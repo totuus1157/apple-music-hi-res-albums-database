@@ -33,16 +33,18 @@ export default function Album(): JSX.Element {
   }, []);
 
   return (
-    <Table striped bordered>
-      <thead>
-        <tr>
-          <th>Artist</th>
-          <th>Genre</th>
-          <th>Sample rate</th>
-          <th>Title</th>
-        </tr>
-      </thead>
-      <tbody>{data}</tbody>
-    </Table>
+    <div style={{ marginBottom: "20px" }}>
+      <Table striped bordered>
+        <thead>
+          <tr>
+            <th>Artist</th>
+            <th>Genre</th>
+            <th>Sample rate</th>
+            <th>Title</th>
+          </tr>
+        </thead>
+        <tbody>{data}</tbody>
+      </Table>
+    </div>
   );
 }

@@ -1,9 +1,18 @@
 import Button from "react-bootstrap/Button";
 
-export default function Buttons() {
+export default function Buttons(): JSX.Element {
   return (
-    <div style={{ float: "right" }}>
-      <Button>Add</Button>
-    </div>
+    <>
+      <style jsx>{`
+        div {
+          margin: 10px;
+          float: right;
+        }
+      `}</style>
+
+      <div>
+        <Button>Add</Button>
+      </div>
+    </>
   );
 }

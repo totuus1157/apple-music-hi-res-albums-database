@@ -21,13 +21,15 @@ export default function Title(props: {
     | undefined;
 }): JSX.Element {
   return (
-    <Navbar bg="dark" variant="dark">
-      <Navbar.Brand>{props.title}</Navbar.Brand>
-      <Navbar.Collapse className="justify-content-end">
-        {/* <Button variant="outline-light" onClick={doLogin}>
+    <div style={{ marginBottom: "20px" }}>
+      <Navbar bg="dark" variant="dark">
+        <Navbar.Brand>{props.title}</Navbar.Brand>
+        <Navbar.Collapse className="justify-content-end">
+          {/* <Button variant="outline-light" onClick={doLogin}>
           {loginState}
         </Button> */}
-      </Navbar.Collapse>
-    </Navbar>
+        </Navbar.Collapse>
+      </Navbar>
+    </div>
   );
 }
