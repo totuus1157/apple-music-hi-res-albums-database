@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, SetStateAction } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -17,7 +18,6 @@ export default function Album(): JSX.Element {
       .get()
       .then((snapshot): void => {
         snapshot.forEach((document): void => {
-          console.log(document.id);
           const doc = document.data();
           mydata.push(
             <tr key={document.id}>
@@ -33,7 +33,7 @@ export default function Album(): JSX.Element {
   }, []);
 
   return (
-    <Table>
+    <Table striped bordered>
       <thead>
         <tr>
           <th>Artist</th>
