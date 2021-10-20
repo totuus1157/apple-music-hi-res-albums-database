@@ -11,7 +11,8 @@ export default function Buttons(): JSX.Element {
       `}</style>
 
       <div>
-        <Button>Add</Button>
+        <Button variant="primary">Add</Button>{" "}
+        <Button variant="secondary">Edit</Button>
       </div>
     </>
   );
