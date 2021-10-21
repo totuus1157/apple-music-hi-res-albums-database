@@ -1,6 +1,6 @@
 # apple-music-hi-res-album-database
 
-## This is a database that we can all create together.
+This is a database that we can all create together.
 
 ## TODO
 - Implementation of login function using Apple ID.
