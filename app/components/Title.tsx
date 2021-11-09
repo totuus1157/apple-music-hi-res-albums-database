@@ -4,6 +4,7 @@ import {
   ReactNodeArray,
   ReactPortal,
   useState,
+  useEffect,
 } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -29,15 +30,22 @@ export default function Title(props: {
 }): JSX.Element {
   const [loginState, setLoginState] = useState("Login");
 
-  const login = (): void => {
+  useEffect((): void => {
     auth
-      .signInWithPopup(provider)
-      .then((_result): void => {
-        setLoginState("Logout");
+      .getRedirectResult()
+      .then((result): void => {
+        if (result.credential) {
+          console.log("User", result.credential);
+          setLoginState("Logout");
+        }
       })
       .catch((_error): void => {
         console.log("not logined.");
       });
+  }, []);
+
+  const login = (): void => {
+    auth.signInWithRedirect(provider);
   };
 
   const logout = (): void => {
