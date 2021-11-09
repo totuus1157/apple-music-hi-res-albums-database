@@ -58,6 +58,7 @@ export default function Title(props: {
       login();
     } else {
       logout();
+      window.location.reload();
     }
   };
 
