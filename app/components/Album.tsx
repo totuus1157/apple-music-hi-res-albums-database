@@ -7,8 +7,6 @@ import Table from "react-bootstrap/Table";
 
 const db = firebase.firestore();
 
-console.log("fuga");
-
 export default function Album(): JSX.Element {
   const mydata: SetStateAction<any[]> = [];
   const [data, setData] = useState(mydata);
@@ -25,6 +23,7 @@ export default function Album(): JSX.Element {
             <tr key={document.id}>
               <td>{doc.artist}</td>
               <td>{doc.genre}</td>
+              <td>{doc.composer}</td>
               <td>{doc.sampleRate}</td>
               <td>
                 <a href={doc.link} target="_blank" rel="noopener noreferrer">
@@ -45,6 +44,7 @@ export default function Album(): JSX.Element {
           <tr>
             <th>Artist</th>
             <th>Genre</th>
+            <th>Composer</th>
             <th>Sample rate</th>
             <th>Title</th>
           </tr>
