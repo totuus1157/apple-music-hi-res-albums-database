@@ -9,7 +9,6 @@ import {
 import firebase from "firebase/app";
 import "firebase/auth";
 import "./fire";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 
