@@ -4,7 +4,6 @@ import "firebase/auth";
 import "./fire";
 import Buttons from "./Buttons";
 import Album from "./Album";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const auth = firebase.auth();
 
