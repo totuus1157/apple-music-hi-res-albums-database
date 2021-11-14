@@ -10,6 +10,7 @@ const db = firebase.firestore();
 export default function Album(): JSX.Element {
   const mydata: SetStateAction<any[]> = [];
   const [data, setData] = useState(mydata);
+  const [loading, setLoading] = useState(true);
 
   useEffect((): void => {
     db.collection("users")
@@ -34,23 +35,28 @@ export default function Album(): JSX.Element {
           );
         });
         setData(mydata);
+        setLoading(false);
       });
   }, []);
 
   return (
     <div style={{ marginBottom: "20px" }}>
-      <Table striped bordered>
-        <thead>
-          <tr>
-            <th>Artist</th>
-            <th>Genre</th>
-            <th>Composer</th>
-            <th>Sample rate</th>
-            <th>Title</th>
-          </tr>
-        </thead>
-        <tbody>{data}</tbody>
-      </Table>
+      {loading === false ? (
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th>Artist</th>
+              <th>Genre</th>
+              <th>Composer</th>
+              <th>Sample rate</th>
+              <th>Title</th>
+            </tr>
+          </thead>
+          <tbody>{data}</tbody>
+        </Table>
+      ) : (
+        <p>Now loading...</p>
+      )}
     </div>
   );
 }
