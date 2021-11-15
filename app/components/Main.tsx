@@ -1,7 +1,7 @@
-import Title from "./Title";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "./fire";
+import Title from "./Title";
 import Buttons from "./Buttons";
 import Album from "./Album";
 import ModalWindow from "./ModalWindow";
