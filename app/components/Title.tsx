@@ -1,11 +1,3 @@
-import {
-  ReactElement,
-  JSXElementConstructor,
-  ReactNodeArray,
-  ReactPortal,
-  useState,
-  useEffect,
-} from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "./fire";
@@ -16,40 +8,17 @@ const auth = firebase.auth();
 const provider = new firebase.auth.OAuthProvider("apple.com");
 
 export default function Title(props: {
-  title:
-    | string
-    | number
-    | boolean
-    | {}
-    | ReactElement<any, string | JSXElementConstructor<any>>
-    | ReactNodeArray
-    | ReactPortal
-    | null
-    | undefined;
+  title: string;
+  loginState: boolean;
+  setLoginState: (arg0: boolean) => void;
 }): JSX.Element {
-  const [loginState, setLoginState] = useState("Login");
-
-  useEffect((): void => {
-    auth
-      .getRedirectResult()
-      .then((result): void => {
-        if (result.credential) {
-          console.log("User", result.credential);
-          setLoginState("Logout");
-        }
-      })
-      .catch((_error): void => {
-        console.log("not logined.");
-      });
-  }, []);
-
   const login = (): void => {
     auth.signInWithRedirect(provider);
   };
 
   const logout = (): void => {
     auth.signOut();
-    setLoginState("Login");
+    props.setLoginState(false);
   };
 
   const doLogin = (): void => {
@@ -57,6 +26,7 @@ export default function Title(props: {
       login();
     } else {
       logout();
+      alert("Logout!");
       window.location.reload();
     }
   };
@@ -67,7 +37,7 @@ export default function Title(props: {
         <Navbar.Brand>{props.title}</Navbar.Brand>
         <Navbar.Collapse className="justify-content-end">
           <Button variant="outline-light" onClick={doLogin}>
-            {loginState}
+            {props.loginState == true ? "Logout" : "Login"}
           </Button>
         </Navbar.Collapse>
       </Navbar>

@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 
-export default function Buttons(): JSX.Element {
+export default function Buttons(props: { loginState: boolean }): JSX.Element {
   return (
     <>
       <style jsx>{`
@@ -11,8 +11,12 @@ export default function Buttons(): JSX.Element {
       `}</style>
 
       <div>
-        <Button variant="primary">Add</Button>{" "}
-        <Button variant="secondary">Edit</Button>
+        <Button variant="primary" disabled={!props.loginState}>
+          Add
+        </Button>{" "}
+        <Button variant="secondary" disabled={!props.loginState}>
+          Edit
+        </Button>
       </div>
     </>
   );
