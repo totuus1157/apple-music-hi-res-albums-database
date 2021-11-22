@@ -11,6 +11,7 @@ const auth = firebase.auth();
 
 export default function Main(props: { title: string }): JSX.Element {
   const [loginState, setLoginState] = useState(false);
+  const [show, setShow] = useState(false);
 
   useEffect((): void => {
     console.log("Side Effect!");
@@ -35,9 +36,9 @@ export default function Main(props: { title: string }): JSX.Element {
         loginState={loginState}
         setLoginState={setLoginState}
       />
-      <Buttons loginState={loginState} />
+      <Buttons loginState={loginState} setShow={setShow} />
       <Album />
-      <ModalWindow />
+      <ModalWindow show={show} setShow={setShow} />
     </main>
   );
 }
