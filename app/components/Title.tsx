@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "./fire";
+import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 
@@ -31,11 +32,20 @@ export default function Title(props: {
     }
   };
 
+  const handleselect = (eventKey: any): void => {
+    alert(`selected ${eventKey}`);
+  };
+
   return (
     <div style={{ marginBottom: "20px" }}>
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark" expand="lg">
         <Navbar.Brand>{props.title}</Navbar.Brand>
-        <Navbar.Collapse className="justify-content-end">
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto" onSelect={handleselect}>
+            <Nav.Link eventKey="1">About</Nav.Link>
+            <Nav.Link eventKey="2">How to use</Nav.Link>
+          </Nav>
           <Button variant="outline-light" onClick={doLogin}>
             {props.loginState == true ? "Logout" : "Login"}
           </Button>
