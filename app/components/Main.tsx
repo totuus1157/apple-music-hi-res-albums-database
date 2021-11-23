@@ -11,23 +11,24 @@ const auth = firebase.auth();
 
 export default function Main(props: { title: string }): JSX.Element {
   const [loginState, setLoginState] = useState(false);
+  const [modalDetail, setModalDetail] = useState("");
   const [show, setShow] = useState(false);
 
   useEffect((): void => {
     console.log("Side Effect!");
     auth
       .getRedirectResult()
-      .then((result): void => {
+      .then((result: { credential: any }): void => {
         if (result.credential) {
           console.log("User", result.credential);
           const changeTrue = loginState === false ? true : true;
           setLoginState(changeTrue);
         }
       })
-      .catch((_error): void => {
+      .catch((_error: any): void => {
         console.log("not logined.");
       });
-  }, []);
+  }, [loginState]);
 
   return (
     <main>
@@ -36,9 +37,13 @@ export default function Main(props: { title: string }): JSX.Element {
         loginState={loginState}
         setLoginState={setLoginState}
       />
-      <Buttons loginState={loginState} setShow={setShow} />
+      <Buttons
+        loginState={loginState}
+        setModalDetail={setModalDetail}
+        setShow={setShow}
+      />
       <Album />
-      <ModalWindow show={show} setShow={setShow} />
+      <ModalWindow modalDetail={modalDetail} show={show} setShow={setShow} />
     </main>
   );
 }
