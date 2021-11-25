@@ -48,7 +48,7 @@ export default function Album(): JSX.Element {
               <th>Artist</th>
               <th>Genre</th>
               <th>Composer</th>
-              <th>Sample rate</th>
+              <th>Sample Rate</th>
               <th>Title</th>
             </tr>
           </thead>
