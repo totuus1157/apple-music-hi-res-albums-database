@@ -47,6 +47,7 @@ export default function ModalWindow(props: {
       url: url,
       sampleRate: sampleRate,
       composer: composer,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     };
     if (auth.currentUser != null) {
       db.collection("users")
