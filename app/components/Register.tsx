@@ -29,14 +29,16 @@ export default function ModalWindow(props: {
   const onChangeGenre = (e) => {
     setGenre(e.target.value);
   };
-  const onChangeUrl = (e) => {
-    setUrl(e.target.value);
-  };
   const onChangeSampleRate = (e) => {
     setSampleRate(e.target.value);
   };
   const onChangeComposer = (e) => {
     setComposer(e.target.value);
+  };
+  const onChangeUrl = (e) => {
+    const link = e.target.value;
+    const albumId = link.match(/[1-9][0-9]*$/);
+    setUrl(`https://music.apple.com/album/${albumId}`);
   };
 
   const doAction = (e) => {
