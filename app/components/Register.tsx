@@ -14,8 +14,8 @@ export default function ModalWindow(props: {
   show: boolean;
 }): JSX.Element {
   const [artist, setArtist] = useState("");
-  const [genre, setGenre] = useState("");
   const [title, setTitle] = useState("");
+  const [genre, setGenre] = useState("");
   const [url, setUrl] = useState("");
   const [sampleRate, setSampleRate] = useState("");
   const [composer, setComposer] = useState(null);
@@ -23,11 +23,11 @@ export default function ModalWindow(props: {
   const onChangeArtist = (e) => {
     setArtist(e.target.value);
   };
-  const onChangeGenre = (e) => {
-    setGenre(e.target.value);
-  };
   const onChangeTitle = (e) => {
     setTitle(e.target.value);
+  };
+  const onChangeGenre = (e) => {
+    setGenre(e.target.value);
   };
   const onChangeUrl = (e) => {
     setUrl(e.target.value);
@@ -42,8 +42,8 @@ export default function ModalWindow(props: {
   const doAction = (e) => {
     const ob = {
       artist: artist,
-      genre: genre,
       title: title,
+      genre: genre,
       url: url,
       sampleRate: sampleRate,
       composer: composer,
