@@ -73,12 +73,12 @@ export default function ModalWindow(props: {
         <Modal.Body>
           <Form>
             <Form.Group controlId="form-group">
-              <Form.Label>Title:</Form.Label>
-              <Form.Control type="text" onChange={onChangeTitle} />
-            </Form.Group>
-            <Form.Group controlId="form-group">
               <Form.Label>Artist:</Form.Label>
               <Form.Control type="text" onChange={onChangeArtist} />
+            </Form.Group>
+            <Form.Group controlId="form-group">
+              <Form.Label>Title:</Form.Label>
+              <Form.Control type="text" onChange={onChangeTitle} />
             </Form.Group>
             <Form.Group controlId="form-group">
               <Form.Label>Genre:</Form.Label>
