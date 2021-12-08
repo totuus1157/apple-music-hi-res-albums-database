@@ -1,12 +1,12 @@
 import firebase from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBKmNcNmIhxBTiV0zXmNMo3qSnr3OSZ3V4",
-  authDomain: "apple-music-hi-res-album-db.firebaseapp.com",
-  projectId: "apple-music-hi-res-album-db",
-  storageBucket: "apple-music-hi-res-album-db.appspot.com",
-  messagingSenderId: "630030760466",
-  appId: "1:630030760466:web:c3efe9c2d9662e19bff6cb",
+  apiKey: "AIzaSyBFlc6lHB2wERqre6Mo4sDhyAL_QnfTU38",
+  authDomain: "apple-music-hi-res-album-eab62.firebaseapp.com",
+  projectId: "apple-music-hi-res-album-eab62",
+  storageBucket: "apple-music-hi-res-album-eab62.appspot.com",
+  messagingSenderId: "1032337833616",
+  appId: "1:1032337833616:web:a9c99280d0ef6eadb4e215",
 };
 
 if (firebase.apps.length == 0) {
