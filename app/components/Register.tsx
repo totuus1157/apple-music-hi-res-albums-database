@@ -40,7 +40,7 @@ export default function ModalWindow(props: {
     const link = e.target.value;
     const str = link.match(/[1-9][0-9]*$/);
     setUrl(`https://music.apple.com/album/${str}`);
-    setAlbumId(str);
+    setAlbumId(str[0]);
   };
 
   const doAction = (e) => {
@@ -57,7 +57,8 @@ export default function ModalWindow(props: {
       db.collection("users")
         .doc(auth.currentUser.email!)
         .collection("albums")
-        .add(ob)
+        .doc(albumId)
+        .set(ob)
         .then((): void => {
           handleClose();
         });
