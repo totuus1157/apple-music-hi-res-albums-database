@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "./fire";
@@ -19,6 +19,7 @@ export default function ModalWindow(props: {
   const [url, setUrl] = useState("");
   const [sampleRate, setSampleRate] = useState("");
   const [composer, setComposer] = useState(null);
+  const [albumId, setAlbumId] = useState("");
 
   const onChangeArtist = (e) => {
     setArtist(e.target.value);
@@ -37,8 +38,9 @@ export default function ModalWindow(props: {
   };
   const onChangeUrl = (e) => {
     const link = e.target.value;
-    const albumId = link.match(/[1-9][0-9]*$/);
-    setUrl(`https://music.apple.com/album/${albumId}`);
+    const str = link.match(/[1-9][0-9]*$/);
+    setUrl(`https://music.apple.com/album/${str}`);
+    setAlbumId(str);
   };
 
   const doAction = (e) => {
@@ -56,8 +58,7 @@ export default function ModalWindow(props: {
         .doc(auth.currentUser.email!)
         .collection("albums")
         .add(ob)
-        .then((ref) => {
-          console.log("ref: ", ref);
+        .then((): void => {
           handleClose();
         });
     }
@@ -93,7 +94,28 @@ export default function ModalWindow(props: {
             </Form.Group>
             <Form.Group controlId="form-group">
               <Form.Label>Sample Rate:</Form.Label>
-              <Form.Control type="text" onChange={onChangeSampleRate} />
+              <Form.Check
+                label="96"
+                type="radio"
+                name="sampleRate"
+                value="96"
+                onChange={onChangeSampleRate}
+                checked
+              />
+              <Form.Check
+                label="176.4"
+                type="radio"
+                name="sampleRate"
+                value="176.4"
+                onChange={onChangeSampleRate}
+              />
+              <Form.Check
+                label="192"
+                type="radio"
+                name="sampleRate"
+                value="192"
+                onChange={onChangeSampleRate}
+              />
             </Form.Group>
             <Form.Group controlId="form-group">
               <Form.Label>URL:</Form.Label>
