@@ -20,6 +20,7 @@ export default function ModalWindow(props: {
   const [sampleRate, setSampleRate] = useState("");
   const [composer, setComposer] = useState(null);
   const [albumId, setAlbumId] = useState("");
+  const [checked, setChecked] = useState("96");
 
   const onChangeArtist = (e) => {
     setArtist(e.target.value);
@@ -32,6 +33,7 @@ export default function ModalWindow(props: {
   };
   const onChangeSampleRate = (e) => {
     setSampleRate(e.target.value);
+    setChecked(e.target.value);
   };
   const onChangeComposer = (e) => {
     setComposer(e.target.value);
@@ -101,7 +103,7 @@ export default function ModalWindow(props: {
                 name="sampleRate"
                 value="96"
                 onChange={onChangeSampleRate}
-                checked
+                checked={checked === "96"}
               />
               <Form.Check
                 label="176.4"
@@ -109,6 +111,7 @@ export default function ModalWindow(props: {
                 name="sampleRate"
                 value="176.4"
                 onChange={onChangeSampleRate}
+                checked={checked === "176.4"}
               />
               <Form.Check
                 label="192"
@@ -116,6 +119,7 @@ export default function ModalWindow(props: {
                 name="sampleRate"
                 value="192"
                 onChange={onChangeSampleRate}
+                checked={checked === "192"}
               />
             </Form.Group>
             <Form.Group controlId="form-group">
