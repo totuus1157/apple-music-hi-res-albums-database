@@ -23,6 +23,19 @@ export default function ModalWindow(props: {
   const [albumId, setAlbumId] = useState("");
   const [checked, setChecked] = useState("96");
 
+  console.log(
+    artist,
+    title,
+    genre,
+    url,
+    sampleRate,
+    composer,
+    albumId,
+    checked
+  );
+
+  const sampleLateArray = ["96", "176.4", "192"];
+
   const onChangeArtist = (e) => {
     setArtist(e.target.value);
   };
@@ -63,6 +76,14 @@ export default function ModalWindow(props: {
         .doc(albumId)
         .set(ob)
         .then((): void => {
+          setArtist("");
+          setTitle("");
+          setGenre("");
+          setUrl("");
+          setSampleRate("");
+          setComposer(null);
+          setAlbumId("");
+          setChecked("96");
           handleClose();
         });
     }
@@ -102,30 +123,17 @@ export default function ModalWindow(props: {
             </Form.Group>
             <Form.Group controlId="form-group">
               <Form.Label>Sample Rate:</Form.Label>
-              <Form.Check
-                label="96"
-                type="radio"
-                name="sampleRate"
-                value="96"
-                onChange={onChangeSampleRate}
-                checked={checked === "96"}
-              />
-              <Form.Check
-                label="176.4"
-                type="radio"
-                name="sampleRate"
-                value="176.4"
-                onChange={onChangeSampleRate}
-                checked={checked === "176.4"}
-              />
-              <Form.Check
-                label="192"
-                type="radio"
-                name="sampleRate"
-                value="192"
-                onChange={onChangeSampleRate}
-                checked={checked === "192"}
-              />
+              {sampleLateArray.map((sampleRate) => (
+                <Form.Check
+                  label={sampleRate}
+                  type="radio"
+                  id={`radios${sampleRate}`}
+                  name="sampleRate"
+                  value={sampleRate}
+                  onChange={onChangeSampleRate}
+                  checked={checked === sampleRate}
+                />
+              ))}
             </Form.Group>
             <Form.Group controlId="form-group">
               <Form.Label>URL:</Form.Label>
