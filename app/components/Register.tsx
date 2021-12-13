@@ -2,6 +2,7 @@ import { useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "./fire";
+import genreList from "./genreList";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -89,7 +90,11 @@ export default function ModalWindow(props: {
             </Form.Group>
             <Form.Group controlId="form-group">
               <Form.Label>Genre:</Form.Label>
-              <Form.Control type="text" onChange={onChangeGenre} />
+              <Form.Control as="select" onChange={onChangeGenre}>
+                {genreList.map((genre) => (
+                  <option>{genre}</option>
+                ))}
+              </Form.Control>
             </Form.Group>
             <Form.Group controlId="form-group">
               <Form.Label>Composer:</Form.Label>
