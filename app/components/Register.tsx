@@ -59,7 +59,7 @@ export default function ModalWindow(props: {
     setAlbumId(str[0]);
   };
 
-  const doAction = (e) => {
+  const doAction = () => {
     const ob = {
       artist: artist,
       title: title,
