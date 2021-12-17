@@ -34,7 +34,7 @@ export default function ModalWindow(props: {
     checked
   );
 
-  const sampleLateArray = ["96", "176.4", "192"];
+  const sampleLateArray = ["88.2", "96", "176.4", "192"];
 
   const onChangeArtist = (e) => {
     setArtist(e.target.value);
