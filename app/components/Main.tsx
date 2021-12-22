@@ -18,12 +18,10 @@ export default function Main(props: { title: string }): JSX.Element {
   const [albumData, setAlbumData] = useState("");
 
   useEffect((): void => {
-    console.log("Side Effect!");
     auth
       .getRedirectResult()
       .then((result: { credential: any }): void => {
         if (result.credential) {
-          console.log("User", result.credential);
           const changeTrue = loginState === false ? true : true;
           setLoginState(changeTrue);
         }
