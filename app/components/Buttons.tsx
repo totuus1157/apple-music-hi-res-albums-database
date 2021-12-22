@@ -2,6 +2,7 @@ import Button from "react-bootstrap/Button";
 
 export default function Buttons(props: {
   setShow: (arg0: boolean) => void;
+  setEditing: (arg0: boolean) => void;
   setModalDetail: (arg0: string) => void;
   loginState: boolean;
 }): JSX.Element {
@@ -27,7 +28,11 @@ export default function Buttons(props: {
         >
           Add
         </Button>{" "}
-        <Button variant="secondary" disabled={!props.loginState}>
+        <Button
+          variant="secondary"
+          disabled={!props.loginState}
+          onClick={() => props.setEditing(true)}
+        >
           Edit
         </Button>
       </div>
