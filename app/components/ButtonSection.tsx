@@ -29,7 +29,7 @@ export default function Buttons(props: {
           Add
         </Button>{" "}
         <Button
-          variant="secondary"
+          variant="dark"
           disabled={!props.loginState}
           onClick={() => props.setEditing(true)}
         >
