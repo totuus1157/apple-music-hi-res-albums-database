@@ -3,7 +3,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "./fire";
 import Title from "./Title";
-import Buttons from "./Buttons";
+import ButtonSection from "./ButtonSection";
 import Album from "./Album";
 import EditTable from "./EditTable";
 import ModalWindow from "./ModalWindow";
@@ -40,7 +40,7 @@ export default function Main(props: { title: string }): JSX.Element {
         loginState={loginState}
         setLoginState={setLoginState}
       />
-      <Buttons
+      <ButtonSection
         loginState={loginState}
         setModalDetail={setModalDetail}
         setShow={setShow}
