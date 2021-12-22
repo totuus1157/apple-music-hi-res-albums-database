@@ -42,6 +42,7 @@ export default function Main(props: { title: string }): JSX.Element {
         loginState={loginState}
         setModalDetail={setModalDetail}
         setShow={setShow}
+        editing={editing}
         setEditing={setEditing}
       />
       {editing === false ? (
