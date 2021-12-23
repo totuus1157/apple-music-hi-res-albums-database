@@ -123,16 +123,16 @@ export default function ModalWindow(props: {
             </Form.Group>
             <Form.Group controlId="form-group">
               <Form.Label>Sample Rate:</Form.Label>
-              {sampleRateList.map((sampleRate) => (
+              {sampleRateList.map((value) => (
                 <Form.Check
-                  key={sampleRate.id}
-                  label={sampleRate.value}
+                  key={value.id}
+                  label={value.sampleRate}
                   type="radio"
-                  id={`radios${sampleRate.value}`}
+                  id={`radios${value.sampleRate}`}
                   name="sampleRate.value"
-                  value={sampleRate.value}
+                  value={value.sampleRate}
                   onChange={onChangeSampleRate}
-                  checked={checked === sampleRate.value}
+                  checked={checked === value.sampleRate}
                 />
               ))}
             </Form.Group>
