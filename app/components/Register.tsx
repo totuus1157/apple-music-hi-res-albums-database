@@ -12,7 +12,7 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 
 export default function ModalWindow(props: {
-  setShow: (arg0: boolean) => any;
+  setShow: (arg0: boolean) => void;
   show: boolean;
 }): JSX.Element {
   const [artist, setArtist] = useState("");
@@ -90,7 +90,7 @@ export default function ModalWindow(props: {
     }
   };
 
-  const handleClose = (): any => {
+  const handleClose = (): void => {
     return props.setShow(false);
   };
 
