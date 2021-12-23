@@ -59,15 +59,17 @@ export default function ModalWindow(props: {
   };
 
   const doAction = () => {
-    const ob = {
+    let ob = {
       artist: artist,
       title: title,
       genre: genre,
       url: url,
       sampleRate: sampleRate,
-      composer: composer,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     };
+
+    if (composer !== null) ob[composer] = composer;
+
     if (auth.currentUser != null) {
       db.collection("users")
         .doc(auth.currentUser.email!)
