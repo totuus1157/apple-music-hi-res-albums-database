@@ -111,6 +111,7 @@ export default function ModalWindow(props: {
             <Form.Group controlId="form-group">
               <Form.Label>Genre:</Form.Label>
               <Form.Control as="select" onChange={onChangeGenre}>
+                <option hidden>-- Please select a genre --</option>
                 {genreList.map((genre) => (
                   <option key={genre.id}>{genre.value}</option>
                 ))}
