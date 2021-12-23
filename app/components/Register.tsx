@@ -2,6 +2,7 @@ import { useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "./fire";
+import sampleRateList from "./sampleRateList";
 import genreList from "./genreList";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -33,8 +34,6 @@ export default function ModalWindow(props: {
     albumId,
     checked
   );
-
-  const sampleLateArray = ["88.2", "96", "176.4", "192"];
 
   const onChangeArtist = (e) => {
     setArtist(e.target.value);
@@ -113,7 +112,7 @@ export default function ModalWindow(props: {
               <Form.Label>Genre:</Form.Label>
               <Form.Control as="select" onChange={onChangeGenre}>
                 {genreList.map((genre) => (
-                  <option>{genre}</option>
+                  <option key={genre.id}>{genre.value}</option>
                 ))}
               </Form.Control>
             </Form.Group>
@@ -123,15 +122,16 @@ export default function ModalWindow(props: {
             </Form.Group>
             <Form.Group controlId="form-group">
               <Form.Label>Sample Rate:</Form.Label>
-              {sampleLateArray.map((sampleRate) => (
+              {sampleRateList.map((sampleRate) => (
                 <Form.Check
-                  label={sampleRate}
+                  key={sampleRate.id}
+                  label={sampleRate.value}
                   type="radio"
-                  id={`radios${sampleRate}`}
-                  name="sampleRate"
-                  value={sampleRate}
+                  id={`radios${sampleRate.value}`}
+                  name="sampleRate.value"
+                  value={sampleRate.value}
                   onChange={onChangeSampleRate}
-                  checked={checked === sampleRate}
+                  checked={checked === sampleRate.value}
                 />
               ))}
             </Form.Group>
