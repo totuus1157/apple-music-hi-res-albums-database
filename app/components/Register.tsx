@@ -19,7 +19,7 @@ export default function ModalWindow(props: {
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
   const [url, setUrl] = useState("");
-  const [sampleRate, setSampleRate] = useState("");
+  const [sampleRate, setSampleRate] = useState("96");
   const [composer, setComposer] = useState(null);
   const [albumId, setAlbumId] = useState("");
   const [checked, setChecked] = useState("96");
