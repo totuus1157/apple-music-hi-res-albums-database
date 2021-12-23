@@ -119,7 +119,11 @@ export default function ModalWindow(props: {
             </Form.Group>
             <Form.Group controlId="form-group">
               <Form.Label>Composer:</Form.Label>
-              <Form.Control type="text" onChange={onChangeComposer} />
+              <Form.Control
+                type="text"
+                onChange={onChangeComposer}
+                disabled={genre !== "Classical" && true}
+              />
             </Form.Group>
             <Form.Group controlId="form-group">
               <Form.Label>Sample Rate:</Form.Label>
