@@ -20,7 +20,7 @@ export default function ModalWindow(props: {
   const [genre, setGenre] = useState("");
   const [url, setUrl] = useState("");
   const [sampleRate, setSampleRate] = useState("96");
-  const [composer, setComposer] = useState(null);
+  const [composer, setComposer] = useState("");
   const [albumId, setAlbumId] = useState("");
   const [checked, setChecked] = useState("96");
 
@@ -57,7 +57,7 @@ export default function ModalWindow(props: {
     setChecked(e.target.value);
   };
   const onChangeComposer = (e: {
-    target: { value: SetStateAction<null> };
+    target: { value: SetStateAction<string> };
   }): void => {
     setComposer(e.target.value);
   };
@@ -92,7 +92,7 @@ export default function ModalWindow(props: {
           setGenre("");
           setUrl("");
           setSampleRate("");
-          setComposer(null);
+          setComposer("");
           setAlbumId("");
           setChecked("96");
           handleClose();
