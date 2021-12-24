@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "./fire";
@@ -35,23 +35,33 @@ export default function ModalWindow(props: {
     checked
   );
 
-  const onChangeArtist = (e) => {
+  function onChangeArtist(e: {
+    target: { value: SetStateAction<string> };
+  }): void {
     setArtist(e.target.value);
-  };
-  const onChangeTitle = (e) => {
+  }
+  const onChangeTitle = (e: {
+    target: { value: SetStateAction<string> };
+  }): void => {
     setTitle(e.target.value);
   };
-  const onChangeGenre = (e) => {
+  const onChangeGenre = (e: {
+    target: { value: SetStateAction<string> };
+  }): void => {
     setGenre(e.target.value);
   };
-  const onChangeSampleRate = (e) => {
+  const onChangeSampleRate = (e: {
+    target: { value: SetStateAction<string> };
+  }): void => {
     setSampleRate(e.target.value);
     setChecked(e.target.value);
   };
-  const onChangeComposer = (e) => {
+  const onChangeComposer = (e: {
+    target: { value: SetStateAction<null> };
+  }): void => {
     setComposer(e.target.value);
   };
-  const onChangeUrl = (e) => {
+  const onChangeUrl = (e: { target: { value: any } }): void => {
     const link = e.target.value;
     const str = link.match(/[1-9][0-9]*$/);
     setUrl(`https://music.apple.com/album/${str}`);
