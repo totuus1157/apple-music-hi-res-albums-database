@@ -35,30 +35,26 @@ export default function ModalWindow(props: {
     checked
   );
 
-  function onChangeArtist(e: {
-    target: { value: SetStateAction<string> };
-  }): void {
+  type TargetValue = {
+    target: {
+      value: SetStateAction<string>;
+    };
+  };
+
+  function onChangeArtist(e: TargetValue): void {
     setArtist(e.target.value);
   }
-  const onChangeTitle = (e: {
-    target: { value: SetStateAction<string> };
-  }): void => {
+  const onChangeTitle = (e: TargetValue): void => {
     setTitle(e.target.value);
   };
-  const onChangeGenre = (e: {
-    target: { value: SetStateAction<string> };
-  }): void => {
+  const onChangeGenre = (e: TargetValue): void => {
     setGenre(e.target.value);
   };
-  const onChangeSampleRate = (e: {
-    target: { value: SetStateAction<string> };
-  }): void => {
+  const onChangeSampleRate = (e: TargetValue): void => {
     setSampleRate(e.target.value);
     setChecked(e.target.value);
   };
-  const onChangeComposer = (e: {
-    target: { value: SetStateAction<string> };
-  }): void => {
+  const onChangeComposer = (e: TargetValue): void => {
     setComposer(e.target.value);
   };
   const onChangeUrl = (e: { target: { value: any } }): void => {
