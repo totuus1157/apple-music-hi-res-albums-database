@@ -18,22 +18,12 @@ export default function ModalWindow(props: {
   const [artist, setArtist] = useState("");
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
-  const [url, setUrl] = useState("");
+  const [link, setLink] = useState("");
   const [sampleRate, setSampleRate] = useState("96");
   const [composer, setComposer] = useState("");
-  const [albumId, setAlbumId] = useState("");
   const [checked, setChecked] = useState("96");
 
-  console.log(
-    artist,
-    title,
-    genre,
-    url,
-    sampleRate,
-    composer,
-    albumId,
-    checked
-  );
+  console.log(artist, title, genre, link, sampleRate, composer, checked);
 
   type TargetValue = {
     target: {
@@ -57,19 +47,23 @@ export default function ModalWindow(props: {
   const onChangeComposer = (e: TargetValue): void => {
     setComposer(e.target.value);
   };
-  const onChangeUrl = (e: { target: { value: any } }): void => {
-    const link = e.target.value;
-    const str = link.match(/[1-9][0-9]*$/);
-    setUrl(`https://music.apple.com/album/${str}`);
-    setAlbumId(str[0]);
+  const onChangeUrl = (e: TargetValue): void => {
+    setLink(e.target.value);
   };
 
-  const doAction = (): void => {
+  const doAction = (_e: any): void => {
+    const matches = link.match(/[1-9][0-9]*$/);
+    const albumId = matches && matches[0];
+    const normalizedURL = `https://music.apple.com/album/${albumId}`;
+
+    console.log("albumId: ", albumId);
+    console.log("normalizedURL: ", normalizedURL);
+
     let ob = {
       artist: artist,
       title: title,
       genre: genre,
-      url: url,
+      url: normalizedURL,
       sampleRate: sampleRate,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     };
@@ -86,10 +80,9 @@ export default function ModalWindow(props: {
           setArtist("");
           setTitle("");
           setGenre("");
-          setUrl("");
+          setLink("");
           setSampleRate("");
           setComposer("");
-          setAlbumId("");
           setChecked("96");
           handleClose();
         });
