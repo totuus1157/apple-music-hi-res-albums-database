@@ -31,9 +31,9 @@ export default function ModalWindow(props: {
     };
   };
 
-  function onChangeArtist(e: TargetValue): void {
+  const onChangeArtist = (e: TargetValue): void => {
     setArtist(e.target.value);
-  }
+  };
   const onChangeTitle = (e: TargetValue): void => {
     setTitle(e.target.value);
   };
