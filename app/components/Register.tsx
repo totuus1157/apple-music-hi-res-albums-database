@@ -47,7 +47,7 @@ export default function ModalWindow(props: {
   const onChangeComposer = (e: TargetValue): void => {
     setComposer(e.target.value);
   };
-  const onChangeUrl = (e: TargetValue): void => {
+  const onChangeLink = (e: TargetValue): void => {
     setLink(e.target.value);
   };
 
@@ -142,8 +142,8 @@ export default function ModalWindow(props: {
               ))}
             </Form.Group>
             <Form.Group controlId="form-group">
-              <Form.Label>URL:</Form.Label>
-              <Form.Control type="text" onChange={onChangeUrl} />
+              <Form.Label>Link:</Form.Label>
+              <Form.Control type="text" onChange={onChangeLink} />
             </Form.Group>
           </Form>
         </Modal.Body>
