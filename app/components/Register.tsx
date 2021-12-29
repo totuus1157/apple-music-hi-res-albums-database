@@ -18,12 +18,12 @@ export default function ModalWindow(props: {
   const [artist, setArtist] = useState("");
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
+  const [composer, setComposer] = useState("");
   const [link, setLink] = useState("");
   const [sampleRate, setSampleRate] = useState("96");
-  const [composer, setComposer] = useState("");
   const [checked, setChecked] = useState("96");
 
-  console.log(artist, title, genre, link, sampleRate, composer, checked);
+  console.log(artist, title, genre, composer, link, sampleRate, checked);
 
   type TargetValue = {
     target: {
@@ -40,15 +40,15 @@ export default function ModalWindow(props: {
   const onChangeGenre = (e: TargetValue): void => {
     setGenre(e.target.value);
   };
-  const onChangeSampleRate = (e: TargetValue): void => {
-    setSampleRate(e.target.value);
-    setChecked(e.target.value);
-  };
   const onChangeComposer = (e: TargetValue): void => {
     setComposer(e.target.value);
   };
   const onChangeLink = (e: TargetValue): void => {
     setLink(e.target.value);
+  };
+  const onChangeSampleRate = (e: TargetValue): void => {
+    setSampleRate(e.target.value);
+    setChecked(e.target.value);
   };
 
   const doAction = (_e: any): void => {
