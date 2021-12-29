@@ -70,7 +70,7 @@ export default function ModalWindow(props: {
 
     if (composer !== "") ob.composer = composer;
 
-    if (auth.currentUser != null) {
+    if (auth.currentUser !== null) {
       db.collection("users")
         .doc(auth.currentUser.email!)
         .collection("albums")
