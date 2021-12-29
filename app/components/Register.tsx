@@ -80,9 +80,9 @@ export default function ModalWindow(props: {
           setArtist("");
           setTitle("");
           setGenre("");
-          setLink("");
-          setSampleRate("");
           setComposer("");
+          setLink("");
+          setSampleRate("96");
           setChecked("96");
           handleClose();
         });
