@@ -15,15 +15,14 @@ export default function ModalWindow(props: {
   setShow: (arg0: boolean) => void;
   show: boolean;
 }): JSX.Element {
-  const [artist, setArtist] = useState("");
-  const [title, setTitle] = useState("");
-  const [genre, setGenre] = useState("");
-  const [composer, setComposer] = useState("");
-  const [link, setLink] = useState("");
+  const [artist, setArtist] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [genre, setGenre] = useState(null);
+  const [composer, setComposer] = useState(null);
+  const [link, setLink] = useState(null);
   const [sampleRate, setSampleRate] = useState("96");
   const [checked, setChecked] = useState("96");
-
-  console.log(artist, title, genre, composer, link, sampleRate, checked);
+  const [errors, setErrors] = useState({});
 
   type TargetValue = {
     target: {
@@ -33,18 +32,23 @@ export default function ModalWindow(props: {
 
   const onChangeArtist = (e: TargetValue): void => {
     setArtist(e.target.value);
+    errors.artist && setErrors({ ...errors, artist: null });
   };
   const onChangeTitle = (e: TargetValue): void => {
     setTitle(e.target.value);
+    errors.title && setErrors({ ...errors, title: null });
   };
   const onChangeGenre = (e: TargetValue): void => {
     setGenre(e.target.value);
+    errors.genre && setErrors({ ...errors, genre: null });
   };
   const onChangeComposer = (e: TargetValue): void => {
     setComposer(e.target.value);
+    errors.composer && setErrors({ ...errors, composer: null });
   };
   const onChangeLink = (e: TargetValue): void => {
     setLink(e.target.value);
+    errors.link && setErrors({ ...errors, link: null });
   };
   const onChangeSampleRate = (e: TargetValue): void => {
     setSampleRate(e.target.value);
@@ -52,45 +56,78 @@ export default function ModalWindow(props: {
   };
 
   const doAction = (_e: any): void => {
-    const matches = link.match(/[1-9][0-9]*$/);
-    const albumId = matches && matches[0];
-    const normalizedURL = `https://music.apple.com/album/${albumId}`;
+    _e.preventDefault();
+    const newErrors = findFormErrors();
 
-    console.log("albumId: ", albumId);
-    console.log("normalizedURL: ", normalizedURL);
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      const matches = link.match(/[1-9][0-9]*/);
+      const albumId = matches && matches[0];
+      const normalizedURL = `https://music.apple.com/album/${albumId}`;
 
-    let ob = {
-      artist: artist,
-      title: title,
-      genre: genre,
-      url: normalizedURL,
-      sampleRate: sampleRate,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    };
+      let ob = {
+        artist: artist,
+        title: title,
+        genre: genre,
+        url: normalizedURL,
+        sampleRate: sampleRate,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      };
 
-    if (composer !== "") ob.composer = composer;
+      if (composer !== "") ob.composer = composer;
 
-    if (auth.currentUser !== null) {
-      db.collection("users")
-        .doc(auth.currentUser.email!)
-        .collection("albums")
-        .doc(albumId)
-        .set(ob)
-        .then((): void => {
-          setArtist("");
-          setTitle("");
-          setGenre("");
-          setComposer("");
-          setLink("");
-          setSampleRate("96");
-          setChecked("96");
-          handleClose();
-        });
+      if (auth.currentUser !== null) {
+        db.collection("users")
+          .doc(auth.currentUser.email!)
+          .collection("albums")
+          .doc(albumId)
+          .set(ob)
+          .then((): void => {
+            handleClose();
+          });
+      }
     }
   };
 
+  const findFormErrors = (): {} => {
+    const newErrors = {};
+    const regex = {
+      ltnAndNum: new RegExp(/^[\p{Script=Latin}\p{Punctuation}\d\s]+$/, "u"),
+      appleMusicLink: new RegExp(
+        /^https:\/\/music\.apple\.com\/?[a-z]*\/album\/?[\w-]*\/?[\d]+$/
+      ),
+    };
+
+    if (!artist || artist === "") newErrors.artist = "cannot be blank!";
+    else if (!regex.ltnAndNum.test(artist))
+      newErrors.artist = "only Latin letters be used";
+    if (!title || title === "") newErrors.title = "cannot be blank!";
+    else if (!regex.ltnAndNum.test(title))
+      newErrors.title = "only Latin letters be used";
+    if (!genre || genre === "") newErrors.genre = "select a genre!";
+    /* if (genre == "Classical") */ // The following code does not work if you use the IF nesting structure
+    if (genre === "Classical" && (!composer || composer === ""))
+      newErrors.composer = "cannot be blank!";
+    else if (genre === "Classical" && !regex.ltnAndNum.test(composer))
+      newErrors.composer = "only Latin letters can be used";
+    if (!link || link === "") newErrors.link = "cannot be blank!";
+    else if (!regex.appleMusicLink.test(link))
+      newErrors.link = "only links to Apple Music albums can be allowed.";
+
+    return newErrors;
+  };
+
   const handleClose = (): void => {
-    return props.setShow(false);
+    setArtist(null);
+    setTitle(null);
+    setGenre(null);
+    setComposer(null);
+    setLink(null);
+    setSampleRate("96");
+    setChecked("96");
+    setErrors({});
+    props.setShow(false);
   };
 
   return (
@@ -103,28 +140,53 @@ export default function ModalWindow(props: {
           <Form>
             <Form.Group controlId="form-group">
               <Form.Label>Artist:</Form.Label>
-              <Form.Control type="text" onChange={onChangeArtist} />
+              <Form.Control
+                type="text"
+                onChange={onChangeArtist}
+                isInvalid={errors.artist}
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.artist}
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="form-group">
               <Form.Label>Title:</Form.Label>
-              <Form.Control type="text" onChange={onChangeTitle} />
+              <Form.Control
+                type="text"
+                onChange={onChangeTitle}
+                isInvalid={errors.title}
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.title}
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="form-group">
               <Form.Label>Genre:</Form.Label>
-              <Form.Control as="select" onChange={onChangeGenre}>
+              <Form.Control
+                as="select"
+                onChange={onChangeGenre}
+                isInvalid={errors.genre}
+              >
                 <option hidden>-- Please select a genre --</option>
                 {genreList.map((value) => (
                   <option key={value.id}>{value.genreName}</option>
                 ))}
               </Form.Control>
+              <Form.Control.Feedback type="invalid">
+                {errors.genre}
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="form-group">
               <Form.Label>Composer:</Form.Label>
               <Form.Control
                 type="text"
                 onChange={onChangeComposer}
-                disabled={genre !== "Classical" && true}
+                isInvalid={errors.composer}
+                disabled={genre !== "Classical"}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.composer}
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="form-group">
               <Form.Label>Sample Rate:</Form.Label>
@@ -143,7 +205,14 @@ export default function ModalWindow(props: {
             </Form.Group>
             <Form.Group controlId="form-group">
               <Form.Label>Link:</Form.Label>
-              <Form.Control type="text" onChange={onChangeLink} />
+              <Form.Control
+                type="text"
+                onChange={onChangeLink}
+                isInvalid={errors.link}
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.link}
+              </Form.Control.Feedback>
             </Form.Group>
           </Form>
         </Modal.Body>
