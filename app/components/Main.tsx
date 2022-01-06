@@ -4,7 +4,7 @@ import "firebase/auth";
 import "./fire";
 import Title from "./Title";
 import ButtonSection from "./ButtonSection";
-import Album from "./Album";
+import Albums from "./Albums";
 import EditTable from "./EditTable";
 import ModalWindow from "./ModalWindow";
 
@@ -46,7 +46,7 @@ export default function Main(props: { title: string }): JSX.Element {
         setEditing={setEditing}
       />
       {editing === false ? (
-        <Album show={show} />
+        <Albums show={show} />
       ) : (
         <EditTable
           show={show}
