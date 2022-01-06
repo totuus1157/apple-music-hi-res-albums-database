@@ -95,7 +95,7 @@ export default function ModalWindow(props: {
     const regex = {
       ltnAndNum: new RegExp(/^[\p{Script=Latin}\p{Punctuation}\d\s]+$/, "u"),
       appleMusicLink: new RegExp(
-        /^https:\/\/music\.apple\.com\/?[a-z]*\/album\/?[\w-]*\/?[\d]+$/
+        /^https:\/\/music\.apple\.com\/?[a-z]*\/album\/?[\w-]*\/?[\d]+(\?l=\w+)*$/
       ),
     };
 
