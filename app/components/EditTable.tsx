@@ -5,6 +5,8 @@ import "firebase/auth";
 import "./fire";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 
 const db = firebase.firestore();
 const auth = firebase.auth();
@@ -53,7 +55,7 @@ export default function EditTable(props: {
                     value={document.id}
                     onClick={handleShow}
                   >
-                    ×
+                    <FontAwesomeIcon icon={faTrashAlt} />
                   </Button>
                 </td>
               </tr>
