@@ -23,6 +23,9 @@ export default function EditTable(props: {
   const [loading, setLoading] = useState(true);
 
   const handleShow = (e: MouseEventHandler<HTMLElement>): void => {
+    console.dir(e.currentTarget.__reactProps$tpd8clicdwp.value, {
+      depth: null,
+    });
     props.setAlbumData(e.currentTarget.value);
     props.setShow(true);
     props.setModalDetail("delete");
@@ -48,11 +51,11 @@ export default function EditTable(props: {
                     {doc.title}
                   </a>
                 </td>
-                <td>
+                <td style={{ border: "none" }}>
                   <Button
                     variant="outline-danger"
                     size="sm"
-                    value={document.id}
+                    value={doc}
                     onClick={handleShow}
                   >
                     <FontAwesomeIcon icon={faTrashAlt} />
