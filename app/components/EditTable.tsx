@@ -79,7 +79,7 @@ export default function EditTable(props: {
   return (
     <div style={{ marginBottom: "20px" }}>
       {loading === false ? (
-        <Table striped bordered hover responsive>
+        <Table bordered hover responsive>
           <thead>
             <tr>
               <th>Artist</th>
