@@ -12,8 +12,6 @@ export default function Buttons(props: {
     props.setModalDetail("register");
   };
 
-  console.log(props.editing);
-
   return (
     <>
       <style jsx>{`
