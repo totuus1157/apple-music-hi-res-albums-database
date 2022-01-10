@@ -43,7 +43,7 @@ export default function ModalWindow(props: {
     errors.genre && setErrors({ ...errors, genre: null });
   };
   const onChangeComposer = (e: TargetValue): void => {
-    setComposer(e.target.value);
+    e.target.value !== "" ? setComposer(e.target.value) : setComposer(null);
     errors.composer && setErrors({ ...errors, composer: null });
   };
   const onChangeLink = (e: TargetValue): void => {
@@ -75,7 +75,7 @@ export default function ModalWindow(props: {
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       };
 
-      if (composer !== "") ob.composer = composer;
+      if (composer !== null) ob.composer = composer;
 
       if (auth.currentUser !== null) {
         db.collection("users")
