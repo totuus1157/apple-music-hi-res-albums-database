@@ -62,7 +62,7 @@ export default function ModalWindow(props: {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
-      const matches = link.match(/[1-9][0-9]*/);
+      const matches = link.match(/[1-9][0-9]*$/);
       const albumId = matches && matches[0];
       const normalizedURL = `https://music.apple.com/album/${albumId}`;
 
