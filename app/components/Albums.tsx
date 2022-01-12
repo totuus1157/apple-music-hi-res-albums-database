@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, SetStateAction } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -7,15 +6,13 @@ import Table from "react-bootstrap/Table";
 
 const db = firebase.firestore();
 
-export default function Album(): JSX.Element {
+export default function Albums(props: { show: boolean }): JSX.Element {
   const mydata: SetStateAction<any[]> = [];
   const [data, setData] = useState(mydata);
   const [loading, setLoading] = useState(true);
 
   useEffect((): void => {
-    db.collection("users")
-      .doc("VhTtKxlWjDbmkq0qyzAc")
-      .collection("albums")
+    db.collectionGroup("albums")
       .get()
       .then((snapshot): void => {
         snapshot.forEach((document): void => {
@@ -27,7 +24,7 @@ export default function Album(): JSX.Element {
               <td>{doc.composer}</td>
               <td>{doc.sampleRate}</td>
               <td>
-                <a href={doc.link} target="_blank" rel="noopener noreferrer">
+                <a href={doc.url} target="_blank" rel="noopener noreferrer">
                   {doc.title}
                 </a>
               </td>
@@ -37,7 +34,7 @@ export default function Album(): JSX.Element {
         setData(mydata);
         setLoading(false);
       });
-  }, []);
+  }, [props.show]);
 
   return (
     <div style={{ marginBottom: "20px" }}>
