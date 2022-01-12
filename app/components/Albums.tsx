@@ -39,7 +39,7 @@ export default function Albums(props: { show: boolean }): JSX.Element {
   return (
     <div style={{ marginBottom: "20px" }}>
       {loading === false ? (
-        <Table striped bordered hover responsive>
+        <Table bordered hover responsive>
           <thead>
             <tr>
               <th>Artist</th>
