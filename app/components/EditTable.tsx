@@ -18,14 +18,14 @@ export default function EditTable(props: {
   setModalDetail: (arg0: string) => void;
   show: boolean;
 }): JSX.Element {
-  const mydata: SetStateAction<any[]> = [];
-  const [data, setData] = useState(mydata);
+  const tableContent: SetStateAction<any[]> = [];
+  const [data, setData] = useState(tableContent);
   const [loading, setLoading] = useState(true);
 
   const handleShow = (e: MouseEventHandler<HTMLElement>): void => {
-    console.dir(e.currentTarget.__reactProps$tpd8clicdwp.value, {
-      depth: null,
-    });
+    /* console.dir(e.currentTarget.__reactProps$tpd8clicdwp.value, {
+     *   depth: null,
+     * }); */
     props.setAlbumData(e.currentTarget.value);
     props.setShow(true);
     props.setModalDetail("delete");
@@ -40,7 +40,7 @@ export default function EditTable(props: {
         .then((snapshot): void => {
           snapshot.forEach((document): void => {
             const doc = document.data();
-            mydata.push(
+            tableContent.push(
               <tr key={document.id}>
                 <td>{doc.artist}</td>
                 <td>{doc.genre}</td>
@@ -55,7 +55,7 @@ export default function EditTable(props: {
                   <Button
                     variant="outline-danger"
                     size="sm"
-                    value={doc}
+                    value={document.id}
                     onClick={handleShow}
                   >
                     <FontAwesomeIcon icon={faTrashAlt} />
@@ -64,11 +64,11 @@ export default function EditTable(props: {
               </tr>
             );
           });
-          setData(mydata);
+          setData(tableContent);
           setLoading(false);
         });
     } else {
-      mydata.push(
+      tableContent.push(
         <tr key="1">
           <th>Cannot retrieve data.</th>
         </tr>
