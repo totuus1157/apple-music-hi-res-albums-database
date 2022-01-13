@@ -7,8 +7,8 @@ import Table from "react-bootstrap/Table";
 const db = firebase.firestore();
 
 export default function Albums(props: { show: boolean }): JSX.Element {
-  const mydata: SetStateAction<any[]> = [];
-  const [data, setData] = useState(mydata);
+  const tableContent: SetStateAction<any[]> = [];
+  const [data, setData] = useState(tableContent);
   const [loading, setLoading] = useState(true);
 
   useEffect((): void => {
@@ -17,7 +17,7 @@ export default function Albums(props: { show: boolean }): JSX.Element {
       .then((snapshot): void => {
         snapshot.forEach((document): void => {
           const doc = document.data();
-          mydata.push(
+          tableContent.push(
             <tr key={document.id}>
               <td>{doc.artist}</td>
               <td>{doc.genre}</td>
@@ -31,7 +31,7 @@ export default function Albums(props: { show: boolean }): JSX.Element {
             </tr>
           );
         });
-        setData(mydata);
+        setData(tableContent);
         setLoading(false);
       });
   }, [props.show]);
