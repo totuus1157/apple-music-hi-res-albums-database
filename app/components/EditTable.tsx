@@ -12,7 +12,7 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 
 export default function EditTable(props: {
-  albumData: string;
+  albumData: string[];
   setAlbumData: (arg0: string) => void;
   setShow: (arg0: boolean) => void;
   setModalDetail: (arg0: string) => void;
@@ -52,7 +52,14 @@ export default function EditTable(props: {
                   <Button
                     variant="outline-danger"
                     size="sm"
-                    value={document.id}
+                    value={[
+                      document.id,
+                      doc.artist,
+                      doc.title,
+                      doc.genre,
+                      doc.composer,
+                      doc.sampleRate,
+                    ]}
                     onClick={handleShow}
                   >
                     <FontAwesomeIcon icon={faTrashAlt} />
