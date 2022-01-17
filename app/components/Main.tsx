@@ -15,7 +15,7 @@ export default function Main(props: { title: string }): JSX.Element {
   const [modalDetail, setModalDetail] = useState("");
   const [show, setShow] = useState(false);
   const [editing, setEditing] = useState(false);
-  const [albumData, setAlbumData] = useState([]);
+  const [albumData, setAlbumData] = useState("");
 
   useEffect((): void => {
     auth
