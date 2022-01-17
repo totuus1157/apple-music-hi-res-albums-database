@@ -23,7 +23,7 @@ export default function Delete(props: {
         .collection("albums")
         .doc(albumId)
         .delete()
-        .then(() => {
+        .then((): void => {
           handleClose();
         });
     }
