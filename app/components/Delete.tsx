@@ -29,7 +29,7 @@ export default function Delete(props: {
     }
   };
 
-  const handleClose = (): any => props.setShow(false);
+  const handleClose = (): void => props.setShow(false);
 
   return (
     <Modal show={props.show} onHide={handleClose}>
