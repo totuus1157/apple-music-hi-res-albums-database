@@ -15,7 +15,7 @@ export default function Main(props: { title: string }): JSX.Element {
   const [modalDetail, setModalDetail] = useState("");
   const [show, setShow] = useState(false);
   const [editing, setEditing] = useState(false);
-  const [albumData, setAlbumData] = useState("");
+  const [albumInfo, setAlbumInfo] = useState("");
 
   useEffect((): void => {
     auth
@@ -52,15 +52,15 @@ export default function Main(props: { title: string }): JSX.Element {
           show={show}
           setShow={setShow}
           setModalDetail={setModalDetail}
-          albumData={albumData}
-          setAlbumData={setAlbumData}
+          albumInfo={albumInfo}
+          setAlbumInfo={setAlbumInfo}
         />
       )}
       <ModalWindow
         modalDetail={modalDetail}
         show={show}
         setShow={setShow}
-        albumData={albumData}
+        albumInfo={albumInfo}
       />
     </main>
   );

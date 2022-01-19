@@ -12,8 +12,8 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 
 export default function EditTable(props: {
-  albumData: string[];
-  setAlbumData: (arg0: string) => void;
+  albumInfo: string[];
+  setAlbumInfo: (arg0: string) => void;
   setShow: (arg0: boolean) => void;
   setModalDetail: (arg0: string) => void;
   show: boolean;
@@ -23,7 +23,7 @@ export default function EditTable(props: {
   const [loading, setLoading] = useState(true);
 
   const handleShow = (e: MouseEventHandler<HTMLElement>): void => {
-    props.setAlbumData(e.currentTarget.value);
+    props.setAlbumInfo(e.currentTarget.value);
     props.setShow(true);
     props.setModalDetail("delete");
   };

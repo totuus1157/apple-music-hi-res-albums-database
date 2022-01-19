@@ -3,7 +3,7 @@ import Delete from "./Delete";
 
 export default function ModalWindow(props: {
   modalDetail: string;
-  albumData: string;
+  albumInfo: string;
   show: boolean;
   setShow: (arg0: boolean) => any;
 }): JSX.Element {
@@ -16,7 +16,7 @@ export default function ModalWindow(props: {
         <Delete
           show={props.show}
           setShow={props.setShow}
-          albumData={props.albumData}
+          albumInfo={props.albumInfo}
         />
       )}
     </>

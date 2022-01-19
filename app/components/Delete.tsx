@@ -11,9 +11,9 @@ const auth = firebase.auth();
 export default function Delete(props: {
   setShow: (arg0: boolean) => void;
   show: boolean;
-  albumData: string;
+  albumInfo: string;
 }): JSX.Element {
-  const albumDataArray = props.albumData.split(",");
+  const albumDataArray = props.albumInfo.split(",");
   const [albumId, artist, title, genre, composer, sampleRate] = albumDataArray;
 
   const doAction = (): void => {
