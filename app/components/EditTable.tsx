@@ -12,7 +12,7 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 
 export default function EditTable(props: {
-  albumInfo: string[];
+  albumInfo: string;
   setAlbumInfo: (arg0: string) => void;
   setShow: (arg0: boolean) => void;
   setModalDetail: (arg0: string) => void;
