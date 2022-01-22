@@ -20,7 +20,7 @@ export default function Main(props: { title: string }): JSX.Element {
   useEffect((): void => {
     auth
       .getRedirectResult()
-      .then((result: { credential: any }): void => {
+      .then((result): void => {
         if (result.credential) {
           const changeTrue = loginState === false ? true : true;
           setLoginState(changeTrue);
