@@ -18,15 +18,16 @@ export default function Main(props: { title: string }): JSX.Element {
   const [albumInfo, setAlbumInfo] = useState("");
   const [user, setUser] = useState({});
 
+  console.log("loginState: ", loginState);
+
   useEffect((): void => {
     auth
       .getRedirectResult()
       .then((result): void => {
         if (result.user) {
+          setLoginState(true);
           setUser(result.user);
         }
-        const changeTrue = loginState === false ? true : true;
-        setLoginState(changeTrue);
       })
       .catch((): void => {
         console.log("not logined.");
