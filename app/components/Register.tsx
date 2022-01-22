@@ -14,6 +14,7 @@ const auth = firebase.auth();
 export default function Register(props: {
   setShow: (arg0: boolean) => void;
   show: boolean;
+  user: object;
 }): JSX.Element {
   const [artist, setArtist] = useState(null);
   const [title, setTitle] = useState(null);
@@ -23,6 +24,8 @@ export default function Register(props: {
   const [sampleRate, setSampleRate] = useState("96");
   const [checked, setChecked] = useState("96");
   const [errors, setErrors] = useState({});
+
+  const userId = props.user.uid;
 
   type TargetValue = {
     target: {
@@ -79,7 +82,7 @@ export default function Register(props: {
 
       if (auth.currentUser !== null) {
         db.collection("users")
-          .doc(auth.currentUser.email!)
+          .doc(userId)
           .collection("albums")
           .doc(albumId)
           .set(ob)

@@ -16,15 +16,17 @@ export default function Main(props: { title: string }): JSX.Element {
   const [show, setShow] = useState(false);
   const [editing, setEditing] = useState(false);
   const [albumInfo, setAlbumInfo] = useState("");
+  const [user, setUser] = useState({});
 
   useEffect((): void => {
     auth
       .getRedirectResult()
       .then((result): void => {
-        if (result.credential) {
-          const changeTrue = loginState === false ? true : true;
-          setLoginState(changeTrue);
+        if (result.user) {
+          setUser(result.user);
         }
+        const changeTrue = loginState === false ? true : true;
+        setLoginState(changeTrue);
       })
       .catch((): void => {
         console.log("not logined.");
@@ -61,6 +63,7 @@ export default function Main(props: { title: string }): JSX.Element {
         show={show}
         setShow={setShow}
         albumInfo={albumInfo}
+        user={user}
       />
     </main>
   );
