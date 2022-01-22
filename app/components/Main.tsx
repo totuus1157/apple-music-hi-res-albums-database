@@ -26,7 +26,7 @@ export default function Main(props: { title: string }): JSX.Element {
           setLoginState(changeTrue);
         }
       })
-      .catch((_error: any): void => {
+      .catch((): void => {
         console.log("not logined.");
       });
   }, [loginState]);
