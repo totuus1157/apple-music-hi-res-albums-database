@@ -5,7 +5,7 @@ export default function ModalWindow(props: {
   modalDetail: string;
   albumInfo: string;
   show: boolean;
-  setShow: (arg0: boolean) => any;
+  setShow: (arg0: boolean) => void;
 }): JSX.Element {
   return (
     <>
