@@ -11,7 +11,7 @@ import Form from "react-bootstrap/Form";
 const db = firebase.firestore();
 const auth = firebase.auth();
 
-export default function ModalWindow(props: {
+export default function Register(props: {
   setShow: (arg0: boolean) => void;
   show: boolean;
 }): JSX.Element {
