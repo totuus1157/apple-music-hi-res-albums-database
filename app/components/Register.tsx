@@ -73,12 +73,11 @@ export default function Register(props: {
         artist: artist,
         title: title,
         genre: genre,
+        composer: composer,
         url: normalizedURL,
         sampleRate: sampleRate,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       };
-
-      if (composer !== null) ob.composer = composer;
 
       if (auth.currentUser !== null) {
         db.collection("users")
