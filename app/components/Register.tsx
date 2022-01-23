@@ -77,6 +77,7 @@ export default function Register(props: {
         url: normalizedURL,
         sampleRate: sampleRate,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        updatedAt: null,
       };
 
       if (auth.currentUser !== null) {
