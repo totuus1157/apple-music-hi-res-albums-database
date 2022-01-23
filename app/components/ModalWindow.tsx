@@ -6,12 +6,18 @@ export default function ModalWindow(props: {
   albumInfo: string;
   show: boolean;
   setShow: (arg0: boolean) => void;
+  registeredURL: string[];
   user: object;
 }): JSX.Element {
   return (
     <>
       {props.modalDetail === "register" && (
-        <Register show={props.show} setShow={props.setShow} user={props.user} />
+        <Register
+          show={props.show}
+          setShow={props.setShow}
+          user={props.user}
+          registeredURL={props.registeredURL}
+        />
       )}
       {props.modalDetail === "delete" && (
         <Delete

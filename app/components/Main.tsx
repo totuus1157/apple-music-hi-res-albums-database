@@ -16,6 +16,7 @@ export default function Main(props: { title: string }): JSX.Element {
   const [show, setShow] = useState(false);
   const [editing, setEditing] = useState(false);
   const [albumInfo, setAlbumInfo] = useState("");
+  const [registeredURL, setRegisteredURL] = useState<string[]>([]);
   const [user, setUser] = useState({});
 
   useEffect((): void => {
@@ -47,7 +48,11 @@ export default function Main(props: { title: string }): JSX.Element {
         setEditing={setEditing}
       />
       {editing !== true ? (
-        <Albums show={show} />
+        <Albums
+          show={show}
+          registeredURL={registeredURL}
+          setRegisteredURL={setRegisteredURL}
+        />
       ) : (
         <EditTable
           show={show}
@@ -63,6 +68,7 @@ export default function Main(props: { title: string }): JSX.Element {
         show={show}
         setShow={setShow}
         albumInfo={albumInfo}
+        registeredURL={registeredURL}
         user={user}
       />
     </main>

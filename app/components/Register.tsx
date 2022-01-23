@@ -14,6 +14,7 @@ const auth = firebase.auth();
 export default function Register(props: {
   setShow: (arg0: boolean) => void;
   show: boolean;
+  registeredURL: string[];
   user: object;
 }): JSX.Element {
   const [artist, setArtist] = useState(null);
@@ -26,6 +27,9 @@ export default function Register(props: {
   const [errors, setErrors] = useState({});
 
   const userId = props.user.uid;
+  const matches = link && link.match(/(?<digit>[1-9][0-9]+)(\?l=[\w]+)*$/);
+  const albumId = matches && matches.groups.digit;
+  const formattedURL = `https://music.apple.com/album/${albumId}`;
 
   type TargetValue = {
     target: {
@@ -65,16 +69,12 @@ export default function Register(props: {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
-      const matches = link.match(/(?<digit>[1-9][0-9]+)(\?l=[\w]+)*$/);
-      const albumId = matches && matches.groups.digit;
-      const normalizedURL = `https://music.apple.com/album/${albumId}`;
-
       let ob = {
         artist: artist,
         title: title,
         genre: genre,
         composer: composer,
-        url: normalizedURL,
+        url: formattedURL,
         sampleRate: sampleRate,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         updatedAt: null,
@@ -117,6 +117,9 @@ export default function Register(props: {
     if (!link || link === "") newErrors.link = "cannot be blank!";
     else if (!regex.appleMusicLink.test(link))
       newErrors.link = "only links to Apple Music albums can be allowed.";
+    else if (props.registeredURL.find((url) => url === formattedURL)) {
+      newErrors.link = "This album is already registered";
+    }
 
     return newErrors;
   };

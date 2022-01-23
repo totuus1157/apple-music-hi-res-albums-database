@@ -6,10 +6,16 @@ import Table from "react-bootstrap/Table";
 
 const db = firebase.firestore();
 
-export default function Albums(props: { show: boolean }): JSX.Element {
+export default function Albums(props: {
+  show: boolean;
+  registeredURL: string[];
+  setRegisteredURL: (arg0: string[]) => void;
+}): JSX.Element {
   const tableContent: SetStateAction<any[]> = [];
   const [data, setData] = useState(tableContent);
   const [loading, setLoading] = useState(true);
+
+  const albumUrl: string[] = [];
 
   useEffect((): void => {
     db.collectionGroup("albums")
@@ -30,8 +36,10 @@ export default function Albums(props: { show: boolean }): JSX.Element {
               </td>
             </tr>
           );
+          albumUrl.push(doc.url);
         });
         setData(tableContent);
+        props.setRegisteredURL(albumUrl);
         setLoading(false);
       });
   }, [props.show]);
