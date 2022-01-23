@@ -46,7 +46,7 @@ export default function Main(props: { title: string }): JSX.Element {
         editing={editing}
         setEditing={setEditing}
       />
-      {editing === false ? (
+      {editing !== true ? (
         <Albums show={show} />
       ) : (
         <EditTable
