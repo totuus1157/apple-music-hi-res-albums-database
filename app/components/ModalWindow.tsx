@@ -18,6 +18,7 @@ export default function ModalWindow(props: {
           show={props.show}
           setShow={props.setShow}
           albumInfo={props.albumInfo}
+          user={props.user}
         />
       )}
     </>

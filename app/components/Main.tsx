@@ -57,6 +57,7 @@ export default function Main(props: { title: string }): JSX.Element {
           setModalDetail={setModalDetail}
           albumInfo={albumInfo}
           setAlbumInfo={setAlbumInfo}
+          user={user}
         />
       )}
       <ModalWindow
