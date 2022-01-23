@@ -27,7 +27,6 @@ export default function Title(props: {
       login();
     } else {
       logout();
-      alert("Logout!");
       window.location.reload();
     }
   };
