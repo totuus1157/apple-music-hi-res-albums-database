@@ -38,7 +38,7 @@ export default function Albums(props: { show: boolean }): JSX.Element {
 
   return (
     <div style={{ marginBottom: "20px" }}>
-      {loading === false ? (
+      {loading !== true ? (
         <Table bordered hover responsive>
           <thead>
             <tr>
