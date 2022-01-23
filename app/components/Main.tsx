@@ -18,8 +18,6 @@ export default function Main(props: { title: string }): JSX.Element {
   const [albumInfo, setAlbumInfo] = useState("");
   const [user, setUser] = useState({});
 
-  console.log("loginState: ", loginState);
-
   useEffect((): void => {
     auth
       .getRedirectResult()
