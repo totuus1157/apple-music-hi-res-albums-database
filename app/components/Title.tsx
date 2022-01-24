@@ -46,7 +46,7 @@ export default function Title(props: {
             <Nav.Link eventKey="2">How to use</Nav.Link>
           </Nav>
           <Button variant="outline-light" onClick={doLogin}>
-            {props.loginState == true ? "Logout" : "Login"}
+            {props.loginState !== true ? "Login" : "Logout"}
           </Button>
         </Navbar.Collapse>
       </Navbar>
