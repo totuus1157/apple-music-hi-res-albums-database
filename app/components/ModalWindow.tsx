@@ -7,7 +7,7 @@ export default function ModalWindow(props: {
   show: boolean;
   setShow: (arg0: boolean) => void;
   registeredURL: string[];
-  user: object;
+  uid: string;
 }): JSX.Element {
   return (
     <>
@@ -15,7 +15,7 @@ export default function ModalWindow(props: {
         <Register
           show={props.show}
           setShow={props.setShow}
-          user={props.user}
+          uid={props.uid}
           registeredURL={props.registeredURL}
         />
       )}
@@ -24,7 +24,7 @@ export default function ModalWindow(props: {
           show={props.show}
           setShow={props.setShow}
           albumInfo={props.albumInfo}
-          user={props.user}
+          uid={props.uid}
         />
       )}
     </>

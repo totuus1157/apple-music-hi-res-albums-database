@@ -15,7 +15,7 @@ export default function Register(props: {
   setShow: (arg0: boolean) => void;
   show: boolean;
   registeredURL: string[];
-  user: object;
+  uid: string;
 }): JSX.Element {
   const [artist, setArtist] = useState(null);
   const [title, setTitle] = useState(null);
@@ -26,7 +26,6 @@ export default function Register(props: {
   const [checked, setChecked] = useState("96");
   const [errors, setErrors] = useState({});
 
-  const userId = props.user.uid;
   const matches = link && link.match(/(?<digit>[1-9][0-9]+)(\?l=[\w]+)*$/);
   const albumId = matches && matches.groups.digit;
   const formattedURL = `https://music.apple.com/album/${albumId}`;
@@ -82,7 +81,7 @@ export default function Register(props: {
 
       if (auth.currentUser !== null) {
         db.collection("users")
-          .doc(userId)
+          .doc(props.uid)
           .collection("albums")
           .doc(albumId)
           .set(ob)

@@ -17,13 +17,11 @@ export default function EditTable(props: {
   setShow: (arg0: boolean) => void;
   setModalDetail: (arg0: string) => void;
   show: boolean;
-  user: object;
+  uid: string;
 }): JSX.Element {
   const tableContent: SetStateAction<any[]> = [];
   const [data, setData] = useState(tableContent);
   const [loading, setLoading] = useState(true);
-
-  const userId = props.user.uid;
 
   const handleShow = (e: MouseEventHandler<HTMLElement>): void => {
     props.setAlbumInfo(e.currentTarget.value);
@@ -34,7 +32,7 @@ export default function EditTable(props: {
   useEffect((): void => {
     if (auth.currentUser !== null) {
       db.collection("users")
-        .doc(userId)
+        .doc(props.uid)
         .collection("albums")
         .get()
         .then((snapshot): void => {

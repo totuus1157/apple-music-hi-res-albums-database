@@ -12,17 +12,15 @@ export default function Delete(props: {
   setShow: (arg0: boolean) => void;
   show: boolean;
   albumInfo: string;
-  user: object;
+  uid: string;
 }): JSX.Element {
   const albumDataArray = props.albumInfo.split(",");
   const [albumId, artist, title, genre, composer, sampleRate] = albumDataArray;
 
-  const userId = props.user.uid;
-
   const doAction = (): void => {
     if (auth.currentUser !== null) {
       db.collection("users")
-        .doc(userId)
+        .doc(props.uid)
         .collection("albums")
         .doc(albumId)
         .delete()

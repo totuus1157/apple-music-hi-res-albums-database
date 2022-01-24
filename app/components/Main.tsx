@@ -17,21 +17,14 @@ export default function Main(props: { title: string }): JSX.Element {
   const [editing, setEditing] = useState(false);
   const [albumInfo, setAlbumInfo] = useState("");
   const [registeredURL, setRegisteredURL] = useState<string[]>([]);
-  const [user, setUser] = useState({});
+  const [uid, setUid] = useState("");
 
-  useEffect((): void => {
-    auth
-      .getRedirectResult()
-      .then((result): void => {
-        if (result.user) {
-          setLoginState(true);
-          setUser(result.user);
-        }
-      })
-      .catch((): void => {
-        console.log("not logined.");
-      });
-  }, [loginState]);
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      setLoginState(true);
+      setUid(user.uid);
+    }
+  });
 
   return (
     <main>
@@ -60,7 +53,7 @@ export default function Main(props: { title: string }): JSX.Element {
           setModalDetail={setModalDetail}
           albumInfo={albumInfo}
           setAlbumInfo={setAlbumInfo}
-          user={user}
+          uid={uid}
         />
       )}
       <ModalWindow
@@ -69,7 +62,7 @@ export default function Main(props: { title: string }): JSX.Element {
         setShow={setShow}
         albumInfo={albumInfo}
         registeredURL={registeredURL}
-        user={user}
+        uid={uid}
       />
     </main>
   );
