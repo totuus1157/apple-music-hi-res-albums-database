@@ -1,5 +1,6 @@
 import { useState } from "react";
 import firebase from "firebase/app";
+import "firebase/firestore";
 import "firebase/auth";
 import "./fire";
 import Title from "./Title";
@@ -8,6 +9,7 @@ import Albums from "./Albums";
 import EditTable from "./EditTable";
 import ModalWindow from "./ModalWindow";
 
+const db = firebase.firestore();
 const auth = firebase.auth();
 
 export default function Main(props: { title: string }): JSX.Element {
@@ -19,8 +21,17 @@ export default function Main(props: { title: string }): JSX.Element {
   const [registeredURL, setRegisteredURL] = useState<string[]>([]);
   const [uid, setUid] = useState("");
 
-  auth.onAuthStateChanged((user) => {
+  auth.onAuthStateChanged(async (user) => {
     if (user) {
+      const userDoc = await db.collection("users").doc(user.uid).get();
+      if (!userDoc.exists) {
+        await db.collection("users").doc(user.uid).set({
+          displayName: user.displayName,
+          email: user.email,
+          uid: user.uid,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+      }
       setLoginState(true);
       setUid(user.uid);
     }
