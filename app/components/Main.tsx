@@ -21,7 +21,17 @@ export default function Main(props: { title: string }): JSX.Element {
   const [registeredURL, setRegisteredURL] = useState<string[]>([]);
   const [uid, setUid] = useState("");
 
+  auth
+    .getRedirectResult()
+    .then((result) => {
+      console.log("result: ", result);
+    })
+    .catch((error) => {
+      console.log("error: ", error);
+    });
+
   auth.onAuthStateChanged(async (user) => {
+    console.log("user: ", user);
     if (user) {
       const userDoc = await db.collection("users").doc(user.uid).get();
       if (!userDoc.exists) {
