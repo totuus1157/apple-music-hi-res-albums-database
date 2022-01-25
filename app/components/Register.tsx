@@ -68,7 +68,7 @@ export default function Register(props: {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
-      let ob = {
+      const ob = {
         artist: artist,
         title: title,
         genre: genre,
