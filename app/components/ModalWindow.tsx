@@ -1,5 +1,6 @@
 import Register from "./Register";
 import Delete from "./Delete";
+import About from "./About";
 
 export default function ModalWindow(props: {
   modalContent: string | null;
@@ -28,6 +29,8 @@ export default function ModalWindow(props: {
         uid={props.uid}
       />
     );
+  } else if (props.modalContent === "about") {
+    content = <About show={props.show} setShow={props.setShow} />;
   }
 
   return content;
