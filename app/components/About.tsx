@@ -35,9 +35,9 @@ export default function About(props: {
           we grew up in.
         </p>
         <p>
-          If you know of a high-resolution album that has not yet been added to
-          this database, please add it. Any small contribution would be greatly
-          appreciated.
+          If you know of a high-resolution album that has not yet been
+          registered to this database, please add it. Any small contribution
+          would be greatly appreciated.
         </p>
         <p>Let's enjoy together the common language of the world, music!</p>
       </Modal.Body>
