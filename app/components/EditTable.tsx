@@ -15,7 +15,7 @@ export default function EditTable(props: {
   albumInfo: string;
   setAlbumInfo: (arg0: string) => void;
   setShow: (arg0: boolean) => void;
-  setModalDetail: (arg0: string) => void;
+  setModalContent: (arg0: string) => void;
   show: boolean;
   uid: string;
 }): JSX.Element {
@@ -26,7 +26,7 @@ export default function EditTable(props: {
   const handleShow = (e: MouseEventHandler<HTMLElement>): void => {
     props.setAlbumInfo(e.currentTarget.value);
     props.setShow(true);
-    props.setModalDetail("delete");
+    props.setModalContent("delete");
   };
 
   useEffect((): void => {

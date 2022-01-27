@@ -12,6 +12,8 @@ export default function Title(props: {
   title: string;
   loginState: boolean;
   setLoginState: (arg0: boolean) => void;
+  setModalContent: (arg0: string) => void;
+  setShow: (arg0: boolean) => void;
 }): JSX.Element {
   const login = (): void => {
     auth.signInWithRedirect(provider);
@@ -31,8 +33,10 @@ export default function Title(props: {
     }
   };
 
-  const handleselect = (eventKey: any): void => {
-    alert(`selected ${eventKey}`);
+  const handleselect = (eventKey: string): void => {
+    props.setModalContent(eventKey);
+    props.setShow(true);
+    console.log(`selected ${eventKey}`);
   };
 
   return (
@@ -42,8 +46,8 @@ export default function Title(props: {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto" onSelect={handleselect}>
-            <Nav.Link eventKey="1">About this site</Nav.Link>
-            <Nav.Link eventKey="2">How to use</Nav.Link>
+            <Nav.Link eventKey="about">About this site</Nav.Link>
+            <Nav.Link eventKey="howto">How to use</Nav.Link>
           </Nav>
           <Button variant="outline-light" onClick={doLogin}>
             {props.loginState !== true ? "Login" : "Logout"}

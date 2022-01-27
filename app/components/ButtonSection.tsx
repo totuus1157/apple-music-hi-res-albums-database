@@ -4,12 +4,12 @@ export default function Buttons(props: {
   setShow: (arg0: boolean) => void;
   editing: boolean;
   setEditing: (arg0: boolean) => void;
-  setModalDetail: (arg0: string) => void;
+  setModalContent: (arg0: string) => void;
   loginState: boolean;
 }): JSX.Element {
   const handleShow = () => {
     props.setShow(true);
-    props.setModalDetail("register");
+    props.setModalContent("register");
   };
 
   return (

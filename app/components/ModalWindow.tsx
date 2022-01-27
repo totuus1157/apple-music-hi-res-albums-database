@@ -2,7 +2,7 @@ import Register from "./Register";
 import Delete from "./Delete";
 
 export default function ModalWindow(props: {
-  modalDetail: string;
+  modalContent: string;
   albumInfo: string;
   show: boolean;
   setShow: (arg0: boolean) => void;
@@ -11,7 +11,7 @@ export default function ModalWindow(props: {
 }): JSX.Element {
   return (
     <>
-      {props.modalDetail === "register" && (
+      {props.modalContent === "register" && (
         <Register
           show={props.show}
           setShow={props.setShow}
@@ -19,7 +19,7 @@ export default function ModalWindow(props: {
           registeredURL={props.registeredURL}
         />
       )}
-      {props.modalDetail === "delete" && (
+      {props.modalContent === "delete" && (
         <Delete
           show={props.show}
           setShow={props.setShow}

@@ -14,12 +14,15 @@ const auth = firebase.auth();
 
 export default function Main(props: { title: string }): JSX.Element {
   const [loginState, setLoginState] = useState(false);
-  const [modalDetail, setModalDetail] = useState("");
+  const [modalContent, setModalContent] = useState("");
   const [show, setShow] = useState(false);
   const [editing, setEditing] = useState(false);
   const [albumInfo, setAlbumInfo] = useState("");
   const [registeredURL, setRegisteredURL] = useState<string[]>([]);
   const [uid, setUid] = useState("");
+
+  console.log("modalContent: ", modalContent);
+  console.log("show: ", show);
 
   auth
     .getRedirectResult()
@@ -44,10 +47,12 @@ export default function Main(props: { title: string }): JSX.Element {
         title={props.title}
         loginState={loginState}
         setLoginState={setLoginState}
+        setModalContent={setModalContent}
+        setShow={setShow}
       />
       <ButtonSection
         loginState={loginState}
-        setModalDetail={setModalDetail}
+        setModalContent={setModalContent}
         setShow={setShow}
         editing={editing}
         setEditing={setEditing}
@@ -62,14 +67,14 @@ export default function Main(props: { title: string }): JSX.Element {
         <EditTable
           show={show}
           setShow={setShow}
-          setModalDetail={setModalDetail}
+          setModalContent={setModalContent}
           albumInfo={albumInfo}
           setAlbumInfo={setAlbumInfo}
           uid={uid}
         />
       )}
       <ModalWindow
-        modalDetail={modalDetail}
+        modalContent={modalContent}
         show={show}
         setShow={setShow}
         albumInfo={albumInfo}
