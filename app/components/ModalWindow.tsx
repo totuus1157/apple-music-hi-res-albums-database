@@ -9,24 +9,26 @@ export default function ModalWindow(props: {
   registeredURL: string[];
   uid: string;
 }): JSX.Element {
-  return (
-    <>
-      {props.modalContent === "register" && (
-        <Register
-          show={props.show}
-          setShow={props.setShow}
-          uid={props.uid}
-          registeredURL={props.registeredURL}
-        />
-      )}
-      {props.modalContent === "delete" && (
-        <Delete
-          show={props.show}
-          setShow={props.setShow}
-          albumInfo={props.albumInfo}
-          uid={props.uid}
-        />
-      )}
-    </>
-  );
+  let content = <></>;
+  if (props.modalContent === "register") {
+    content = (
+      <Register
+        show={props.show}
+        setShow={props.setShow}
+        uid={props.uid}
+        registeredURL={props.registeredURL}
+      />
+    );
+  } else if (props.modalContent === "delete") {
+    content = (
+      <Delete
+        show={props.show}
+        setShow={props.setShow}
+        albumInfo={props.albumInfo}
+        uid={props.uid}
+      />
+    );
+  }
+
+  return <>{content}</>;
 }
