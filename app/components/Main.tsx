@@ -9,7 +9,6 @@ import Albums from "./Albums";
 import EditTable from "./EditTable";
 import ModalWindow from "./ModalWindow";
 
-const db = firebase.firestore();
 const auth = firebase.auth();
 
 export default function Main(props: { title: string }): JSX.Element {
