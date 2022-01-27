@@ -30,5 +30,5 @@ export default function ModalWindow(props: {
     );
   }
 
-  return <>{content}</>;
+  return content;
 }
