@@ -33,17 +33,8 @@ export default function Main(props: { title: string }): JSX.Element {
   auth.onAuthStateChanged(async (user) => {
     console.log("user: ", user);
     if (user) {
-      const userDoc = await db.collection("users").doc(user.uid).get();
-      if (!userDoc.exists) {
-        await db.collection("users").doc(user.uid).set({
-          displayName: user.displayName,
-          email: user.email,
-          uid: user.uid,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        });
-      }
-      setLoginState(true);
       setUid(user.uid);
+      setLoginState(true);
     }
   });
 
