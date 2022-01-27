@@ -42,7 +42,7 @@ export default function Title(props: {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto" onSelect={handleselect}>
-            <Nav.Link eventKey="1">About</Nav.Link>
+            <Nav.Link eventKey="1">About this site</Nav.Link>
             <Nav.Link eventKey="2">How to use</Nav.Link>
           </Nav>
           <Button variant="outline-light" onClick={doLogin}>
