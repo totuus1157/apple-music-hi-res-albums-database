@@ -12,7 +12,7 @@ export default function Title(props: {
   title: string;
   loginState: boolean;
   setLoginState: (arg0: boolean) => void;
-  setModalContent: (arg0: string) => void;
+  setModalContent: (arg0: string | null) => void;
   setShow: (arg0: boolean) => void;
 }): JSX.Element {
   const login = (): void => {
@@ -33,7 +33,7 @@ export default function Title(props: {
     }
   };
 
-  const handleselect = (eventKey: string): void => {
+  const handleselect = (eventKey: string | null): void => {
     props.setModalContent(eventKey);
     props.setShow(true);
     console.log(`selected ${eventKey}`);
