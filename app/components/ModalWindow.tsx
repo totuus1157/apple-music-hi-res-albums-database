@@ -2,7 +2,7 @@ import Register from "./Register";
 import Delete from "./Delete";
 
 export default function ModalWindow(props: {
-  modalContent: string;
+  modalContent: string | null;
   albumInfo: string;
   show: boolean;
   setShow: (arg0: boolean) => void;
