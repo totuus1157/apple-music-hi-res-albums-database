@@ -9,7 +9,7 @@ export default function HowTo(props: {
 
   return (
     <Modal show={props.show} onHide={handleClose}>
-      <Modal.Header>
+      <Modal.Header closeButton>
         <Modal.Title>How to Register</Modal.Title>
       </Modal.Header>
       <Modal.Body>

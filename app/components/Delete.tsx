@@ -34,7 +34,7 @@ export default function Delete(props: {
 
   return (
     <Modal show={props.show} onHide={handleClose}>
-      <Modal.Header>
+      <Modal.Header closeButton>
         <Modal.Title>Deleting an album</Modal.Title>
       </Modal.Header>
       <Modal.Body>

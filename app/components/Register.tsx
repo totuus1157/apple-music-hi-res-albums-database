@@ -138,7 +138,7 @@ export default function Register(props: {
   return (
     <>
       <Modal show={props.show} onHide={handleClose}>
-        <Modal.Header>
+        <Modal.Header closeButton>
           <Modal.Title>Adding a New Album</Modal.Title>
         </Modal.Header>
         <Modal.Body>

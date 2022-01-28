@@ -9,7 +9,7 @@ export default function About(props: {
 
   return (
     <Modal show={props.show} onHide={handleClose}>
-      <Modal.Header>
+      <Modal.Header closeButton>
         <Modal.Title>About this site</Modal.Title>
       </Modal.Header>
       <Modal.Body>
