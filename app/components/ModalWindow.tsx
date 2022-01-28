@@ -2,6 +2,7 @@ import Register from "./Register";
 import Delete from "./Delete";
 import About from "./About";
 import HowTo from "./HowTo";
+import PrivacyPolicy from "./PrivacyPolicy";
 
 export default function ModalWindow(props: {
   modalContent: string | null;
@@ -34,6 +35,8 @@ export default function ModalWindow(props: {
     content = <About show={props.show} setShow={props.setShow} />;
   } else if (props.modalContent === "howto") {
     content = <HowTo show={props.show} setShow={props.setShow} />;
+  } else if (props.modalContent === "privacy") {
+    content = <PrivacyPolicy show={props.show} setShow={props.setShow} />;
   }
 
   return content;

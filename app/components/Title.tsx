@@ -48,6 +48,7 @@ export default function Title(props: {
           <Nav className="mr-auto" onSelect={handleselect}>
             <Nav.Link eventKey="about">About this site</Nav.Link>
             <Nav.Link eventKey="howto">How to use</Nav.Link>
+            <Nav.Link eventKey="privacy">Privacy policy</Nav.Link>
           </Nav>
           <Button variant="outline-light" onClick={doLogin}>
             {props.loginState !== true ? "Login" : "Logout"}
