@@ -20,9 +20,6 @@ export default function Main(props: { title: string }): JSX.Element {
   const [registeredURL, setRegisteredURL] = useState<string[]>([]);
   const [uid, setUid] = useState("");
 
-  console.log("modalContent: ", modalContent);
-  console.log("show: ", show);
-
   auth
     .getRedirectResult()
     .then((result) => {
