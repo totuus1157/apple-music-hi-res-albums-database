@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+	  function signedIn() {
+      return request.auth != null;
+    }
+    
+    function isOwnPath(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function isAlbumData(data) {
+	    return data.keys().hasAll(['artist', 'title', 'genre', 'sampleRate', 'url', 'composer', 'createdAt', 'updatedAt']) &&
+             data.keys().hasOnly(['artist', 'title', 'genre', 'sampleRate', 'url', 'composer', 'createdAt', 'updatedAt']) &&
+             data.artist is string && data.artist.size() <= 100 &&
+             data.title is string && data.title.size() <= 100 &&
+             data.genre is string && data.genre.matches("^(Adult Contemporary|Alternative|Blues/R&B|Books & Spoken|Children's Music|Classical|Country|Dance|Easy Listening|Electronic|Folk|Fusion|Hip Hop/Rap|Holiday|House|Industrial|Jazz|New Age|Pop|Prog-Rock/Art Rock|Religious|Rock|Soundtrack|Techno|Trance|Unclassifiable|World)$") &&
+             data.sampleRate is string && data.sampleRate.matches('^(88.2|96|176.4|192)$') &&
+             data.url is string && data.url.matches('^(https://music.apple.com/album/[1-9][0-9]+)$') &&
+             (data.composer == null || (data.composer is string && 
+                                        data.composer.size() <= 100 &&
+                                        get(/databases/$(database)/documents/users/$(userId)/albums/$(albumId)).data.genre == 'Classical')) &&
+             data.createdAt is timestamp && data.createdAt == request.time &&
+             (data.updatedAt == null || (data.updatedAt is timestamp && data.updatedAt == request.time));
+    }
+
+  	match /{path=**}/albums/{albumId} {
+    	allow list: if true;
+    }
+    
+    match /users/{userId}/albums/{albumId} {
+      allow create: if signedIn() && isOwnPath(userId) && isAlbumData(request.resource.data);
+      allow delete: if signedIn() && isOwnPath(userId);
+    }
+  }
+}
