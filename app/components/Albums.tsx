@@ -8,14 +8,14 @@ const db = firebase.firestore();
 
 export default function Albums(props: {
   show: boolean;
-  registeredURL: string[];
-  setRegisteredURL: (arg0: string[]) => void;
+  registeredAlbum: string[];
+  setRegisteredAlbum: (arg0: string[]) => void;
 }): JSX.Element {
   const tableContent: SetStateAction<any[]> = [];
   const [data, setData] = useState(tableContent);
   const [loading, setLoading] = useState(true);
 
-  const albumUrl: string[] = [];
+  const albumId: string[] = [];
 
   useEffect((): void => {
     db.collectionGroup("albums")
@@ -30,16 +30,20 @@ export default function Albums(props: {
               <td>{doc.composer}</td>
               <td>{doc.sampleRate}</td>
               <td>
-                <a href={doc.url} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={`https://music.apple.com/album/${doc.albumId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {doc.title}
                 </a>
               </td>
             </tr>
           );
-          albumUrl.push(doc.url);
+          albumId.push(doc.albumId);
         });
         setData(tableContent);
-        props.setRegisteredURL(albumUrl);
+        props.setRegisteredAlbum(albumId);
         setLoading(false);
       });
   }, [props.show]);

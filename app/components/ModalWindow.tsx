@@ -9,7 +9,7 @@ export default function ModalWindow(props: {
   albumInfo: string;
   show: boolean;
   setShow: (arg0: boolean) => void;
-  registeredURL: string[];
+  registeredAlbum: string[];
   uid: string;
 }): JSX.Element {
   let content = <></>;
@@ -19,7 +19,7 @@ export default function ModalWindow(props: {
         show={props.show}
         setShow={props.setShow}
         uid={props.uid}
-        registeredURL={props.registeredURL}
+        registeredAlbum={props.registeredAlbum}
       />
     );
   } else if (props.modalContent === "delete") {

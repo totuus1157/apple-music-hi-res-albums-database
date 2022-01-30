@@ -17,7 +17,7 @@ export default function Main(props: { title: string }): JSX.Element {
   const [show, setShow] = useState(false);
   const [editing, setEditing] = useState(false);
   const [albumInfo, setAlbumInfo] = useState("");
-  const [registeredURL, setRegisteredURL] = useState<string[]>([]);
+  const [registeredAlbum, setRegisteredAlbum] = useState<string[]>([]);
   const [uid, setUid] = useState("");
 
   auth
@@ -56,8 +56,8 @@ export default function Main(props: { title: string }): JSX.Element {
       {editing !== true ? (
         <Albums
           show={show}
-          registeredURL={registeredURL}
-          setRegisteredURL={setRegisteredURL}
+          registeredAlbum={registeredAlbum}
+          setRegisteredAlbum={setRegisteredAlbum}
         />
       ) : (
         <EditTable
@@ -74,7 +74,7 @@ export default function Main(props: { title: string }): JSX.Element {
         show={show}
         setShow={setShow}
         albumInfo={albumInfo}
-        registeredURL={registeredURL}
+        registeredAlbum={registeredAlbum}
         uid={uid}
       />
     </main>
