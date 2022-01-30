@@ -95,7 +95,10 @@ export default function Register(props: {
   const findFormErrors = (): {} => {
     const newErrors = {};
     const regex = {
-      ltnAndNum: new RegExp(/^[\p{Script=Latin}\p{Punctuation}\d\s]+$/, "u"),
+      ltnAndNum: new RegExp(
+        /^[\p{Script=Latin}\p{Punctuation}\p{Math_Symbol}\d\s]+$/,
+        "u"
+      ),
       appleMusicLink: new RegExp(
         /^https:\/\/music\.apple\.com\/?[a-z]*\/album\/?[\w-]*\/?[\d]+(\?l=\w+)*$/
       ),
