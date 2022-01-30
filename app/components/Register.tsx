@@ -96,7 +96,7 @@ export default function Register(props: {
     const newErrors = {};
     const regex = {
       ltnAndNum: new RegExp(
-        /^[\p{Script=Latin}\p{Punctuation}\p{Math_Symbol}\d\s]+$/,
+        /^[\p{Script=Latin}\p{Punctuation}\p{Symbol}\d\s]+$/,
         "u"
       ),
       appleMusicLink: new RegExp(
