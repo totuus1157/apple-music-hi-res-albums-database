@@ -100,7 +100,7 @@ export default function Register(props: {
         "u"
       ),
       appleMusicLink: new RegExp(
-        /^https:\/\/music\.apple\.com\/?[a-z]*\/album\/?[\w-]*\/?[\d]+(\?l=\w+)*$/
+        /^https:\/\/music\.apple\.com\/?[a-z]*\/album\/?[\w-%]*\/?[\d]+(\?l=\w+)*$/
       ),
     };
 
