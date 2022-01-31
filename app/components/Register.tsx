@@ -59,6 +59,7 @@ export default function Register(props: {
 
   const albumId = (link) => {
     const matches = link.match(/(?<digit>[1-9][0-9]+)(\?l=[\w]+)*$/);
+    console.log("matches.groups.digit: ", matches.groups.digit);
     return matches.groups.digit;
   };
 
@@ -74,7 +75,7 @@ export default function Register(props: {
         title: title,
         genre: genre,
         composer: composer,
-        albumId: albumId,
+        albumId: albumId(link),
         sampleRate: sampleRate,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         updatedAt: null,
