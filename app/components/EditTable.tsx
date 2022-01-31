@@ -1,4 +1,4 @@
-import { useState, useEffect, SetStateAction, MouseEventHandler } from "react";
+import { useState, useEffect, SetStateAction } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
@@ -23,7 +23,7 @@ export default function EditTable(props: {
   const [data, setData] = useState(tableContent);
   const [loading, setLoading] = useState(true);
 
-  const handleShow = (e: MouseEventHandler<HTMLElement>): void => {
+  const handleShow = (e: { currentTarget: { value: string } }): void => {
     props.setAlbumInfo(e.currentTarget.value);
     props.setShow(true);
     props.setModalContent("delete");
