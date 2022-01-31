@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "./fire";
@@ -28,7 +28,7 @@ export default function Register(props: {
 
   type TargetValue = {
     target: {
-      value: SetStateAction<string>;
+      value: any;
     };
   };
 
