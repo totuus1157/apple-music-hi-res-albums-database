@@ -26,9 +26,6 @@ export default function Register(props: {
   const [checked, setChecked] = useState("96");
   const [errors, setErrors] = useState({});
 
-  const matches = link && link.match(/(?<digit>[1-9][0-9]+)(\?l=[\w]+)*$/);
-  const albumId = matches && matches.groups.digit;
-
   type TargetValue = {
     target: {
       value: SetStateAction<string>;
@@ -60,6 +57,11 @@ export default function Register(props: {
     setChecked(e.target.value);
   };
 
+  const albumId = (link) => {
+    const matches = link.match(/(?<digit>[1-9][0-9]+)(\?l=[\w]+)*$/);
+    return matches.groups.digit;
+  };
+
   const doAction = (_e: any): void => {
     _e.preventDefault();
     const newErrors = findFormErrors();
@@ -82,7 +84,7 @@ export default function Register(props: {
         db.collection("users")
           .doc(props.uid)
           .collection("albums")
-          .doc(albumId)
+          .doc(albumId(link))
           .set(ob)
           .then((): void => {
             handleClose();
@@ -118,7 +120,7 @@ export default function Register(props: {
     if (!link || link === "") newErrors.link = "cannot be blank!";
     else if (!regex.appleMusicLink.test(link))
       newErrors.link = "only links to Apple Music albums can be allowed.";
-    else if (props.registeredAlbum.find((id) => id === albumId)) {
+    else if (props.registeredAlbum.find((id) => id === albumId(link))) {
       newErrors.link = "This album is already registered";
     }
 
