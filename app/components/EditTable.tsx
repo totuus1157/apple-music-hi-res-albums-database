@@ -23,7 +23,7 @@ export default function EditTable(props: {
   const [data, setData] = useState(tableContent);
   const [loading, setLoading] = useState(true);
 
-  const handleShow = (e: { currentTarget: { value: string } }): void => {
+  const handleShow = (e: any): void => {
     props.setAlbumInfo(e.currentTarget.value);
     props.setShow(true);
     props.setModalContent("delete");
