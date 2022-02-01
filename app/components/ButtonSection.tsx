@@ -7,7 +7,7 @@ export default function Buttons(props: {
   setModalContent: (arg0: string) => void;
   loginState: boolean;
 }): JSX.Element {
-  const handleShow = () => {
+  const handleShow = (): void => {
     props.setShow(true);
     props.setModalContent("register");
   };
