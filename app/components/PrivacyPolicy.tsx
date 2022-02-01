@@ -207,7 +207,7 @@ export default function About(props: {
               Album Database., accessible from{" "}
               <a
                 href="https://applemusichirezdb.com"
-                rel="external nofollow noopener"
+                rel="external nofollow noopener noreferrer"
                 target="_blank"
               >
                 https://applemusichirezdb.com{" "}
@@ -1332,7 +1332,7 @@ export default function About(props: {
             The NAI&apos;s opt-out platform:{" "}
             <a
               href="http://www.networkadvertising.org/choices/"
-              rel="external nofollow noopener"
+              rel="external nofollow noopener noreferrer"
               target="_blank"
             >
               http://www.networkadvertising.org/choices/
@@ -1342,7 +1342,7 @@ export default function About(props: {
             The EDAA&apos;s opt-out platform{" "}
             <a
               href="http://www.youronlinechoices.com/"
-              rel="external nofollow noopener"
+              rel="external nofollow noopener noreferrer"
               target="_blank"
             >
               http://www.youronlinechoices.com/
@@ -1352,7 +1352,7 @@ export default function About(props: {
             The DAA&apos;s opt-out platform:{" "}
             <a
               href="http://optout.aboutads.info/?c=2&lang=EN"
-              rel="external nofollow noopener"
+              rel="external nofollow noopener noreferrer"
               target="_blank"
             >
               http://optout.aboutads.info/?c=2&lang=EN
