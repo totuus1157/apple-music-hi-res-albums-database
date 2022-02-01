@@ -11,20 +11,28 @@ import Form from "react-bootstrap/Form";
 const db = firebase.firestore();
 const auth = firebase.auth();
 
+type Errors = {
+  artist?: string | null;
+  title?: string | null;
+  genre?: string | null;
+  composer?: string | null;
+  link?: string | null;
+};
+
 export default function Register(props: {
   setShow: (arg0: boolean) => void;
   show: boolean;
   registeredAlbum: string[];
   uid: string;
 }): JSX.Element {
-  const [artist, setArtist] = useState(null);
-  const [title, setTitle] = useState(null);
-  const [genre, setGenre] = useState(null);
-  const [composer, setComposer] = useState(null);
-  const [link, setLink] = useState(null);
+  const [artist, setArtist] = useState<string | null>(null);
+  const [title, setTitle] = useState<string | null>(null);
+  const [genre, setGenre] = useState<string | null>(null);
+  const [composer, setComposer] = useState<string | null>(null);
+  const [link, setLink] = useState<string | null>(null);
   const [sampleRate, setSampleRate] = useState("96");
   const [checked, setChecked] = useState("96");
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Errors>({});
 
   type TargetValue = {
     target: {
@@ -57,14 +65,17 @@ export default function Register(props: {
     setChecked(e.target.value);
   };
 
-  const albumId = (link) => {
-    const matches = link.match(/(?<digit>[1-9][0-9]+)(\?l=[\w]+)*$/);
-    console.log("matches.groups.digit: ", matches.groups.digit);
-    return matches.groups.digit;
+  const albumId = (link: string | null) => {
+    if (link) {
+      const matches = link.match(/(?<digit>[1-9][0-9]+)(\?l=[\w]+)*$/);
+      if (matches && matches.groups !== undefined) {
+        return matches.groups.digit;
+      }
+    }
   };
 
-  const doAction = (_e: any): void => {
-    _e.preventDefault();
+  const doAction = (e: { preventDefault: () => void }): void => {
+    e.preventDefault();
     const newErrors = findFormErrors();
 
     if (Object.keys(newErrors).length > 0) {
@@ -95,7 +106,7 @@ export default function Register(props: {
   };
 
   const findFormErrors = (): {} => {
-    const newErrors = {};
+    const newErrors: Errors = {};
     const regex = {
       ltnAndNum: new RegExp(
         /^[\p{Script=Latin}\p{Punctuation}\p{Symbol}\d\s]+$/,
@@ -116,7 +127,11 @@ export default function Register(props: {
     /* if (genre == "Classical") */ // The following code does not work if you use the IF nesting structure
     if (genre === "Classical" && (!composer || composer === ""))
       newErrors.composer = "cannot be blank!";
-    else if (genre === "Classical" && !regex.ltnAndNum.test(composer))
+    else if (
+      genre === "Classical" &&
+      composer !== null &&
+      !regex.ltnAndNum.test(composer)
+    )
       newErrors.composer = "only Latin letters can be used";
     if (!link || link === "") newErrors.link = "cannot be blank!";
     else if (!regex.appleMusicLink.test(link))
@@ -153,7 +168,7 @@ export default function Register(props: {
               <Form.Control
                 type="text"
                 onChange={onChangeArtist}
-                isInvalid={errors.artist}
+                isInvalid={errors.artist ? true : false}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.artist}
@@ -164,7 +179,7 @@ export default function Register(props: {
               <Form.Control
                 type="text"
                 onChange={onChangeTitle}
-                isInvalid={errors.title}
+                isInvalid={errors.title ? true : false}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.title}
@@ -175,7 +190,7 @@ export default function Register(props: {
               <Form.Control
                 as="select"
                 onChange={onChangeGenre}
-                isInvalid={errors.genre}
+                isInvalid={errors.genre ? true : false}
               >
                 <option hidden>-- Please select a genre --</option>
                 {genreList.map((value) => (
@@ -191,7 +206,7 @@ export default function Register(props: {
               <Form.Control
                 type="text"
                 onChange={onChangeComposer}
-                isInvalid={errors.composer}
+                isInvalid={errors.composer ? true : false}
                 disabled={genre !== "Classical"}
               />
               <Form.Control.Feedback type="invalid">
@@ -218,7 +233,7 @@ export default function Register(props: {
               <Form.Control
                 type="text"
                 onChange={onChangeLink}
-                isInvalid={errors.link}
+                isInvalid={errors.link ? true : false}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.link}
