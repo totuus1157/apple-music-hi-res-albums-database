@@ -52,43 +52,45 @@ export default function About(props: {
         <ul>
           <li>
             <p>
-              <strong>"Account"</strong> means a unique account created for You
-              to access our Service or parts of our Service.
+              <strong>&quot;Account&quot;</strong> means a unique account
+              created for You to access our Service or parts of our Service.
             </p>
           </li>
           <li>
             <p>
-              <strong>"Affiliate"</strong> means an entity that controls, is
-              controlled by or is under common control with a party, where
-              &quot;control&quot; means ownership of 50% or more of the shares,
-              equity interest or other securities entitled to vote for election
-              of directors or other managing authority.
+              <strong>&quot;Affiliate&quot;</strong> means an entity that
+              controls, is controlled by or is under common control with a
+              party, where &quot;control&quot; means ownership of 50% or more of
+              the shares, equity interest or other securities entitled to vote
+              for election of directors or other managing authority.
             </p>
           </li>
           <li>
             <p>
-              <strong>"Application"</strong> means the software program provided
-              by the Company downloaded by You on any electronic device, named
-              Apple Music Hi-Res Album Database
+              <strong>&quot;Application&quot;</strong> means the software
+              program provided by the Company downloaded by You on any
+              electronic device, named Apple Music Hi-Res Album Database
             </p>
           </li>
           <li>
             <p>
-              <strong>"Business"</strong>, for the purpose of the CCPA
+              <strong>&quot;Business&quot;</strong>, for the purpose of the CCPA
               (California Consumer Privacy Act), refers to the Company as the
-              legal entity that collects Consumers' personal information and
-              determines the purposes and means of the processing of Consumers'
-              personal information, or on behalf of which such information is
-              collected and that alone, or jointly with others, determines the
-              purposes and means of the processing of consumers' personal
-              information, that does business in the State of California.
+              legal entity that collects Consumers&apos; personal information
+              and determines the purposes and means of the processing of
+              Consumers&apos; personal information, or on behalf of which such
+              information is collected and that alone, or jointly with others,
+              determines the purposes and means of the processing of
+              consumers&apos; personal information, that does business in the
+              State of California.
             </p>
           </li>
           <li>
             <p>
-              <strong>"Company"</strong> (referred to as either "the Company",
-              "We", "Us" or "Our" in this Agreement) refers to Apple Music
-              Hi-Res Album Database.
+              <strong>&quot;Company&quot;</strong> (referred to as either
+              &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or
+              &quot;Our&quot; in this Agreement) refers to Apple Music Hi-Res
+              Album Database.
             </p>
             <p>
               For the purpose of the GDPR, the Company is the Data Controller.
@@ -96,12 +98,12 @@ export default function About(props: {
           </li>
           <li>
             <p>
-              <strong>"Country"</strong> refers to Japan.
+              <strong>&quot;Country&quot;</strong> refers to Japan.
             </p>
           </li>
           <li>
             <p>
-              <strong>"Consumer"</strong>, for the purpose of the CCPA
+              <strong>&quot;Consumer&quot;</strong>, for the purpose of the CCPA
               (California Consumer Privacy Act), means a natural person who is a
               California resident. A resident, as defined in the law, includes
               (1) every individual who is in the USA for other than a temporary
@@ -112,39 +114,41 @@ export default function About(props: {
           </li>
           <li>
             <p>
-              <strong>"Cookies"</strong> are small files that are placed on Your
-              computer, mobile device or any other device by a website,
-              containing the details of Your browsing history on that website
-              among its many uses.
+              <strong>&quot;Cookies&quot;</strong> are small files that are
+              placed on Your computer, mobile device or any other device by a
+              website, containing the details of Your browsing history on that
+              website among its many uses.
             </p>
           </li>
           <li>
             <p>
-              <strong>"Data Controller"</strong>, for the purposes of the GDPR
-              (General Data Protection Regulation), refers to the Company as the
-              legal person which alone or jointly with others determines the
-              purposes and means of the processing of Personal Data.
+              <strong>&quot;Data Controller&quot;</strong>, for the purposes of
+              the GDPR (General Data Protection Regulation), refers to the
+              Company as the legal person which alone or jointly with others
+              determines the purposes and means of the processing of Personal
+              Data.
             </p>
           </li>
           <li>
             <p>
-              <strong>"Device"</strong> means any device that can access the
-              Service such as a computer, a cellphone or a digital tablet.
+              <strong>&quot;Device&quot;</strong> means any device that can
+              access the Service such as a computer, a cellphone or a digital
+              tablet.
             </p>
           </li>
           <li>
             <p>
-              <strong>"Do Not Track"</strong> (DNT) is a concept that has been
-              promoted by US regulatory authorities, in particular the U.S.
-              Federal Trade Commission (FTC), for the Internet industry to
+              <strong>&quot;Do Not Track&quot;</strong> (DNT) is a concept that
+              has been promoted by US regulatory authorities, in particular the
+              U.S. Federal Trade Commission (FTC), for the Internet industry to
               develop and implement a mechanism for allowing internet users to
               control the tracking of their online activities across websites.
             </p>
           </li>
           <li>
             <p>
-              <strong>"Personal Data"</strong> is any information that relates
-              to an identified or identifiable individual.
+              <strong>&quot;Personal Data&quot;</strong> is any information that
+              relates to an identified or identifiable individual.
             </p>
             <p>
               For the purposes of GDPR, Personal Data means any information
@@ -162,27 +166,28 @@ export default function About(props: {
           </li>
           <li>
             <p>
-              <strong>"Sale"</strong>, for the purpose of the CCPA (California
-              Consumer Privacy Act), means selling, renting, releasing,
-              disclosing, disseminating, making available, transferring, or
-              otherwise communicating orally, in writing, or by electronic or
-              other means, a Consumer's personal information to another business
-              or a third party for monetary or other valuable consideration.
+              <strong>&quot;Sale&quot;</strong>, for the purpose of the CCPA
+              (California Consumer Privacy Act), means selling, renting,
+              releasing, disclosing, disseminating, making available,
+              transferring, or otherwise communicating orally, in writing, or by
+              electronic or other means, a Consumer&apos;s personal information
+              to another business or a third party for monetary or other
+              valuable consideration.
             </p>
           </li>
           <li>
             <p>
-              <strong>"Service"</strong> refers to the Website.
+              <strong>&quot;Service&quot;</strong> refers to the Website.
             </p>
           </li>
           <li>
             <p>
-              <strong>"Service Provider"</strong> means any natural or legal
-              person who processes the data on behalf of the Company. It refers
-              to third-party companies or individuals employed by the Company to
-              facilitate the Service, to provide the Service on behalf of the
-              Company, to perform services related to the Service or to assist
-              the Company in analyzing how the Service is used.
+              <strong>&quot;Service Provider&quot;</strong> means any natural or
+              legal person who processes the data on behalf of the Company. It
+              refers to third-party companies or individuals employed by the
+              Company to facilitate the Service, to provide the Service on
+              behalf of the Company, to perform services related to the Service
+              or to assist the Company in analyzing how the Service is used.
               <br />
               For the purpose of the GDPR, Service Providers are considered Data
               Processors.
@@ -190,7 +195,7 @@ export default function About(props: {
           </li>
           <li>
             <p>
-              <strong>"Usage Data"</strong> refers to data collected
+              <strong>&quot;Usage Data&quot;</strong> refers to data collected
               automatically, either generated by the use of the Service or from
               the Service infrastructure itself (for example, the duration of a
               page visit).
@@ -198,8 +203,8 @@ export default function About(props: {
           </li>
           <li>
             <p>
-              <strong>"Website"</strong> refers to Apple Music Hi-Res Album
-              Database., accessible from{" "}
+              <strong>&quot;Website&quot;</strong> refers to Apple Music Hi-Res
+              Album Database., accessible from{" "}
               <a
                 href="https://applemusichirezdb.com"
                 rel="external nofollow noopener"
@@ -211,9 +216,10 @@ export default function About(props: {
           </li>
           <li>
             <p>
-              <strong>"You"</strong> means the individual accessing or using the
-              Service, or the company, or other legal entity on behalf of which
-              such individual is accessing or using the Service, as applicable.
+              <strong>&quot;You&quot;</strong> means the individual accessing or
+              using the Service, or the company, or other legal entity on behalf
+              of which such individual is accessing or using the Service, as
+              applicable.
             </p>
             <p>
               Under GDPR (General Data Protection Regulation), You can be
@@ -259,7 +265,7 @@ export default function About(props: {
         </p>
         <p>Usage Data is collected automatically when using the Service.</p>
         <p>
-          Usage Data may include information such as Your Device's Internet
+          Usage Data may include information such as Your Device&apos;s Internet
           Protocol address (e.g. IP address), browser type, browser version, the
           pages of our Service that You visit, the time and date of Your visit,
           the time spent on those pages, unique device identifiers and other
@@ -308,10 +314,10 @@ export default function About(props: {
           </li>
         </ul>
         <p>
-          Cookies can be "Persistent" or "Session" Cookies. Persistent Cookies
-          remain on Your personal computer or mobile device when You go offline,
-          while Session Cookies are deleted as soon as You close Your web
-          browser.
+          Cookies can be &quot;Persistent&quot; or &quot;Session&quot; Cookies.
+          Persistent Cookies remain on Your personal computer or mobile device
+          when You go offline, while Session Cookies are deleted as soon as You
+          close Your web browser.
         </p>
         <p>
           We use both Session and Persistent Cookies for the purposes set out
@@ -412,11 +418,11 @@ export default function About(props: {
             <p>
               <strong>To contact You:</strong> To contact You by email,
               telephone calls, SMS, or other equivalent forms of electronic
-              communication, such as a mobile application's push notifications
-              regarding updates or informative communications related to the
-              functionalities, products or contracted services, including the
-              security updates, when necessary or reasonable for their
-              implementation.
+              communication, such as a mobile application&apos;s push
+              notifications regarding updates or informative communications
+              related to the functionalities, products or contracted services,
+              including the security updates, when necessary or reasonable for
+              their implementation.
             </p>
           </li>
           <li>
@@ -516,12 +522,12 @@ export default function About(props: {
         </p>
         <p>
           Your information, including Personal Data, is processed at the
-          Company's operating offices and in any other places where the parties
-          involved in the processing are located. It means that this information
-          may be transferred to — and maintained on — computers located outside
-          of Your state, province, country or other governmental jurisdiction
-          where the data protection laws may differ than those from Your
-          jurisdiction.
+          Company&apos;s operating offices and in any other places where the
+          parties involved in the processing are located. It means that this
+          information may be transferred to — and maintained on — computers
+          located outside of Your state, province, country or other governmental
+          jurisdiction where the data protection laws may differ than those from
+          Your jurisdiction.
         </p>
         <p>
           Your consent to this Privacy Policy followed by Your submission of
@@ -747,8 +753,8 @@ export default function About(props: {
             <p>
               Examples: A real name, alias, postal address, unique personal
               identifier, online identifier, Internet Protocol address, email
-              address, account name, driver's license number, passport number,
-              or other similar identifiers.
+              address, account name, driver&apos;s license number, passport
+              number, or other similar identifiers.
             </p>
             <p>Collected: Yes.</p>
           </li>
@@ -763,12 +769,13 @@ export default function About(props: {
             <p>
               Examples: A name, signature, Social Security number, physical
               characteristics or description, address, telephone number,
-              passport number, driver's license or state identification card
-              number, insurance policy number, education, employment, employment
-              history, bank account number, credit card number, debit card
-              number, or any other financial information, medical information,
-              or health insurance information. Some personal information
-              included in this category may overlap with other categories.
+              passport number, driver&apos;s license or state identification
+              card number, insurance policy number, education, employment,
+              employment history, bank account number, credit card number, debit
+              card number, or any other financial information, medical
+              information, or health insurance information. Some personal
+              information included in this category may overlap with other
+              categories.
             </p>
             <p>Collected: Yes.</p>
           </li>
@@ -875,7 +882,7 @@ export default function About(props: {
               </strong>
             </p>
             <p>
-              Examples: Profile reflecting a person's preferences,
+              Examples: Profile reflecting a person&apos;s preferences,
               characteristics, psychological trends, predispositions, behavior,
               attitudes, intelligence, abilities, and aptitudes.
             </p>
@@ -887,7 +894,7 @@ export default function About(props: {
           <li>Publicly available information from government records</li>
           <li>Deidentified or aggregated consumer information</li>
           <li>
-            Information excluded from the CCPA's scope, such as:
+            Information excluded from the CCPA&apos;s scope, such as:
             <ul>
               <li>
                 Health or medical information covered by the Health Insurance
@@ -899,7 +906,7 @@ export default function About(props: {
                 Personal Information covered by certain sector-specific privacy
                 laws, including the Fair Credit Reporting Act (FRCA), the
                 Gramm-Leach-Bliley Act (GLBA) or California Financial
-                Information Privacy Act (FIPA), and the Driver's Privacy
+                Information Privacy Act (FIPA), and the Driver&apos;s Privacy
                 Protection Act of 1994
               </li>
             </ul>
@@ -941,9 +948,9 @@ export default function About(props: {
           </strong>
         </p>
         <p>
-          We may use or disclose personal information We collect for "business
-          purposes" or "commercial purposes" (as defined under the CCPA), which
-          may include the following examples:
+          We may use or disclose personal information We collect for
+          &quot;business purposes&quot; or &quot;commercial purposes&quot; (as
+          defined under the CCPA), which may include the following examples:
         </p>
         <ul>
           <li>To operate our Service and provide You with our Service.</li>
@@ -978,7 +985,8 @@ export default function About(props: {
         <p>
           Please note that the examples provided above are illustrative and not
           intended to be exhaustive. For more details on how we use this
-          information, please refer to the "Use of Your Personal Data" section.
+          information, please refer to the &quot;Use of Your Personal Data&quot;
+          section.
         </p>
         <p>
           If We decide to collect additional categories of personal information
@@ -1025,13 +1033,14 @@ export default function About(props: {
           <strong>Sale of Personal Information</strong>
         </p>
         <p>
-          As defined in the CCPA, "sell" and "sale" mean selling, renting,
-          releasing, disclosing, disseminating, making available, transferring,
-          or otherwise communicating orally, in writing, or by electronic or
-          other means, a consumer's personal information by the business to a
-          third party for valuable consideration. This means that We may have
-          received some kind of benefit in return for sharing personal
-          information, but not necessarily a monetary benefit.
+          As defined in the CCPA, &quot;sell&quot; and &quot;sale&quot; mean
+          selling, renting, releasing, disclosing, disseminating, making
+          available, transferring, or otherwise communicating orally, in
+          writing, or by electronic or other means, a consumer&apos;s personal
+          information by the business to a third party for valuable
+          consideration. This means that We may have received some kind of
+          benefit in return for sharing personal information, but not
+          necessarily a monetary benefit.
         </p>
         <p>
           Please note that the categories listed below are those defined in the
@@ -1082,19 +1091,19 @@ export default function About(props: {
           age of 16 through our Service, although certain third party websites
           that we link to may do so. These third-party websites have their own
           terms of use and privacy policies and we encourage parents and legal
-          guardians to monitor their children's Internet usage and instruct
+          guardians to monitor their children&apos;s Internet usage and instruct
           their children to never provide information on other websites without
           their permission.
         </p>
         <p>
           We do not sell the personal information of Consumers We actually know
           are less than 16 years of age, unless We receive affirmative
-          authorization (the "right to opt-in") from either the Consumer who is
-          between 13 and 16 years of age, or the parent or guardian of a
-          Consumer less than 13 years of age. Consumers who opt-in to the sale
-          of personal information may opt-out of future sales at any time. To
-          exercise the right to opt-out, You (or Your authorized representative)
-          may submit a request to Us by contacting Us.
+          authorization (the &quot;right to opt-in&quot;) from either the
+          Consumer who is between 13 and 16 years of age, or the parent or
+          guardian of a Consumer less than 13 years of age. Consumers who opt-in
+          to the sale of personal information may opt-out of future sales at any
+          time. To exercise the right to opt-out, You (or Your authorized
+          representative) may submit a request to Us by contacting Us.
         </p>
         <p>
           If You have reason to believe that a child under the age of 13 (or 16)
@@ -1199,10 +1208,10 @@ export default function About(props: {
               <li>
                 Engage in public or peer-reviewed scientific, historical, or
                 statistical research in the public interest that adheres to all
-                other applicable ethics and privacy laws, when the information's
-                deletion may likely render impossible or seriously impair the
-                research's achievement, if You previously provided informed
-                consent.
+                other applicable ethics and privacy laws, when the
+                information&apos;s deletion may likely render impossible or
+                seriously impair the research&apos;s achievement, if You
+                previously provided informed consent.
               </li>
               <li>
                 Enable solely internal uses that are reasonably aligned with
@@ -1218,7 +1227,7 @@ export default function About(props: {
           <li>
             <strong>The right not to be discriminated against.</strong> You have
             the right not to be discriminated against for exercising any of Your
-            consumer's rights, including by:
+            consumer&apos;s rights, including by:
             <ul>
               <li>Denying goods or services to You</li>
               <li>
@@ -1281,7 +1290,7 @@ export default function About(props: {
         </p>
         <p>
           Any disclosures We provide will only cover the 12-month period
-          preceding the verifiable request's receipt.
+          preceding the verifiable request&apos;s receipt.
         </p>
         <p>
           For data portability requests, We will select a format to provide Your
@@ -1320,7 +1329,7 @@ export default function About(props: {
         </p>
         <ul>
           <li>
-            The NAI's opt-out platform:{" "}
+            The NAI&apos;s opt-out platform:{" "}
             <a
               href="http://www.networkadvertising.org/choices/"
               rel="external nofollow noopener"
@@ -1330,7 +1339,7 @@ export default function About(props: {
             </a>
           </li>
           <li>
-            The EDAA's opt-out platform{" "}
+            The EDAA&apos;s opt-out platform{" "}
             <a
               href="http://www.youronlinechoices.com/"
               rel="external nofollow noopener"
@@ -1340,7 +1349,7 @@ export default function About(props: {
             </a>
           </li>
           <li>
-            The DAA's opt-out platform:{" "}
+            The DAA&apos;s opt-out platform:{" "}
             <a
               href="http://optout.aboutads.info/?c=2&lang=EN"
               rel="external nofollow noopener"
@@ -1365,10 +1374,10 @@ export default function About(props: {
         </p>
         <ul>
           <li>
-            "Opt out of Interest-Based Ads" or "Opt out of Ads Personalization"
-            on Android devices
+            &quot;Opt out of Interest-Based Ads&quot; or &quot;Opt out of Ads
+            Personalization&quot; on Android devices
           </li>
-          <li>"Limit Ad Tracking" on iOS devices</li>
+          <li>&quot;Limit Ad Tracking&quot; on iOS devices</li>
         </ul>
         <p>
           You can also stop the collection of location information from Your
@@ -1376,8 +1385,8 @@ export default function About(props: {
         </p>
         <p>
           <strong>
-            "Do Not Track" Policy as Required by California Online Privacy
-            Protection Act (CalOPPA)
+            &quot;Do Not Track&quot; Policy as Required by California Online
+            Privacy Protection Act (CalOPPA)
           </strong>
         </p>
         <p>Our Service does not respond to Do Not Track signals.</p>
@@ -1389,7 +1398,7 @@ export default function About(props: {
           preferences or settings page of Your web browser.
         </p>
         <p>
-          <strong>Children's Privacy</strong>
+          <strong>Children&apos;s Privacy</strong>
         </p>
         <p>
           Our Service does not address anyone under the age of 13. We do not
@@ -1403,25 +1412,26 @@ export default function About(props: {
         <p>
           If We need to rely on consent as a legal basis for processing Your
           information and Your country requires consent from a parent, We may
-          require Your parent's consent before We collect and use that
+          require Your parent&apos;s consent before We collect and use that
           information.
         </p>
         <p>
           <strong>
-            Your California Privacy Rights (California's Shine the Light law)
+            Your California Privacy Rights (California&apos;s Shine the Light
+            law)
           </strong>
         </p>
         <p>
-          Under California Civil Code Section 1798 (California's Shine the Light
-          law), California residents with an established business relationship
-          with us can request information once a year about sharing their
-          Personal Data with third parties for the third parties' direct
-          marketing purposes.
+          Under California Civil Code Section 1798 (California&apos;s Shine the
+          Light law), California residents with an established business
+          relationship with us can request information once a year about sharing
+          their Personal Data with third parties for the third parties&apos;
+          direct marketing purposes.
         </p>
         <p>
-          If you'd like to request more information under the California Shine
-          the Light law, and if You are a California resident, You can contact
-          Us using the contact information provided below.
+          If you&apos;d like to request more information under the California
+          Shine the Light law, and if You are a California resident, You can
+          contact Us using the contact information provided below.
         </p>
         <p>
           <strong>
@@ -1451,8 +1461,8 @@ export default function About(props: {
         <p>
           Our Service may contain links to other websites that are not operated
           by Us. If You click on a third party link, You will be directed to
-          that third party's site. We strongly advise You to review the Privacy
-          Policy of every site You visit.
+          that third party&apos;s site. We strongly advise You to review the
+          Privacy Policy of every site You visit.
         </p>
         <p>
           We have no control over and assume no responsibility for the content,
@@ -1467,8 +1477,8 @@ export default function About(props: {
         </p>
         <p>
           We will let You know via email and/or a prominent notice on Our
-          Service, prior to the change becoming effective and update the "Last
-          updated" date at the top of this Privacy Policy.
+          Service, prior to the change becoming effective and update the
+          &quot;Last updated&quot; date at the top of this Privacy Policy.
         </p>
         <p>
           You are advised to review this Privacy Policy periodically for any

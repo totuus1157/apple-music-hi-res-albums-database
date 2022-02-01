@@ -39,7 +39,9 @@ export default function About(props: {
           registered to this database, please add it. Any small contribution
           would be greatly appreciated.
         </p>
-        <p>Let's enjoy together the common language of the world, music!</p>
+        <p>
+          Let&apos;s enjoy together the common language of the world, music!
+        </p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>

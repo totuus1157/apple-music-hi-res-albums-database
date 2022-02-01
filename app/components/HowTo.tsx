@@ -15,15 +15,17 @@ export default function HowTo(props: {
       <Modal.Body>
         <ol>
           <li>
-            Display the desired album from the Music app, and select "Get Info"
-            from the "..." icon to the right of the title.
+            Display the desired album from the Music app, and select &quot;Get
+            Info&quot; from the &quot;...&quot; icon to the right of the title.
           </li>
           <li>
-            Copy “artist", “album", and “composer" (if the genre is "Classical")
-            from the items in the opened window and paste them into the
-            "Artist", "Title", and "Composer" text boxes of our app,
-            respectively. At the same time, select "Genre" (if "Classical" is
-            not selected, the "Composer" text box will not be activated).
+            Copy &quot;artist&quot;, &quot;album&quot;, and &quot;composer&quot;
+            (if the genre is &quot;Classical&quot;) from the items in the opened
+            window and paste them into the &quot;Artist&quot;,
+            &quot;Title&quot;, and &quot;Composer&quot; text boxes of our app,
+            respectively. At the same time, select &quot;Genre&quot; (if
+            &quot;Classical&quot; is not selected, the &quot;Composer&quot; text
+            box will not be activated).
           </li>
           <li>
             Play the album and click on the wavy icon on the right side of the
@@ -31,13 +33,14 @@ export default function HowTo(props: {
             displayed and you can select it from the radio buttons in our app.
           </li>
           <li>
-            Finally, click the "..." icon next to the album name again. icon
-            again, do "Share" -{">"} "Copy Link", and paste the address you got
-            into the "URL" text box of our app.
+            Finally, click the &quot;...&quot; icon next to the album name
+            again. icon again, do &quot;Share&quot; -{">"} &quot;Copy
+            Link&quot;, and paste the address you got into the &quot;URL&quot;
+            text box of our app.
           </li>
           <li>
-            Click on the "Save changes" button and make sure that the registered
-            album appears correctly in the database.
+            Click on the &quot;Save changes&quot; button and make sure that the
+            registered album appears correctly in the database.
           </li>
         </ol>
       </Modal.Body>
