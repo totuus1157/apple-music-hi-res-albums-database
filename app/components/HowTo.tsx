@@ -50,13 +50,16 @@ export default function HowTo(props: {
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
                     <Card.Text>
-                      Only the Latin alphabet can be used for this service. If
-                      the name of the artist, album, or composer you wish to
-                      register is not in Latin, please convert it to the Latin
-                      alphabet specified by the country or region to which you
-                      belong before entering it (basically, please follow the
-                      notation rules specified by the International Organization
-                      for Standardization).
+                      Only the Latin alphabet can be used in this service. If
+                      the name of the artist, album, and composer you wish to
+                      register is not originally written in the Latin alphabet,
+                      please perform the Latin alphabet conversion required by
+                      original country or region before entering it (basically,
+                      please follow the notation rules set by the International
+                      Organization for Standardization).
+                      <br />
+                      <strong>Caution!</strong> Never use English localized
+                      notation (e.g. ❎Ryuichi Sakamoto ✅Sakamoto Ryûiti).
                     </Card.Text>
                     <Card.Text>Major ISO Romanization Standards:</Card.Text>
                     <ul>
