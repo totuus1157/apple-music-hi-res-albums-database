@@ -14,7 +14,7 @@ service cloud.firestore {
              data.keys().hasOnly(['artist', 'title', 'genre', 'sampleRate', 'albumId', 'composer', 'createdAt', 'updatedAt']) &&
              data.artist is string && data.artist.size() <= 100 &&
              data.title is string && data.title.size() <= 100 &&
-             data.genre is string && data.genre.matches("^(Adult Contemporary|Alternative|Blues/R&B|Books & Spoken|Children's Music|Classical|Country|Dance|Easy Listening|Electronic|Folk|Fusion|Hip Hop/Rap|Holiday|House|Industrial|Jazz|New Age|Pop|Prog-Rock/Art Rock|Religious|Rock|Soundtrack|Techno|Trance|Unclassifiable|World)$") &&
+             data.genre is string && data.genre.matches("^[A-Za-z&-/':éóÖü ]+$") && data.genre.size() <= 30 &&
              data.sampleRate is string && data.sampleRate.matches('^(88.2|96|176.4|192)$') &&
              data.albumId is string && data.albumId.matches('^[1-9][0-9]+$') &&
              (data.composer == null || (data.composer is string &&
