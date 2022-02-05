@@ -41,11 +41,13 @@ export default function Register(props: {
   };
 
   const onChangeArtist = (e: TargetValue): void => {
-    setArtist(e.target.value);
+    const inputArtist = String(e.target.value);
+    setArtist(inputArtist.trim());
     errors.artist && setErrors({ ...errors, artist: null });
   };
   const onChangeTitle = (e: TargetValue): void => {
-    setTitle(e.target.value);
+    const inputTitle = String(e.target.value);
+    setTitle(inputTitle.trim());
     errors.title && setErrors({ ...errors, title: null });
   };
   const onChangeGenre = (e: TargetValue): void => {
@@ -53,11 +55,15 @@ export default function Register(props: {
     errors.genre && setErrors({ ...errors, genre: null });
   };
   const onChangeComposer = (e: TargetValue): void => {
-    e.target.value !== "" ? setComposer(e.target.value) : setComposer(null);
+    const inputComposer = String(e.target.value);
+    inputComposer !== ""
+      ? setComposer(inputComposer.trim())
+      : setComposer(null);
     errors.composer && setErrors({ ...errors, composer: null });
   };
   const onChangeLink = (e: TargetValue): void => {
-    setLink(e.target.value);
+    const inputLink = String(e.target.value);
+    setLink(inputLink.trim());
     errors.link && setErrors({ ...errors, link: null });
   };
   const onChangeSampleRate = (e: TargetValue): void => {
