@@ -2,9 +2,18 @@ import { useState, useEffect, SetStateAction } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "./fire";
+import sampleRateList from "./sampleRateList";
+import Selector from "./Selector";
 import Table from "react-bootstrap/Table";
 
 const db = firebase.firestore();
+
+type AlbumElements = {
+  artist?: string;
+  genre?: string;
+  composer?: string;
+  sampleRate?: string;
+};
 
 export default function Albums(props: {
   show: boolean;
@@ -12,10 +21,26 @@ export default function Albums(props: {
   setRegisteredAlbum: (arg0: string[]) => void;
 }): JSX.Element {
   const tableContent: SetStateAction<any[]> = [];
+  const albumElements: AlbumElements[] = [];
+  const albumId: string[] = [];
   const [data, setData] = useState(tableContent);
   const [loading, setLoading] = useState(true);
+  const [albumFactorArray, setAlbumFactorArray] = useState(albumElements);
 
-  const albumId: string[] = [];
+  const selectionCandidate = (_category: keyof AlbumElements) => {
+    return Object.assign(
+      {},
+      Array.from(
+        new Set(
+          albumFactorArray.map((elements) => {
+            if (elements[_category] !== null) {
+              return elements[_category];
+            }
+          })
+        )
+      ).sort()
+    );
+  };
 
   useEffect((): void => {
     db.collectionGroup("albums")
@@ -40,9 +65,15 @@ export default function Albums(props: {
               </td>
             </tr>
           );
+          albumElements.push({
+            artist: doc.artist,
+            genre: doc.genre,
+            composer: doc.composer,
+          });
           albumId.push(doc.albumId);
         });
         setData(tableContent);
+        setAlbumFactorArray(albumElements);
         props.setRegisteredAlbum(albumId);
         setLoading(false);
       });
@@ -54,7 +85,10 @@ export default function Albums(props: {
         <Table bordered hover responsive>
           <thead>
             <tr>
-              <th>Artist</th>
+              <th>
+                Artist
+                <Selector />
+              </th>
               <th>Genre</th>
               <th>Composer</th>
               <th>Sample Rate</th>
