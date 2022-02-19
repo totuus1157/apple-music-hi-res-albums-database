@@ -25,22 +25,24 @@ export default function Albums(props: {
   const albumId: string[] = [];
   const [data, setData] = useState(tableContent);
   const [loading, setLoading] = useState(true);
-  const [albumFactorArray, setAlbumFactorArray] = useState(albumElements);
+  const [albumElementsList, setAlbumElementsList] = useState(albumElements);
 
   const selectionCandidate = (_category: keyof AlbumElements) => {
     return Object.assign(
       {},
       Array.from(
         new Set(
-          albumFactorArray.map((elements) => {
-            if (elements[_category] !== null) {
-              return elements[_category];
+          albumElementsList.map((albumElements) => {
+            if (albumElements[_category] !== null) {
+              return albumElements[_category];
             }
           })
         )
       ).sort()
     );
   };
+
+  console.log("selectionCandidate: ", selectionCandidate("composer"));
 
   useEffect((): void => {
     db.collectionGroup("albums")
@@ -73,7 +75,7 @@ export default function Albums(props: {
           albumId.push(doc.albumId);
         });
         setData(tableContent);
-        setAlbumFactorArray(albumElements);
+        setAlbumElementsList(albumElements);
         props.setRegisteredAlbum(albumId);
         setLoading(false);
       });
@@ -85,10 +87,7 @@ export default function Albums(props: {
         <Table bordered hover responsive>
           <thead>
             <tr>
-              <th>
-                Artist
-                <Selector />
-              </th>
+              <th>Artist</th>
               <th>Genre</th>
               <th>Composer</th>
               <th>Sample Rate</th>
