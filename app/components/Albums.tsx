@@ -32,11 +32,11 @@ export default function Albums(props: {
       {},
       Array.from(
         new Set(
-          albumElementsList.map((albumElements) => {
-            if (albumElements[_category] !== null) {
+          albumElementsList
+            .map((albumElements) => {
               return albumElements[_category];
-            }
-          })
+            })
+            .filter(Boolean)
         )
       ).sort()
     );
