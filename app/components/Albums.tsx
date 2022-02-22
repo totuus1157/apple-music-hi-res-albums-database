@@ -27,18 +27,25 @@ export default function Albums(props: {
   const [loading, setLoading] = useState(true);
   const [albumElementsList, setAlbumElementsList] = useState(albumElements);
 
-  const selectionElements = (_category: keyof AlbumElements) => {
+  type SelectionElements = {
+    id?: string;
+    element?: string;
+  };
+
+  const selectionElements = (
+    _category: keyof AlbumElements
+  ): SelectionElements[] => {
     return Array.from(
       new Set(
         albumElementsList
-          .map((albumElements) => {
+          .map((albumElements): string | undefined => {
             return albumElements[_category];
           })
           .filter(Boolean)
       )
     )
       .sort()
-      .map((uniqueelement) => {
+      .map((uniqueelement): SelectionElements => {
         return { id: uniqueelement, element: uniqueelement };
       });
   };
@@ -86,7 +93,9 @@ export default function Albums(props: {
         <Table bordered hover responsive>
           <thead>
             <tr>
-              <th>Artist</th>
+              <th>
+                <Selector name="artist" />
+              </th>
               <th>Genre</th>
               <th>Composer</th>
               <th>Sample Rate</th>
