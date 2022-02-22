@@ -28,21 +28,20 @@ export default function Albums(props: {
   const [albumElementsList, setAlbumElementsList] = useState(albumElements);
 
   const selectionCandidate = (_category: keyof AlbumElements) => {
-    return Object.assign(
-      {},
-      Array.from(
-        new Set(
-          albumElementsList
-            .map((albumElements) => {
-              return albumElements[_category];
-            })
-            .filter(Boolean)
-        )
-      ).sort()
-    );
+    return Array.from(
+      new Set(
+        albumElementsList
+          .map((albumElements) => {
+            return albumElements[_category];
+          })
+          .filter(Boolean)
+      )
+    )
+      .sort()
+      .map((uniqueelement) => {
+        return { id: uniqueelement, element: uniqueelement };
+      });
   };
-
-  console.log("selectionCandidate: ", selectionCandidate("composer"));
 
   useEffect((): void => {
     db.collectionGroup("albums")
