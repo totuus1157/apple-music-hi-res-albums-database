@@ -45,8 +45,8 @@ export default function Albums(props: {
       )
     )
       .sort()
-      .map((uniqueelement): SelectionElements => {
-        return { id: uniqueelement, element: uniqueelement };
+      .map((uniqueelement, key): SelectionElements => {
+        return { id: String(key + 1), element: uniqueelement };
       });
   };
 
