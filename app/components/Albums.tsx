@@ -27,7 +27,7 @@ export default function Albums(props: {
   const [loading, setLoading] = useState(true);
   const [albumElementsList, setAlbumElementsList] = useState(albumElements);
 
-  const selectionCandidate = (_category: keyof AlbumElements) => {
+  const selectionElements = (_category: keyof AlbumElements) => {
     return Array.from(
       new Set(
         albumElementsList
