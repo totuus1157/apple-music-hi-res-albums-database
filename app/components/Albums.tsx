@@ -45,10 +45,12 @@ export default function Albums(props: {
       )
     )
       .sort()
-      .map((uniqueelement, key): SelectionElements => {
-        return { id: String(key + 1), element: uniqueelement };
+      .map((uniqueElement, key): SelectionElements => {
+        return { id: String(key + 1), element: uniqueElement };
       });
   };
+
+  console.log("selectionElements: ", selectionElements("artist"));
 
   useEffect((): void => {
     db.collectionGroup("albums")
