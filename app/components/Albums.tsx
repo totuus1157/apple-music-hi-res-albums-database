@@ -26,9 +26,17 @@ export default function Albums(props: {
   const [data, setData] = useState(tableContent);
   const [loading, setLoading] = useState(true);
   const [albumElementsList, setAlbumElementsList] = useState(albumElements);
+  const [selectedItem, setSelectedItem] = useState({
+    artist: "",
+    genre: "",
+    composer: "",
+    sampleRate: "",
+  });
+
+  console.log("selectedItem: ", selectedItem);
 
   type SelectionElements = {
-    id?: string;
+    id: string;
     element?: string;
   };
 
@@ -49,8 +57,6 @@ export default function Albums(props: {
         return { id: String(key + 1), element: uniqueElement };
       });
   };
-
-  console.log("selectionElements: ", selectionElements("artist"));
 
   useEffect((): void => {
     db.collectionGroup("albums")
@@ -96,7 +102,12 @@ export default function Albums(props: {
           <thead>
             <tr>
               <th>
-                <Selector name="artist" />
+                <Selector
+                  name="artist"
+                  selectedItem={selectedItem}
+                  setSelectedItem={setSelectedItem}
+                  selectionElements={selectionElements("artist")}
+                />
               </th>
               <th>Genre</th>
               <th>Composer</th>
