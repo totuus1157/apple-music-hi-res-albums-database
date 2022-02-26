@@ -63,9 +63,7 @@ export default function Selector(props: {
   setSelectedItem: (arg0: SelectedItem) => void;
   selectionElements: { id?: number; element?: string }[];
 }): JSX.Element {
-  console.log("props.selectionElements: ", props.selectionElements);
-
-  const selectItems = (eventkey: string | undefined) => {
+  const selectItems = (eventkey: string | undefined): void => {
     if (eventkey !== undefined) {
       props.setSelectedItem({ ...props.selectedItem, [props.name]: eventkey });
     }
