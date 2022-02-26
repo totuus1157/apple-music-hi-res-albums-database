@@ -36,7 +36,7 @@ export default function Albums(props: {
   console.log("selectedItem: ", selectedItem);
 
   type SelectionElements = {
-    id: string;
+    id: number;
     element?: string;
   };
 
@@ -54,7 +54,7 @@ export default function Albums(props: {
     )
       .sort()
       .map((uniqueElement, key): SelectionElements => {
-        return { id: String(key + 1), element: uniqueElement };
+        return { id: key + 1, element: uniqueElement };
       });
   };
 

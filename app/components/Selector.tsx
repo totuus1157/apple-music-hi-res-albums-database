@@ -61,7 +61,7 @@ export default function Selector(props: {
   name: string;
   selectedItem: SelectedItem;
   setSelectedItem: (arg0: SelectedItem) => void;
-  selectionElements: { id?: string; element?: string }[];
+  selectionElements: { id?: number; element?: string }[];
 }): JSX.Element {
   console.log("props.selectionElements: ", props.selectionElements);
 
