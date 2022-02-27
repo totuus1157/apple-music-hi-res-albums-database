@@ -58,6 +58,11 @@ export default function Albums(props: {
       });
   };
 
+  const renamedProperty = sampleRateList.map((value) => ({
+    id: value.id,
+    element: value.sampleRate,
+  }));
+
   useEffect((): void => {
     db.collectionGroup("albums")
       .get()
