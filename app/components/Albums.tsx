@@ -114,9 +114,30 @@ export default function Albums(props: {
                   selectionElements={selectionElements("artist")}
                 />
               </th>
-              <th>Genre</th>
-              <th>Composer</th>
-              <th>Sample Rate</th>
+              <th>
+                <Selector
+                  name="Genre"
+                  selectedItem={selectedItem}
+                  setSelectedItem={setSelectedItem}
+                  selectionElements={selectionElements("genre")}
+                />
+              </th>
+              <th>
+                <Selector
+                  name="Composer"
+                  selectedItem={selectedItem}
+                  setSelectedItem={setSelectedItem}
+                  selectionElements={selectionElements("composer")}
+                />
+              </th>
+              <th>
+                <Selector
+                  name="Sample Rate"
+                  selectedItem={selectedItem}
+                  setSelectedItem={setSelectedItem}
+                  selectionElements={renamedProperty}
+                />
+              </th>
               <th>Title</th>
             </tr>
           </thead>
