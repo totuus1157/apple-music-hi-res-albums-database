@@ -108,7 +108,7 @@ export default function Albums(props: {
             <tr>
               <th>
                 <Selector
-                  name="artist"
+                  name="Artist"
                   selectedItem={selectedItem}
                   setSelectedItem={setSelectedItem}
                   selectionElements={selectionElements("artist")}
