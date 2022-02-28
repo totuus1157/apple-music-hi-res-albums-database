@@ -85,6 +85,8 @@ export default function Selector(props: {
         {props.name}
       </Dropdown.Toggle>
       <Dropdown.Menu as={CustomMenu}>
+        <Dropdown.Item eventkey="">All Items</Dropdown.Item>
+        <Dropdown.Divider />
         {props.selectionElements.map((obj): JSX.Element => {
           return (
             <Dropdown.Item key={obj.id} eventKey={obj.element}>
