@@ -63,16 +63,14 @@ export default function Selector(props: {
   setSelectedItem: (arg0: SelectedItem) => void;
   selectionElements: { id?: number; element?: string }[];
 }): JSX.Element {
-  const selectItems = (eventkey: string | undefined): void => {
-    if (eventkey !== undefined) {
-      const propertyName = (
-        props.name.slice(0, 1).toLowerCase() + props.name.slice(1)
-      ).replace(/\s+/g, "");
-      props.setSelectedItem({
-        ...props.selectedItem,
-        [propertyName]: eventkey,
-      });
-    }
+  const selectItems = (eventkey: string | null): void => {
+    const propertyName = (
+      props.name.slice(0, 1).toLowerCase() + props.name.slice(1)
+    ).replace(/\s+/g, "");
+    props.setSelectedItem({
+      ...props.selectedItem,
+      [propertyName]: eventkey,
+    });
   };
 
   return (
