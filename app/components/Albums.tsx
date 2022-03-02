@@ -33,8 +33,6 @@ export default function Albums(props: {
     sampleRate: "",
   });
 
-  console.log("selectedItem: ", selectedItem);
-
   type SelectionElements = {
     id: number;
     element?: string;
@@ -64,41 +62,47 @@ export default function Albums(props: {
   }));
 
   useEffect((): void => {
-    db.collectionGroup("albums")
-      .get()
-      .then((snapshot): void => {
-        snapshot.forEach((document): void => {
-          const doc = document.data();
-          tableContent.push(
-            <tr key={document.id}>
-              <td>{doc.artist}</td>
-              <td>{doc.genre}</td>
-              <td>{doc.composer}</td>
-              <td>{doc.sampleRate}</td>
-              <td>
-                <a
-                  href={`https://music.apple.com/album/${doc.albumId}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {doc.title}
-                </a>
-              </td>
-            </tr>
-          );
-          albumElements.push({
-            artist: doc.artist,
-            genre: doc.genre,
-            composer: doc.composer,
-          });
-          albumId.push(doc.albumId);
+    const i = selectedItem;
+    let albumsRef = db.collectionGroup("albums");
+    i.artist && (albumsRef = albumsRef.where("artist", "==", i.artist));
+    i.genre && (albumsRef = albumsRef.where("genre", "==", i.genre));
+    i.composer && (albumsRef = albumsRef.where("composer", "==", i.composer));
+    i.sampleRate &&
+      (albumsRef = albumsRef.where("sampleRate", "==", i.sampleRate));
+
+    albumsRef.get().then((snapshot): void => {
+      snapshot.forEach((document): void => {
+        const doc = document.data();
+        tableContent.push(
+          <tr key={document.id}>
+            <td>{doc.artist}</td>
+            <td>{doc.genre}</td>
+            <td>{doc.composer}</td>
+            <td>{doc.sampleRate}</td>
+            <td>
+              <a
+                href={`https://music.apple.com/album/${doc.albumId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {doc.title}
+              </a>
+            </td>
+          </tr>
+        );
+        albumElements.push({
+          artist: doc.artist,
+          genre: doc.genre,
+          composer: doc.composer,
         });
-        setData(tableContent);
-        setAlbumElementsList(albumElements);
-        props.setRegisteredAlbum(albumId);
-        setLoading(false);
+        albumId.push(doc.albumId);
       });
-  }, [props.show]);
+      setData(tableContent);
+      setAlbumElementsList(albumElements);
+      props.setRegisteredAlbum(albumId);
+      setLoading(false);
+    });
+  }, [props.show, selectedItem]);
 
   return (
     <div style={{ marginBottom: "20px" }}>
