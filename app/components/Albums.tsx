@@ -105,7 +105,7 @@ export default function Albums(props: {
   }, [props.show, selectedItem]);
 
   return (
-    <div style={{ marginBottom: "20px" }}>
+    <>
       {loading !== true ? (
         <Table bordered hover responsive>
           <thead>
@@ -150,6 +150,6 @@ export default function Albums(props: {
       ) : (
         <p>Now loading...</p>
       )}
-    </div>
+    </>
   );
 }
