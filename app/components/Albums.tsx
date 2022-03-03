@@ -61,6 +61,22 @@ export default function Albums(props: {
     element: value.sampleRate,
   }));
 
+  useEffect(() => {
+    db.collectionGroup("albums")
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((document): void => {
+          const doc = document.data();
+          albumElements.push({
+            artist: doc.artist,
+            genre: doc.genre,
+            composer: doc.composer,
+          });
+        });
+        setAlbumElementsList(albumElements);
+      });
+  }, [props.show]);
+
   useEffect((): void => {
     const i = selectedItem;
     let albumsRef = db.collectionGroup("albums");
@@ -90,15 +106,9 @@ export default function Albums(props: {
             </td>
           </tr>
         );
-        albumElements.push({
-          artist: doc.artist,
-          genre: doc.genre,
-          composer: doc.composer,
-        });
         albumId.push(doc.albumId);
       });
       setData(tableContent);
-      setAlbumElementsList(albumElements);
       props.setRegisteredAlbum(albumId);
       setLoading(false);
     });
