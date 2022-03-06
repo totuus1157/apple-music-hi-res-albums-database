@@ -116,47 +116,55 @@ export default function Albums(props: {
 
   return (
     <>
+      <style jsx>{`
+        div.table-responsive {
+          height: 90%;
+        }
+      `}</style>
+
       {loading !== true ? (
-        <Table bordered hover responsive>
-          <thead>
-            <tr>
-              <th>
-                <Selector
-                  name="Artist"
-                  selectedItem={selectedItem}
-                  setSelectedItem={setSelectedItem}
-                  selectionElements={selectionElements("artist")}
-                />
-              </th>
-              <th>
-                <Selector
-                  name="Genre"
-                  selectedItem={selectedItem}
-                  setSelectedItem={setSelectedItem}
-                  selectionElements={selectionElements("genre")}
-                />
-              </th>
-              <th>
-                <Selector
-                  name="Composer"
-                  selectedItem={selectedItem}
-                  setSelectedItem={setSelectedItem}
-                  selectionElements={selectionElements("composer")}
-                />
-              </th>
-              <th>
-                <Selector
-                  name="Sample Rate"
-                  selectedItem={selectedItem}
-                  setSelectedItem={setSelectedItem}
-                  selectionElements={renamedProperty}
-                />
-              </th>
-              <th>Title</th>
-            </tr>
-          </thead>
-          <tbody>{data}</tbody>
-        </Table>
+        <div className="table-responsive">
+          <table className="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>
+                  <Selector
+                    name="Artist"
+                    selectedItem={selectedItem}
+                    setSelectedItem={setSelectedItem}
+                    selectionElements={selectionElements("artist")}
+                  />
+                </th>
+                <th>
+                  <Selector
+                    name="Genre"
+                    selectedItem={selectedItem}
+                    setSelectedItem={setSelectedItem}
+                    selectionElements={selectionElements("genre")}
+                  />
+                </th>
+                <th>
+                  <Selector
+                    name="Composer"
+                    selectedItem={selectedItem}
+                    setSelectedItem={setSelectedItem}
+                    selectionElements={selectionElements("composer")}
+                  />
+                </th>
+                <th>
+                  <Selector
+                    name="Sample Rate"
+                    selectedItem={selectedItem}
+                    setSelectedItem={setSelectedItem}
+                    selectionElements={renamedProperty}
+                  />
+                </th>
+                <th>Title</th>
+              </tr>
+            </thead>
+            <tbody>{data}</tbody>
+          </table>
+        </div>
       ) : (
         <p>Now loading...</p>
       )}

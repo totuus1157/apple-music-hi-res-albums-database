@@ -38,45 +38,53 @@ export default function Main(props: { title: string }): JSX.Element {
   });
 
   return (
-    <main>
-      <Title
-        title={props.title}
-        loginState={loginState}
-        setLoginState={setLoginState}
-        setModalContent={setModalContent}
-        setShow={setShow}
-      />
-      <ButtonSection
-        loginState={loginState}
-        setModalContent={setModalContent}
-        setShow={setShow}
-        editing={editing}
-        setEditing={setEditing}
-      />
-      {editing !== true ? (
-        <Albums
-          show={show}
-          registeredAlbum={registeredAlbum}
-          setRegisteredAlbum={setRegisteredAlbum}
+    <>
+      <style jsx>{`
+        main {
+          height: 100%;
+        }
+      `}</style>
+
+      <main>
+        <Title
+          title={props.title}
+          loginState={loginState}
+          setLoginState={setLoginState}
+          setModalContent={setModalContent}
+          setShow={setShow}
         />
-      ) : (
-        <EditTable
+        <ButtonSection
+          loginState={loginState}
+          setModalContent={setModalContent}
+          setShow={setShow}
+          editing={editing}
+          setEditing={setEditing}
+        />
+        {editing !== true ? (
+          <Albums
+            show={show}
+            registeredAlbum={registeredAlbum}
+            setRegisteredAlbum={setRegisteredAlbum}
+          />
+        ) : (
+          <EditTable
+            show={show}
+            setShow={setShow}
+            setModalContent={setModalContent}
+            albumInfo={albumInfo}
+            setAlbumInfo={setAlbumInfo}
+            uid={uid}
+          />
+        )}
+        <ModalWindow
+          modalContent={modalContent}
           show={show}
           setShow={setShow}
-          setModalContent={setModalContent}
           albumInfo={albumInfo}
-          setAlbumInfo={setAlbumInfo}
+          registeredAlbum={registeredAlbum}
           uid={uid}
         />
-      )}
-      <ModalWindow
-        modalContent={modalContent}
-        show={show}
-        setShow={setShow}
-        albumInfo={albumInfo}
-        registeredAlbum={registeredAlbum}
-        uid={uid}
-      />
-    </main>
+      </main>
+    </>
   );
 }
