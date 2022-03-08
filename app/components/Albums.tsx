@@ -4,7 +4,6 @@ import "firebase/firestore";
 import "./fire";
 import sampleRateList from "./sampleRateList";
 import Selector from "./Selector";
-import Table from "react-bootstrap/Table";
 
 const db = firebase.firestore();
 
