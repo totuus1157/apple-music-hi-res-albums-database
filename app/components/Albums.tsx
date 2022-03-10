@@ -119,6 +119,10 @@ export default function Albums(props: {
         div.table-responsive {
           height: 90%;
         }
+
+        .selecting {
+          background-color: #ffe8a1;
+        }
       `}</style>
 
       {loading !== true ? (
@@ -126,7 +130,7 @@ export default function Albums(props: {
           <table className="table table-bordered table-hover">
             <thead>
               <tr>
-                <th>
+                <th className={selectedItem.artist && "selecting"}>
                   <Selector
                     name="Artist"
                     selectedItem={selectedItem}
@@ -134,7 +138,7 @@ export default function Albums(props: {
                     selectionElements={selectionElements("artist")}
                   />
                 </th>
-                <th>
+                <th className={selectedItem.genre && "selecting"}>
                   <Selector
                     name="Genre"
                     selectedItem={selectedItem}
@@ -142,7 +146,7 @@ export default function Albums(props: {
                     selectionElements={selectionElements("genre")}
                   />
                 </th>
-                <th>
+                <th className={selectedItem.composer && "selecting"}>
                   <Selector
                     name="Composer"
                     selectedItem={selectedItem}
@@ -150,7 +154,7 @@ export default function Albums(props: {
                     selectionElements={selectionElements("composer")}
                   />
                 </th>
-                <th>
+                <th className={selectedItem.sampleRate && "selecting"}>
                   <Selector
                     name="Sample Rate"
                     selectedItem={selectedItem}
