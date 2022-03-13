@@ -5,8 +5,15 @@ import Dropdown from "react-bootstrap/Dropdown";
 // The following code is based on a sample from the following website, with some minor modifications.
 // https://react-bootstrap-v4.netlify.app/components/dropdowns/#custom-dropdown-components
 
+interface customToggleProps {
+  children: React.ReactNode;
+  onClick: React.MouseEventHandler<HTMLAnchorElement>;
+}
+
+type anchorRefType = React.LegacyRef<HTMLAnchorElement>;
+
 const CustomToggle = React.forwardRef(
-  ({ children, onClick }, ref): JSX.Element => (
+  ({ children, onClick }: customToggleProps, ref: anchorRefType) => (
     <a
       href=""
       ref={ref}
