@@ -28,8 +28,26 @@ const CustomToggle = React.forwardRef(
   )
 );
 
+interface customMenuProps {
+  children: React.ReactNode;
+  style: React.CSSProperties;
+  className: string;
+  "aria-labelledby": string;
+  labeledBy: string;
+}
+
+type divRefType = React.LegacyRef<HTMLDivElement>;
+
 const CustomMenu = React.forwardRef(
-  ({ children, style, className, "aria-labelledby": labeledBy }, ref) => {
+  (
+    {
+      children,
+      style,
+      className,
+      "aria-labelledby": labeledBy,
+    }: customMenuProps,
+    ref: divRefType
+  ) => {
     const [value, setValue] = useState("");
 
     return (
@@ -47,10 +65,13 @@ const CustomMenu = React.forwardRef(
           value={value}
         />
         <ul className="list-unstyled">
-          {React.Children.toArray(children).filter(
-            (child) =>
-              !value || child.props.children.toLowerCase().startsWith(value)
-          )}
+          {React.Children.toArray(children).filter((child) => {
+            if (React.isValidElement(child)) {
+              return (
+                !value || child.props.children.toLowerCase().startsWith(value)
+              );
+            }
+          })}
         </ul>
       </div>
     );
