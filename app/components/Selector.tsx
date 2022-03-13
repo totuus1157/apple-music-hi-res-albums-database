@@ -30,10 +30,10 @@ const CustomToggle = React.forwardRef(
 
 interface customMenuProps {
   children: React.ReactNode;
-  style: React.CSSProperties;
+  style?: React.CSSProperties;
   className: string;
-  "aria-labelledby": string;
-  labeledBy: string;
+  "aria-labelledby"?: string;
+  labeledBy?: string;
 }
 
 type divRefType = React.LegacyRef<HTMLDivElement>;
