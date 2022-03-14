@@ -12,11 +12,14 @@ interface customToggleProps {
 type anchorRefType = React.LegacyRef<HTMLAnchorElement>;
 
 const CustomToggle = React.forwardRef(
-  ({ children, onClick }: customToggleProps, ref: anchorRefType) => (
+  (
+    { children, onClick }: customToggleProps,
+    ref: anchorRefType
+  ): JSX.Element => (
     <a
       href=""
       ref={ref}
-      onClick={(e) => {
+      onClick={(e): void => {
         e.preventDefault();
         onClick(e);
       }}
