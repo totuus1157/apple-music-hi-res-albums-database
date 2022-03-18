@@ -11,11 +11,11 @@ interface customToggleProps {
 
 type anchorRefType = React.LegacyRef<HTMLAnchorElement>;
 
-const CustomToggle = React.forwardRef(
-  (
-    { children, onClick }: customToggleProps,
-    ref: anchorRefType
-  ): JSX.Element => (
+const CustomToggle = React.forwardRef(function CustomToggle(
+  { children, onClick }: customToggleProps,
+  ref: anchorRefType
+): JSX.Element {
+  return (
     <a
       href=""
       ref={ref}
@@ -27,8 +27,8 @@ const CustomToggle = React.forwardRef(
       {children}
       &#x25bc;
     </a>
-  )
-);
+  );
+});
 
 // Suspend use until the following errors can be resolved.
 // "TypeError: child.props.children is undefined"
