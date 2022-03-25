@@ -1,7 +1,7 @@
+import Link from "next/link";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "./fire";
-import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 
@@ -33,27 +33,15 @@ export default function Title(props: {
     }
   };
 
-  const handleselect = (eventKey: string | null): void => {
-    props.setModalContent(eventKey);
-    props.setShow(true);
-    console.log(`selected ${eventKey}`);
-  };
-
   return (
     <div style={{ marginBottom: "20px" }}>
       <Navbar bg="dark" variant="dark" expand="lg">
-        <Navbar.Brand>{props.title}</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto" onSelect={handleselect}>
-            <Nav.Link eventKey="about">About this site</Nav.Link>
-            <Nav.Link eventKey="howto">How to use</Nav.Link>
-            <Nav.Link eventKey="privacy">Privacy policy</Nav.Link>
-          </Nav>
-          <Button variant="outline-light" onClick={doLogin}>
-            {props.loginState !== true ? "Login" : "Logout"}
-          </Button>
-        </Navbar.Collapse>
+        <Link href="/" passHref replace>
+          <Navbar.Brand>&lt;&lt; Back to Homepage</Navbar.Brand>
+        </Link>
+        <Button variant="outline-light" onClick={doLogin}>
+          {props.loginState !== true ? "Login" : "Logout"}
+        </Button>
       </Navbar>
     </div>
   );
