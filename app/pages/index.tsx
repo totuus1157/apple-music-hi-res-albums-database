@@ -15,20 +15,42 @@ const Home: NextPage = () => {
 
   return (
     <div className={styles.container}>
+      <style jsx>{`
+        div.start {
+          margin: 60px;
+        }
+
+        div.tabs {
+          max-width: 1024px;
+        }
+
+        .strawberry {
+          color: #e73562;
+        }
+        .limegreen {
+          color: #32cd32;
+        }
+        .blueberry {
+          color: #4f86f7;
+        }
+        .tangerine {
+          color: #ffa812;
+        }
+        .grape {
+          color: #56256e;
+        }
+      `}</style>
+
       <Header title={title} />
 
       <main className={styles.main}>
-        <h1 className={styles.title}>{title}</h1>
-
-        <style jsx>{`
-          div.start {
-            margin: 60px;
-          }
-
-          div.tabs {
-            max-width: 1024px;
-          }
-        `}</style>
+        <h1 className={styles.title}>
+          <span className="strawberry">Apple</span>{" "}
+          <span className="limegreen">Music</span>{" "}
+          <span className="blueberry">Hi-Res</span>{" "}
+          <span className="tangerine">Album</span>{" "}
+          <span className="grape">Database</span>
+        </h1>
 
         <div className="start">
           <Link href="/main" replace>
