@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Card from "react-bootstrap/Card";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
@@ -5,20 +6,30 @@ import Button from "react-bootstrap/Button";
 export default function HowTo(): JSX.Element {
   return (
     <>
-      {" "}
       <style jsx>
         {`
           p {
             color: red;
           }
+
+          li {
+            margin: 10px 0px;
+          }
         `}
       </style>
+
       <ol>
         <p>You will need to log in with your Apple ID in advance.</p>
         <li>
           Display the desired album from the Music app, and select &quot;Get
           Info&quot; from the &quot;...&quot; icon to the right of the title.
         </li>
+        <Image
+          src="/images/howto1.jpg"
+          width="1644"
+          height="932"
+          objectFit="contain"
+        />
         <li>
           Copy &quot;artist&quot;, &quot;album&quot;, and &quot;composer&quot;
           (if the genre is &quot;Classical&quot;) from the items in the opened
@@ -27,6 +38,12 @@ export default function HowTo(): JSX.Element {
           same time, select &quot;Genre&quot; (if &quot;Classical&quot; is not
           selected, the &quot;Composer&quot; text box will not be activated).
         </li>
+        <Image
+          src="/images/howto2.jpg"
+          width="1200"
+          height="800"
+          objectFit="contain"
+        />
         <Accordion>
           <Card>
             <Card.Header>
@@ -150,12 +167,24 @@ export default function HowTo(): JSX.Element {
           window where the song title is displayed, the sampling rate will be
           displayed and you can select it from the radio buttons in our app.
         </li>
+        <Image
+          src="/images/howto3.jpg"
+          width="1202"
+          height="448"
+          objectFit="contain"
+        />
         <li>
           Finally, click the &quot;...&quot; icon next to the album name again.
           icon again, do &quot;Share&quot; -{">"} &quot;Copy Link&quot;, and
           paste the address you got into the &quot;URL&quot; text box of our
           app.
         </li>
+        <Image
+          src="/images/howto4.jpg"
+          width="1636"
+          height="910"
+          objectFit="contain"
+        />
         <li>
           Click on the &quot;Save changes&quot; button and make sure that the
           registered album appears correctly in the database.
