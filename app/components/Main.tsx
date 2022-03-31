@@ -4,7 +4,7 @@ import "firebase/firestore";
 import "firebase/auth";
 import "./fire";
 import Title from "./Title";
-import ButtonSection from "./ButtonSection";
+import ButtonSect from "./ButtonSect";
 import Albums from "./Albums";
 import EditTable from "./EditTable";
 import ModalWindow from "./ModalWindow";
@@ -53,7 +53,7 @@ export default function Main(props: { title: string }): JSX.Element {
           setModalContent={setModalContent}
           setShow={setShow}
         />
-        <ButtonSection
+        <ButtonSect
           loginState={loginState}
           setModalContent={setModalContent}
           setShow={setShow}
