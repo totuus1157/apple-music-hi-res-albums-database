@@ -37,7 +37,7 @@ export default function Title(props: {
     <div style={{ marginBottom: "20px" }}>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Link href="/" passHref replace>
-          <Navbar.Brand>&lt;&lt; Back to Homepage</Navbar.Brand>
+          <Navbar.Brand>&lt;&lt; Back to Home page</Navbar.Brand>
         </Link>
         <Button variant="outline-light" onClick={doLogin}>
           {props.loginState !== true ? "Login" : "Logout"}
