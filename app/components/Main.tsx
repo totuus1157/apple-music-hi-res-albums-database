@@ -3,7 +3,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import "./fire";
-import Title from "./Title";
+import NavLine from "./NavLine";
 import ButtonSect from "./ButtonSect";
 import Albums from "./Albums";
 import EditTable from "./EditTable";
@@ -46,7 +46,7 @@ export default function Main(props: { title: string }): JSX.Element {
       `}</style>
 
       <main>
-        <Title
+        <NavLine
           title={props.title}
           loginState={loginState}
           setLoginState={setLoginState}
