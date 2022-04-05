@@ -19,17 +19,12 @@ export default function NavLine(props: {
     auth.signInWithRedirect(provider);
   };
 
-  const logout = (): void => {
-    auth.signOut();
-    props.setLoginState(false);
-  };
-
   const doLogin = (): void => {
     if (auth.currentUser == null) {
       login();
     } else {
-      logout();
-      window.location.reload();
+      props.setShow(true);
+      props.setModalContent("logout");
     }
   };
 

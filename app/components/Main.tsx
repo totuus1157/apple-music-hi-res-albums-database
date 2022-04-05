@@ -83,6 +83,7 @@ export default function Main(props: { title: string }): JSX.Element {
           albumInfo={albumInfo}
           registeredAlbum={registeredAlbum}
           uid={uid}
+          setLoginState={setLoginState}
         />
       </main>
     </>
