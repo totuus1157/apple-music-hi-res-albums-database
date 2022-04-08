@@ -22,14 +22,14 @@ export default function Main(props: { title: string }): JSX.Element {
 
   auth
     .getRedirectResult()
-    .then((result) => {
+    .then((result): void => {
       console.log("result: ", result);
     })
-    .catch((error) => {
+    .catch((error): void => {
       console.log("error: ", error);
     });
 
-  auth.onAuthStateChanged(async (user) => {
+  auth.onAuthStateChanged(async (user): Promise<void> => {
     console.log("user: ", user);
     if (user) {
       setUid(user.uid);
