@@ -46,9 +46,9 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>
           <span className="strawberry">Apple</span>{" "}
-          <span className="limegreen">Music</span>{" "}
-          <span className="blueberry">Hi-Res</span>{" "}
-          <span className="tangerine">Album</span>{" "}
+          <span className="tangerine">Music</span>{" "}
+          <span className="limegreen">Hi-Res</span>{" "}
+          <span className="blueberry">Album</span>{" "}
           <span className="grape">Database</span>
         </h1>
 
