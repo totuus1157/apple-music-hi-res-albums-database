@@ -3,8 +3,8 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import "./fire";
-import Title from "./Title";
-import ButtonSection from "./ButtonSection";
+import NavLine from "./NavLine";
+import ButtonSect from "./ButtonSect";
 import Albums from "./Albums";
 import EditTable from "./EditTable";
 import ModalWindow from "./ModalWindow";
@@ -22,15 +22,15 @@ export default function Main(props: { title: string }): JSX.Element {
 
   auth
     .getRedirectResult()
-    .then((result) => {
-      console.log("result: ", result);
+    .then((result): void => {
+      console.log("Main.result: ", result);
     })
-    .catch((error) => {
-      console.log("error: ", error);
+    .catch((error): void => {
+      console.log("Main.error: ", error);
     });
 
-  auth.onAuthStateChanged(async (user) => {
-    console.log("user: ", user);
+  auth.onAuthStateChanged(async (user): Promise<void> => {
+    console.log("Main.user: ", user);
     if (user) {
       setUid(user.uid);
       setLoginState(true);
@@ -46,14 +46,14 @@ export default function Main(props: { title: string }): JSX.Element {
       `}</style>
 
       <main>
-        <Title
+        <NavLine
           title={props.title}
           loginState={loginState}
           setLoginState={setLoginState}
           setModalContent={setModalContent}
           setShow={setShow}
         />
-        <ButtonSection
+        <ButtonSect
           loginState={loginState}
           setModalContent={setModalContent}
           setShow={setShow}
@@ -83,6 +83,7 @@ export default function Main(props: { title: string }): JSX.Element {
           albumInfo={albumInfo}
           registeredAlbum={registeredAlbum}
           uid={uid}
+          setLoginState={setLoginState}
         />
       </main>
     </>

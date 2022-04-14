@@ -8,10 +8,6 @@ export default function HowTo(): JSX.Element {
     <>
       <style jsx>
         {`
-          p {
-            color: red;
-          }
-
           li {
             margin: 10px 0px;
           }
@@ -19,7 +15,9 @@ export default function HowTo(): JSX.Element {
       </style>
 
       <ol>
-        <p>You will need to log in with your Apple ID in advance.</p>
+        <p className="text-danger">
+          You will need to log in with your Apple ID in advance.
+        </p>
         <li>
           Display the desired album from the Music app, and select &quot;Get
           Info&quot; from the &quot;...&quot; icon to the right of the title.

@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 
-export default function Buttons(props: {
+export default function ButtonSect(props: {
   setShow: (arg0: boolean) => void;
   editing: boolean;
   setEditing: (arg0: boolean) => void;
