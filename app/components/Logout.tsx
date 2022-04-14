@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 
 const auth = firebase.auth();
 const user = auth.currentUser;
+const provider = new firebase.auth.OAuthProvider("apple.com");
 
 export default function Logout(props: {
   show: boolean;
@@ -19,18 +20,32 @@ export default function Logout(props: {
     props.setShow(false);
   };
 
-  const doDelete = () => {
-    if (user) {
-      user
-        .delete()
-        .then(() => {
-          props.setLoginState(false);
-          props.setShow(false);
-        })
-        .catch((error) => {
-          console.log("error: ", error);
-        });
-    }
+  const doDelete = (): void => {
+    const unsubscribe = auth.onAuthStateChanged((user): void => {
+      if (user) {
+        if (confirm("Are you sure you want to do this?")) {
+          user
+            .delete()
+            .then((): void => {
+              props.setLoginState(false);
+              props.setShow(false);
+              alert("Your account registration has been successfully deleted.");
+            })
+            .catch((error): void => {
+              if (
+                confirm(
+                  `${error.message} Would you like to re-authenticate your account now?`
+                )
+              ) {
+                user.reauthenticateWithRedirect(provider);
+              } else {
+                props.setShow(false);
+              }
+            });
+        }
+      }
+      unsubscribe();
+    });
   };
 
   const handleClose = (): void => props.setShow(false);
@@ -38,7 +53,7 @@ export default function Logout(props: {
   return (
     <>
       <style jsx>{`
-        span.linkButton {
+        span.link-button {
           position: relative;
           bottom: 2px;
           right: 5px;
@@ -55,14 +70,14 @@ export default function Logout(props: {
           </p>
           <Card body>
             To delete your account registration,
-            <span className="linkButton">
+            <span className="link-button">
               <Button variant="link" onClick={doDelete}>
                 click here.
               </Button>
             </span>
             <br />
             <span className="text-danger">
-              Your registered album data will not be deleted.
+              Notice: Your registered album data will not be deleted.
             </span>
           </Card>
         </Modal.Body>
