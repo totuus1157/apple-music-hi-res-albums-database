@@ -22,9 +22,11 @@ export default function Albums(props: {
   const tableContent: SetStateAction<any[]> = [];
   const albumElements: AlbumElements[] = [];
   const albumId: string[] = [];
+  const nameNoArticle: string[] = [];
   const [data, setData] = useState(tableContent);
   const [loading, setLoading] = useState(true);
   const [albumElementsList, setAlbumElementsList] = useState(albumElements);
+  const [noDefiniteArticle, setNoDefiniteArticle] = useState(nameNoArticle);
   const [selectedItem, setSelectedItem] = useState({
     artist: "",
     genre: "",
@@ -43,8 +45,8 @@ export default function Albums(props: {
     return Array.from(
       new Set(
         albumElementsList
-          .map((albumElements): string | undefined => {
-            return albumElements[_category];
+          .map((value): string | undefined => {
+            return value[_category];
           })
           .filter(Boolean)
       )
@@ -66,20 +68,32 @@ export default function Albums(props: {
       .then((snapshot) => {
         snapshot.forEach((document): void => {
           const doc = document.data();
+          const regex = /^The /;
+          let artist = doc.artist;
+          if (regex.test(artist)) {
+            artist = artist.replace(regex, "");
+            nameNoArticle.push(artist);
+          }
           albumElements.push({
-            artist: doc.artist,
+            artist: artist,
             genre: doc.genre,
             composer: doc.composer,
           });
         });
         setAlbumElementsList(albumElements);
+        setNoDefiniteArticle(nameNoArticle);
       });
   }, [props.show]);
 
   useEffect((): void => {
     const i = selectedItem;
+    let artist = i.artist;
+    if (noDefiniteArticle.includes(artist)) {
+      artist = `The ${artist}`;
+    }
+
     let albumsRef = db.collectionGroup("albums");
-    i.artist && (albumsRef = albumsRef.where("artist", "==", i.artist));
+    i.artist && (albumsRef = albumsRef.where("artist", "==", artist));
     i.genre && (albumsRef = albumsRef.where("genre", "==", i.genre));
     i.composer && (albumsRef = albumsRef.where("composer", "==", i.composer));
     i.sampleRate &&
