@@ -30,13 +30,16 @@ export default function NavLine(props: {
 
   return (
     <div style={{ marginBottom: "20px" }}>
-      <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar bg="dark" variant="dark">
         <Link href="/" passHref replace>
           <Navbar.Brand>&lt;&lt; Back to Home page</Navbar.Brand>
         </Link>
-        <Button variant="outline-light" onClick={doLogin}>
-          {props.loginState !== true ? "Login" : "Logout"}
-        </Button>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          <Button variant="outline-light" onClick={doLogin}>
+            {props.loginState !== true ? "Login" : "Logout"}
+          </Button>
+        </Navbar.Collapse>
       </Navbar>
     </div>
   );
