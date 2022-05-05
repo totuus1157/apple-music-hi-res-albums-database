@@ -28,10 +28,10 @@ export default function Albums(props: {
   const [albumElementsList, setAlbumElementsList] = useState(albumElements);
   const [noDefiniteArticle, setNoDefiniteArticle] = useState(nameNoArticle);
   const [selectedItem, setSelectedItem] = useState({
-    artist: "",
-    genre: "",
-    composer: "",
-    sampleRate: "",
+    artist: null,
+    genre: null,
+    composer: null,
+    sampleRate: null,
   });
 
   type SelectionElements = {
