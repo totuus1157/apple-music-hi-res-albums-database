@@ -15,40 +15,46 @@ export default function ButtonSect(props: {
   return (
     <>
       <style jsx>{`
-        div {
+        .parent {
           margin: 10px;
-          float: right;
+          display: flex;
+          justify-content: space-between;
         }
       `}</style>
 
-      <div>
-        {!props.editing && (
-          <Button
-            variant="primary"
-            disabled={!props.loginState}
-            onClick={handleShow}
-          >
-            Add
-          </Button>
-        )}{" "}
-        {!props.editing ? (
-          <Button
-            variant="dark"
-            disabled={!props.loginState}
-            onClick={() => props.setEditing(true)}
-          >
-            Edit
-          </Button>
-        ) : (
-          <Button
-            variant="outline-dark"
-            onClick={() => {
-              props.setEditing(false);
-            }}
-          >
-            Exit
-          </Button>
-        )}
+      <div className="parent">
+        <div>
+          <Button variant="success">All Items</Button>
+        </div>
+        <div>
+          {!props.editing && (
+            <Button
+              variant="primary"
+              disabled={!props.loginState}
+              onClick={handleShow}
+            >
+              Add
+            </Button>
+          )}{" "}
+          {!props.editing ? (
+            <Button
+              variant="dark"
+              disabled={!props.loginState}
+              onClick={() => props.setEditing(true)}
+            >
+              Edit
+            </Button>
+          ) : (
+            <Button
+              variant="outline-dark"
+              onClick={() => {
+                props.setEditing(false);
+              }}
+            >
+              Exit
+            </Button>
+          )}
+        </div>
       </div>
     </>
   );
