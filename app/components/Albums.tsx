@@ -7,6 +7,13 @@ import Selector from "./Selector";
 
 const db = firebase.firestore();
 
+type SelectedItem = {
+  artist: string;
+  genre: string;
+  composer: string;
+  sampleRate: string;
+};
+
 type AlbumElements = {
   artist?: string;
   genre?: string;
@@ -18,6 +25,13 @@ export default function Albums(props: {
   show: boolean;
   registeredAlbum: string[];
   setRegisteredAlbum: (arg0: string[]) => void;
+  selectedItem: SelectedItem;
+  setSelectedItem: {
+    (arg0: SelectedItem): void;
+    (arg0: SelectedItem): void;
+    (arg0: SelectedItem): void;
+    (arg0: SelectedItem): void;
+  };
 }): JSX.Element {
   const tableContent: SetStateAction<any[]> = [];
   const albumElements: AlbumElements[] = [];
@@ -27,12 +41,6 @@ export default function Albums(props: {
   const [loading, setLoading] = useState(true);
   const [albumElementsList, setAlbumElementsList] = useState(albumElements);
   const [noDefiniteArticle, setNoDefiniteArticle] = useState(nameNoArticle);
-  const [selectedItem, setSelectedItem] = useState({
-    artist: null,
-    genre: null,
-    composer: null,
-    sampleRate: null,
-  });
 
   type SelectionElements = {
     id: number;
@@ -86,7 +94,7 @@ export default function Albums(props: {
   }, [props.show]);
 
   useEffect((): void => {
-    const i = selectedItem;
+    const i = props.selectedItem;
     let artist = i.artist;
     if (noDefiniteArticle.includes(artist)) {
       artist = `The ${artist}`;
@@ -125,7 +133,7 @@ export default function Albums(props: {
       props.setRegisteredAlbum(albumId);
       setLoading(false);
     });
-  }, [props.show, selectedItem]);
+  }, [props.show, props.selectedItem]);
 
   return (
     <>
@@ -144,35 +152,35 @@ export default function Albums(props: {
           <table className="table table-bordered table-hover">
             <thead>
               <tr>
-                <th className={selectedItem.artist && "selecting"}>
+                <th className={props.selectedItem.artist && "selecting"}>
                   <Selector
                     name="Artist"
-                    selectedItem={selectedItem}
-                    setSelectedItem={setSelectedItem}
+                    selectedItem={props.selectedItem}
+                    setSelectedItem={props.setSelectedItem}
                     selectionElements={selectionElements("artist")}
                   />
                 </th>
-                <th className={selectedItem.genre && "selecting"}>
+                <th className={props.selectedItem.genre && "selecting"}>
                   <Selector
                     name="Genre"
-                    selectedItem={selectedItem}
-                    setSelectedItem={setSelectedItem}
+                    selectedItem={props.selectedItem}
+                    setSelectedItem={props.setSelectedItem}
                     selectionElements={selectionElements("genre")}
                   />
                 </th>
-                <th className={selectedItem.composer && "selecting"}>
+                <th className={props.selectedItem.composer && "selecting"}>
                   <Selector
                     name="Composer"
-                    selectedItem={selectedItem}
-                    setSelectedItem={setSelectedItem}
+                    selectedItem={props.selectedItem}
+                    setSelectedItem={props.setSelectedItem}
                     selectionElements={selectionElements("composer")}
                   />
                 </th>
-                <th className={selectedItem.sampleRate && "selecting"}>
+                <th className={props.selectedItem.sampleRate && "selecting"}>
                   <Selector
                     name="Sample Rate"
-                    selectedItem={selectedItem}
-                    setSelectedItem={setSelectedItem}
+                    selectedItem={props.selectedItem}
+                    setSelectedItem={props.setSelectedItem}
                     selectionElements={renamedProperty}
                   />
                 </th>

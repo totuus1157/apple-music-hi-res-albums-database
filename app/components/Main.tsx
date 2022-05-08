@@ -19,6 +19,12 @@ export default function Main(props: { title: string }): JSX.Element {
   const [albumInfo, setAlbumInfo] = useState("");
   const [registeredAlbum, setRegisteredAlbum] = useState<string[]>([]);
   const [uid, setUid] = useState("");
+  const [selectedItem, setSelectedItem] = useState({
+    artist: "",
+    genre: "",
+    composer: "",
+    sampleRate: "",
+  });
 
   auth
     .getRedirectResult()
@@ -59,12 +65,16 @@ export default function Main(props: { title: string }): JSX.Element {
           setShow={setShow}
           editing={editing}
           setEditing={setEditing}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
         />
         {editing !== true ? (
           <Albums
             show={show}
             registeredAlbum={registeredAlbum}
             setRegisteredAlbum={setRegisteredAlbum}
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem}
           />
         ) : (
           <EditTable

@@ -1,11 +1,25 @@
 import Button from "react-bootstrap/Button";
 
+type SelectedItem = {
+  artist: string;
+  genre: string;
+  composer: string;
+  sampleRate: string;
+};
+
 export default function ButtonSect(props: {
   setShow: (arg0: boolean) => void;
   editing: boolean;
   setEditing: (arg0: boolean) => void;
   setModalContent: (arg0: string) => void;
   loginState: boolean;
+  selectedItem: SelectedItem;
+  setSelectedItem: {
+    (arg0: SelectedItem): void;
+    (arg0: SelectedItem): void;
+    (arg0: SelectedItem): void;
+    (arg0: SelectedItem): void;
+  };
 }): JSX.Element {
   const handleShow = (): void => {
     props.setShow(true);
@@ -24,7 +38,25 @@ export default function ButtonSect(props: {
 
       <div className="parent">
         <div>
-          <Button variant="success">All Items</Button>
+          <Button
+            variant="success"
+            disabled={
+              !props.selectedItem.artist &&
+              !props.selectedItem.genre &&
+              !props.selectedItem.composer &&
+              !props.selectedItem.sampleRate
+            }
+            onClick={() =>
+              props.setSelectedItem({
+                artist: "",
+                genre: "",
+                composer: "",
+                sampleRate: "",
+              })
+            }
+          >
+            All Items
+          </Button>
         </div>
         <div>
           {!props.editing && (
