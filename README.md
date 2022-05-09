@@ -1,4 +1,4 @@
-# apple-music-hi-res-album-database
+# apple-music-hi-res-albums-database
 
 This is a database that we can all create together.
 
