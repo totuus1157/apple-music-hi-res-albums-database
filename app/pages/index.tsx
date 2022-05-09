@@ -11,7 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
-  const title = "Apple Music Hi-Res Album Database";
+  const title = "Apple Music Hi-Res Albums Database";
 
   return (
     <div className={styles.container}>
@@ -48,7 +48,7 @@ const Home: NextPage = () => {
           <span className="strawberry">Apple</span>{" "}
           <span className="tangerine">Music</span>{" "}
           <span className="limegreen">Hi-Res</span>{" "}
-          <span className="blueberry">Album</span>{" "}
+          <span className="blueberry">Albums</span>{" "}
           <span className="grape">Database</span>
         </h1>
 
