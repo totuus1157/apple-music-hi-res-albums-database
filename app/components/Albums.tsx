@@ -150,6 +150,7 @@ export default function Albums(props: {
       {loading !== true ? (
         <div className="table-responsive">
           <table className="table table-bordered table-hover">
+            <caption>Total: {albumElementsList.length}</caption>
             <thead>
               <tr>
                 <th className={props.selectedItem.artist && "selecting"}>
