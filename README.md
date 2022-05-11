@@ -1,6 +1,6 @@
 # apple-music-hi-res-albums-database
 
-List of high-res lossless compatible albums making by all "Apple and music lovers"
+List of high-res lossless albums making by all "Apple and music lovers"
 
 ## TODO
 - Rewriting Props with Destructuring assignments.
