@@ -16,6 +16,12 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <style jsx>{`
+        h2 {
+          text-align: center;
+          font-size: 23px;
+          margin-top: 20px;
+        }
+
         div.start {
           margin: 60px;
         }
@@ -51,6 +57,10 @@ const Home: NextPage = () => {
           <span className="blueberry">Albums</span>{" "}
           <span className="grape">Database</span>
         </h1>
+
+        <h2 className="text-secondary">
+          List of Hi-Res lossless albums making by all "Apple and music lovers"
+        </h2>
 
         <div className="start">
           <Link href="/main" replace>
