@@ -59,7 +59,8 @@ const Home: NextPage = () => {
         </h1>
 
         <h2 className="text-secondary">
-          List of Hi-Res lossless albums making by all "Apple and music lovers"
+          List of Hi-Res lossless albums making by all &quot;Apple and music
+          lovers&quot;
         </h2>
 
         <div className="start">
