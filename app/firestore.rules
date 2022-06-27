@@ -13,7 +13,7 @@ service cloud.firestore {
 	    return data.keys().hasAll(['artist', 'title', 'genre', 'sampleRate', 'albumId', 'composer', 'createdAt', 'updatedAt']) &&
              data.keys().hasOnly(['artist', 'title', 'genre', 'sampleRate', 'albumId', 'composer', 'createdAt', 'updatedAt']) &&
              data.artist is string && data.artist.size() <= 100 &&
-             data.title is string && data.title.size() <= 100 &&
+             data.title is string && data.title.size() <= 200 &&
              data.genre is string && data.genre.matches("^[A-Za-z&-/':éóÖü ]+$") && data.genre.size() <= 30 &&
              data.sampleRate is string && data.sampleRate.matches('^(88.2|96|176.4|192)$') &&
              data.albumId is string && data.albumId.matches('^[1-9][0-9]+$') &&
