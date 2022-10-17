@@ -11,7 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = (): JSX.Element => {
-  const title = "Apple Music Hi-Res Albums Database";
+  const title = "Home page";
 
   return (
     <div className={styles.container}>
