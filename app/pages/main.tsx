@@ -4,7 +4,7 @@ import Main from "../components/Main";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../styles/Home.module.css";
 
-const Home: NextPage = () => {
+const Home: NextPage = (): JSX.Element => {
   const title = "Apple Music Hi-Res Album Database";
 
   return (
