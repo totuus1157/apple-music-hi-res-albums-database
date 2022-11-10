@@ -31,7 +31,7 @@ export default function NavLine(props: {
   return (
     <div style={{ marginBottom: "20px" }}>
       <Navbar bg="dark" variant="dark">
-        <Link href="/" passHref replace>
+        <Link href="/" passHref replace legacyBehavior>
           <Navbar.Brand>&lt;&lt; Back to Home page</Navbar.Brand>
         </Link>
         <Navbar.Toggle />
