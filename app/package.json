@@ -16,7 +16,7 @@
     "@fortawesome/react-fontawesome": "^0.1.16",
     "bootstrap": "^4.6.0",
     "firebase": "^8.8.0",
-    "next": "^13.0.3",
+    "next": "^14.0.1",
     "react": "^18.2.0",
     "react-bootstrap": "^1.6.4",
     "react-dom": "^18.2.0"
