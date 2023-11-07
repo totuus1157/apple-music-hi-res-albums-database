@@ -1,5 +1,5 @@
-import firebase from "firebase/app";
-import "firebase/firestore";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 import "./fire";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";

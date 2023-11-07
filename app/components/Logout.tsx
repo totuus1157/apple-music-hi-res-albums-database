@@ -1,5 +1,5 @@
-import firebase from "firebase/app";
-import "firebase/firestore";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 import "./fire";
 import Modal from "react-bootstrap/Modal";
 import Card from "react-bootstrap/Card";
@@ -34,7 +34,7 @@ export default function Logout(props: {
             .catch((error): void => {
               if (
                 confirm(
-                  `${error.message} Would you like to re-authenticate your account now?`
+                  `${error.message} Would you like to re-authenticate your account now?`,
                 )
               ) {
                 user.reauthenticateWithRedirect(provider);

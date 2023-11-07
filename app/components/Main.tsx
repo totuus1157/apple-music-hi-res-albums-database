@@ -1,7 +1,7 @@
 import { useState } from "react";
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+import "firebase/compat/auth";
 import "./fire";
 import NavLine from "./NavLine";
 import ButtonSect from "./ButtonSect";

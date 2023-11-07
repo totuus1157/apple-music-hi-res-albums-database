@@ -1,6 +1,6 @@
 import { useState } from "react";
-import firebase from "firebase/app";
-import "firebase/firestore";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 import "./fire";
 import sampleRateList from "./sampleRateList";
 import genreList from "./genreList";
@@ -116,10 +116,10 @@ export default function Register(props: {
     const regex = {
       ltnAndNum: new RegExp(
         /^[\p{Script=Latin}\p{Punctuation}\p{Symbol}\d\s]+$/,
-        "u"
+        "u",
       ),
       appleMusicLink: new RegExp(
-        /^https:\/\/music\.apple\.com\/?[a-z]*\/album\/?[\w-%]*\/?[\d]+(\?l=\w+)*$/
+        /^https:\/\/music\.apple\.com\/?[a-z]*\/album\/?[\w-%]*\/?[\d]+(\?l=\w+)*$/,
       ),
     };
 

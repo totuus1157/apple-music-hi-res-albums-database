@@ -1,7 +1,7 @@
 import { useState, useEffect, SetStateAction } from "react";
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+import "firebase/compat/auth";
 import "./fire";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
@@ -66,7 +66,7 @@ export default function EditTable(props: {
                     <FontAwesomeIcon icon={faTrashAlt} />
                   </Button>
                 </td>
-              </tr>
+              </tr>,
             );
           });
           setData(tableContent);
@@ -76,7 +76,7 @@ export default function EditTable(props: {
       tableContent.push(
         <tr key="1">
           <th>Cannot retrieve data.</th>
-        </tr>
+        </tr>,
       );
     }
   }, [props.show]);

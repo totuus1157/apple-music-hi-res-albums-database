@@ -1,6 +1,6 @@
 import { useState, useEffect, SetStateAction } from "react";
-import firebase from "firebase/app";
-import "firebase/firestore";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 import "./fire";
 import sampleRateList from "./sampleRateList";
 import Selector from "./Selector";
@@ -48,7 +48,7 @@ export default function Albums(props: {
   };
 
   const selectionElements = (
-    _category: keyof AlbumElements
+    _category: keyof AlbumElements,
   ): SelectionElements[] => {
     return Array.from(
       new Set(
@@ -56,8 +56,8 @@ export default function Albums(props: {
           .map((value): string | undefined => {
             return value[_category];
           })
-          .filter(Boolean)
-      )
+          .filter(Boolean),
+      ),
     )
       .sort()
       .map((uniqueElement, key): SelectionElements => {
@@ -125,7 +125,7 @@ export default function Albums(props: {
                 {doc.title}
               </a>
             </td>
-          </tr>
+          </tr>,
         );
         albumId.push(doc.albumId);
       });
