@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
@@ -26,22 +26,24 @@ export default function Main(props: { title: string }): JSX.Element {
     sampleRate: "",
   });
 
-  auth
-    .getRedirectResult()
-    .then((result): void => {
-      console.log("Main.result: ", result);
-    })
-    .catch((error): void => {
-      console.log("Main.error: ", error);
-    });
+  useEffect((): void => {
+    auth
+      .getRedirectResult()
+      .then((result): void => {
+        console.log("Main.result: ", result);
+      })
+      .catch((error): void => {
+        console.log("Main.error: ", error);
+      });
 
-  auth.onAuthStateChanged(async (user): Promise<void> => {
-    console.log("Main.user: ", user);
-    if (user) {
-      setUid(user.uid);
-      setLoginState(true);
-    }
-  });
+    auth.onAuthStateChanged((user): void => {
+      console.log("Main.user: ", user);
+      if (user) {
+        setUid(user.uid);
+        setLoginState(true);
+      }
+    });
+  }, []);
 
   return (
     <>
