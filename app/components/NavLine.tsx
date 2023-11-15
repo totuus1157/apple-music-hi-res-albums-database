@@ -9,7 +9,6 @@ const auth = firebase.auth();
 const provider = new firebase.auth.OAuthProvider("apple.com");
 
 export default function NavLine(props: {
-  title: string;
   loginState: boolean;
   setLoginState: (arg0: boolean) => void;
   setModalContent: (arg0: string | null) => void;

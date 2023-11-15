@@ -55,7 +55,6 @@ export default function Main(props: { title: string }): JSX.Element {
 
       <main>
         <NavLine
-          title={props.title}
           loginState={loginState}
           setLoginState={setLoginState}
           setModalContent={setModalContent}
