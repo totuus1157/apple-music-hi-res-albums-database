@@ -10,7 +10,7 @@ const Home: NextPage = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <Header title={title} />
-      <Main title={title} />
+      <Main />
     </div>
   );
 };

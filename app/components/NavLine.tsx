@@ -8,12 +8,16 @@ import Button from "react-bootstrap/Button";
 const auth = firebase.auth();
 const provider = new firebase.auth.OAuthProvider("apple.com");
 
-export default function NavLine(props: {
+type Props = {
   loginState: boolean;
   setLoginState: (arg0: boolean) => void;
   setModalContent: (arg0: string | null) => void;
   setShow: (arg0: boolean) => void;
-}): JSX.Element {
+};
+
+export default function NavLine(props: Props): JSX.Element {
+  const { loginState, setLoginState, setModalContent, setShow } = props;
+
   const login = (): void => {
     auth.signInWithRedirect(provider);
   };
