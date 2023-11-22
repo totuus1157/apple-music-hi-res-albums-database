@@ -11,7 +11,7 @@ import ModalWindow from "./ModalWindow";
 
 const auth = firebase.auth();
 
-export default function Main(props: { title: string }): JSX.Element {
+export default function Main(): JSX.Element {
   const [loginState, setLoginState] = useState(false);
   const [modalContent, setModalContent] = useState<string | null>(null);
   const [show, setShow] = useState(false);
