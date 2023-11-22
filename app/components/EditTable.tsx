@@ -11,28 +11,33 @@ import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 const db = firebase.firestore();
 const auth = firebase.auth();
 
-export default function EditTable(props: {
+type Props = {
   albumInfo: string;
   setAlbumInfo: (arg0: string) => void;
   setShow: (arg0: boolean) => void;
   setModalContent: (arg0: string) => void;
   show: boolean;
   uid: string;
-}): JSX.Element {
+};
+
+export default function EditTable(props: Props): JSX.Element {
+  const { albumInfo, setAlbumInfo, setShow, setModalContent, show, uid } =
+    props;
+
   const tableContent: SetStateAction<any[]> = [];
   const [data, setData] = useState(tableContent);
   const [loading, setLoading] = useState(true);
 
   const handleShow = (e: any): void => {
-    props.setAlbumInfo(e.currentTarget.value);
-    props.setShow(true);
-    props.setModalContent("delete");
+    setAlbumInfo(e.currentTarget.value);
+    setShow(true);
+    setModalContent("delete");
   };
 
   useEffect((): void => {
     if (auth.currentUser !== null) {
       db.collection("users")
-        .doc(props.uid)
+        .doc(uid)
         .collection("albums")
         .get()
         .then((snapshot): void => {
@@ -79,7 +84,7 @@ export default function EditTable(props: {
         </tr>,
       );
     }
-  }, [props.show]);
+  }, [show]);
 
   return (
     <div style={{ marginBottom: "20px" }}>

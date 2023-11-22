@@ -7,7 +7,7 @@ type SelectedItem = {
   sampleRate: string;
 };
 
-export default function ButtonSect(props: {
+type Props = {
   setShow: (arg0: boolean) => void;
   editing: boolean;
   setEditing: (arg0: boolean) => void;
@@ -20,10 +20,22 @@ export default function ButtonSect(props: {
     (arg0: SelectedItem): void;
     (arg0: SelectedItem): void;
   };
-}): JSX.Element {
+};
+
+export default function ButtonSect(props: Props): JSX.Element {
+  const {
+    setShow,
+    editing,
+    setEditing,
+    setModalContent,
+    loginState,
+    selectedItem,
+    setSelectedItem,
+  } = props;
+
   const handleShow = (): void => {
-    props.setShow(true);
-    props.setModalContent("register");
+    setShow(true);
+    setModalContent("register");
   };
 
   return (
@@ -41,13 +53,13 @@ export default function ButtonSect(props: {
           <Button
             variant="success"
             disabled={
-              !props.selectedItem.artist &&
-              !props.selectedItem.genre &&
-              !props.selectedItem.composer &&
-              !props.selectedItem.sampleRate
+              !selectedItem.artist &&
+              !selectedItem.genre &&
+              !selectedItem.composer &&
+              !selectedItem.sampleRate
             }
             onClick={() =>
-              props.setSelectedItem({
+              setSelectedItem({
                 artist: "",
                 genre: "",
                 composer: "",
@@ -59,20 +71,20 @@ export default function ButtonSect(props: {
           </Button>
         </div>
         <div>
-          {!props.editing && (
+          {!editing && (
             <Button
               variant="primary"
-              disabled={!props.loginState}
+              disabled={!loginState}
               onClick={handleShow}
             >
               Add
             </Button>
           )}{" "}
-          {!props.editing ? (
+          {!editing ? (
             <Button
               variant="dark"
-              disabled={!props.loginState}
-              onClick={() => props.setEditing(true)}
+              disabled={!loginState}
+              onClick={() => setEditing(true)}
             >
               Edit
             </Button>
@@ -80,7 +92,7 @@ export default function ButtonSect(props: {
             <Button
               variant="outline-dark"
               onClick={() => {
-                props.setEditing(false);
+                setEditing(false);
               }}
             >
               Exit

@@ -9,15 +9,19 @@ const auth = firebase.auth();
 const user = auth.currentUser;
 const provider = new firebase.auth.OAuthProvider("apple.com");
 
-export default function Logout(props: {
+type Props = {
   show: boolean;
   setShow: (arg0: boolean) => void;
   setLoginState: (arg0: boolean) => void;
-}): JSX.Element {
+};
+
+export default function Logout(props: Props): JSX.Element {
+  const { show, setShow, setLoginState } = props;
+
   const doAction = (): void => {
     auth.signOut();
-    props.setLoginState(false);
-    props.setShow(false);
+    setLoginState(false);
+    setShow(false);
   };
 
   const doDelete = (): void => {
@@ -27,8 +31,8 @@ export default function Logout(props: {
           user
             .delete()
             .then((): void => {
-              props.setLoginState(false);
-              props.setShow(false);
+              setLoginState(false);
+              setShow(false);
               alert("Your account registration has been successfully deleted.");
             })
             .catch((error): void => {
@@ -39,7 +43,7 @@ export default function Logout(props: {
               ) {
                 user.reauthenticateWithRedirect(provider);
               } else {
-                props.setShow(false);
+                setShow(false);
               }
             });
         }
@@ -48,7 +52,7 @@ export default function Logout(props: {
     });
   };
 
-  const handleClose = (): void => props.setShow(false);
+  const handleClose = (): void => setShow(false);
 
   return (
     <>
@@ -60,7 +64,7 @@ export default function Logout(props: {
         }
       `}</style>
 
-      <Modal show={props.show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Logout</Modal.Title>
         </Modal.Header>

@@ -2,7 +2,7 @@ import Register from "./Register";
 import Delete from "./Delete";
 import Logout from "./Logout";
 
-export default function ModalWindow(props: {
+type Props = {
   modalContent: string | null;
   albumInfo: string;
   show: boolean;
@@ -10,33 +10,36 @@ export default function ModalWindow(props: {
   registeredAlbum: string[];
   uid: string;
   setLoginState: (arg0: boolean) => void;
-}): JSX.Element {
+};
+
+export default function ModalWindow(props: Props): JSX.Element {
+  const {
+    modalContent,
+    albumInfo,
+    show,
+    setShow,
+    registeredAlbum,
+    uid,
+    setLoginState,
+  } = props;
+
   let content = <></>;
-  if (props.modalContent === "register") {
+  if (modalContent === "register") {
     content = (
       <Register
-        show={props.show}
-        setShow={props.setShow}
-        uid={props.uid}
-        registeredAlbum={props.registeredAlbum}
+        show={show}
+        setShow={setShow}
+        uid={uid}
+        registeredAlbum={registeredAlbum}
       />
     );
-  } else if (props.modalContent === "delete") {
+  } else if (modalContent === "delete") {
     content = (
-      <Delete
-        show={props.show}
-        setShow={props.setShow}
-        albumInfo={props.albumInfo}
-        uid={props.uid}
-      />
+      <Delete show={show} setShow={setShow} albumInfo={albumInfo} uid={uid} />
     );
-  } else if (props.modalContent === "logout") {
+  } else if (modalContent === "logout") {
     content = (
-      <Logout
-        show={props.show}
-        setShow={props.setShow}
-        setLoginState={props.setLoginState}
-      />
+      <Logout show={show} setShow={setShow} setLoginState={setLoginState} />
     );
   }
 

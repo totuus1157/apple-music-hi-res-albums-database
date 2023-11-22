@@ -8,19 +8,23 @@ import Table from "react-bootstrap/Table";
 const db = firebase.firestore();
 const auth = firebase.auth();
 
-export default function Delete(props: {
+type Props = {
   setShow: (arg0: boolean) => void;
   show: boolean;
   albumInfo: string;
   uid: string;
-}): JSX.Element {
-  const albumDataArray = props.albumInfo.split(",");
+};
+
+export default function Delete(props: Props): JSX.Element {
+  const { setShow, show, albumInfo, uid } = props;
+
+  const albumDataArray = albumInfo.split(",");
   const [albumId, artist, title, genre, composer, sampleRate] = albumDataArray;
 
   const doAction = (): void => {
     if (auth.currentUser !== null) {
       db.collection("users")
-        .doc(props.uid)
+        .doc(uid)
         .collection("albums")
         .doc(albumId)
         .delete()
@@ -30,10 +34,10 @@ export default function Delete(props: {
     }
   };
 
-  const handleClose = (): void => props.setShow(false);
+  const handleClose = (): void => setShow(false);
 
   return (
-    <Modal show={props.show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Deleting an album</Modal.Title>
       </Modal.Header>

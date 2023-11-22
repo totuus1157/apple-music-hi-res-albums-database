@@ -26,8 +26,8 @@ export default function NavLine(props: Props): JSX.Element {
     if (auth.currentUser == null) {
       login();
     } else {
-      props.setShow(true);
-      props.setModalContent("logout");
+      setShow(true);
+      setModalContent("logout");
     }
   };
 
@@ -40,7 +40,7 @@ export default function NavLine(props: Props): JSX.Element {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Button variant="outline-light" onClick={doLogin}>
-            {props.loginState !== true ? "Login" : "Logout"}
+            {loginState !== true ? "Login" : "Logout"}
           </Button>
         </Navbar.Collapse>
       </Navbar>

@@ -21,7 +21,7 @@ type AlbumElements = {
   sampleRate?: string;
 };
 
-export default function Albums(props: {
+type Props = {
   show: boolean;
   registeredAlbum: string[];
   setRegisteredAlbum: (arg0: string[]) => void;
@@ -32,7 +32,17 @@ export default function Albums(props: {
     (arg0: SelectedItem): void;
     (arg0: SelectedItem): void;
   };
-}): JSX.Element {
+};
+
+export default function Albums(props: Props): JSX.Element {
+  const {
+    show,
+    registeredAlbum,
+    setRegisteredAlbum,
+    selectedItem,
+    setSelectedItem,
+  } = props;
+
   const tableContent: SetStateAction<any[]> = [];
   const albumElements: AlbumElements[] = [];
   const albumId: string[] = [];
@@ -91,10 +101,10 @@ export default function Albums(props: {
         setAlbumElementsList(albumElements);
         setNoDefiniteArticle(nameNoArticle);
       });
-  }, [props.show]);
+  }, [show]);
 
   useEffect((): void => {
-    const i = props.selectedItem;
+    const i = selectedItem;
     let artist = i.artist;
     if (noDefiniteArticle.includes(artist)) {
       artist = `The ${artist}`;
@@ -130,10 +140,10 @@ export default function Albums(props: {
         albumId.push(doc.albumId);
       });
       setData(tableContent);
-      props.setRegisteredAlbum(albumId);
+      setRegisteredAlbum(albumId);
       setLoading(false);
     });
-  }, [props.show, props.selectedItem]);
+  }, [show, selectedItem]);
 
   return (
     <>
@@ -153,35 +163,35 @@ export default function Albums(props: {
             <caption>Total: {albumElementsList.length}</caption>
             <thead>
               <tr>
-                <th className={props.selectedItem.artist && "selecting"}>
+                <th className={selectedItem.artist && "selecting"}>
                   <Selector
                     name="Artist"
-                    selectedItem={props.selectedItem}
-                    setSelectedItem={props.setSelectedItem}
+                    selectedItem={selectedItem}
+                    setSelectedItem={setSelectedItem}
                     selectionElements={selectionElements("artist")}
                   />
                 </th>
-                <th className={props.selectedItem.genre && "selecting"}>
+                <th className={selectedItem.genre && "selecting"}>
                   <Selector
                     name="Genre"
-                    selectedItem={props.selectedItem}
-                    setSelectedItem={props.setSelectedItem}
+                    selectedItem={selectedItem}
+                    setSelectedItem={setSelectedItem}
                     selectionElements={selectionElements("genre")}
                   />
                 </th>
-                <th className={props.selectedItem.composer && "selecting"}>
+                <th className={selectedItem.composer && "selecting"}>
                   <Selector
                     name="Composer"
-                    selectedItem={props.selectedItem}
-                    setSelectedItem={props.setSelectedItem}
+                    selectedItem={selectedItem}
+                    setSelectedItem={setSelectedItem}
                     selectionElements={selectionElements("composer")}
                   />
                 </th>
-                <th className={props.selectedItem.sampleRate && "selecting"}>
+                <th className={selectedItem.sampleRate && "selecting"}>
                   <Selector
                     name="Sample Rate"
-                    selectedItem={props.selectedItem}
-                    setSelectedItem={props.setSelectedItem}
+                    selectedItem={selectedItem}
+                    setSelectedItem={setSelectedItem}
                     selectionElements={renamedProperty}
                   />
                 </th>

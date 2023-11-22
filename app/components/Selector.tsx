@@ -13,7 +13,7 @@ type anchorRefType = React.LegacyRef<HTMLAnchorElement>;
 
 const CustomToggle = React.forwardRef(function CustomToggle(
   { children, onClick }: customToggleProps,
-  ref: anchorRefType
+  ref: anchorRefType,
 ): JSX.Element {
   return (
     <a
@@ -91,18 +91,22 @@ type SelectedItem = {
   sampleRate: string;
 };
 
-export default function Selector(props: {
+type Props = {
   name: string;
   selectedItem: SelectedItem;
   setSelectedItem: (arg0: SelectedItem) => void;
   selectionElements: { id?: number; element?: string }[];
-}): JSX.Element {
+};
+
+export default function Selector(props: Props): JSX.Element {
+  const { name, selectedItem, setSelectedItem, selectionElements } = props;
+
   const selectItems = (eventkey: string | null): void => {
     const propertyName = (
-      props.name.slice(0, 1).toLowerCase() + props.name.slice(1)
+      name.slice(0, 1).toLowerCase() + name.slice(1)
     ).replace(/\s+/g, "");
-    props.setSelectedItem({
-      ...props.selectedItem,
+    setSelectedItem({
+      ...selectedItem,
       [propertyName]: eventkey,
     });
   };
@@ -114,13 +118,13 @@ export default function Selector(props: {
         variant="success"
         id="dropdown-custom-components"
       >
-        {props.name}
+        {name}
       </Dropdown.Toggle>
       {/* <Dropdown.Menu as={CustomMenu}> */}
       <Dropdown.Menu>
         <Dropdown.Item eventkey="">All Items</Dropdown.Item>
         <Dropdown.Divider />
-        {props.selectionElements.map((obj): JSX.Element => {
+        {selectionElements.map((obj): JSX.Element => {
           return (
             <Dropdown.Item key={obj.id} eventKey={obj.element}>
               {obj.element}

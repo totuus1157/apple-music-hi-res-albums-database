@@ -19,12 +19,16 @@ type Errors = {
   link?: string | null;
 };
 
-export default function Register(props: {
+type Props = {
   setShow: (arg0: boolean) => void;
   show: boolean;
   registeredAlbum: string[];
   uid: string;
-}): JSX.Element {
+};
+
+export default function Register(props: Props): JSX.Element {
+  const { setShow, show, registeredAlbum, uid } = props;
+
   const [artist, setArtist] = useState<string | null>(null);
   const [title, setTitle] = useState<string | null>(null);
   const [genre, setGenre] = useState<string | null>(null);
@@ -100,7 +104,7 @@ export default function Register(props: {
 
       if (auth.currentUser !== null) {
         db.collection("users")
-          .doc(props.uid)
+          .doc(uid)
           .collection("albums")
           .doc(albumId(link))
           .set(ob)
@@ -142,7 +146,7 @@ export default function Register(props: {
     if (!link || link === "") newErrors.link = "cannot be blank!";
     else if (!regex.appleMusicLink.test(link))
       newErrors.link = "only links to Apple Music albums can be allowed.";
-    else if (props.registeredAlbum.find((id) => id === albumId(link))) {
+    else if (registeredAlbum.find((id) => id === albumId(link))) {
       newErrors.link = "This album is already registered";
     }
 
@@ -158,12 +162,12 @@ export default function Register(props: {
     setSampleRate("96");
     setChecked("96");
     setErrors({});
-    props.setShow(false);
+    setShow(false);
   };
 
   return (
     <>
-      <Modal show={props.show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Adding a New Album</Modal.Title>
         </Modal.Header>
