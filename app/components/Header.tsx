@@ -1,4 +1,3 @@
-import { ReactChild, ReactFragment, ReactPortal } from "react";
 import Head from "next/head";
 
 type Props = {
