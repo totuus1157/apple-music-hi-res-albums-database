@@ -12,7 +12,7 @@ import ModalWindow from "./ModalWindow";
 const auth = firebase.auth();
 
 export default function Main(): JSX.Element {
-  const [isLoggedIn, setLoginState] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [modalContent, setModalContent] = useState<string | null>(null);
   const [show, setShow] = useState(false);
   const [editing, setEditing] = useState(false);
@@ -40,7 +40,7 @@ export default function Main(): JSX.Element {
       console.log("Main.user: ", user);
       if (user) {
         setUid(user.uid);
-        setLoginState(true);
+        setIsLoggedIn(true);
       }
     });
   }, []);
@@ -56,7 +56,7 @@ export default function Main(): JSX.Element {
       <main>
         <NavLine
           isLoggedIn={isLoggedIn}
-          setLoginState={setLoginState}
+          setIsLoggedIn={setIsLoggedIn}
           setModalContent={setModalContent}
           setShow={setShow}
         />
@@ -94,7 +94,7 @@ export default function Main(): JSX.Element {
           albumInfo={albumInfo}
           registeredAlbum={registeredAlbum}
           uid={uid}
-          setLoginState={setLoginState}
+          setIsLoggedIn={setIsLoggedIn}
         />
       </main>
     </>

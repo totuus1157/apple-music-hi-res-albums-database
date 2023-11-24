@@ -9,7 +9,7 @@ type Props = {
   setShow: (arg0: boolean) => void;
   registeredAlbum: string[];
   uid: string;
-  setLoginState: (arg0: boolean) => void;
+  setIsLoggedIn: (arg0: boolean) => void;
 };
 
 export default function ModalWindow(props: Props): JSX.Element {
@@ -20,7 +20,7 @@ export default function ModalWindow(props: Props): JSX.Element {
     setShow,
     registeredAlbum,
     uid,
-    setLoginState,
+    setIsLoggedIn,
   } = props;
 
   let content = <></>;
@@ -39,7 +39,7 @@ export default function ModalWindow(props: Props): JSX.Element {
     );
   } else if (modalContent === "logout") {
     content = (
-      <Logout show={show} setShow={setShow} setLoginState={setLoginState} />
+      <Logout show={show} setShow={setShow} setIsLoggedIn={setIsLoggedIn} />
     );
   }
 

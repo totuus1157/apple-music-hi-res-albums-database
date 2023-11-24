@@ -12,15 +12,15 @@ const provider = new firebase.auth.OAuthProvider("apple.com");
 type Props = {
   show: boolean;
   setShow: (arg0: boolean) => void;
-  setLoginState: (arg0: boolean) => void;
+  setIsLoggedIn: (arg0: boolean) => void;
 };
 
 export default function Logout(props: Props): JSX.Element {
-  const { show, setShow, setLoginState } = props;
+  const { show, setShow, setIsLoggedIn } = props;
 
   const doAction = (): void => {
     auth.signOut();
-    setLoginState(false);
+    setIsLoggedIn(false);
     setShow(false);
   };
 
@@ -31,7 +31,7 @@ export default function Logout(props: Props): JSX.Element {
           user
             .delete()
             .then((): void => {
-              setLoginState(false);
+              setIsLoggedIn(false);
               setShow(false);
               alert("Your account registration has been successfully deleted.");
             })
