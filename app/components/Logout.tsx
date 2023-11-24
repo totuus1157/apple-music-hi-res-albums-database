@@ -10,13 +10,13 @@ const user = auth.currentUser;
 const provider = new firebase.auth.OAuthProvider("apple.com");
 
 type Props = {
-  show: boolean;
+  isModalOpen: boolean;
   setShow: (arg0: boolean) => void;
   setIsLoggedIn: (arg0: boolean) => void;
 };
 
 export default function Logout(props: Props): JSX.Element {
-  const { show, setShow, setIsLoggedIn } = props;
+  const { isModalOpen, setShow, setIsLoggedIn } = props;
 
   const doAction = (): void => {
     auth.signOut();
@@ -64,7 +64,7 @@ export default function Logout(props: Props): JSX.Element {
         }
       `}</style>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={isModalOpen} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Logout</Modal.Title>
         </Modal.Header>

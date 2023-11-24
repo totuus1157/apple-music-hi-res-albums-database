@@ -14,7 +14,7 @@ const auth = firebase.auth();
 export default function Main(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [modalContent, setModalContent] = useState<string | null>(null);
-  const [show, setShow] = useState(false);
+  const [isModalOpen, setShow] = useState(false);
   const [editing, setEditing] = useState(false);
   const [albumInfo, setAlbumInfo] = useState("");
   const [registeredAlbum, setRegisteredAlbum] = useState<string[]>([]);
@@ -71,7 +71,7 @@ export default function Main(): JSX.Element {
         />
         {editing !== true ? (
           <Albums
-            show={show}
+            isModalOpen={isModalOpen}
             registeredAlbum={registeredAlbum}
             setRegisteredAlbum={setRegisteredAlbum}
             selectedItem={selectedItem}
@@ -79,7 +79,7 @@ export default function Main(): JSX.Element {
           />
         ) : (
           <EditTable
-            show={show}
+            isModalOpen={isModalOpen}
             setShow={setShow}
             setModalContent={setModalContent}
             albumInfo={albumInfo}
@@ -89,7 +89,7 @@ export default function Main(): JSX.Element {
         )}
         <ModalWindow
           modalContent={modalContent}
-          show={show}
+          isModalOpen={isModalOpen}
           setShow={setShow}
           albumInfo={albumInfo}
           registeredAlbum={registeredAlbum}

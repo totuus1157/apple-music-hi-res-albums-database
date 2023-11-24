@@ -16,13 +16,19 @@ type Props = {
   setAlbumInfo: (arg0: string) => void;
   setShow: (arg0: boolean) => void;
   setModalContent: (arg0: string) => void;
-  show: boolean;
+  isModalOpen: boolean;
   uid: string;
 };
 
 export default function EditTable(props: Props): JSX.Element {
-  const { albumInfo, setAlbumInfo, setShow, setModalContent, show, uid } =
-    props;
+  const {
+    albumInfo,
+    setAlbumInfo,
+    setShow,
+    setModalContent,
+    isModalOpen,
+    uid,
+  } = props;
 
   const tableContent: SetStateAction<any[]> = [];
   const [data, setData] = useState(tableContent);
@@ -84,7 +90,7 @@ export default function EditTable(props: Props): JSX.Element {
         </tr>,
       );
     }
-  }, [show]);
+  }, [isModalOpen]);
 
   return (
     <div style={{ marginBottom: "20px" }}>

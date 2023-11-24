@@ -22,7 +22,7 @@ type AlbumElements = {
 };
 
 type Props = {
-  show: boolean;
+  isModalOpen: boolean;
   registeredAlbum: string[];
   setRegisteredAlbum: (arg0: string[]) => void;
   selectedItem: SelectedItem;
@@ -36,7 +36,7 @@ type Props = {
 
 export default function Albums(props: Props): JSX.Element {
   const {
-    show,
+    isModalOpen,
     registeredAlbum,
     setRegisteredAlbum,
     selectedItem,
@@ -101,7 +101,7 @@ export default function Albums(props: Props): JSX.Element {
         setAlbumElementsList(albumElements);
         setNoDefiniteArticle(nameNoArticle);
       });
-  }, [show]);
+  }, [isModalOpen]);
 
   useEffect((): void => {
     const i = selectedItem;
@@ -143,7 +143,7 @@ export default function Albums(props: Props): JSX.Element {
       setRegisteredAlbum(albumId);
       setLoading(false);
     });
-  }, [show, selectedItem]);
+  }, [isModalOpen, selectedItem]);
 
   return (
     <>

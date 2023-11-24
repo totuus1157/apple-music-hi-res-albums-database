@@ -5,7 +5,7 @@ import Logout from "./Logout";
 type Props = {
   modalContent: string | null;
   albumInfo: string;
-  show: boolean;
+  isModalOpen: boolean;
   setShow: (arg0: boolean) => void;
   registeredAlbum: string[];
   uid: string;
@@ -16,7 +16,7 @@ export default function ModalWindow(props: Props): JSX.Element {
   const {
     modalContent,
     albumInfo,
-    show,
+    isModalOpen,
     setShow,
     registeredAlbum,
     uid,
@@ -27,7 +27,7 @@ export default function ModalWindow(props: Props): JSX.Element {
   if (modalContent === "register") {
     content = (
       <Register
-        show={show}
+        isModalOpen={isModalOpen}
         setShow={setShow}
         uid={uid}
         registeredAlbum={registeredAlbum}
@@ -35,11 +35,20 @@ export default function ModalWindow(props: Props): JSX.Element {
     );
   } else if (modalContent === "delete") {
     content = (
-      <Delete show={show} setShow={setShow} albumInfo={albumInfo} uid={uid} />
+      <Delete
+        isModalOpen={isModalOpen}
+        setShow={setShow}
+        albumInfo={albumInfo}
+        uid={uid}
+      />
     );
   } else if (modalContent === "logout") {
     content = (
-      <Logout show={show} setShow={setShow} setIsLoggedIn={setIsLoggedIn} />
+      <Logout
+        isModalOpen={isModalOpen}
+        setShow={setShow}
+        setIsLoggedIn={setIsLoggedIn}
+      />
     );
   }
 

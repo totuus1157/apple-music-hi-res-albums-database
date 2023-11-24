@@ -21,13 +21,13 @@ type Errors = {
 
 type Props = {
   setShow: (arg0: boolean) => void;
-  show: boolean;
+  isModalOpen: boolean;
   registeredAlbum: string[];
   uid: string;
 };
 
 export default function Register(props: Props): JSX.Element {
-  const { setShow, show, registeredAlbum, uid } = props;
+  const { setShow, isModalOpen, registeredAlbum, uid } = props;
 
   const [artist, setArtist] = useState<string | null>(null);
   const [title, setTitle] = useState<string | null>(null);
@@ -167,7 +167,7 @@ export default function Register(props: Props): JSX.Element {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={isModalOpen} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Adding a New Album</Modal.Title>
         </Modal.Header>
