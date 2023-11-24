@@ -64,7 +64,7 @@ const Home: NextPage = (): JSX.Element => {
         </h2>
 
         <div className="start">
-          <Link href="/main" replace legacyBehavior>
+          <Link href="/datatable" replace legacyBehavior>
             <a className="h2">Go to Main page &gt;&gt;</a>
           </Link>
         </div>
