@@ -12,7 +12,7 @@ type Props = {
   editing: boolean;
   setEditing: (arg0: boolean) => void;
   setModalContent: (arg0: string) => void;
-  loginState: boolean;
+  isLoggedIn: boolean;
   selectedItem: SelectedItem;
   setSelectedItem: {
     (arg0: SelectedItem): void;
@@ -28,7 +28,7 @@ export default function ButtonSect(props: Props): JSX.Element {
     editing,
     setEditing,
     setModalContent,
-    loginState,
+    isLoggedIn,
     selectedItem,
     setSelectedItem,
   } = props;
@@ -74,7 +74,7 @@ export default function ButtonSect(props: Props): JSX.Element {
           {!editing && (
             <Button
               variant="primary"
-              disabled={!loginState}
+              disabled={!isLoggedIn}
               onClick={handleShow}
             >
               Add
@@ -83,7 +83,7 @@ export default function ButtonSect(props: Props): JSX.Element {
           {!editing ? (
             <Button
               variant="dark"
-              disabled={!loginState}
+              disabled={!isLoggedIn}
               onClick={() => setEditing(true)}
             >
               Edit

@@ -12,7 +12,7 @@ import ModalWindow from "./ModalWindow";
 const auth = firebase.auth();
 
 export default function Main(): JSX.Element {
-  const [loginState, setLoginState] = useState(false);
+  const [isLoggedIn, setLoginState] = useState(false);
   const [modalContent, setModalContent] = useState<string | null>(null);
   const [show, setShow] = useState(false);
   const [editing, setEditing] = useState(false);
@@ -55,13 +55,13 @@ export default function Main(): JSX.Element {
 
       <main>
         <NavLine
-          loginState={loginState}
+          isLoggedIn={isLoggedIn}
           setLoginState={setLoginState}
           setModalContent={setModalContent}
           setShow={setShow}
         />
         <ButtonSect
-          loginState={loginState}
+          isLoggedIn={isLoggedIn}
           setModalContent={setModalContent}
           setShow={setShow}
           editing={editing}

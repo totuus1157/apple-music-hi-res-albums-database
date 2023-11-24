@@ -9,14 +9,19 @@ const auth = firebase.auth();
 const provider = new firebase.auth.OAuthProvider("apple.com");
 
 type Props = {
-  loginState: boolean;
+  isLoggedIn: boolean;
   setLoginState: (arg0: boolean) => void;
   setModalContent: (arg0: string | null) => void;
   setShow: (arg0: boolean) => void;
 };
 
 export default function NavLine(props: Props): JSX.Element {
-  const { loginState, setLoginState, setModalContent, setShow } = props;
+  const {
+    isLoggedIn: loginState,
+    setLoginState,
+    setModalContent,
+    setShow,
+  } = props;
 
   const login = (): void => {
     auth.signInWithRedirect(provider);
