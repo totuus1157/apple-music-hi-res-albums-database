@@ -9,8 +9,8 @@ type SelectedItem = {
 
 type Props = {
   setIsModalOpen: (arg0: boolean) => void;
-  editing: boolean;
-  setEditing: (arg0: boolean) => void;
+  isEditMode: boolean;
+  setIsEditMode: (arg0: boolean) => void;
   setModalContent: (arg0: string) => void;
   isLoggedIn: boolean;
   selectedItem: SelectedItem;
@@ -25,8 +25,8 @@ type Props = {
 export default function ButtonSect(props: Props): JSX.Element {
   const {
     setIsModalOpen,
-    editing,
-    setEditing,
+    isEditMode,
+    setIsEditMode,
     setModalContent,
     isLoggedIn,
     selectedItem,
@@ -71,7 +71,7 @@ export default function ButtonSect(props: Props): JSX.Element {
           </Button>
         </div>
         <div>
-          {!editing && (
+          {!isEditMode && (
             <Button
               variant="primary"
               disabled={!isLoggedIn}
@@ -80,11 +80,11 @@ export default function ButtonSect(props: Props): JSX.Element {
               Add
             </Button>
           )}{" "}
-          {!editing ? (
+          {!isEditMode ? (
             <Button
               variant="dark"
               disabled={!isLoggedIn}
-              onClick={() => setEditing(true)}
+              onClick={() => setIsEditMode(true)}
             >
               Edit
             </Button>
@@ -92,7 +92,7 @@ export default function ButtonSect(props: Props): JSX.Element {
             <Button
               variant="outline-dark"
               onClick={() => {
-                setEditing(false);
+                setIsEditMode(false);
               }}
             >
               Exit

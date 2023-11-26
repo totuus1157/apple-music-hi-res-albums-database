@@ -15,7 +15,7 @@ export default function Main(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [modalContent, setModalContent] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editing, setEditing] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
   const [albumInfo, setAlbumInfo] = useState("");
   const [registeredAlbum, setRegisteredAlbum] = useState<string[]>([]);
   const [uid, setUid] = useState("");
@@ -64,12 +64,12 @@ export default function Main(): JSX.Element {
           isLoggedIn={isLoggedIn}
           setModalContent={setModalContent}
           setIsModalOpen={setIsModalOpen}
-          editing={editing}
-          setEditing={setEditing}
+          isEditMode={isEditMode}
+          setIsEditMode={setIsEditMode}
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
         />
-        {editing !== true ? (
+        {isEditMode !== true ? (
           <Albums
             isModalOpen={isModalOpen}
             registeredAlbum={registeredAlbum}
