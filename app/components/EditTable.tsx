@@ -14,7 +14,7 @@ const auth = firebase.auth();
 type Props = {
   albumInfo: string;
   setAlbumInfo: (arg0: string) => void;
-  setShow: (arg0: boolean) => void;
+  setIsModalOpen: (arg0: boolean) => void;
   setModalContent: (arg0: string) => void;
   isModalOpen: boolean;
   uid: string;
@@ -24,7 +24,7 @@ export default function EditTable(props: Props): JSX.Element {
   const {
     albumInfo,
     setAlbumInfo,
-    setShow,
+    setIsModalOpen,
     setModalContent,
     isModalOpen,
     uid,
@@ -36,7 +36,7 @@ export default function EditTable(props: Props): JSX.Element {
 
   const handleShow = (e: any): void => {
     setAlbumInfo(e.currentTarget.value);
-    setShow(true);
+    setIsModalOpen(true);
     setModalContent("delete");
   };
 

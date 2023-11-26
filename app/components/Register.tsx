@@ -20,14 +20,14 @@ type Errors = {
 };
 
 type Props = {
-  setShow: (arg0: boolean) => void;
+  setIsModalOpen: (arg0: boolean) => void;
   isModalOpen: boolean;
   registeredAlbum: string[];
   uid: string;
 };
 
 export default function Register(props: Props): JSX.Element {
-  const { setShow, isModalOpen, registeredAlbum, uid } = props;
+  const { setIsModalOpen, isModalOpen, registeredAlbum, uid } = props;
 
   const [artist, setArtist] = useState<string | null>(null);
   const [title, setTitle] = useState<string | null>(null);
@@ -162,7 +162,7 @@ export default function Register(props: Props): JSX.Element {
     setSampleRate("96");
     setChecked("96");
     setErrors({});
-    setShow(false);
+    setIsModalOpen(false);
   };
 
   return (

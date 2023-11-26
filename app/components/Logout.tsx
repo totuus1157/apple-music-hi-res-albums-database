@@ -11,17 +11,17 @@ const provider = new firebase.auth.OAuthProvider("apple.com");
 
 type Props = {
   isModalOpen: boolean;
-  setShow: (arg0: boolean) => void;
+  setIsModalOpen: (arg0: boolean) => void;
   setIsLoggedIn: (arg0: boolean) => void;
 };
 
 export default function Logout(props: Props): JSX.Element {
-  const { isModalOpen, setShow, setIsLoggedIn } = props;
+  const { isModalOpen, setIsModalOpen, setIsLoggedIn } = props;
 
   const doAction = (): void => {
     auth.signOut();
     setIsLoggedIn(false);
-    setShow(false);
+    setIsModalOpen(false);
   };
 
   const doDelete = (): void => {
@@ -32,7 +32,7 @@ export default function Logout(props: Props): JSX.Element {
             .delete()
             .then((): void => {
               setIsLoggedIn(false);
-              setShow(false);
+              setIsModalOpen(false);
               alert("Your account registration has been successfully deleted.");
             })
             .catch((error): void => {
@@ -43,7 +43,7 @@ export default function Logout(props: Props): JSX.Element {
               ) {
                 user.reauthenticateWithRedirect(provider);
               } else {
-                setShow(false);
+                setIsModalOpen(false);
               }
             });
         }
@@ -52,7 +52,7 @@ export default function Logout(props: Props): JSX.Element {
     });
   };
 
-  const handleClose = (): void => setShow(false);
+  const handleClose = (): void => setIsModalOpen(false);
 
   return (
     <>

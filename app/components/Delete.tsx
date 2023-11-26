@@ -9,14 +9,14 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 
 type Props = {
-  setShow: (arg0: boolean) => void;
+  setIsModalOpen: (arg0: boolean) => void;
   isModalOpen: boolean;
   albumInfo: string;
   uid: string;
 };
 
 export default function Delete(props: Props): JSX.Element {
-  const { setShow, isModalOpen, albumInfo, uid } = props;
+  const { setIsModalOpen, isModalOpen, albumInfo, uid } = props;
 
   const albumDataArray = albumInfo.split(",");
   const [albumId, artist, title, genre, composer, sampleRate] = albumDataArray;
@@ -34,7 +34,7 @@ export default function Delete(props: Props): JSX.Element {
     }
   };
 
-  const handleClose = (): void => setShow(false);
+  const handleClose = (): void => setIsModalOpen(false);
 
   return (
     <Modal show={isModalOpen} onHide={handleClose}>

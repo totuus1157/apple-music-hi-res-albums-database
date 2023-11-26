@@ -6,7 +6,7 @@ type Props = {
   modalContent: string | null;
   albumInfo: string;
   isModalOpen: boolean;
-  setShow: (arg0: boolean) => void;
+  setIsModalOpen: (arg0: boolean) => void;
   registeredAlbum: string[];
   uid: string;
   setIsLoggedIn: (arg0: boolean) => void;
@@ -17,7 +17,7 @@ export default function ModalWindow(props: Props): JSX.Element {
     modalContent,
     albumInfo,
     isModalOpen,
-    setShow,
+    setIsModalOpen,
     registeredAlbum,
     uid,
     setIsLoggedIn,
@@ -28,7 +28,7 @@ export default function ModalWindow(props: Props): JSX.Element {
     content = (
       <Register
         isModalOpen={isModalOpen}
-        setShow={setShow}
+        setIsModalOpen={setIsModalOpen}
         uid={uid}
         registeredAlbum={registeredAlbum}
       />
@@ -37,7 +37,7 @@ export default function ModalWindow(props: Props): JSX.Element {
     content = (
       <Delete
         isModalOpen={isModalOpen}
-        setShow={setShow}
+        setIsModalOpen={setIsModalOpen}
         albumInfo={albumInfo}
         uid={uid}
       />
@@ -46,7 +46,7 @@ export default function ModalWindow(props: Props): JSX.Element {
     content = (
       <Logout
         isModalOpen={isModalOpen}
-        setShow={setShow}
+        setIsModalOpen={setIsModalOpen}
         setIsLoggedIn={setIsLoggedIn}
       />
     );

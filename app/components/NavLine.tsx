@@ -12,11 +12,11 @@ type Props = {
   isLoggedIn: boolean;
   setIsLoggedIn: (arg0: boolean) => void;
   setModalContent: (arg0: string | null) => void;
-  setShow: (arg0: boolean) => void;
+  setIsModalOpen: (arg0: boolean) => void;
 };
 
 export default function NavLine(props: Props): JSX.Element {
-  const { isLoggedIn, setIsLoggedIn, setModalContent, setShow } = props;
+  const { isLoggedIn, setIsLoggedIn, setModalContent, setIsModalOpen } = props;
 
   const login = (): void => {
     auth.signInWithRedirect(provider);
@@ -26,7 +26,7 @@ export default function NavLine(props: Props): JSX.Element {
     if (auth.currentUser == null) {
       login();
     } else {
-      setShow(true);
+      setIsModalOpen(true);
       setModalContent("logout");
     }
   };

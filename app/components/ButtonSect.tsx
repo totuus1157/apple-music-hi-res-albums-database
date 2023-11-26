@@ -8,7 +8,7 @@ type SelectedItem = {
 };
 
 type Props = {
-  setShow: (arg0: boolean) => void;
+  setIsModalOpen: (arg0: boolean) => void;
   editing: boolean;
   setEditing: (arg0: boolean) => void;
   setModalContent: (arg0: string) => void;
@@ -24,7 +24,7 @@ type Props = {
 
 export default function ButtonSect(props: Props): JSX.Element {
   const {
-    setShow,
+    setIsModalOpen,
     editing,
     setEditing,
     setModalContent,
@@ -34,7 +34,7 @@ export default function ButtonSect(props: Props): JSX.Element {
   } = props;
 
   const handleShow = (): void => {
-    setShow(true);
+    setIsModalOpen(true);
     setModalContent("register");
   };
 
