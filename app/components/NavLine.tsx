@@ -9,14 +9,14 @@ const auth = firebase.auth();
 const provider = new firebase.auth.OAuthProvider("apple.com");
 
 type Props = {
-  isLoggedIn: boolean;
-  setIsLoggedIn: (arg0: boolean) => void;
+  isLogin: boolean;
+  setIsLogin: (arg0: boolean) => void;
   setModalContent: (arg0: string | null) => void;
   setIsModalOpen: (arg0: boolean) => void;
 };
 
 export default function NavLine(props: Props): JSX.Element {
-  const { isLoggedIn, setIsLoggedIn, setModalContent, setIsModalOpen } = props;
+  const { isLogin, setIsLogin, setModalContent, setIsModalOpen } = props;
 
   const login = (): void => {
     auth.signInWithRedirect(provider);
@@ -40,7 +40,7 @@ export default function NavLine(props: Props): JSX.Element {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Button variant="outline-light" onClick={doLogin}>
-            {isLoggedIn !== true ? "Login" : "Logout"}
+            {isLogin !== true ? "Login" : "Logout"}
           </Button>
         </Navbar.Collapse>
       </Navbar>
