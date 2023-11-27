@@ -3,7 +3,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import "components/fire";
-import NavLine from "components/NavLine";
+import Navbar from "components/Navbar";
 import ButtonGroup from "components/ButtonGroup";
 import Albums from "components/Albums";
 import EditTable from "components/EditTable";
@@ -54,7 +54,7 @@ export default function Main(): JSX.Element {
       `}</style>
 
       <main>
-        <NavLine
+        <Navbar
           isLogin={isLogin}
           setIsLogin={setIsLogin}
           setModalContent={setModalContent}

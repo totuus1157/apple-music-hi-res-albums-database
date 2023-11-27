@@ -2,7 +2,7 @@ import Link from "next/link";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "components/fire";
-import Navbar from "react-bootstrap/Navbar";
+import BSNavbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 
 const auth = firebase.auth();
@@ -15,7 +15,7 @@ type Props = {
   setIsModalOpen: (arg0: boolean) => void;
 };
 
-export default function NavLine(props: Props): JSX.Element {
+export default function Navbar(props: Props): JSX.Element {
   const { isLogin, setIsLogin, setModalContent, setIsModalOpen } = props;
 
   const login = (): void => {
@@ -33,17 +33,17 @@ export default function NavLine(props: Props): JSX.Element {
 
   return (
     <div style={{ marginBottom: "20px" }}>
-      <Navbar bg="dark" variant="dark">
+      <BSNavbar bg="dark" variant="dark">
         <Link href="/" passHref replace legacyBehavior>
-          <Navbar.Brand>&lt;&lt; Back to Home page</Navbar.Brand>
+          <BSNavbar.Brand>&lt;&lt; Back to Home page</BSNavbar.Brand>
         </Link>
-        <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
+        <BSNavbar.Toggle />
+        <BSNavbar.Collapse className="justify-content-end">
           <Button variant="outline-light" onClick={doLogin}>
             {isLogin !== true ? "Login" : "Logout"}
           </Button>
-        </Navbar.Collapse>
-      </Navbar>
+        </BSNavbar.Collapse>
+      </BSNavbar>
     </div>
   );
 }
