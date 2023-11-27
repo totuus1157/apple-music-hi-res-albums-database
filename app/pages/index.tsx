@@ -1,14 +1,14 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import Header from "../components/Header";
-import About from "../components/About";
-import HowTo from "../components/HowTo";
-import PrivacyPolicy from "../components/PrivacyPolicy";
-import Footer from "../components/Footer";
+import Header from "components/Header";
+import About from "components/About";
+import HowTo from "components/HowTo";
+import PrivacyPolicy from "components/PrivacyPolicy";
+import Footer from "components/Footer";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "../styles/Home.module.css";
+import styles from "styles/Home.module.css";
 
 const Home: NextPage = (): JSX.Element => {
   const title = "Home page";

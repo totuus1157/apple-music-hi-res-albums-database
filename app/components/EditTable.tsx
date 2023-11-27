@@ -2,7 +2,7 @@ import { useState, useEffect, SetStateAction } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
-import "./fire";
+import "components/fire";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

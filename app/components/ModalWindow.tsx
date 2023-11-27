@@ -1,6 +1,6 @@
-import Register from "./Register";
-import Delete from "./Delete";
-import Logout from "./Logout";
+import Register from "components/Register";
+import Delete from "components/Delete";
+import Logout from "components/Logout";
 
 type Props = {
   modalContent: string | null;

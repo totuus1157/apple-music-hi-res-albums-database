@@ -1,9 +1,9 @@
 import { useState, useEffect, SetStateAction } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
-import "./fire";
-import sampleRateList from "./sampleRateList";
-import Selector from "./Selector";
+import "components/fire";
+import sampleRateList from "components/sampleRateList";
+import Selector from "components/Selector";
 
 const db = firebase.firestore();
 

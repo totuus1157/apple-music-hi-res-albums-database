@@ -1,6 +1,6 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
-import "./fire";
+import "components/fire";
 import Modal from "react-bootstrap/Modal";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";

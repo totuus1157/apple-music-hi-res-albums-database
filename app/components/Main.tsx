@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
-import "./fire";
-import NavLine from "./NavLine";
-import ButtonSect from "./ButtonSect";
-import Albums from "./Albums";
-import EditTable from "./EditTable";
-import ModalWindow from "./ModalWindow";
+import "components/fire";
+import NavLine from "components/NavLine";
+import ButtonSect from "components/ButtonSect";
+import Albums from "components/Albums";
+import EditTable from "components/EditTable";
+import ModalWindow from "components/ModalWindow";
 
 const auth = firebase.auth();
 

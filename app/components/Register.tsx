@@ -1,9 +1,9 @@
 import { useState } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
-import "./fire";
-import sampleRateList from "./sampleRateList";
-import genreList from "./genreList";
+import "components/fire";
+import sampleRateList from "components/sampleRateList";
+import genreList from "components/genreList";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
