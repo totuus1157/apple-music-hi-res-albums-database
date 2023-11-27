@@ -1,7 +1,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "components/fire";
-import Modal from "react-bootstrap/Modal";
+import BSModal from "react-bootstrap/Modal";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
@@ -64,11 +64,11 @@ export default function Logout(props: Props): JSX.Element {
         }
       `}</style>
 
-      <Modal show={isModalOpen} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Logout</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+      <BSModal show={isModalOpen} onHide={handleClose}>
+        <BSModal.Header closeButton>
+          <BSModal.Title>Logout</BSModal.Title>
+        </BSModal.Header>
+        <BSModal.Body>
           <p>
             Do you want to execute{user !== null && `, ${user.displayName}`}?
           </p>
@@ -84,16 +84,16 @@ export default function Logout(props: Props): JSX.Element {
               Notice: Your registered album data will not be deleted.
             </span>
           </Card>
-        </Modal.Body>
-        <Modal.Footer>
+        </BSModal.Body>
+        <BSModal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           <Button variant="info" onClick={doAction}>
             Logout
           </Button>
-        </Modal.Footer>
-      </Modal>
+        </BSModal.Footer>
+      </BSModal>
     </>
   );
 }

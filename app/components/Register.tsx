@@ -4,7 +4,7 @@ import "firebase/compat/firestore";
 import "components/fire";
 import sampleRateList from "components/sampleRateList";
 import genreList from "components/genreList";
-import Modal from "react-bootstrap/Modal";
+import BSModal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
@@ -167,11 +167,11 @@ export default function Register(props: Props): JSX.Element {
 
   return (
     <>
-      <Modal show={isModalOpen} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Adding a New Album</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+      <BSModal show={isModalOpen} onHide={handleClose}>
+        <BSModal.Header closeButton>
+          <BSModal.Title>Adding a New Album</BSModal.Title>
+        </BSModal.Header>
+        <BSModal.Body>
           <Form>
             <Form.Group controlId="form-group">
               <Form.Label>Artist:</Form.Label>
@@ -250,16 +250,16 @@ export default function Register(props: Props): JSX.Element {
               </Form.Control.Feedback>
             </Form.Group>
           </Form>
-        </Modal.Body>
-        <Modal.Footer>
+        </BSModal.Body>
+        <BSModal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           <Button variant="primary" onClick={doAction}>
             Save Changes
           </Button>
-        </Modal.Footer>
-      </Modal>
+        </BSModal.Footer>
+      </BSModal>
     </>
   );
 }

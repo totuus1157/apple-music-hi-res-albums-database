@@ -1,7 +1,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "components/fire";
-import Modal from "react-bootstrap/Modal";
+import BSModal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 
@@ -37,11 +37,11 @@ export default function Delete(props: Props): JSX.Element {
   const handleClose = (): void => setIsModalOpen(false);
 
   return (
-    <Modal show={isModalOpen} onHide={handleClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Deleting an album</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
+    <BSModal show={isModalOpen} onHide={handleClose}>
+      <BSModal.Header closeButton>
+        <BSModal.Title>Deleting an album</BSModal.Title>
+      </BSModal.Header>
+      <BSModal.Body>
         <Table>
           <tbody>
             <tr>
@@ -66,15 +66,15 @@ export default function Delete(props: Props): JSX.Element {
             </tr>
           </tbody>
         </Table>
-      </Modal.Body>
-      <Modal.Footer>
+      </BSModal.Body>
+      <BSModal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
         <Button variant="danger" onClick={doAction}>
           Delete
         </Button>
-      </Modal.Footer>
-    </Modal>
+      </BSModal.Footer>
+    </BSModal>
   );
 }

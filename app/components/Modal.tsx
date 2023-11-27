@@ -12,7 +12,7 @@ type Props = {
   setIsLogin: (arg0: boolean) => void;
 };
 
-export default function ModalWindow(props: Props): JSX.Element {
+export default function Modal(props: Props): JSX.Element {
   const {
     modalContent,
     albumInfo,

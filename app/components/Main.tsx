@@ -7,7 +7,7 @@ import Navbar from "components/Navbar";
 import ButtonGroup from "components/ButtonGroup";
 import Albums from "components/Albums";
 import EditTable from "components/EditTable";
-import ModalWindow from "components/ModalWindow";
+import Modal from "components/Modal";
 
 const auth = firebase.auth();
 
@@ -87,7 +87,7 @@ export default function Main(): JSX.Element {
             uid={uid}
           />
         )}
-        <ModalWindow
+        <Modal
           modalContent={modalContent}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
