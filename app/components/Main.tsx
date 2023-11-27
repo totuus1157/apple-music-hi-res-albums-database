@@ -4,7 +4,7 @@ import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import "components/fire";
 import NavLine from "components/NavLine";
-import ButtonSect from "components/ButtonSect";
+import ButtonGroup from "components/ButtonGroup";
 import Albums from "components/Albums";
 import EditTable from "components/EditTable";
 import ModalWindow from "components/ModalWindow";
@@ -60,7 +60,7 @@ export default function Main(): JSX.Element {
           setModalContent={setModalContent}
           setIsModalOpen={setIsModalOpen}
         />
-        <ButtonSect
+        <ButtonGroup
           isLogin={isLogin}
           setModalContent={setModalContent}
           setIsModalOpen={setIsModalOpen}

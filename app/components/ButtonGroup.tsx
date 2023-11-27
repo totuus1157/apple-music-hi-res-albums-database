@@ -22,7 +22,7 @@ type Props = {
   };
 };
 
-export default function ButtonSect(props: Props): JSX.Element {
+export default function ButtonGroup(props: Props): JSX.Element {
   const {
     setIsModalOpen,
     isEditMode,
