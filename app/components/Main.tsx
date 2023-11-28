@@ -5,7 +5,7 @@ import "firebase/compat/auth";
 import "components/fire";
 import Navbar from "components/Navbar";
 import ButtonGroup from "components/ButtonGroup";
-import Albums from "components/Albums";
+import AlbumTable from "components/AlbumTable";
 import EditTable from "components/EditTable";
 import Modal from "components/Modal";
 
@@ -70,7 +70,7 @@ export default function Main(): JSX.Element {
           setSelectedItem={setSelectedItem}
         />
         {isEditMode !== true ? (
-          <Albums
+          <AlbumTable
             isModalOpen={isModalOpen}
             registeredAlbum={registeredAlbum}
             setRegisteredAlbum={setRegisteredAlbum}

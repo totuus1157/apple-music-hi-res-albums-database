@@ -34,7 +34,7 @@ type Props = {
   };
 };
 
-export default function Albums(props: Props): JSX.Element {
+export default function AlbumTable(props: Props): JSX.Element {
   const {
     isModalOpen,
     registeredAlbum,
