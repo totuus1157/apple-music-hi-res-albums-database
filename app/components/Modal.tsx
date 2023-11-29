@@ -23,9 +23,8 @@ export default function Modal(props: Props): JSX.Element {
     setIsLogin,
   } = props;
 
-  let content = <></>;
   if (modalContent === "register") {
-    content = (
+    return (
       <Register
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
@@ -34,7 +33,7 @@ export default function Modal(props: Props): JSX.Element {
       />
     );
   } else if (modalContent === "delete") {
-    content = (
+    return (
       <Delete
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
@@ -43,7 +42,7 @@ export default function Modal(props: Props): JSX.Element {
       />
     );
   } else if (modalContent === "logout") {
-    content = (
+    return (
       <Logout
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
@@ -51,6 +50,4 @@ export default function Modal(props: Props): JSX.Element {
       />
     );
   }
-
-  return content;
 }
