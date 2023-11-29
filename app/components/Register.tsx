@@ -22,12 +22,12 @@ type Errors = {
 type Props = {
   setIsModalOpen: (arg0: boolean) => void;
   isModalOpen: boolean;
-  registeredAlbum: string[];
+  registeredAlbumIDs: string[];
   uid: string;
 };
 
 export default function Register(props: Props): JSX.Element {
-  const { setIsModalOpen, isModalOpen, registeredAlbum, uid } = props;
+  const { setIsModalOpen, isModalOpen, registeredAlbumIDs, uid } = props;
 
   const [artist, setArtist] = useState<string | null>(null);
   const [title, setTitle] = useState<string | null>(null);
@@ -146,7 +146,7 @@ export default function Register(props: Props): JSX.Element {
     if (!link || link === "") newErrors.link = "cannot be blank!";
     else if (!regex.appleMusicLink.test(link))
       newErrors.link = "only links to Apple Music albums can be allowed.";
-    else if (registeredAlbum.find((id) => id === albumId(link))) {
+    else if (registeredAlbumIDs.find((id) => id === albumId(link))) {
       newErrors.link = "This album is already registered";
     }
 

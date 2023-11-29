@@ -7,7 +7,7 @@ type Props = {
   albumInfo: string;
   isModalOpen: boolean;
   setIsModalOpen: (arg0: boolean) => void;
-  registeredAlbum: string[];
+  registeredAlbumIDs: string[];
   uid: string;
   setIsLogin: (arg0: boolean) => void;
 };
@@ -18,7 +18,7 @@ export default function Modal(props: Props): JSX.Element {
     albumInfo,
     isModalOpen,
     setIsModalOpen,
-    registeredAlbum,
+    registeredAlbumIDs,
     uid,
     setIsLogin,
   } = props;
@@ -29,7 +29,7 @@ export default function Modal(props: Props): JSX.Element {
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         uid={uid}
-        registeredAlbum={registeredAlbum}
+        registeredAlbumIDs={registeredAlbumIDs}
       />
     );
   }

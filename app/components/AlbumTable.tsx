@@ -23,8 +23,8 @@ type AlbumElements = {
 
 type Props = {
   isModalOpen: boolean;
-  registeredAlbum: string[];
-  setRegisteredAlbum: (arg0: string[]) => void;
+  registeredAlbumIDs: string[];
+  setRegisteredAlbumIDs: (arg0: string[]) => void;
   selectedItem: SelectedItem;
   setSelectedItem: {
     (arg0: SelectedItem): void;
@@ -37,8 +37,8 @@ type Props = {
 export default function AlbumTable(props: Props): JSX.Element {
   const {
     isModalOpen,
-    registeredAlbum,
-    setRegisteredAlbum,
+    registeredAlbumIDs,
+    setRegisteredAlbumIDs,
     selectedItem,
     setSelectedItem,
   } = props;
@@ -140,7 +140,7 @@ export default function AlbumTable(props: Props): JSX.Element {
         albumId.push(doc.albumId);
       });
       setData(tableContent);
-      setRegisteredAlbum(albumId);
+      setRegisteredAlbumIDs(albumId);
       setLoading(false);
     });
   }, [isModalOpen, selectedItem]);

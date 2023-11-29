@@ -17,7 +17,7 @@ export default function Main(): JSX.Element {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [albumInfo, setAlbumInfo] = useState("");
-  const [registeredAlbum, setRegisteredAlbum] = useState<string[]>([]);
+  const [registeredAlbumIDs, setRegisteredAlbumIDs] = useState<string[]>([]);
   const [uid, setUid] = useState("");
   const [selectedItem, setSelectedItem] = useState({
     artist: "",
@@ -72,8 +72,8 @@ export default function Main(): JSX.Element {
         {isEditMode !== true ? (
           <AlbumTable
             isModalOpen={isModalOpen}
-            registeredAlbum={registeredAlbum}
-            setRegisteredAlbum={setRegisteredAlbum}
+            registeredAlbumIDs={registeredAlbumIDs}
+            setRegisteredAlbumIDs={setRegisteredAlbumIDs}
             selectedItem={selectedItem}
             setSelectedItem={setSelectedItem}
           />
@@ -92,7 +92,7 @@ export default function Main(): JSX.Element {
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           albumInfo={albumInfo}
-          registeredAlbum={registeredAlbum}
+          registeredAlbumIDs={registeredAlbumIDs}
           uid={uid}
           setIsLogin={setIsLogin}
         />
