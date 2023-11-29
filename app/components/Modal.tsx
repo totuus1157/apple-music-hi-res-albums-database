@@ -32,7 +32,8 @@ export default function Modal(props: Props): JSX.Element {
         registeredAlbum={registeredAlbum}
       />
     );
-  } else if (modalContent === "delete") {
+  }
+  if (modalContent === "delete") {
     return (
       <Delete
         isModalOpen={isModalOpen}
@@ -41,7 +42,8 @@ export default function Modal(props: Props): JSX.Element {
         uid={uid}
       />
     );
-  } else if (modalContent === "logout") {
+  }
+  if (modalContent === "logout") {
     return (
       <Logout
         isModalOpen={isModalOpen}
@@ -50,4 +52,6 @@ export default function Modal(props: Props): JSX.Element {
       />
     );
   }
+
+  return <div />;
 }
