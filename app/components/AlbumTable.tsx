@@ -48,7 +48,7 @@ export default function AlbumTable(props: Props): JSX.Element {
   const albumId: string[] = [];
   const nameNoArticle: string[] = [];
   const [data, setData] = useState(tableContent);
-  const [loading, setLoading] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [albumElementsList, setAlbumElementsList] = useState(albumElements);
   const [noDefiniteArticle, setNoDefiniteArticle] = useState(nameNoArticle);
 
@@ -141,7 +141,7 @@ export default function AlbumTable(props: Props): JSX.Element {
       });
       setData(tableContent);
       setRegisteredAlbumIDs(albumId);
-      setLoading(false);
+      setIsLoaded(true);
     });
   }, [isModalOpen, selectedItem]);
 
@@ -157,7 +157,7 @@ export default function AlbumTable(props: Props): JSX.Element {
         }
       `}</style>
 
-      {loading !== true ? (
+      {isLoaded === true ? (
         <div className="table-responsive">
           <table className="table table-bordered table-hover">
             <caption>Total: {albumElementsList.length}</caption>

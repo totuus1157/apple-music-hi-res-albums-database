@@ -32,7 +32,7 @@ export default function EditTable(props: Props): JSX.Element {
 
   const tableContent: SetStateAction<any[]> = [];
   const [data, setData] = useState(tableContent);
-  const [loading, setLoading] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const handleShow = (e: any): void => {
     setAlbumInfo(e.currentTarget.value);
@@ -81,7 +81,7 @@ export default function EditTable(props: Props): JSX.Element {
             );
           });
           setData(tableContent);
-          setLoading(false);
+          setIsLoaded(true);
         });
     } else {
       tableContent.push(
@@ -94,7 +94,7 @@ export default function EditTable(props: Props): JSX.Element {
 
   return (
     <div style={{ marginBottom: "20px" }}>
-      {loading === false ? (
+      {isLoaded === true ? (
         <Table bordered hover responsive>
           <thead>
             <tr>
