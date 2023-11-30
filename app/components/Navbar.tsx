@@ -23,7 +23,7 @@ export default function Navbar(props: Props): JSX.Element {
   };
 
   const doLogin = (): void => {
-    if (auth.currentUser == null) {
+    if (auth.currentUser === null) {
       login();
     } else {
       setIsModalOpen(true);
