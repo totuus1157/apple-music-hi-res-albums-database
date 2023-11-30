@@ -46,11 +46,11 @@ export default function AlbumTable(props: Props): JSX.Element {
   const tableRows: SetStateAction<any[]> = [];
   const albumElements: AlbumElements[] = [];
   const albumIds: string[] = [];
-  const nameNoArticle: string[] = [];
+  const nonTheNames: string[] = [];
   const [data, setData] = useState(tableRows);
   const [isLoaded, setIsLoaded] = useState(false);
   const [albumElementsList, setAlbumElementsList] = useState(albumElements);
-  const [noDefiniteArticle, setNoDefiniteArticle] = useState(nameNoArticle);
+  const [noDefiniteArticle, setNoDefiniteArticle] = useState(nonTheNames);
 
   type SelectionElements = {
     id: number;
@@ -90,7 +90,7 @@ export default function AlbumTable(props: Props): JSX.Element {
           let artist = doc.artist;
           if (regex.test(artist)) {
             artist = artist.replace(regex, "");
-            nameNoArticle.push(artist);
+            nonTheNames.push(artist);
           }
           albumElements.push({
             artist: artist,
@@ -99,7 +99,7 @@ export default function AlbumTable(props: Props): JSX.Element {
           });
         });
         setAlbumElementsList(albumElements);
-        setNoDefiniteArticle(nameNoArticle);
+        setNoDefiniteArticle(nonTheNames);
       });
   }, [isModalOpen]);
 
