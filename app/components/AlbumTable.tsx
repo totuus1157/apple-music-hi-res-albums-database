@@ -43,11 +43,11 @@ export default function AlbumTable(props: Props): JSX.Element {
     setSelectedItem,
   } = props;
 
-  const tableContent: SetStateAction<any[]> = [];
+  const tableRows: SetStateAction<any[]> = [];
   const albumElements: AlbumElements[] = [];
   const albumIds: string[] = [];
   const nameNoArticle: string[] = [];
-  const [data, setData] = useState(tableContent);
+  const [data, setData] = useState(tableRows);
   const [isLoaded, setIsLoaded] = useState(false);
   const [albumElementsList, setAlbumElementsList] = useState(albumElements);
   const [noDefiniteArticle, setNoDefiniteArticle] = useState(nameNoArticle);
@@ -120,7 +120,7 @@ export default function AlbumTable(props: Props): JSX.Element {
     albumsRef.get().then((snapshot): void => {
       snapshot.forEach((document): void => {
         const doc = document.data();
-        tableContent.push(
+        tableRows.push(
           <tr key={document.id}>
             <td>{doc.artist}</td>
             <td>{doc.genre}</td>
@@ -139,7 +139,7 @@ export default function AlbumTable(props: Props): JSX.Element {
         );
         albumIds.push(doc.albumId);
       });
-      setData(tableContent);
+      setData(tableRows);
       setRegisteredAlbumIDs(albumIds);
       setIsLoaded(true);
     });

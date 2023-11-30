@@ -30,8 +30,8 @@ export default function EditTable(props: Props): JSX.Element {
     uid,
   } = props;
 
-  const tableContent: SetStateAction<any[]> = [];
-  const [data, setData] = useState(tableContent);
+  const tableRows: SetStateAction<any[]> = [];
+  const [data, setData] = useState(tableRows);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const handleShow = (e: any): void => {
@@ -49,7 +49,7 @@ export default function EditTable(props: Props): JSX.Element {
         .then((snapshot): void => {
           snapshot.forEach((document): void => {
             const doc = document.data();
-            tableContent.push(
+            tableRows.push(
               <tr key={document.id}>
                 <td>{doc.artist}</td>
                 <td>{doc.genre}</td>
@@ -80,11 +80,11 @@ export default function EditTable(props: Props): JSX.Element {
               </tr>,
             );
           });
-          setData(tableContent);
+          setData(tableRows);
           setIsLoaded(true);
         });
     } else {
-      tableContent.push(
+      tableRows.push(
         <tr key="1">
           <th>Cannot retrieve data.</th>
         </tr>,
