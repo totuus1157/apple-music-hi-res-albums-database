@@ -75,15 +75,17 @@ export default function AlbumTable(props: Props): JSX.Element {
       });
   };
 
-  const renamedProperty = sampleRateList.map((value) => ({
-    id: value.id,
-    element: value.sampleRate,
-  }));
+  const renamedProperty = sampleRateList.map(
+    (value): SelectionElements => ({
+      id: value.id,
+      element: value.sampleRate,
+    }),
+  );
 
-  useEffect(() => {
+  useEffect((): void => {
     db.collectionGroup("albums")
       .get()
-      .then((snapshot) => {
+      .then((snapshot): void => {
         snapshot.forEach((document): void => {
           const doc = document.data();
           const regex = /^The /;

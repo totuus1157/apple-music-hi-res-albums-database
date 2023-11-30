@@ -58,7 +58,7 @@ export default function ButtonGroup(props: Props): JSX.Element {
               !selectedItem.composer &&
               !selectedItem.sampleRate
             }
-            onClick={() =>
+            onClick={(): void =>
               setSelectedItem({
                 artist: "",
                 genre: "",
@@ -80,14 +80,14 @@ export default function ButtonGroup(props: Props): JSX.Element {
             <Button
               variant="dark"
               disabled={!isLogin}
-              onClick={() => setIsEditMode(true)}
+              onClick={(): void => setIsEditMode(true)}
             >
               Edit
             </Button>
           ) : (
             <Button
               variant="outline-dark"
-              onClick={() => {
+              onClick={(): void => {
                 setIsEditMode(false);
               }}
             >

@@ -75,7 +75,7 @@ export default function Register(props: Props): JSX.Element {
     setChecked(e.target.value);
   };
 
-  const albumId = (link: string | null) => {
+  const albumId = (link: string | null): string | undefined => {
     if (link) {
       const matches = link.match(/(?<digit>[1-9][0-9]+)(\?l=[\w]+)*$/);
       if (matches && matches.groups !== undefined) {
@@ -146,7 +146,7 @@ export default function Register(props: Props): JSX.Element {
     if (!link || link === "") newErrors.link = "cannot be blank!";
     else if (!regex.appleMusicLink.test(link))
       newErrors.link = "only links to Apple Music albums can be allowed.";
-    else if (registeredAlbumIDs.find((id) => id === albumId(link))) {
+    else if (registeredAlbumIDs.find((id): boolean => id === albumId(link))) {
       newErrors.link = "This album is already registered";
     }
 
