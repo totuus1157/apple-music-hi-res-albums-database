@@ -45,7 +45,7 @@ export default function AlbumTable(props: Props): JSX.Element {
 
   const tableContent: SetStateAction<any[]> = [];
   const albumElements: AlbumElements[] = [];
-  const albumId: string[] = [];
+  const albumIds: string[] = [];
   const nameNoArticle: string[] = [];
   const [data, setData] = useState(tableContent);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -137,10 +137,10 @@ export default function AlbumTable(props: Props): JSX.Element {
             </td>
           </tr>,
         );
-        albumId.push(doc.albumId);
+        albumIds.push(doc.albumId);
       });
       setData(tableContent);
-      setRegisteredAlbumIDs(albumId);
+      setRegisteredAlbumIDs(albumIds);
       setIsLoaded(true);
     });
   }, [isModalOpen, selectedItem]);
