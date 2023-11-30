@@ -50,7 +50,7 @@ export default function AlbumTable(props: Props): JSX.Element {
   const [data, setData] = useState(tableRows);
   const [isLoaded, setIsLoaded] = useState(false);
   const [albumElementsList, setAlbumElementsList] = useState(albumElements);
-  const [noDefiniteArticle, setNoDefiniteArticle] = useState(nonTheNames);
+  const [nonArticleNames, setNonArticleNames] = useState(nonTheNames);
 
   type SelectionElements = {
     id: number;
@@ -99,14 +99,14 @@ export default function AlbumTable(props: Props): JSX.Element {
           });
         });
         setAlbumElementsList(albumElements);
-        setNoDefiniteArticle(nonTheNames);
+        setNonArticleNames(nonTheNames);
       });
   }, [isModalOpen]);
 
   useEffect((): void => {
     const i = selectedItem;
     let artist = i.artist;
-    if (noDefiniteArticle.includes(artist)) {
+    if (nonArticleNames.includes(artist)) {
       artist = `The ${artist}`;
     }
 
