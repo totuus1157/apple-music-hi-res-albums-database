@@ -95,14 +95,14 @@ export default function AlbumTable(props: Props): JSX.Element {
   }, [isModalOpen]);
 
   useEffect((): void => {
-    let artist = selectedItem.artist;
-    if (nonArticleNames.includes(artist)) {
-      artist = `The ${artist}`;
+    let selectedArtistName = selectedItem.artist;
+    if (nonArticleNames.includes(selectedArtistName)) {
+      selectedArtistName = `The ${selectedArtistName}`;
     }
 
     let albumsRef = db.collectionGroup("albums");
     selectedItem.artist &&
-      (albumsRef = albumsRef.where("artist", "==", artist));
+      (albumsRef = albumsRef.where("artist", "==", selectedArtistName));
     selectedItem.genre &&
       (albumsRef = albumsRef.where("genre", "==", selectedItem.genre));
     selectedItem.composer &&
