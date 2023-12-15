@@ -59,13 +59,11 @@ export default function AlbumTable(props: Props): JSX.Element {
 
   const selectionElements = (
     _category: keyof AlbumElements,
-  ): SelectionElements[] => {
-    return Array.from(
+  ): SelectionElements[] =>
+    Array.from(
       new Set(
         albumElementsList
-          .map((value): string | undefined => {
-            return value[_category];
-          })
+          .map((value): string | undefined => value[_category])
           .filter(Boolean),
       ),
     )
@@ -73,7 +71,6 @@ export default function AlbumTable(props: Props): JSX.Element {
       .map((uniqueElement, key): SelectionElements => {
         return { id: key + 1, element: uniqueElement };
       });
-  };
 
   const renamedProperty = sampleRateList.map(
     (value): SelectionElements => ({
