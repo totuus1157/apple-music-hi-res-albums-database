@@ -78,10 +78,9 @@ export default function AlbumTable(props: Props): JSX.Element {
       .then((snapshot): void => {
         snapshot.forEach((document): void => {
           const doc = document.data();
-          const regex = /^The /;
           let artist = doc.artist;
-          if (regex.test(artist)) {
-            artist = artist.replace(regex, "");
+          if (/^The /.test(artist)) {
+            artist = artist.replace(/^The /, "");
             nonTheNames.push(artist);
           }
           albumElements.push({
