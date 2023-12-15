@@ -72,13 +72,6 @@ export default function AlbumTable(props: Props): JSX.Element {
         return { id: key + 1, element: uniqueElement };
       });
 
-  const renamedProperty = sampleRateList.map(
-    (value): SelectionElements => ({
-      id: value.id,
-      element: value.sampleRate,
-    }),
-  );
-
   useEffect((): void => {
     db.collectionGroup("albums")
       .get()
@@ -191,7 +184,12 @@ export default function AlbumTable(props: Props): JSX.Element {
                     name="Sample Rate"
                     selectedItem={selectedItem}
                     setSelectedItem={setSelectedItem}
-                    selectionElements={renamedProperty}
+                    selectionElements={sampleRateList.map(
+                      (value): SelectionElements => ({
+                        id: value.id,
+                        element: value.sampleRate,
+                      }),
+                    )}
                   />
                 </th>
                 <th>Title</th>
