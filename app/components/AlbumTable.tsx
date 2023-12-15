@@ -144,7 +144,7 @@ export default function AlbumTable(props: Props): JSX.Element {
           height: 90%;
         }
 
-        .selecting {
+        .selected {
           background-color: #ffe8a1;
         }
       `}</style>
@@ -155,7 +155,7 @@ export default function AlbumTable(props: Props): JSX.Element {
             <caption>Total: {albumElementsList.length}</caption>
             <thead>
               <tr>
-                <th className={selectedItem.artist && "selecting"}>
+                <th className={selectedItem.artist && "selected"}>
                   <Selector
                     name="Artist"
                     selectedItem={selectedItem}
@@ -163,7 +163,7 @@ export default function AlbumTable(props: Props): JSX.Element {
                     selectionElements={selectionElements("artist")}
                   />
                 </th>
-                <th className={selectedItem.genre && "selecting"}>
+                <th className={selectedItem.genre && "selected"}>
                   <Selector
                     name="Genre"
                     selectedItem={selectedItem}
@@ -171,7 +171,7 @@ export default function AlbumTable(props: Props): JSX.Element {
                     selectionElements={selectionElements("genre")}
                   />
                 </th>
-                <th className={selectedItem.composer && "selecting"}>
+                <th className={selectedItem.composer && "selected"}>
                   <Selector
                     name="Composer"
                     selectedItem={selectedItem}
@@ -179,7 +179,7 @@ export default function AlbumTable(props: Props): JSX.Element {
                     selectionElements={selectionElements("composer")}
                   />
                 </th>
-                <th className={selectedItem.sampleRate && "selecting"}>
+                <th className={selectedItem.sampleRate && "selected"}>
                   <Selector
                     name="Sample Rate"
                     selectedItem={selectedItem}
