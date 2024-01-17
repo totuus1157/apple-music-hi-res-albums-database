@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "styles/Home.module.css";
 
 const DataTable: NextPage = (): JSX.Element => {
-  const title = "Main page";
+  const title = "Data table";
 
   return (
     <div className={styles.container}>
