@@ -3,8 +3,15 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import "components/fire";
-import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableColumn,
+  TableRow,
+  TableCell,
+  Button,
+} from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 
@@ -14,21 +21,15 @@ const auth = firebase.auth();
 type Props = {
   albumInfo: string;
   setAlbumInfo: (arg0: string) => void;
-  setIsModalOpen: (arg0: boolean) => void;
+  onOpen: () => void;
   setModalContent: (arg0: string) => void;
-  isModalOpen: boolean;
+  isOpen: boolean;
   uid: string;
 };
 
 export default function EditTable(props: Props): JSX.Element {
-  const {
-    albumInfo,
-    setAlbumInfo,
-    setIsModalOpen,
-    setModalContent,
-    isModalOpen,
-    uid,
-  } = props;
+  const { albumInfo, setAlbumInfo, onOpen, setModalContent, isOpen, uid } =
+    props;
 
   const tableRows: SetStateAction<any[]> = [];
   const [data, setData] = useState(tableRows);
@@ -36,8 +37,8 @@ export default function EditTable(props: Props): JSX.Element {
 
   const handleShow = (e: any): void => {
     setAlbumInfo(e.currentTarget.value);
-    setIsModalOpen(true);
     setModalContent("delete");
+    onOpen();
   };
 
   useEffect((): void => {
@@ -50,19 +51,20 @@ export default function EditTable(props: Props): JSX.Element {
           snapshot.forEach((document): void => {
             const doc = document.data();
             tableRows.push(
-              <tr key={document.id}>
-                <td>{doc.artist}</td>
-                <td>{doc.genre}</td>
-                <td>{doc.composer}</td>
-                <td>{doc.sampleRate}</td>
-                <td>
+              <TableRow key={document.id}>
+                <TableCell>{doc.artist}</TableCell>
+                <TableCell>{doc.genre}</TableCell>
+                <TableCell>{doc.composer}</TableCell>
+                <TableCell>{doc.sampleRate}</TableCell>
+                <TableCell>
                   <a href={doc.url} target="_blank" rel="noopener noreferrer">
                     {doc.title}
                   </a>
-                </td>
-                <td style={{ border: "none" }}>
+                </TableCell>
+                <TableCell style={{ border: "none" }}>
                   <Button
-                    variant="outline-danger"
+                    isIconOnly
+                    color="danger"
                     size="sm"
                     value={[
                       document.id,
@@ -76,8 +78,8 @@ export default function EditTable(props: Props): JSX.Element {
                   >
                     <FontAwesomeIcon icon={faTrashAlt} />
                   </Button>
-                </td>
-              </tr>,
+                </TableCell>
+              </TableRow>,
             );
           });
           setData(tableRows);
@@ -85,27 +87,26 @@ export default function EditTable(props: Props): JSX.Element {
         });
     } else {
       tableRows.push(
-        <tr key="1">
-          <th>Cannot retrieve data.</th>
-        </tr>,
+        <TableRow key="1">
+          <TableCell>Cannot retrieve data.</TableCell>
+        </TableRow>,
       );
     }
-  }, [isModalOpen]);
+  }, [isOpen]);
 
   return (
     <div style={{ marginBottom: "20px" }}>
       {isLoaded === true ? (
-        <Table bordered hover responsive>
-          <thead>
-            <tr>
-              <th>Artist</th>
-              <th>Genre</th>
-              <th>Composer</th>
-              <th>Sample Rate</th>
-              <th>Title</th>
-            </tr>
-          </thead>
-          <tbody>{data}</tbody>
+        <Table isStriped>
+          <TableHeader>
+            <TableColumn>Artist</TableColumn>
+            <TableColumn>Genre</TableColumn>
+            <TableColumn>Composer</TableColumn>
+            <TableColumn>Sample Rate</TableColumn>
+            <TableColumn>Title</TableColumn>
+            <TableColumn>Action</TableColumn>
+          </TableHeader>
+          <TableBody>{data}</TableBody>
         </Table>
       ) : (
         <p>Now loading...</p>

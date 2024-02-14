@@ -4,9 +4,17 @@ import "firebase/compat/firestore";
 import "components/fire";
 import sampleRateList from "components/sampleRateList";
 import genreList from "components/genreList";
-import BSModal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Input,
+  RadioGroup,
+  Radio,
+} from "@nextui-org/react";
 
 const db = firebase.firestore();
 const auth = firebase.auth();
@@ -20,14 +28,17 @@ type Errors = {
 };
 
 type Props = {
-  setIsModalOpen: (arg0: boolean) => void;
-  isModalOpen: boolean;
+  isOpen: boolean;
+  onOpen: () => void;
+  onOpenChange: () => void;
+  onClose: () => void;
   registeredAlbumIDs: string[];
   uid: string;
 };
 
 export default function Register(props: Props): JSX.Element {
-  const { setIsModalOpen, isModalOpen, registeredAlbumIDs, uid } = props;
+  const { isOpen, onOpen, onOpenChange, onClose, registeredAlbumIDs, uid } =
+    props;
 
   const [artist, setArtist] = useState<string | null>(null);
   const [title, setTitle] = useState<string | null>(null);
@@ -162,104 +173,74 @@ export default function Register(props: Props): JSX.Element {
     setSampleRate("96");
     setChecked("96");
     setErrors({});
-    setIsModalOpen(false);
+    onClose();
   };
 
   return (
-    <>
-      <BSModal show={isModalOpen} onHide={handleClose}>
-        <BSModal.Header closeButton>
-          <BSModal.Title>Adding a New Album</BSModal.Title>
-        </BSModal.Header>
-        <BSModal.Body>
-          <Form>
-            <Form.Group controlId="form-group">
-              <Form.Label>Artist:</Form.Label>
-              <Form.Control
+    <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <ModalContent>
+        {() => (
+          <>
+            <ModalHeader>Adding a New Album</ModalHeader>
+            <ModalBody>
+              <Input
+                isRequired
                 type="text"
-                onChange={onChangeArtist}
+                label="Artist"
                 isInvalid={errors.artist ? true : false}
+                errorMessage={errors.artist}
+                onChange={onChangeArtist}
               />
-              <Form.Control.Feedback type="invalid">
-                {errors.artist}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group controlId="form-group">
-              <Form.Label>Title:</Form.Label>
-              <Form.Control
+              <Input
+                isRequired
                 type="text"
-                onChange={onChangeTitle}
+                label="Title"
                 isInvalid={errors.title ? true : false}
+                errorMessage={errors.title}
+                onChange={onChangeTitle}
               />
-              <Form.Control.Feedback type="invalid">
-                {errors.title}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group controlId="form-group">
-              <Form.Label>Genre:</Form.Label>
-              <Form.Control
-                as="select"
-                onChange={onChangeGenre}
+              <Input
+                isRequired
+                type="text"
+                label="Genre"
                 isInvalid={errors.genre ? true : false}
-              >
-                <option hidden>-- Please select a genre --</option>
-                {genreList.map((value) => (
-                  <option key={value.id}>{value.genreName}</option>
-                ))}
-              </Form.Control>
-              <Form.Control.Feedback type="invalid">
-                {errors.genre}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group controlId="form-group">
-              <Form.Label>Composer:</Form.Label>
-              <Form.Control
+                errorMessage={errors.genre}
+                onChange={onChangeGenre}
+              />
+              <Input
+                isRequired
                 type="text"
-                onChange={onChangeComposer}
+                label="Composer"
                 isInvalid={errors.composer ? true : false}
-                disabled={genre !== "Classical"}
+                errorMessage={errors.composer}
+                onChange={onChangeComposer}
               />
-              <Form.Control.Feedback type="invalid">
-                {errors.composer}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group controlId="form-group">
-              <Form.Label>Sample Rate:</Form.Label>
-              {sampleRateList.map((value) => (
-                <Form.Check
-                  key={value.id}
-                  label={value.sampleRate}
-                  type="radio"
-                  id={`radios${value.sampleRate}`}
-                  name="sampleRate.value"
-                  value={value.sampleRate}
-                  onChange={onChangeSampleRate}
-                  checked={checked === value.sampleRate}
-                />
-              ))}
-            </Form.Group>
-            <Form.Group controlId="form-group">
-              <Form.Label>Link:</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={onChangeLink}
+              <RadioGroup label="Sample Rate" defaultValue="96">
+                <Radio value="88.2">88.2</Radio>
+                <Radio value="96">96</Radio>
+                <Radio value="176.4">176.4</Radio>
+                <Radio value="192">192</Radio>
+              </RadioGroup>
+              <Input
+                isRequired
+                type="url"
+                label="Link"
+                labelPlacement="outside"
+                placeholder="https://music.apple.com/jp/album/now-and-then-single/1713197371"
                 isInvalid={errors.link ? true : false}
+                errorMessage={errors.link}
+                onChange={onChangeLink}
               />
-              <Form.Control.Feedback type="invalid">
-                {errors.link}
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Form>
-        </BSModal.Body>
-        <BSModal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={doAction}>
-            Save Changes
-          </Button>
-        </BSModal.Footer>
-      </BSModal>
-    </>
+            </ModalBody>
+            <ModalFooter>
+              <Button onClick={handleClose}>Close</Button>
+              <Button color="primary" onClick={doAction}>
+                Save
+              </Button>
+            </ModalFooter>
+          </>
+        )}
+      </ModalContent>
+    </Modal>
   );
 }

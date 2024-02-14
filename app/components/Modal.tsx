@@ -5,8 +5,10 @@ import Logout from "components/Logout";
 type Props = {
   modalContent: string | null;
   albumInfo: string;
-  isModalOpen: boolean;
-  setIsModalOpen: (arg0: boolean) => void;
+  isOpen: boolean;
+  onOpen: () => void;
+  onOpenChange: () => void;
+  onClose: () => void;
   registeredAlbumIDs: string[];
   uid: string;
   setIsLogin: (arg0: boolean) => void;
@@ -16,8 +18,10 @@ export default function Modal(props: Props): JSX.Element {
   const {
     modalContent,
     albumInfo,
-    isModalOpen,
-    setIsModalOpen,
+    isOpen,
+    onOpen,
+    onOpenChange,
+    onClose,
     registeredAlbumIDs,
     uid,
     setIsLogin,
@@ -26,18 +30,22 @@ export default function Modal(props: Props): JSX.Element {
   if (modalContent === "register") {
     return (
       <Register
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        uid={uid}
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onOpenChange={onOpenChange}
+        onClose={onClose}
         registeredAlbumIDs={registeredAlbumIDs}
+        uid={uid}
       />
     );
   }
   if (modalContent === "delete") {
     return (
       <Delete
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onOpenChange={onOpenChange}
+        onClose={onClose}
         albumInfo={albumInfo}
         uid={uid}
       />
@@ -46,8 +54,10 @@ export default function Modal(props: Props): JSX.Element {
   if (modalContent === "logout") {
     return (
       <Logout
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onOpenChange={onOpenChange}
+        onClose={onClose}
         setIsLogin={setIsLogin}
       />
     );

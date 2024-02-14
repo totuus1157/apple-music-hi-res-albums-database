@@ -1,22 +1,35 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "components/fire";
-import BSModal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Table from "react-bootstrap/Table";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Table,
+  TableHeader,
+  TableBody,
+  TableColumn,
+  TableRow,
+  TableCell,
+} from "@nextui-org/react";
 
 const db = firebase.firestore();
 const auth = firebase.auth();
 
 type Props = {
-  setIsModalOpen: (arg0: boolean) => void;
-  isModalOpen: boolean;
+  isOpen: boolean;
+  onOpen: () => void;
+  onOpenChange: () => void;
+  onClose: () => void;
   albumInfo: string;
   uid: string;
 };
 
 export default function Delete(props: Props): JSX.Element {
-  const { setIsModalOpen, isModalOpen, albumInfo, uid } = props;
+  const { isOpen, onOpen, onOpenChange, onClose, albumInfo, uid } = props;
 
   const albumDataArray = albumInfo.split(",");
   const [albumId, artist, title, genre, composer, sampleRate] = albumDataArray;
@@ -34,47 +47,53 @@ export default function Delete(props: Props): JSX.Element {
     }
   };
 
-  const handleClose = (): void => setIsModalOpen(false);
+  const handleClose = (): void => onClose();
 
   return (
-    <BSModal show={isModalOpen} onHide={handleClose}>
-      <BSModal.Header closeButton>
-        <BSModal.Title>Deleting an album</BSModal.Title>
-      </BSModal.Header>
-      <BSModal.Body>
-        <Table>
-          <tbody>
-            <tr>
-              <td>Artist</td>
-              <td>{artist}</td>
-            </tr>
-            <tr>
-              <td>Title</td>
-              <td>{title}</td>
-            </tr>
-            <tr>
-              <td>Genre</td>
-              <td>{genre}</td>
-            </tr>
-            <tr>
-              <td>Composer</td>
-              <td>{composer ? composer : "-"}</td>
-            </tr>
-            <tr>
-              <td>SampleRate</td>
-              <td>{sampleRate}</td>
-            </tr>
-          </tbody>
-        </Table>
-      </BSModal.Body>
-      <BSModal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant="danger" onClick={doAction}>
-          Delete
-        </Button>
-      </BSModal.Footer>
-    </BSModal>
+    <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <ModalContent>
+        {() => (
+          <>
+            <ModalHeader>Deleting an album</ModalHeader>
+            <ModalBody>
+              <Table hideHeader>
+                <TableHeader>
+                  <TableColumn>Dummy</TableColumn>
+                  <TableColumn>Dummy</TableColumn>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Artist</TableCell>
+                    <TableCell>{artist}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Title</TableCell>
+                    <TableCell>{title}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Genre</TableCell>
+                    <TableCell>{genre}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Composer</TableCell>
+                    <TableCell>{composer ? composer : "-"}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>SampleRate</TableCell>
+                    <TableCell>{sampleRate}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </ModalBody>
+            <ModalFooter>
+              <Button onClick={handleClose}>Close</Button>
+              <Button color="danger" onClick={doAction}>
+                Delete
+              </Button>
+            </ModalFooter>
+          </>
+        )}
+      </ModalContent>
+    </Modal>
   );
 }

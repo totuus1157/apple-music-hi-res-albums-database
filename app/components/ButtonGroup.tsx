@@ -1,4 +1,4 @@
-import Button from "react-bootstrap/Button";
+import { Button } from "@nextui-org/react";
 
 type SelectedItem = {
   artist: string;
@@ -8,7 +8,7 @@ type SelectedItem = {
 };
 
 type Props = {
-  setIsModalOpen: (arg0: boolean) => void;
+  onOpen: () => void;
   isEditMode: boolean;
   setIsEditMode: (arg0: boolean) => void;
   setModalContent: (arg0: string) => void;
@@ -24,7 +24,7 @@ type Props = {
 
 export default function ButtonGroup(props: Props): JSX.Element {
   const {
-    setIsModalOpen,
+    onOpen,
     isEditMode,
     setIsEditMode,
     setModalContent,
@@ -34,15 +34,15 @@ export default function ButtonGroup(props: Props): JSX.Element {
   } = props;
 
   const handleShow = (): void => {
-    setIsModalOpen(true);
     setModalContent("register");
+    onOpen();
   };
 
   return (
     <>
       <style jsx>{`
         .parent {
-          margin: 10px;
+          margin: 1.5rem;
           display: flex;
           justify-content: space-between;
         }
@@ -51,7 +51,7 @@ export default function ButtonGroup(props: Props): JSX.Element {
       <div className="parent">
         <div>
           <Button
-            variant="success"
+            color="success"
             disabled={
               !selectedItem.artist &&
               !selectedItem.genre &&
@@ -72,13 +72,13 @@ export default function ButtonGroup(props: Props): JSX.Element {
         </div>
         <div>
           {!isEditMode && (
-            <Button variant="primary" disabled={!isLogin} onClick={handleShow}>
+            <Button color="primary" disabled={!isLogin} onClick={handleShow}>
               Add
             </Button>
           )}{" "}
           {!isEditMode ? (
             <Button
-              variant="dark"
+              color="default"
               disabled={!isLogin}
               onClick={(): void => setIsEditMode(true)}
             >
@@ -86,7 +86,8 @@ export default function ButtonGroup(props: Props): JSX.Element {
             </Button>
           ) : (
             <Button
-              variant="outline-dark"
+              color="default"
+              variant="bordered"
               onClick={(): void => {
                 setIsEditMode(false);
               }}

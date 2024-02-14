@@ -8,13 +8,13 @@ import ButtonGroup from "components/ButtonGroup";
 import AlbumTable from "components/AlbumTable";
 import EditTable from "components/EditTable";
 import Modal from "components/Modal";
+import { useDisclosure } from "@nextui-org/react";
 
 const auth = firebase.auth();
 
 export default function Main(): JSX.Element {
   const [isLogin, setIsLogin] = useState(false);
   const [modalContent, setModalContent] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [albumInfo, setAlbumInfo] = useState("");
   const [registeredAlbumIDs, setRegisteredAlbumIDs] = useState<string[]>([]);
@@ -25,6 +25,7 @@ export default function Main(): JSX.Element {
     composer: "",
     sampleRate: "",
   });
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
   useEffect((): void => {
     auth
@@ -58,12 +59,12 @@ export default function Main(): JSX.Element {
           isLogin={isLogin}
           setIsLogin={setIsLogin}
           setModalContent={setModalContent}
-          setIsModalOpen={setIsModalOpen}
+          onOpen={onOpen}
         />
         <ButtonGroup
           isLogin={isLogin}
           setModalContent={setModalContent}
-          setIsModalOpen={setIsModalOpen}
+          onOpen={onOpen}
           isEditMode={isEditMode}
           setIsEditMode={setIsEditMode}
           selectedItem={selectedItem}
@@ -71,7 +72,7 @@ export default function Main(): JSX.Element {
         />
         {isEditMode !== true ? (
           <AlbumTable
-            isModalOpen={isModalOpen}
+            isOpen={isOpen}
             registeredAlbumIDs={registeredAlbumIDs}
             setRegisteredAlbumIDs={setRegisteredAlbumIDs}
             selectedItem={selectedItem}
@@ -79,8 +80,8 @@ export default function Main(): JSX.Element {
           />
         ) : (
           <EditTable
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
+            isOpen={isOpen}
+            onOpen={onOpen}
             setModalContent={setModalContent}
             albumInfo={albumInfo}
             setAlbumInfo={setAlbumInfo}
@@ -89,8 +90,10 @@ export default function Main(): JSX.Element {
         )}
         <Modal
           modalContent={modalContent}
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
+          isOpen={isOpen}
+          onOpen={onOpen}
+          onOpenChange={onOpenChange}
+          onClose={onClose}
           albumInfo={albumInfo}
           registeredAlbumIDs={registeredAlbumIDs}
           uid={uid}

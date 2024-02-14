@@ -4,6 +4,14 @@ import "firebase/compat/firestore";
 import "components/fire";
 import sampleRateList from "components/sampleRateList";
 import Selector from "components/Selector";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableColumn,
+  TableRow,
+  TableCell,
+} from "@nextui-org/react";
 
 const db = firebase.firestore();
 
@@ -22,7 +30,7 @@ type AlbumElements = {
 };
 
 type Props = {
-  isModalOpen: boolean;
+  isOpen: boolean;
   registeredAlbumIDs: string[];
   setRegisteredAlbumIDs: (arg0: string[]) => void;
   selectedItem: SelectedItem;
@@ -36,7 +44,7 @@ type Props = {
 
 export default function AlbumTable(props: Props): JSX.Element {
   const {
-    isModalOpen,
+    isOpen,
     registeredAlbumIDs,
     setRegisteredAlbumIDs,
     selectedItem,
@@ -92,7 +100,7 @@ export default function AlbumTable(props: Props): JSX.Element {
         setAlbumElementsList(albumElements);
         setNonArticleNames(nonTheNames);
       });
-  }, [isModalOpen]);
+  }, [isOpen]);
 
   useEffect((): void => {
     let selectedArtistName = selectedItem.artist;
@@ -118,12 +126,12 @@ export default function AlbumTable(props: Props): JSX.Element {
       snapshot.forEach((document): void => {
         const doc = document.data();
         tableRows.push(
-          <tr key={document.id}>
-            <td>{doc.artist}</td>
-            <td>{doc.genre}</td>
-            <td>{doc.composer}</td>
-            <td>{doc.sampleRate}</td>
-            <td>
+          <TableRow key={document.id}>
+            <TableCell>{doc.artist}</TableCell>
+            <TableCell>{doc.genre}</TableCell>
+            <TableCell>{doc.composer}</TableCell>
+            <TableCell>{doc.sampleRate}</TableCell>
+            <TableCell>
               <a
                 href={`https://music.apple.com/album/${doc.albumId}`}
                 target="_blank"
@@ -131,8 +139,8 @@ export default function AlbumTable(props: Props): JSX.Element {
               >
                 {doc.title}
               </a>
-            </td>
-          </tr>,
+            </TableCell>
+          </TableRow>,
         );
         albumIds.push(doc.albumId);
       });
@@ -140,7 +148,7 @@ export default function AlbumTable(props: Props): JSX.Element {
       setRegisteredAlbumIDs(albumIds);
       setIsLoaded(true);
     });
-  }, [isModalOpen, selectedItem]);
+  }, [isOpen, selectedItem]);
 
   return (
     <>
@@ -156,52 +164,56 @@ export default function AlbumTable(props: Props): JSX.Element {
 
       {isLoaded === true ? (
         <div className="table-responsive">
-          <table className="table table-bordered table-hover">
-            <caption>Total: {albumElementsList.length}</caption>
-            <thead>
-              <tr>
-                <th className={selectedItem.artist && "selected"}>
-                  <Selector
-                    name="Artist"
-                    selectedItem={selectedItem}
-                    setSelectedItem={setSelectedItem}
-                    selectionElements={selectionElements("artist")}
-                  />
-                </th>
-                <th className={selectedItem.genre && "selected"}>
-                  <Selector
-                    name="Genre"
-                    selectedItem={selectedItem}
-                    setSelectedItem={setSelectedItem}
-                    selectionElements={selectionElements("genre")}
-                  />
-                </th>
-                <th className={selectedItem.composer && "selected"}>
-                  <Selector
-                    name="Composer"
-                    selectedItem={selectedItem}
-                    setSelectedItem={setSelectedItem}
-                    selectionElements={selectionElements("composer")}
-                  />
-                </th>
-                <th className={selectedItem.sampleRate && "selected"}>
-                  <Selector
-                    name="Sample Rate"
-                    selectedItem={selectedItem}
-                    setSelectedItem={setSelectedItem}
-                    selectionElements={sampleRateList.map(
-                      (value): SelectionElements => ({
-                        id: value.id,
-                        element: value.sampleRate,
-                      }),
-                    )}
-                  />
-                </th>
-                <th>Title</th>
-              </tr>
-            </thead>
-            <tbody>{data}</tbody>
-          </table>
+          <Table
+            isStriped
+            topContent={
+              <caption className="flex justify-start">
+                Total: {albumElementsList.length}
+              </caption>
+            }
+          >
+            <TableHeader>
+              <TableColumn className={selectedItem.artist && "selected"}>
+                <Selector
+                  name="Artist"
+                  selectedItem={selectedItem}
+                  setSelectedItem={setSelectedItem}
+                  selectionElements={selectionElements("artist")}
+                />
+              </TableColumn>
+              <TableColumn className={selectedItem.genre && "selected"}>
+                <Selector
+                  name="Genre"
+                  selectedItem={selectedItem}
+                  setSelectedItem={setSelectedItem}
+                  selectionElements={selectionElements("genre")}
+                />
+              </TableColumn>
+              <TableColumn className={selectedItem.composer && "selected"}>
+                <Selector
+                  name="Composer"
+                  selectedItem={selectedItem}
+                  setSelectedItem={setSelectedItem}
+                  selectionElements={selectionElements("composer")}
+                />
+              </TableColumn>
+              <TableColumn className={selectedItem.sampleRate && "selected"}>
+                <Selector
+                  name="Sample Rate"
+                  selectedItem={selectedItem}
+                  setSelectedItem={setSelectedItem}
+                  selectionElements={sampleRateList.map(
+                    (value): SelectionElements => ({
+                      id: value.id,
+                      element: value.sampleRate,
+                    }),
+                  )}
+                />
+              </TableColumn>
+              <TableColumn>Title</TableColumn>
+            </TableHeader>
+            <TableBody>{data}</TableBody>
+          </Table>
         </div>
       ) : (
         <p>Now loading...</p>
