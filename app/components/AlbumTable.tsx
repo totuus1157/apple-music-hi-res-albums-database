@@ -11,6 +11,7 @@ import {
   TableColumn,
   TableRow,
   TableCell,
+  Link,
 } from "@nextui-org/react";
 
 const db = firebase.firestore();
@@ -132,13 +133,14 @@ export default function AlbumTable(props: Props): JSX.Element {
             <TableCell>{doc.composer}</TableCell>
             <TableCell>{doc.sampleRate}</TableCell>
             <TableCell>
-              <a
+              <Link
+                isExternal
                 href={`https://music.apple.com/album/${doc.albumId}`}
-                target="_blank"
-                rel="noopener noreferrer"
+                size="sm"
+                underline="hover"
               >
                 {doc.title}
-              </a>
+              </Link>
             </TableCell>
           </TableRow>,
         );
