@@ -46,7 +46,6 @@ export default function Register(props: Props): JSX.Element {
   const [composer, setComposer] = useState<string | null>(null);
   const [link, setLink] = useState<string | null>(null);
   const [sampleRate, setSampleRate] = useState("96");
-  const [checked, setChecked] = useState("96");
   const [errors, setErrors] = useState<Errors>({});
 
   type TargetValue = {
