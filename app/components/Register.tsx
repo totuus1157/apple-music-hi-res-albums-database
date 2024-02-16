@@ -82,7 +82,6 @@ export default function Register(props: Props): JSX.Element {
   };
   const onChangeSampleRate = (e: TargetValue): void => {
     setSampleRate(e.target.value);
-    setChecked(e.target.value);
   };
 
   const albumId = (link: string | null): string | undefined => {
@@ -170,7 +169,6 @@ export default function Register(props: Props): JSX.Element {
     setComposer(null);
     setLink(null);
     setSampleRate("96");
-    setChecked("96");
     setErrors({});
     onClose();
   };
@@ -242,4 +240,7 @@ export default function Register(props: Props): JSX.Element {
       </ModalContent>
     </Modal>
   );
+}
+function setChecked(value: any) {
+  throw new Error("Function not implemented.");
 }
