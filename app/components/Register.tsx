@@ -241,6 +241,3 @@ export default function Register(props: Props): JSX.Element {
     </Modal>
   );
 }
-function setChecked(value: any) {
-  throw new Error("Function not implemented.");
-}
