@@ -2,6 +2,7 @@ import { useState } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "components/fire";
+import { makeApiRequestWithRetry } from "components/apiRequest";
 import sampleRateList from "components/sampleRateList";
 import genreList from "components/genreList";
 import {
@@ -54,27 +55,6 @@ export default function Register(props: Props): JSX.Element {
     };
   };
 
-  const onChangeArtist = (e: TargetValue): void => {
-    const inputArtist = String(e.target.value);
-    setArtist(inputArtist.trim());
-    errors.artist && setErrors({ ...errors, artist: null });
-  };
-  const onChangeTitle = (e: TargetValue): void => {
-    const inputTitle = String(e.target.value);
-    setTitle(inputTitle.trim());
-    errors.title && setErrors({ ...errors, title: null });
-  };
-  const onChangeGenre = (e: TargetValue): void => {
-    setGenre(e.target.value);
-    errors.genre && setErrors({ ...errors, genre: null });
-  };
-  const onChangeComposer = (e: TargetValue): void => {
-    const inputComposer = String(e.target.value);
-    inputComposer !== ""
-      ? setComposer(inputComposer.trim())
-      : setComposer(null);
-    errors.composer && setErrors({ ...errors, composer: null });
-  };
   const onChangeLink = (e: TargetValue): void => {
     const inputLink = String(e.target.value);
     setLink(inputLink.trim());
@@ -93,65 +73,63 @@ export default function Register(props: Props): JSX.Element {
     }
   };
 
-  const doAction = (e: { preventDefault: () => void }): void => {
+  function extractUniqueComposerNames(data): string[] {
+    const composerNamesSet: Set<string> = new Set();
+
+    data.data.forEach((album) => {
+      album.relationships.tracks.data.forEach((track) => {
+        composerNamesSet.add(track.attributes.composerName);
+      });
+    });
+
+    return Array.from(composerNamesSet);
+  }
+
+  const doAction = async (e: { preventDefault: () => void }): void => {
     e.preventDefault();
     const newErrors = findFormErrors();
+    const apiEndpoint = `/api/${albumId(link)}`;
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
+      const albumData = (await makeApiRequestWithRetry(apiEndpoint)).data[0];
       const ob = {
-        artist: artist,
-        title: title,
-        genre: genre,
-        composer: composer,
+        artist: albumData.attributes.artistName,
+        title: albumData.attributes.name,
+        genre: albumData.attributes.genreNames,
+        composer: extractUniqueComposerNames(
+          await makeApiRequestWithRetry(apiEndpoint),
+        ),
         albumId: albumId(link),
         sampleRate: sampleRate,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         updatedAt: null,
       };
 
-      if (auth.currentUser !== null) {
-        db.collection("users")
-          .doc(uid)
-          .collection("albums")
-          .doc(albumId(link))
-          .set(ob)
-          .then((): void => {
-            handleClose();
-          });
-      }
+      console.log("ob: ", ob);
+
+      /* if (auth.currentUser !== null) {
+       *   db.collection("users")
+       *     .doc(uid)
+       *     .collection("albums")
+       *     .doc(albumId(link))
+       *     .set(ob)
+       *     .then((): void => {
+       *       handleClose();
+       *     });
+       * } */
     }
   };
 
   const findFormErrors = (): {} => {
     const newErrors: Errors = {};
     const regex = {
-      ltnAndNum: new RegExp(
-        /^[\p{Script=Latin}\p{Punctuation}\p{Symbol}\d\s]+$/,
-        "u",
-      ),
       appleMusicLink: new RegExp(
-        /^https:\/\/music\.apple\.com\/?[a-z]*\/album\/?[\w-%]*\/?[\d]+(\?l=\w+)*$/,
+        /^https?:\/\/music\.apple\.com\/(?:[a-z]{2}\/)?album\/(?:[^\/]+\/)?([1-9][0-9]*)(?:\?l=\w+-\w+)?$/,
       ),
     };
 
-    if (!artist || artist === "") newErrors.artist = "cannot be blank!";
-    else if (!regex.ltnAndNum.test(artist))
-      newErrors.artist = "only Latin letters be used";
-    if (!title || title === "") newErrors.title = "cannot be blank!";
-    else if (!regex.ltnAndNum.test(title))
-      newErrors.title = "only Latin letters be used";
-    if (!genre || genre === "") newErrors.genre = "select a genre!";
-    /* if (genre == "Classical") */ // The following code does not work if you use the IF nesting structure
-    if (genre === "Classical" && (!composer || composer === ""))
-      newErrors.composer = "cannot be blank!";
-    else if (
-      genre === "Classical" &&
-      composer !== null &&
-      !regex.ltnAndNum.test(composer)
-    )
-      newErrors.composer = "only Latin letters can be used";
     if (!link || link === "") newErrors.link = "cannot be blank!";
     else if (!regex.appleMusicLink.test(link))
       newErrors.link = "only links to Apple Music albums can be allowed.";
@@ -182,44 +160,6 @@ export default function Register(props: Props): JSX.Element {
             <ModalBody>
               <Input
                 isRequired
-                type="text"
-                label="Artist"
-                isInvalid={errors.artist ? true : false}
-                errorMessage={errors.artist}
-                onChange={onChangeArtist}
-              />
-              <Input
-                isRequired
-                type="text"
-                label="Title"
-                isInvalid={errors.title ? true : false}
-                errorMessage={errors.title}
-                onChange={onChangeTitle}
-              />
-              <Input
-                isRequired
-                type="text"
-                label="Genre"
-                isInvalid={errors.genre ? true : false}
-                errorMessage={errors.genre}
-                onChange={onChangeGenre}
-              />
-              <Input
-                isRequired
-                type="text"
-                label="Composer"
-                isInvalid={errors.composer ? true : false}
-                errorMessage={errors.composer}
-                onChange={onChangeComposer}
-              />
-              <RadioGroup label="Sample Rate" defaultValue="96">
-                <Radio value="88.2">88.2</Radio>
-                <Radio value="96">96</Radio>
-                <Radio value="176.4">176.4</Radio>
-                <Radio value="192">192</Radio>
-              </RadioGroup>
-              <Input
-                isRequired
                 type="url"
                 label="Link"
                 labelPlacement="outside"
@@ -228,6 +168,12 @@ export default function Register(props: Props): JSX.Element {
                 errorMessage={errors.link}
                 onChange={onChangeLink}
               />
+              <RadioGroup label="Sample Rate" defaultValue="96">
+                <Radio value="88.2">88.2</Radio>
+                <Radio value="96">96</Radio>
+                <Radio value="176.4">176.4</Radio>
+                <Radio value="192">192</Radio>
+              </RadioGroup>
             </ModalBody>
             <ModalFooter>
               <Button onClick={handleClose}>Close</Button>
