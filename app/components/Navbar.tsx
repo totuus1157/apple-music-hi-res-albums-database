@@ -37,21 +37,19 @@ export default function Navbar(props: Props): JSX.Element {
   };
 
   return (
-    <div style={{ marginBottom: "20px" }}>
-      <NextUINavbar maxWidth="full" isBordered>
-        <NavbarContent>
-          <NavbarItem>
-            <Button href="/" as={Link}>
-              Back
-            </Button>
-          </NavbarItem>
-        </NavbarContent>
-        <NavbarContent justify="end">
-          <Button variant="bordered" color="primary" onClick={doLogin}>
-            {!isLogin ? "Login" : "Logout"}
+    <NextUINavbar maxWidth="full" isBordered>
+      <NavbarContent>
+        <NavbarItem>
+          <Button href="/" as={Link}>
+            Back
           </Button>
-        </NavbarContent>
-      </NextUINavbar>
-    </div>
+        </NavbarItem>
+      </NavbarContent>
+      <NavbarContent justify="end">
+        <Button variant="bordered" color="primary" onClick={doLogin}>
+          {!isLogin ? "Login" : "Logout"}
+        </Button>
+      </NavbarContent>
+    </NextUINavbar>
   );
 }
