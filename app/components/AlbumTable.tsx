@@ -154,16 +154,6 @@ export default function AlbumTable(props: Props): JSX.Element {
 
   return (
     <>
-      <style jsx>{`
-        div.table-responsive {
-          height: 90%;
-        }
-
-        .selected {
-          background-color: #ffe8a1;
-        }
-      `}</style>
-
       {isLoaded === true ? (
         <div className="table-responsive">
           <Table

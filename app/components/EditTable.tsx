@@ -95,7 +95,7 @@ export default function EditTable(props: Props): JSX.Element {
   }, [isOpen]);
 
   return (
-    <div style={{ marginBottom: "20px" }}>
+    <>
       {isLoaded === true ? (
         <Table isStriped>
           <TableHeader>
@@ -111,6 +111,6 @@ export default function EditTable(props: Props): JSX.Element {
       ) : (
         <p>Now loading...</p>
       )}
-    </div>
+    </>
   );
 }
