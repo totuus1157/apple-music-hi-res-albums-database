@@ -52,7 +52,7 @@ export default function ButtonGroup(props: Props): JSX.Element {
         <div>
           <Button
             color="success"
-            disabled={
+            isDisabled={
               !selectedItem.artist &&
               !selectedItem.genre &&
               !selectedItem.composer &&
@@ -72,14 +72,14 @@ export default function ButtonGroup(props: Props): JSX.Element {
         </div>
         <div>
           {!isEditMode && (
-            <Button color="primary" disabled={!isLogin} onClick={handleShow}>
+            <Button color="primary" isDisabled={!isLogin} onClick={handleShow}>
               Add
             </Button>
           )}{" "}
           {!isEditMode ? (
             <Button
               color="default"
-              disabled={!isLogin}
+              isDisabled={!isLogin}
               onClick={(): void => setIsEditMode(true)}
             >
               Edit
