@@ -155,58 +155,57 @@ export default function AlbumTable(props: Props): JSX.Element {
   return (
     <>
       {isLoaded ? (
-        <div className="table-responsive">
-          <Table
-            isStriped
-            topContent={
-              <caption className="flex justify-start">
-                Total: {albumElementsList.length}
-              </caption>
-            }
-          >
-            <TableHeader>
-              <TableColumn className={selectedItem.artist && "selected"}>
-                <Selector
-                  name="Artist"
-                  selectedItem={selectedItem}
-                  setSelectedItem={setSelectedItem}
-                  selectionElements={selectionElements("artist")}
-                />
-              </TableColumn>
-              <TableColumn className={selectedItem.genre && "selected"}>
-                <Selector
-                  name="Genre"
-                  selectedItem={selectedItem}
-                  setSelectedItem={setSelectedItem}
-                  selectionElements={selectionElements("genre")}
-                />
-              </TableColumn>
-              <TableColumn className={selectedItem.composer && "selected"}>
-                <Selector
-                  name="Composer"
-                  selectedItem={selectedItem}
-                  setSelectedItem={setSelectedItem}
-                  selectionElements={selectionElements("composer")}
-                />
-              </TableColumn>
-              <TableColumn className={selectedItem.sampleRate && "selected"}>
-                <Selector
-                  name="Sample Rate"
-                  selectedItem={selectedItem}
-                  setSelectedItem={setSelectedItem}
-                  selectionElements={sampleRateList.map(
-                    (value): SelectionElements => ({
-                      id: value.id,
-                      element: value.sampleRate,
-                    }),
-                  )}
-                />
-              </TableColumn>
-              <TableColumn>Title</TableColumn>
-            </TableHeader>
-            <TableBody>{data}</TableBody>
-          </Table>
-        </div>
+        <Table
+          isStriped
+          shadow="none"
+          topContent={
+            <caption className="flex justify-start ml-4">
+              Total: {albumElementsList.length}
+            </caption>
+          }
+        >
+          <TableHeader>
+            <TableColumn className={selectedItem.artist && "selected"}>
+              <Selector
+                name="Artist"
+                selectedItem={selectedItem}
+                setSelectedItem={setSelectedItem}
+                selectionElements={selectionElements("artist")}
+              />
+            </TableColumn>
+            <TableColumn className={selectedItem.genre && "selected"}>
+              <Selector
+                name="Genre"
+                selectedItem={selectedItem}
+                setSelectedItem={setSelectedItem}
+                selectionElements={selectionElements("genre")}
+              />
+            </TableColumn>
+            <TableColumn className={selectedItem.composer && "selected"}>
+              <Selector
+                name="Composer"
+                selectedItem={selectedItem}
+                setSelectedItem={setSelectedItem}
+                selectionElements={selectionElements("composer")}
+              />
+            </TableColumn>
+            <TableColumn className={selectedItem.sampleRate && "selected"}>
+              <Selector
+                name="Sample Rate"
+                selectedItem={selectedItem}
+                setSelectedItem={setSelectedItem}
+                selectionElements={sampleRateList.map(
+                  (value): SelectionElements => ({
+                    id: value.id,
+                    element: value.sampleRate,
+                  }),
+                )}
+              />
+            </TableColumn>
+            <TableColumn>Title</TableColumn>
+          </TableHeader>
+          <TableBody>{data}</TableBody>
+        </Table>
       ) : (
         <p>Now loading...</p>
       )}
