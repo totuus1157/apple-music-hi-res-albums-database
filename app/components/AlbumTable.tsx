@@ -154,7 +154,7 @@ export default function AlbumTable(props: Props): JSX.Element {
 
   return (
     <>
-      {isLoaded === true ? (
+      {isLoaded ? (
         <div className="table-responsive">
           <Table
             isStriped

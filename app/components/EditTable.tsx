@@ -96,7 +96,7 @@ export default function EditTable(props: Props): JSX.Element {
 
   return (
     <>
-      {isLoaded === true ? (
+      {isLoaded ? (
         <Table isStriped>
           <TableHeader>
             <TableColumn>Artist</TableColumn>
