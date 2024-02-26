@@ -27,6 +27,8 @@ export default function Main(): JSX.Element {
   });
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
+  console.log("selectedItem: ", selectedItem);
+
   useEffect((): void => {
     auth
       .getRedirectResult()
@@ -47,59 +49,51 @@ export default function Main(): JSX.Element {
   }, []);
 
   return (
-    <>
-      <style jsx>{`
-        main {
-          height: 100%;
-        }
-      `}</style>
-
-      <main>
-        <Navbar
-          isLogin={isLogin}
-          setIsLogin={setIsLogin}
-          setModalContent={setModalContent}
-          onOpen={onOpen}
-        />
-        <ButtonGroup
-          isLogin={isLogin}
-          setModalContent={setModalContent}
-          onOpen={onOpen}
-          isEditMode={isEditMode}
-          setIsEditMode={setIsEditMode}
+    <main>
+      <Navbar
+        isLogin={isLogin}
+        setIsLogin={setIsLogin}
+        setModalContent={setModalContent}
+        onOpen={onOpen}
+      />
+      <ButtonGroup
+        isLogin={isLogin}
+        setModalContent={setModalContent}
+        onOpen={onOpen}
+        isEditMode={isEditMode}
+        setIsEditMode={setIsEditMode}
+        selectedItem={selectedItem}
+        setSelectedItem={setSelectedItem}
+      />
+      {isEditMode !== true ? (
+        <AlbumTable
+          isOpen={isOpen}
+          registeredAlbumIDs={registeredAlbumIDs}
+          setRegisteredAlbumIDs={setRegisteredAlbumIDs}
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
         />
-        {isEditMode !== true ? (
-          <AlbumTable
-            isOpen={isOpen}
-            registeredAlbumIDs={registeredAlbumIDs}
-            setRegisteredAlbumIDs={setRegisteredAlbumIDs}
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
-          />
-        ) : (
-          <EditTable
-            isOpen={isOpen}
-            onOpen={onOpen}
-            setModalContent={setModalContent}
-            albumInfo={albumInfo}
-            setAlbumInfo={setAlbumInfo}
-            uid={uid}
-          />
-        )}
-        <Modal
-          modalContent={modalContent}
+      ) : (
+        <EditTable
           isOpen={isOpen}
           onOpen={onOpen}
-          onOpenChange={onOpenChange}
-          onClose={onClose}
+          setModalContent={setModalContent}
           albumInfo={albumInfo}
-          registeredAlbumIDs={registeredAlbumIDs}
+          setAlbumInfo={setAlbumInfo}
           uid={uid}
-          setIsLogin={setIsLogin}
         />
-      </main>
-    </>
+      )}
+      <Modal
+        modalContent={modalContent}
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onOpenChange={onOpenChange}
+        onClose={onClose}
+        albumInfo={albumInfo}
+        registeredAlbumIDs={registeredAlbumIDs}
+        uid={uid}
+        setIsLogin={setIsLogin}
+      />
+    </main>
   );
 }
