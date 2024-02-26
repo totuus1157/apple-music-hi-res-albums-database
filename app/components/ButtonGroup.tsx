@@ -39,64 +39,54 @@ export default function ButtonGroup(props: Props): JSX.Element {
   };
 
   return (
-    <>
-      <style jsx>{`
-        .parent {
-          margin: 1.5rem;
-          display: flex;
-          justify-content: space-between;
-        }
-      `}</style>
-
-      <div className="parent">
-        <div>
-          <Button
-            color="success"
-            isDisabled={
-              !selectedItem.artist &&
-              !selectedItem.genre &&
-              !selectedItem.composer &&
-              !selectedItem.sampleRate
-            }
-            onClick={(): void =>
-              setSelectedItem({
-                artist: "",
-                genre: "",
-                composer: "",
-                sampleRate: "",
-              })
-            }
-          >
-            All Items
-          </Button>
-        </div>
-        <div>
-          {!isEditMode && (
-            <Button color="primary" isDisabled={!isLogin} onClick={handleShow}>
-              Add
-            </Button>
-          )}{" "}
-          {!isEditMode ? (
-            <Button
-              color="default"
-              isDisabled={!isLogin}
-              onClick={(): void => setIsEditMode(true)}
-            >
-              Edit
-            </Button>
-          ) : (
-            <Button
-              color="default"
-              variant="bordered"
-              onClick={(): void => {
-                setIsEditMode(false);
-              }}
-            >
-              Exit
-            </Button>
-          )}
-        </div>
+    <div className="m-4 flex justify-between">
+      <div>
+        <Button
+          color="success"
+          isDisabled={
+            !selectedItem.artist &&
+            !selectedItem.genre &&
+            !selectedItem.composer &&
+            !selectedItem.sampleRate
+          }
+          onClick={(): void =>
+            setSelectedItem({
+              artist: "",
+              genre: "",
+              composer: "",
+              sampleRate: "",
+            })
+          }
+        >
+          All Items
+        </Button>
       </div>
-    </>
+      <div>
+        {!isEditMode && (
+          <Button color="primary" isDisabled={!isLogin} onClick={handleShow}>
+            Add
+          </Button>
+        )}{" "}
+        {!isEditMode ? (
+          <Button
+            color="default"
+            isDisabled={!isLogin}
+            onClick={(): void => setIsEditMode(true)}
+          >
+            Edit
+          </Button>
+        ) : (
+          <Button
+            color="default"
+            variant="bordered"
+            onClick={(): void => {
+              setIsEditMode(false);
+            }}
+          >
+            Exit
+          </Button>
+        )}
+      </div>
+    </div>
   );
 }
