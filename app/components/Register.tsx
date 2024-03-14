@@ -3,6 +3,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "components/fire";
 import { makeApiRequestWithRetry } from "components/apiRequest";
+import extractAlbumInfo from "components/extractAlbumInfo";
 import sampleRateList from "components/sampleRateList";
 import genreList from "components/genreList";
 import {
@@ -93,22 +94,28 @@ export default function Register(props: Props): JSX.Element {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
-      const albumData = (await makeApiRequestWithRetry(apiEndpoint)).data[0];
-      const ob = {
-        artist: albumData.attributes.artistName,
-        title: albumData.attributes.name,
-        genre: albumData.attributes.genreNames,
-        composer: extractUniqueComposerNames(
-          await makeApiRequestWithRetry(apiEndpoint),
-        ),
-        albumId: albumId(link),
-        sampleRate: sampleRate,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        updatedAt: null,
-      };
+      const albumData = await makeApiRequestWithRetry(apiEndpoint);
+      const ob = extractAlbumInfo(albumData);
 
-      console.log("ob: ", ob);
+      for (let item of ob) {
+        console.log("item: ", item);
+      }
 
+      /* const ob = {
+*   artist: albumData.attributes.artistName,
+*   title: albumData.attributes.name,
+*   genre: albumData.attributes.genreNames,
+*   composer: extractUniqueComposerNames(
+*     await makeApiRequestWithRetry(apiEndpoint),
+*   ),
+*   albumId: albumId(link),
+*   sampleRate: sampleRate,
+*   createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+*   updatedAt: null,
+* };
+
+* console.log("ob: ", ob);
+ */
       /* if (auth.currentUser !== null) {
        *   db.collection("users")
        *     .doc(uid)
