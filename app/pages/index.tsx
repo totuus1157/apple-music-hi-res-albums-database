@@ -1,74 +1,31 @@
-import type { NextPage } from "next";
-import Link from "next/link";
-import Header from "components/Header";
-import About from "components/About";
-import PrivacyPolicy from "components/PrivacyPolicy";
-import Footer from "components/Footer";
-import styles from "styles/Home.module.css";
+// pages/index.tsx
 
-const Home: NextPage = (): JSX.Element => {
-  const title = "Home page";
+import Head from "next/head";
 
+const UnderMaintenancePage: React.FC = () => {
   return (
-    <div className={styles.container}>
-      <style jsx>{`
-        h2 {
-          text-align: center;
-          font-size: 23px;
-          margin-top: 20px;
-        }
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <Head>
+        <title>Apple Music Hi-Res Albums Database</title>
+        <meta name="description" content="Apple Music Hi-Res Albums Database" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-        div.start {
-          margin: 60px;
-        }
-
-        div.tabs {
-          max-width: 1024px;
-        }
-
-        .strawberry {
-          color: #e73562;
-        }
-        .limegreen {
-          color: #32cd32;
-        }
-        .blueberry {
-          color: #4f86f7;
-        }
-        .tangerine {
-          color: #ffa812;
-        }
-        .grape {
-          color: #56256e;
-        }
-      `}</style>
-
-      <Header title={title} />
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          <span className="strawberry">Apple</span>{" "}
-          <span className="tangerine">Music</span>{" "}
-          <span className="limegreen">Hi-Res</span>{" "}
-          <span className="blueberry">Albums</span>{" "}
-          <span className="grape">Database</span>
-        </h1>
-
-        <h2 className="text-secondary">
-          List of Hi-Res lossless albums making by all &quot;Apple and Music
-          Lovers&quot;
-        </h2>
-
-        <div className="start">
-          <Link href="/datatable" replace legacyBehavior>
-            <a className="h2">Go to Main page &gt;&gt;</a>
-          </Link>
-        </div>
+      <main className="flex flex-col items-center justify-center w-full flex-1 px-4 text-center">
+        <h1 className="text-3xl font-bold mb-4">Site Under Maintenance</h1>
+        <p className="text-lg text-gray-700 mb-8">
+          Our website is currently undergoing maintenance. We apologize for any
+          inconvenience caused.
+        </p>
       </main>
 
-      <Footer />
+      <footer className="w-full h-12 flex justify-center items-center border-t mt-auto">
+        <p className="text-sm text-gray-500">
+          © 2024 Apple Music Hi-Res Albums Database
+        </p>
+      </footer>
     </div>
   );
 };
 
-export default Home;
+export default UnderMaintenancePage;
