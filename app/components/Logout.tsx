@@ -74,7 +74,7 @@ export default function Logout(props: Props): JSX.Element {
 
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
-          {(): void => (
+          {() => (
             <>
               <ModalHeader>Logout</ModalHeader>
               <ModalBody>
