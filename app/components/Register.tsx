@@ -74,11 +74,11 @@ export default function Register(props: Props): JSX.Element {
     }
   };
 
-  function extractUniqueComposerNames(data): string[] {
+  function extractUniqueComposerNames(data: any): string[] {
     const composerNamesSet: Set<string> = new Set();
 
-    data.data.forEach((album) => {
-      album.relationships.tracks.data.forEach((track) => {
+    data.data.forEach((album: any): void => {
+      album.relationships.tracks.data.forEach((track: any): void => {
         composerNamesSet.add(track.attributes.composerName);
       });
     });
