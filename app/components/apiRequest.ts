@@ -10,7 +10,7 @@ async function makeApiRequest(albumId: string): Promise<any> {
     } else {
       throw new Error(`Error: ${response.status}`);
     }
-  } catch (err) {
+  } catch (err: any) {
     throw new Error(`Request failed: ${err.message}`);
   }
 }
@@ -24,7 +24,7 @@ export async function makeApiRequestWithRetry(albumId: string): Promise<any> {
   while (retryCount < maxRetries) {
     try {
       return await makeApiRequest(albumId);
-    } catch (err) {
+    } catch (err: any) {
       if (err.message === "Too Many Requests") {
         console.log(
           `Too Many Requests. Retrying in ${retryDelay / 1000} seconds.`,
