@@ -86,7 +86,7 @@ export default function Register(props: Props): JSX.Element {
     return Array.from(composerNamesSet);
   }
 
-  const doAction = async (e: { preventDefault: () => void }): void => {
+  const doAction = async (e: { preventDefault: () => void }): Promise<void> => {
     e.preventDefault();
     const newErrors = findFormErrors();
     const apiEndpoint = `/api/${albumId(link)}`;

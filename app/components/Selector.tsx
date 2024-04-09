@@ -23,7 +23,7 @@ type Props = {
 export default function Selector(props: Props): JSX.Element {
   const { name, selectedItem, setSelectedItem, selectionElements } = props;
 
-  const selectItems = (eventkey: string | null): void => {
+  const selectItems = (eventkey: string | number): void => {
     const propertyName = (
       name.slice(0, 1).toLowerCase() + name.slice(1)
     ).replace(/\s+/g, "");
