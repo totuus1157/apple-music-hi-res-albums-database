@@ -50,12 +50,7 @@ export default function Main(): JSX.Element {
 
   return (
     <main>
-      <Navbar
-        isLogin={isLogin}
-        setIsLogin={setIsLogin}
-        setModalContent={setModalContent}
-        onOpen={onOpen}
-      />
+      <Navbar setModalContent={setModalContent} onOpen={onOpen} />
       <ButtonGroup
         isLogin={isLogin}
         setModalContent={setModalContent}

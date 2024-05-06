@@ -1,6 +1,4 @@
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "components/fire";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import {
   Navbar as NextUINavbar,
   NavbarBrand,
@@ -8,33 +6,22 @@ import {
   NavbarItem,
   Link,
   Button,
+  link,
 } from "@nextui-org/react";
 
-const auth = firebase.auth();
-const provider = new firebase.auth.OAuthProvider("apple.com");
-
 type Props = {
-  isLogin: boolean;
-  setIsLogin: (arg0: boolean) => void;
   setModalContent: (arg0: string | null) => void;
   onOpen: () => void;
 };
 
+/*
+When the user account deletion function is re-implemented, it should be created on a separate page.
+The setModalContent and onOpen should be retained for future modal implementations of the help viewer.
+*/
+
 export default function Navbar(props: Props): JSX.Element {
-  const { isLogin, setIsLogin, setModalContent, onOpen } = props;
-
-  const login = (): void => {
-    auth.signInWithRedirect(provider);
-  };
-
-  const doLogin = (): void => {
-    if (auth.currentUser === null) {
-      login();
-    } else {
-      setModalContent("logout");
-      onOpen();
-    }
-  };
+  const { setModalContent, onOpen } = props;
+  const { user, error, isLoading } = useUser();
 
   return (
     <NextUINavbar maxWidth="full" isBordered>
@@ -46,9 +33,27 @@ export default function Navbar(props: Props): JSX.Element {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <Button variant="bordered" color="primary" onClick={doLogin}>
-          {!isLogin ? "Login" : "Logout"}
-        </Button>
+        <NavbarItem>
+          {!user ? (
+            <Button
+              href="/api/auth/login"
+              as={Link}
+              variant="bordered"
+              color="primary"
+            >
+              Login
+            </Button>
+          ) : (
+            <Button
+              href="/api/auth/logout"
+              as={Link}
+              variant="bordered"
+              color="primary"
+            >
+              Logout
+            </Button>
+          )}
+        </NavbarItem>
       </NavbarContent>
     </NextUINavbar>
   );
