@@ -13,7 +13,6 @@ import { useDisclosure } from "@nextui-org/react";
 const auth = firebase.auth();
 
 export default function Main(): JSX.Element {
-  const [isLogin, setIsLogin] = useState(false);
   const [modalContent, setModalContent] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [albumInfo, setAlbumInfo] = useState("");
@@ -43,7 +42,6 @@ export default function Main(): JSX.Element {
       console.log("Main.user: ", user);
       if (user) {
         setUid(user.uid);
-        setIsLogin(true);
       }
     });
   }, []);
@@ -52,7 +50,6 @@ export default function Main(): JSX.Element {
     <main>
       <Navbar setModalContent={setModalContent} onOpen={onOpen} />
       <ButtonGroup
-        isLogin={isLogin}
         setModalContent={setModalContent}
         onOpen={onOpen}
         isEditMode={isEditMode}
@@ -87,7 +84,6 @@ export default function Main(): JSX.Element {
         albumInfo={albumInfo}
         registeredAlbumIDs={registeredAlbumIDs}
         uid={uid}
-        setIsLogin={setIsLogin}
       />
     </main>
   );

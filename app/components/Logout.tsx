@@ -20,15 +20,14 @@ type Props = {
   onOpen: () => void;
   onOpenChange: () => void;
   onClose: () => void;
-  setIsLogin: (arg0: boolean) => void;
 };
 
 export default function Logout(props: Props): JSX.Element {
-  const { isOpen, onOpen, onOpenChange, onClose, setIsLogin } = props;
+  const { isOpen, onOpen, onOpenChange, onClose } = props;
 
   const doAction = (): void => {
     auth.signOut();
-    setIsLogin(false);
+    /* setIsLogin(false); */
     onClose();
   };
 
@@ -39,7 +38,7 @@ export default function Logout(props: Props): JSX.Element {
           user
             .delete()
             .then((): void => {
-              setIsLogin(false);
+              /* setIsLogin(false); */
               onClose();
               alert("Your account registration has been successfully deleted.");
             })
