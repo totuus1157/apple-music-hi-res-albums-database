@@ -1,3 +1,4 @@
+import { useUser } from "@auth0/nextjs-auth0/client";
 import { Button } from "@nextui-org/react";
 
 type SelectedItem = {
@@ -12,7 +13,6 @@ type Props = {
   isEditMode: boolean;
   setIsEditMode: (arg0: boolean) => void;
   setModalContent: (arg0: string) => void;
-  isLogin: boolean;
   selectedItem: SelectedItem;
   setSelectedItem: {
     (arg0: SelectedItem): void;
@@ -28,10 +28,10 @@ export default function ButtonGroup(props: Props): JSX.Element {
     isEditMode,
     setIsEditMode,
     setModalContent,
-    isLogin,
     selectedItem,
     setSelectedItem,
   } = props;
+  const { user, error, isLoading } = useUser();
 
   const handleShow = (): void => {
     setModalContent("register");
@@ -63,14 +63,14 @@ export default function ButtonGroup(props: Props): JSX.Element {
       </div>
       <div>
         {!isEditMode && (
-          <Button color="primary" isDisabled={!isLogin} onClick={handleShow}>
+          <Button color="primary" isDisabled={!user} onClick={handleShow}>
             Add
           </Button>
         )}{" "}
         {!isEditMode ? (
           <Button
             color="default"
-            isDisabled={!isLogin}
+            isDisabled={!user}
             onClick={(): void => setIsEditMode(true)}
           >
             Edit
