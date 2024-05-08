@@ -10,8 +10,6 @@ import EditTable from "components/EditTable";
 import Modal from "components/Modal";
 import { useDisclosure } from "@nextui-org/react";
 
-const auth = firebase.auth();
-
 export default function Main(): JSX.Element {
   const [modalContent, setModalContent] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -25,26 +23,6 @@ export default function Main(): JSX.Element {
     sampleRate: "",
   });
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-
-  console.log("selectedItem: ", selectedItem);
-
-  useEffect((): void => {
-    auth
-      .getRedirectResult()
-      .then((result): void => {
-        console.log("Main.result: ", result);
-      })
-      .catch((error): void => {
-        console.log("Main.error: ", error);
-      });
-
-    auth.onAuthStateChanged((user): void => {
-      console.log("Main.user: ", user);
-      if (user) {
-        setUid(user.uid);
-      }
-    });
-  }, []);
 
   return (
     <main>
