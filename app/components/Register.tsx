@@ -4,8 +4,6 @@ import "firebase/compat/firestore";
 import "components/fire";
 import { makeApiRequestWithRetry } from "components/apiRequest";
 import extractAlbumInfo from "components/extractAlbumInfo";
-import sampleRateList from "components/sampleRateList";
-import genreList from "components/genreList";
 import {
   Modal,
   ModalContent,
