@@ -1,7 +1,4 @@
-import { useState, useEffect, SetStateAction } from "react";
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
-import "components/fire";
+import { useState, useEffect } from "react";
 import sampleRateList from "components/sampleRateList";
 import Selector from "components/Selector";
 import {
@@ -13,8 +10,6 @@ import {
   TableCell,
   Link,
 } from "@nextui-org/react";
-
-const db = firebase.firestore();
 
 type SelectedItem = {
   artist: string;
@@ -43,6 +38,15 @@ type Props = {
   };
 };
 
+type Album = {
+  album_id: string;
+  artist: string;
+  genre: string[];
+  composer: string[];
+  sample_rate: string;
+  title: string;
+};
+
 export default function AlbumTable(props: Props): JSX.Element {
   const {
     isOpen,
@@ -52,7 +56,7 @@ export default function AlbumTable(props: Props): JSX.Element {
     setSelectedItem,
   } = props;
 
-  const tableRows: SetStateAction<any[]> = [];
+  const tableRows: JSX.Element[] = [];
   const albumElements: AlbumElements[] = [];
   const albumIds: string[] = [];
   const nonTheNames: string[] = [];
@@ -82,60 +86,62 @@ export default function AlbumTable(props: Props): JSX.Element {
       });
 
   useEffect((): void => {
-    db.collectionGroup("albums")
-      .get()
-      .then((snapshot): void => {
-        snapshot.forEach((document): void => {
-          const doc = document.data();
-          let artistName: string = doc.artist;
-          if (/^The /.test(artistName)) {
-            artistName = artistName.replace(/^The /, "");
-            nonTheNames.push(artistName);
-          }
-          albumElements.push({
-            artist: artistName,
-            genre: doc.genre,
-            composer: doc.composer,
-          });
+    const fetchAlbumElements = async () => {
+      const response = await fetch("/api/get-album");
+      const result = await response.json();
+      const albums: Album[] = result.albums.rows;
+
+      albums.forEach((doc: Album) => {
+        let artistName: string = doc.artist;
+        if (/^The /.test(artistName)) {
+          artistName = artistName.replace(/^The /, "");
+          nonTheNames.push(artistName);
+        }
+        albumElements.push({
+          artist: artistName,
+          genre: doc.genre.join(", "), // Assuming genre is an array
+          composer: doc.composer.join(", "), // Assuming composer is an array
         });
-        setAlbumElementsList(albumElements);
-        setNonArticleNames(nonTheNames);
       });
+
+      setAlbumElementsList(albumElements);
+      setNonArticleNames(nonTheNames);
+    };
+
+    fetchAlbumElements();
   }, [isOpen]);
 
   useEffect((): void => {
-    let selectedArtistName = selectedItem.artist;
-    if (nonArticleNames.includes(selectedArtistName)) {
-      selectedArtistName = `The ${selectedArtistName}`;
-    }
+    const fetchData = async () => {
+      const queryParams = new URLSearchParams();
 
-    let albumsRef = db.collectionGroup("albums");
-    selectedItem.artist &&
-      (albumsRef = albumsRef.where("artist", "==", selectedArtistName));
-    selectedItem.genre &&
-      (albumsRef = albumsRef.where("genre", "==", selectedItem.genre));
-    selectedItem.composer &&
-      (albumsRef = albumsRef.where("composer", "==", selectedItem.composer));
-    selectedItem.sampleRate &&
-      (albumsRef = albumsRef.where(
-        "sampleRate",
-        "==",
-        selectedItem.sampleRate,
-      ));
+      let selectedArtistName = selectedItem.artist;
+      if (nonArticleNames.includes(selectedArtistName)) {
+        selectedArtistName = `The ${selectedArtistName}`;
+      }
 
-    albumsRef.get().then((snapshot): void => {
-      snapshot.forEach((document): void => {
-        const doc = document.data();
+      if (selectedArtistName) queryParams.append("artist", selectedArtistName);
+      if (selectedItem.genre) queryParams.append("genre", selectedItem.genre);
+      if (selectedItem.composer)
+        queryParams.append("composer", selectedItem.composer);
+      if (selectedItem.sampleRate)
+        queryParams.append("sample_rate", selectedItem.sampleRate);
+
+      const response = await fetch(`/api/get-album?${queryParams.toString()}`);
+      const result = await response.json();
+      const albums: Album[] = result.albums.rows;
+
+      albums.forEach((doc: Album) => {
         tableRows.push(
-          <TableRow key={document.id}>
+          <TableRow key={doc.album_id}>
             <TableCell>{doc.artist}</TableCell>
-            <TableCell>{doc.genre}</TableCell>
-            <TableCell>{doc.composer}</TableCell>
-            <TableCell>{doc.sampleRate}</TableCell>
+            <TableCell>{doc.genre.join(", ")}</TableCell>
+            <TableCell>{doc.composer.join(", ")}</TableCell>
+            <TableCell>{doc.sample_rate}</TableCell>
             <TableCell>
               <Link
                 isExternal
-                href={`https://music.apple.com/album/${doc.albumId}`}
+                href={`https://music.apple.com/album/${doc.album_id}`}
                 size="sm"
                 underline="hover"
               >
@@ -144,12 +150,15 @@ export default function AlbumTable(props: Props): JSX.Element {
             </TableCell>
           </TableRow>,
         );
-        albumIds.push(doc.albumId);
+        albumIds.push(doc.album_id);
       });
+
       setData(tableRows);
       setRegisteredAlbumIDs(albumIds);
       setIsLoaded(true);
-    });
+    };
+
+    fetchData();
   }, [isOpen, selectedItem]);
 
   return (
