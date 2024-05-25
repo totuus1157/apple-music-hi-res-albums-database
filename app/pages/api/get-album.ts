@@ -128,7 +128,7 @@ export default async function handler(
 
     return response.status(200).json({ albums });
   } catch (err: any) {
-    console.error("Database query error:", err); // エラーの詳細をログに出力
+    console.error("Database query error:", err);
     return response
       .status(500)
       .json({ error: "Internal Server Error", details: err.message });
