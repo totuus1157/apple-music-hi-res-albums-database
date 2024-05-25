@@ -122,7 +122,7 @@ export default async function handler(
     }
 
     return response.status(200).json({ albums });
-  } catch (err) {
+  } catch (err: any) {
     console.error("Database query error:", err); // エラーの詳細をログに出力
     return response
       .status(500)
