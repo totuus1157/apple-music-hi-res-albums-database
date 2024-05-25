@@ -8,6 +8,11 @@ export default async function handler(
   const { artist, genre, composer, sample_rate } = request.query;
 
   try {
+    const artist = request.query.artist as string;
+    const genre = request.query.artist as string;
+    const composer = request.query.artist as string;
+    const sample_rate = request.query.artist as string;
+
     let albums;
     if (artist && genre && composer && sample_rate) {
       // All parameters are present
