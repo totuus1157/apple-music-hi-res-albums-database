@@ -39,6 +39,7 @@ type Props = {
 };
 
 type Album = {
+  id: string;
   album_id: string;
   artist: string;
   genre: string[];
@@ -131,9 +132,11 @@ export default function AlbumTable(props: Props): JSX.Element {
       const result = await response.json();
       const albums: Album[] = result.albums.rows;
 
+      console.log("albums: ", albums);
+
       albums.forEach((doc: Album) => {
         tableRows.push(
-          <TableRow key={doc.album_id}>
+          <TableRow key={doc.id}>
             <TableCell>{doc.artist}</TableCell>
             <TableCell>{doc.genre.join(", ")}</TableCell>
             <TableCell>{doc.composer.join(", ")}</TableCell>
