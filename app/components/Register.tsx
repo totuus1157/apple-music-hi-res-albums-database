@@ -1,9 +1,7 @@
 import { useState } from "react";
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
-import "components/fire";
 import { makeApiRequestWithRetry } from "components/apiRequest";
 import extractAlbumInfo from "components/extractAlbumInfo";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import {
   Modal,
   ModalContent,
@@ -16,15 +14,18 @@ import {
   Radio,
 } from "@nextui-org/react";
 
-const db = firebase.firestore();
-const auth = firebase.auth();
-
 type Errors = {
   artist?: string | null;
   title?: string | null;
   genre?: string | null;
   composer?: string | null;
   link?: string | null;
+};
+
+type TargetValue = {
+  target: {
+    value: any;
+  };
 };
 
 type Props = {
@@ -48,17 +49,14 @@ export default function Register(props: Props): JSX.Element {
   const [sampleRate, setSampleRate] = useState("96");
   const [errors, setErrors] = useState<Errors>({});
 
-  type TargetValue = {
-    target: {
-      value: any;
-    };
-  };
+  const { user } = useUser();
 
   const onChangeLink = (e: TargetValue): void => {
     const inputLink = String(e.target.value);
     setLink(inputLink.trim());
     errors.link && setErrors({ ...errors, link: null });
   };
+
   const onChangeSampleRate = (e: TargetValue): void => {
     setSampleRate(e.target.value);
   };
@@ -84,6 +82,14 @@ export default function Register(props: Props): JSX.Element {
     return Array.from(composerNamesSet);
   }
 
+  const convertArrayToDatabaseColumnString = (array: string[]) => {
+    return `{${array
+      .map((item) => {
+        return `"${item}"`;
+      })
+      .join(", ")}}`;
+  };
+
   const doAction = async (e: { preventDefault: () => void }): Promise<void> => {
     e.preventDefault();
     const newErrors = findFormErrors();
@@ -96,34 +102,38 @@ export default function Register(props: Props): JSX.Element {
       const ob = extractAlbumInfo(albumData);
 
       for (let item of ob) {
-        console.log("item: ", item);
+        const artist = item.artistName;
+        const title = item.name;
+        const genre = convertArrayToDatabaseColumnString(item.genreNames);
+        const composer = convertArrayToDatabaseColumnString(item.composerName);
+        const productId = albumId(link);
+        const registrantId = user && user.sub;
+
+        try {
+          const response = await fetch("/api/add-album", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              artist,
+              title,
+              genre,
+              composer,
+              productId,
+              sampleRate,
+              registrantId,
+            }),
+          });
+
+          const data = await response.json();
+          if (response.ok) {
+            handleClose();
+          } else {
+            console.log(`Error: ${data.error}`);
+          }
+        } catch (err: any) {
+          console.log(`Error: ${err.message}`);
+        }
       }
-
-      /* const ob = {
-*   artist: albumData.attributes.artistName,
-*   title: albumData.attributes.name,
-*   genre: albumData.attributes.genreNames,
-*   composer: extractUniqueComposerNames(
-*     await makeApiRequestWithRetry(apiEndpoint),
-*   ),
-*   albumId: albumId(link),
-*   sampleRate: sampleRate,
-*   createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-*   updatedAt: null,
-* };
-
-* console.log("ob: ", ob);
- */
-      /* if (auth.currentUser !== null) {
-       *   db.collection("users")
-       *     .doc(uid)
-       *     .collection("albums")
-       *     .doc(albumId(link))
-       *     .set(ob)
-       *     .then((): void => {
-       *       handleClose();
-       *     });
-       * } */
     }
   };
 
@@ -173,7 +183,12 @@ export default function Register(props: Props): JSX.Element {
                 errorMessage={errors.link}
                 onChange={onChangeLink}
               />
-              <RadioGroup label="Sample Rate" defaultValue="96">
+              <RadioGroup
+                label="Sample Rate"
+                value={sampleRate}
+                defaultValue="96"
+                onValueChange={setSampleRate}
+              >
                 <Radio value="88.2">88.2</Radio>
                 <Radio value="96">96</Radio>
                 <Radio value="176.4">176.4</Radio>
