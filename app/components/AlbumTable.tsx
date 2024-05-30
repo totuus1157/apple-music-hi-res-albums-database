@@ -40,7 +40,7 @@ type Props = {
 
 type Album = {
   id: string;
-  album_id: string;
+  product_id: string;
   artist: string;
   genre: string[];
   composer: string[];
@@ -144,7 +144,7 @@ export default function AlbumTable(props: Props): JSX.Element {
             <TableCell>
               <Link
                 isExternal
-                href={`https://music.apple.com/album/${doc.album_id}`}
+                href={`https://music.apple.com/album/${doc.product_id}`}
                 size="sm"
                 underline="hover"
               >
@@ -153,7 +153,7 @@ export default function AlbumTable(props: Props): JSX.Element {
             </TableCell>
           </TableRow>,
         );
-        albumIds.push(doc.album_id);
+        albumIds.push(doc.product_id);
       });
 
       setData(tableRows);
