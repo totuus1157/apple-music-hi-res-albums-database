@@ -88,7 +88,7 @@ export default function AlbumTable(props: Props): JSX.Element {
 
   useEffect((): void => {
     const fetchAlbumElements = async () => {
-      const response = await fetch("/api/get-album");
+      const response = await fetch("/api/get-albums");
       const result = await response.json();
       const albums: Album[] = result.albums.rows;
 
@@ -128,7 +128,7 @@ export default function AlbumTable(props: Props): JSX.Element {
       if (selectedItem.sampleRate)
         queryParams.append("sample_rate", selectedItem.sampleRate);
 
-      const response = await fetch(`/api/get-album?${queryParams.toString()}`);
+      const response = await fetch(`/api/get-albums?${queryParams.toString()}`);
       const result = await response.json();
       const albums: Album[] = result.albums.rows;
 
