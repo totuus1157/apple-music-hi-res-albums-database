@@ -9,9 +9,9 @@ export default async function handler(
 
   try {
     const artist = request.query.artist as string;
-    const genre = request.query.artist as string;
-    const composer = request.query.artist as string;
-    const sample_rate = request.query.artist as string;
+    const genre = request.query.genre as string;
+    const composer = request.query.composer as string;
+    const sample_rate = request.query.sample_rate as string;
 
     let albums;
     if (artist && genre && composer && sample_rate) {
