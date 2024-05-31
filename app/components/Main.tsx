@@ -15,7 +15,6 @@ export default function Main(): JSX.Element {
   const [isEditMode, setIsEditMode] = useState(false);
   const [albumInfo, setAlbumInfo] = useState("");
   const [registeredAlbumIDs, setRegisteredAlbumIDs] = useState<string[]>([]);
-  const [uid, setUid] = useState("");
   const [selectedItem, setSelectedItem] = useState({
     artist: "",
     genre: "",
@@ -50,7 +49,6 @@ export default function Main(): JSX.Element {
           setModalContent={setModalContent}
           albumInfo={albumInfo}
           setAlbumInfo={setAlbumInfo}
-          uid={uid}
         />
       )}
       <Modal
@@ -61,7 +59,6 @@ export default function Main(): JSX.Element {
         onClose={onClose}
         albumInfo={albumInfo}
         registeredAlbumIDs={registeredAlbumIDs}
-        uid={uid}
       />
     </main>
   );

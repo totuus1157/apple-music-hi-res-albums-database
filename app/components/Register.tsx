@@ -34,12 +34,10 @@ type Props = {
   onOpenChange: () => void;
   onClose: () => void;
   registeredAlbumIDs: string[];
-  uid: string;
 };
 
 export default function Register(props: Props): JSX.Element {
-  const { isOpen, onOpen, onOpenChange, onClose, registeredAlbumIDs, uid } =
-    props;
+  const { isOpen, onOpen, onOpenChange, onClose, registeredAlbumIDs } = props;
 
   const [artist, setArtist] = useState<string | null>(null);
   const [title, setTitle] = useState<string | null>(null);

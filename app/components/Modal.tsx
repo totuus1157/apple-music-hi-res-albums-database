@@ -10,7 +10,6 @@ type Props = {
   onOpenChange: () => void;
   onClose: () => void;
   registeredAlbumIDs: string[];
-  uid: string;
 };
 
 export default function Modal(props: Props): JSX.Element {
@@ -22,7 +21,6 @@ export default function Modal(props: Props): JSX.Element {
     onOpenChange,
     onClose,
     registeredAlbumIDs,
-    uid,
   } = props;
 
   if (modalContent === "register") {
@@ -33,7 +31,6 @@ export default function Modal(props: Props): JSX.Element {
         onOpenChange={onOpenChange}
         onClose={onClose}
         registeredAlbumIDs={registeredAlbumIDs}
-        uid={uid}
       />
     );
   }
@@ -45,7 +42,6 @@ export default function Modal(props: Props): JSX.Element {
         onOpenChange={onOpenChange}
         onClose={onClose}
         albumInfo={albumInfo}
-        uid={uid}
       />
     );
   }
