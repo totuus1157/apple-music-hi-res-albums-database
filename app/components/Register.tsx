@@ -165,7 +165,7 @@ export default function Register(props: Props): JSX.Element {
   };
 
   return (
-    <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+    <Modal isOpen={isOpen} placement="center" onOpenChange={onOpenChange}>
       <ModalContent>
         {() => (
           <>
