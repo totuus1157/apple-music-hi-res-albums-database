@@ -123,7 +123,7 @@ export default async function handler(
       `;
     } else {
       // No parameters
-      albums = await sql`SELECT * FROM albums;`;
+      albums = await sql`SELECT * FROM albums ORDER BY id DESC;`;
     }
 
     return response.status(200).json({ albums });

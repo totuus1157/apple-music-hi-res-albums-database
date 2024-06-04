@@ -10,7 +10,7 @@ export default async function handler(
     if (!registrantId) throw new Error("Registrant ID required");
 
     const albums = await sql`
-      SELECT * FROM albums WHERE registrant_id = ${registrantId};
+      SELECT * FROM albums WHERE registrant_id = ${registrantId} ORDER BY id DESC;
     `;
 
     return response.status(200).json({ albums });
