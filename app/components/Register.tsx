@@ -61,9 +61,11 @@ export default function Register(props: Props): JSX.Element {
 
   const albumId = (link: string | null): string | undefined => {
     if (link) {
-      const matches = link.match(/(?<digit>[1-9][0-9]+)(\?l=[\w]+)*$/);
-      if (matches && matches.groups !== undefined) {
-        return matches.groups.digit;
+      const matches = link.match(
+        /^https?:\/\/music\.apple\.com\/(?:[a-z]{2}\/)?album\/(?:[^\/]+\/)?([0-9]+)(?:\?l=\w+-\w+)?$/,
+      );
+      if (matches) {
+        return matches[1];
       }
     }
   };
@@ -135,11 +137,11 @@ export default function Register(props: Props): JSX.Element {
     }
   };
 
-  const findFormErrors = (): {} => {
+  const findFormErrors = (): Errors => {
     const newErrors: Errors = {};
     const regex = {
       appleMusicLink: new RegExp(
-        /^https?:\/\/music\.apple\.com\/(?:[a-z]{2}\/)?album\/(?:[^\/]+\/)?([1-9][0-9]*)(?:\?l=\w+-\w+)?$/,
+        /^https?:\/\/music\.apple\.com\/(?:[a-z]{2}\/)?album\/(?:[^\/]+\/)?([0-9]+)(?:\?l=\w+-\w+)?$/,
       ),
     };
 
