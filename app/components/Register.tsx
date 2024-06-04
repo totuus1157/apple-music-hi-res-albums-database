@@ -93,12 +93,13 @@ export default function Register(props: Props): JSX.Element {
   const doAction = async (e: { preventDefault: () => void }): Promise<void> => {
     e.preventDefault();
     const newErrors = findFormErrors();
-    const apiEndpoint = `/api/${albumId(link)}`;
+    const productId = albumId(link);
+    const registrantId = user && user.sub;
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-    } else {
-      const albumData = await makeApiRequestWithRetry(apiEndpoint);
+    } else if (productId && registrantId) {
+      const albumData = await makeApiRequestWithRetry(`/api/${productId}`);
       const ob = extractAlbumInfo(albumData);
 
       for (let item of ob) {
@@ -106,8 +107,6 @@ export default function Register(props: Props): JSX.Element {
         const title = item.name;
         const genre = convertArrayToDatabaseColumnString(item.genreNames);
         const composer = convertArrayToDatabaseColumnString(item.composerName);
-        const productId = albumId(link);
-        const registrantId = user && user.sub;
 
         try {
           const response = await fetch("/api/add-album", {
