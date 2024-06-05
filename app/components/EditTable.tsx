@@ -114,8 +114,20 @@ export default function EditTable(props: Props): JSX.Element {
             {data.map((doc: Album) => (
               <TableRow key={doc.id}>
                 <TableCell>{doc.artist}</TableCell>
-                <TableCell>{doc.genre.join(", ")}</TableCell>
-                <TableCell>{doc.composer.join(", ")}</TableCell>
+                <TableCell>
+                  <ul>
+                    {doc.genre.map((genre, index) => (
+                      <li key={index}>{genre}</li>
+                    ))}
+                  </ul>
+                </TableCell>
+                <TableCell>
+                  <ul>
+                    {doc.composer.map((composer, index) => (
+                      <li key={index}>{composer}</li>
+                    ))}
+                  </ul>
+                </TableCell>
                 <TableCell>{doc.sample_rate}</TableCell>
                 <TableCell>{doc.title}</TableCell>
                 <TableCell style={{ border: "none" }}>
