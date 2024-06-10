@@ -85,7 +85,7 @@ export default function Register(props: Props): JSX.Element {
   const convertArrayToDatabaseColumnString = (array: string[]) => {
     return `{${array
       .map((item) => {
-        return `"${item}"`;
+        return `"${item.replace(/"/g, '\\"')}"`;
       })
       .join(", ")}}`;
   };
