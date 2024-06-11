@@ -20,8 +20,8 @@ type SelectedItem = {
 
 type AlbumElements = {
   artist?: string;
-  genre?: string;
-  composer?: string;
+  genre?: string[];
+  composer?: string[];
   sampleRate?: string;
 };
 
@@ -73,18 +73,18 @@ export default function AlbumTable(props: Props): JSX.Element {
 
   const selectionElements = (
     _category: keyof AlbumElements,
-  ): SelectionElements[] =>
-    Array.from(
-      new Set(
-        albumElementsList
-          .map((value): string | undefined => value[_category])
-          .filter(Boolean),
-      ),
-    )
+  ): SelectionElements[] => {
+    const elements = albumElementsList
+      .flatMap((value) =>
+        Array.isArray(value[_category]) ? value[_category] : [value[_category]],
+      )
+      .filter(Boolean);
+    return Array.from(new Set(elements))
       .sort()
       .map((uniqueElement, key): SelectionElements => {
-        return { id: key + 1, element: uniqueElement };
+        return { id: key + 1, element: uniqueElement as string };
       });
+  };
 
   useEffect((): void => {
     const fetchAlbumElements = async () => {
@@ -100,8 +100,8 @@ export default function AlbumTable(props: Props): JSX.Element {
         }
         albumElements.push({
           artist: artistName,
-          genre: doc.genre.join(", "), // Assuming genre is an array
-          composer: doc.composer.join(", "), // Assuming composer is an array
+          genre: doc.genre,
+          composer: doc.composer,
         });
       });
 
