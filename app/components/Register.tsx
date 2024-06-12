@@ -95,6 +95,7 @@ export default function Register(props: Props): JSX.Element {
     const newErrors = findFormErrors();
     const productId = albumId(link);
     const registrantId = user && user.sub;
+    const countryCode = "us"; // Provisional measures
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -120,6 +121,7 @@ export default function Register(props: Props): JSX.Element {
               productId,
               sampleRate,
               registrantId,
+              countryCode,
             }),
           });
 

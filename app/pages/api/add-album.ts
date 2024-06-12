@@ -18,6 +18,7 @@ export default async function handler(
     const productId = String(request.body.productId);
     const sampleRate = String(request.body.sampleRate);
     const registrantId = String(request.body.registrantId);
+    const countryCode = String(request.body.countryCode);
 
     if (
       !artist ||
@@ -26,7 +27,8 @@ export default async function handler(
       !composer ||
       !productId ||
       !sampleRate ||
-      !registrantId
+      !registrantId ||
+      !countryCode
     ) {
       throw new Error("All fields are required");
     }
@@ -46,10 +48,15 @@ export default async function handler(
         "sampleRate must be one of the following: 88.2, 96, 176.4, 192",
       );
     }
+    // Check value of countryCode
+    const countryCodeRegex = /^[a-zA-Z]{2}$/;
+    if (!countryCodeRegex.test(countryCode)) {
+      throw new Error("Invalid country code");
+    }
 
     await sql`
-      INSERT INTO albums (artist, title, genre, composer, product_id, sample_rate, registrant_id)
-      VALUES (${artist}, ${title}, ${genre}, ${composer}, ${productId}, ${sampleRate}, ${registrantId});
+      INSERT INTO albums (artist, title, genre, composer, product_id, sample_rate, registrant_id, country_code)
+      VALUES (${artist}, ${title}, ${genre}, ${composer}, ${productId}, ${sampleRate}, ${registrantId}, ${countryCode});
     `;
 
     return response.status(200).json({ message: "Album added successfully" });
