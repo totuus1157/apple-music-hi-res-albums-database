@@ -21,7 +21,8 @@ export default async function handler(
         WHERE artist = ${artist}
         AND ${genre} = ANY(genre)
         AND ${composer} = ANY(composer)
-        AND sample_rate = ${sample_rate};
+        AND sample_rate = ${sample_rate}
+        ORDER BY id DESC;
       `;
     } else if (artist && genre && composer) {
       // artist, genre, composer
@@ -29,7 +30,8 @@ export default async function handler(
         SELECT * FROM albums
         WHERE artist = ${artist}
         AND ${genre} = ANY(genre)
-        AND ${composer} = ANY(composer);
+        AND ${composer} = ANY(composer)
+        ORDER BY id DESC;
       `;
     } else if (artist && genre && sample_rate) {
       // artist, genre, sample_rate
@@ -37,7 +39,8 @@ export default async function handler(
         SELECT * FROM albums
         WHERE artist = ${artist}
         AND ${genre} = ANY(genre)
-        AND sample_rate = ${sample_rate};
+        AND sample_rate = ${sample_rate}
+        ORDER BY id DESC;
       `;
     } else if (artist && composer && sample_rate) {
       // artist, composer, sample_rate
@@ -45,7 +48,8 @@ export default async function handler(
         SELECT * FROM albums
         WHERE artist = ${artist}
         AND ${composer} = ANY(composer)
-        AND sample_rate = ${sample_rate};
+        AND sample_rate = ${sample_rate}
+        ORDER BY id DESC;
       `;
     } else if (genre && composer && sample_rate) {
       // genre, composer, sample_rate
@@ -53,77 +57,91 @@ export default async function handler(
         SELECT * FROM albums
         WHERE ${genre} = ANY(genre)
         AND ${composer} = ANY(composer)
-        AND sample_rate = ${sample_rate};
+        AND sample_rate = ${sample_rate}
+        ORDER BY id DESC;
       `;
     } else if (artist && genre) {
       // artist, genre
       albums = await sql`
         SELECT * FROM albums
         WHERE artist = ${artist}
-        AND ${genre} = ANY(genre);
+        AND ${genre} = ANY(genre)
+        ORDER BY id DESC;
       `;
     } else if (artist && composer) {
       // artist, composer
       albums = await sql`
         SELECT * FROM albums
         WHERE artist = ${artist}
-        AND ${composer} = ANY(composer);
+        AND ${composer} = ANY(composer)
+        ORDER BY id DESC;
       `;
     } else if (artist && sample_rate) {
       // artist, sample_rate
       albums = await sql`
         SELECT * FROM albums
         WHERE artist = ${artist}
-        AND sample_rate = ${sample_rate};
+        AND sample_rate = ${sample_rate}
+        ORDER BY id DESC;
       `;
     } else if (genre && composer) {
       // genre, composer
       albums = await sql`
         SELECT * FROM albums
         WHERE ${genre} = ANY(genre)
-        AND ${composer} = ANY(composer);
+        AND ${composer} = ANY(composer)
+        ORDER BY id DESC;
       `;
     } else if (genre && sample_rate) {
       // genre, sample_rate
       albums = await sql`
         SELECT * FROM albums
         WHERE ${genre} = ANY(genre)
-        AND sample_rate = ${sample_rate};
+        AND sample_rate = ${sample_rate}
+        ORDER BY id DESC;
       `;
     } else if (composer && sample_rate) {
       // composer, sample_rate
       albums = await sql`
         SELECT * FROM albums
         WHERE ${composer} = ANY(composer)
-        AND sample_rate = ${sample_rate};
+        AND sample_rate = ${sample_rate}
+        ORDER BY id DESC;
       `;
     } else if (artist) {
       // artist
       albums = await sql`
         SELECT * FROM albums
-        WHERE artist = ${artist};
+        WHERE artist = ${artist}
+        ORDER BY id DESC;
       `;
     } else if (genre) {
       // genre
       albums = await sql`
         SELECT * FROM albums
-        WHERE ${genre} = ANY(genre);
+        WHERE ${genre} = ANY(genre)
+        ORDER BY id DESC;
       `;
     } else if (composer) {
       // composer
       albums = await sql`
         SELECT * FROM albums
-        WHERE ${composer} = ANY(composer);
+        WHERE ${composer} = ANY(composer)
+        ORDER BY id DESC;
       `;
     } else if (sample_rate) {
       // sample_rate
       albums = await sql`
         SELECT * FROM albums
-        WHERE sample_rate = ${sample_rate};
+        WHERE sample_rate = ${sample_rate}
+        ORDER BY id DESC;
       `;
     } else {
       // No parameters
-      albums = await sql`SELECT * FROM albums ORDER BY id DESC;`;
+      albums = await sql`
+        SELECT * FROM albums 
+        ORDER BY id DESC;
+      `;
     }
 
     return response.status(200).json({ albums });
