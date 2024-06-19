@@ -1,31 +1,113 @@
-// pages/index.tsx
+import type { NextPage } from "next";
+import Link from "next/link";
+import Header from "components/Header";
 
-import Head from "next/head";
-
-const UnderMaintenancePage: React.FC = () => {
+const HomePage: NextPage = (): JSX.Element => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <Head>
-        <title>Apple Music Hi-Res Albums Database</title>
-        <meta name="description" content="Apple Music Hi-Res Albums Database" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white text-gray-800">
+      <Header title="Apple Music Hi-Res Albums Database" />
 
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-4 text-center">
-        <h1 className="text-3xl font-bold mb-4">Site Under Maintenance</h1>
-        <p className="text-lg text-gray-700 mb-8">
-          Our website is currently undergoing maintenance. We apologize for any
-          inconvenience caused.
-        </p>
+      <main className="flex flex-col items-center justify-center w-full flex-1 px-6 text-center">
+        <h1 className="text-5xl font-extrabold my-10 text-black">
+          Apple Music Hi-Res Albums Database
+        </h1>
+
+        <section className="my-12">
+          <h2 className="text-3xl font-semibold mb-6 text-gray-900">
+            A List of Hi-Res Lossless Albums for All &quot;Apple and Music
+            Lovers&quot;
+          </h2>
+          <Link
+            href="/datatable"
+            className="bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
+            passHref
+          >
+            View Hi-Res Albums
+          </Link>
+        </section>
+
+        <section className="my-8 max-w-3xl bg-yellow-100 border border-yellow-500 p-4 rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold mb-2 text-yellow-800">
+            Notice to Users Before April 2024
+          </h2>
+          <p className="text-left text-yellow-700 leading-7">
+            Due to a complete overhaul, previously registered album data can no
+            longer be deleted. Additionally, not all album data could be
+            migrated due to my residential area constraints. I apologize for any
+            inconvenience this may cause.
+          </p>
+        </section>
+
+        <section className="my-12 max-w-2xl">
+          <h2 className="text-3xl font-semibold mb-6 text-gray-900">
+            Why I Created This Service
+          </h2>
+          <p className="text-left text-gray-800 leading-8">
+            Apple launched high-resolution lossless distribution of Apple Music
+            in June 2021. However, a way to directly search for high-resolution
+            music sources has yet to be provided.
+          </p>
+          <p className="text-left text-gray-800 leading-8 mt-6">
+            So I thought it would be very useful to have a database where Apple
+            Music users could register and share high-resolution albums that
+            they know, and I actually developed it.
+          </p>
+          <p className="text-left text-gray-800 leading-8 mt-6">
+            Of course, I understand that sound quality is not the most important
+            criterion for evaluating a piece of music.
+          </p>
+          <p className="text-left text-gray-800 leading-8 mt-6">
+            However, I believe that the desire for better sound quality is
+            rooted in the natural instincts of human beings, and above all, it
+            would be wonderful if this service could help us discover unknown
+            and amazing music that we have never had the chance to experience in
+            the culture we grew up in.
+          </p>
+          <p className="text-left text-gray-800 leading-8 mt-6">
+            If you know of a high-resolution album that has not yet been
+            registered in this database, please add it. Any small contribution
+            would be greatly appreciated.
+          </p>
+          <p className="text-left text-gray-800 leading-8 mt-6">
+            Let&apos;s enjoy the universal language of the world: music!
+          </p>
+        </section>
       </main>
 
-      <footer className="w-full h-12 flex justify-center items-center border-t mt-auto">
-        <p className="text-sm text-gray-500">
-          © 2024 Apple Music Hi-Res Albums Database
+      <footer className="w-full h-20 flex flex-col justify-center items-center border-t">
+        {" "}
+        <p className="text-sm text-gray-500 mb-2">
+          © 2024{" "}
+          <a
+            href="https://x.com/totuus_tweet"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:underline"
+          >
+            Totuus1157
+          </a>
         </p>
+        <div className="text-sm text-gray-500">
+          <a
+            href="https://app.getterms.io/view/sHbek/privacy/en-us"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:underline mr-4"
+          >
+            Privacy Policy
+          </a>
+          <a
+            href="https://app.getterms.io/view/sHbek/cookie/en-us"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:underline"
+          >
+            Cookie Policy
+          </a>
+        </div>
       </footer>
     </div>
   );
 };
 
-export default UnderMaintenancePage;
+export default HomePage;
