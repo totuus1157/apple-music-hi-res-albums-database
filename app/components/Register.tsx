@@ -46,6 +46,7 @@ export default function Register(props: Props): JSX.Element {
   const [link, setLink] = useState<string | null>(null);
   const [sampleRate, setSampleRate] = useState("96");
   const [errors, setErrors] = useState<Errors>({});
+  const [apiError, setApiError] = useState<string | null>(null); // API error state
 
   const { user } = useUser();
 
@@ -100,40 +101,53 @@ export default function Register(props: Props): JSX.Element {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else if (productId && registrantId) {
-      const albumData = await makeApiRequestWithRetry(`/api/${productId}`);
-      const ob = extractAlbumInfo(albumData);
-
-      for (let item of ob) {
-        const artist = item.artistName;
-        const title = item.name;
-        const genre = convertArrayToDatabaseColumnString(item.genreNames);
-        const composer = convertArrayToDatabaseColumnString(item.composerName);
-
-        try {
-          const response = await fetch("/api/add-album", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              artist,
-              title,
-              genre,
-              composer,
-              productId,
-              sampleRate,
-              registrantId,
-              countryCode,
-            }),
-          });
-
-          const data = await response.json();
-          if (response.ok) {
-            handleClose();
-          } else {
-            console.log(`Error: ${data.error}`);
-          }
-        } catch (err: any) {
-          console.log(`Error: ${err.message}`);
+      try {
+        const albumData = await makeApiRequestWithRetry(`/api/${productId}`);
+        if (!albumData) {
+          setApiError(
+            "This album may not be compatible with the US storefront. Currently, this service does not allow albums from non-US storefronts to be registered.",
+          );
+          return;
         }
+
+        const ob = extractAlbumInfo(albumData);
+
+        for (let item of ob) {
+          const artist = item.artistName;
+          const title = item.name;
+          const genre = convertArrayToDatabaseColumnString(item.genreNames);
+          const composer = convertArrayToDatabaseColumnString(
+            item.composerName,
+          );
+
+          try {
+            const response = await fetch("/api/add-album", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                artist,
+                title,
+                genre,
+                composer,
+                productId,
+                sampleRate,
+                registrantId,
+                countryCode,
+              }),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+              handleClose();
+            } else {
+              console.log(`Error: ${data.error}`);
+            }
+          } catch (err: any) {
+            console.log(`Error: ${err.message}`);
+          }
+        }
+      } catch (err: any) {
+        console.log(`Error: ${err.message}`);
       }
     }
   };
@@ -164,6 +178,7 @@ export default function Register(props: Props): JSX.Element {
     setLink(null);
     setSampleRate("96");
     setErrors({});
+    setApiError(null); // Reset API error
     onClose();
   };
 
@@ -195,6 +210,7 @@ export default function Register(props: Props): JSX.Element {
                 <Radio value="176.4">176.4</Radio>
                 <Radio value="192">192</Radio>
               </RadioGroup>
+              {apiError && <p className="text-red-500">{apiError}</p>}
             </ModalBody>
             <ModalFooter>
               <Button onClick={handleClose}>Close</Button>
