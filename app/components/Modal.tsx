@@ -38,7 +38,6 @@ export default function Modal(props: Props): JSX.Element {
     return (
       <Delete
         isOpen={isOpen}
-        onOpen={onOpen}
         onOpenChange={onOpenChange}
         onClose={onClose}
         albumInfo={albumInfo}
