@@ -1,8 +1,4 @@
 import { useEffect, useState } from "react";
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
-import "firebase/compat/auth";
-import "components/fire";
 import Navbar from "components/Navbar";
 import ButtonGroup from "components/ButtonGroup";
 import AlbumTable from "components/AlbumTable";
