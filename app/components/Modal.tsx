@@ -1,6 +1,5 @@
 import Register from "components/Register";
 import Delete from "components/Delete";
-import Logout from "components/Logout";
 
 type Props = {
   modalContent: string | null;
@@ -41,16 +40,6 @@ export default function Modal(props: Props): JSX.Element {
         onOpenChange={onOpenChange}
         onClose={onClose}
         albumInfo={albumInfo}
-      />
-    );
-  }
-  if (modalContent === "logout") {
-    return (
-      <Logout
-        isOpen={isOpen}
-        onOpen={onOpen}
-        onOpenChange={onOpenChange}
-        onClose={onClose}
       />
     );
   }
