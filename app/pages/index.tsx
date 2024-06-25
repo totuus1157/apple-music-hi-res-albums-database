@@ -5,7 +5,12 @@ import Header from "components/Header";
 const HomePage: NextPage = (): JSX.Element => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white text-gray-800">
-      <Header title="Apple Music Hi-Res Albums Database" />
+      <Header
+        title="Apple Music Hi-Res Albums Database"
+        description="Explore and share Hi-Res Lossless albums on Apple Music with our comprehensive database. Discover new music and contribute by adding your favorite high-quality albums."
+        keywords="Apple Music, Hi-Res Lossless, High-Resolution Albums, Music Database, Share Music, Discover Music, Hi-Res Audio"
+        author="Totuus1157"
+      />
 
       <main className="flex flex-col items-center justify-center w-full flex-1 px-6 text-center">
         <h1 className="text-5xl font-extrabold my-10 text-black">
