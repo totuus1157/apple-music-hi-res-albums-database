@@ -1,8 +1,12 @@
-import type { NextPage } from "next";
+import type { NextPage, GetStaticProps } from "next";
 import Link from "next/link";
 import Header from "components/Header";
 
-const HomePage: NextPage = (): JSX.Element => {
+type Props = { year: string };
+
+const HomePage: NextPage<Props> = (props) => {
+  const { year } = props;
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white text-gray-800">
       <Header
@@ -82,7 +86,7 @@ const HomePage: NextPage = (): JSX.Element => {
       <footer className="w-full h-20 flex flex-col justify-center items-center border-t">
         {" "}
         <p className="text-sm text-gray-500 mb-2">
-          © 2024{" "}
+          © {year}{" "}
           <a
             href="https://x.com/totuus_tweet"
             target="_blank"
@@ -113,6 +117,16 @@ const HomePage: NextPage = (): JSX.Element => {
       </footer>
     </div>
   );
+};
+
+// This function gets called at build time
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  // You can fetch data here if needed and pass it to the page as props
+  const year = new Date().getFullYear().toString();
+
+  return {
+    props: { year }, // will be passed to the page component as props
+  };
 };
 
 export default HomePage;
