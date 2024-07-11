@@ -1,21 +1,13 @@
-import type { NextPage, GetStaticProps } from "next";
+import type { NextPage, Metadata } from "next";
 import Link from "next/link";
-import Header from "components/Header";
 
-type Props = { year: string };
+export const metadata: Metadata = { title: "Home Page" };
 
-const HomePage: NextPage<Props> = (props) => {
-  const { year } = props;
+const year = new Date().getFullYear().toString();
 
+const HomePage: NextPage = (): JSX.Element => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white text-gray-800">
-      <Header
-        title="Apple Music Hi-Res Albums Database"
-        description="Explore and share Hi-Res Lossless albums on Apple Music with our comprehensive database. Discover new music and contribute by adding your favorite high-quality albums."
-        keywords="Apple Music, Hi-Res Lossless, High-Resolution Albums, Music Database, Share Music, Discover Music, Hi-Res Audio"
-        author="Totuus1157"
-      />
-
       <main className="flex flex-col items-center justify-center w-full flex-1 px-6 text-center">
         <h1 className="text-5xl font-extrabold my-10 text-black">
           Apple Music Hi-Res Albums Database
@@ -119,14 +111,5 @@ const HomePage: NextPage<Props> = (props) => {
   );
 };
 
-// This function gets called at build time
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  // You can fetch data here if needed and pass it to the page as props
-  const year = new Date().getFullYear().toString();
-
-  return {
-    props: { year }, // will be passed to the page component as props
-  };
-};
-
 export default HomePage;
+
