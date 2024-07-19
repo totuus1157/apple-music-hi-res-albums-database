@@ -1,7 +1,11 @@
 import type { NextPage, Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = { title: "Home Page" };
+export const metadata: Metadata = {
+  title: "Home Page",
+  description:
+    "Explore and share Hi-Res Lossless albums on Apple Music with our comprehensive database. Discover new music and contribute by adding your favorite high-quality albums.",
+};
 
 const year = new Date().getFullYear().toString();
 
@@ -112,4 +116,3 @@ const HomePage: NextPage = (): JSX.Element => {
 };
 
 export default HomePage;
-
