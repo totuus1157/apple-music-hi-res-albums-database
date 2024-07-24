@@ -1,6 +1,6 @@
 # apple-music-hi-res-albums-database
 
-List of high-res lossless albums making by all "Apple and Music Lovers"
+A List of Hi-Res Lossless Albums for All "Apple and Music Lovers"
 
 ## TODO
 - Complete redesign of the top page.
