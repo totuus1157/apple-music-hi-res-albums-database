@@ -1,11 +1,14 @@
 import type { NextPage, Metadata } from "next";
 import Link from "next/link";
+import GoogleAd from "components/googlead";
 
 export const metadata: Metadata = {
   title: "Home Page",
   description:
     "Explore and share Hi-Res Lossless albums on Apple Music with our comprehensive database. Discover new music and contribute by adding your favorite high-quality albums.",
 };
+
+const SLOT_ID = "1788301069";
 
 const year = new Date().getFullYear().toString();
 
@@ -30,6 +33,8 @@ const HomePage: NextPage = (): JSX.Element => {
             View Hi-Res Albums
           </Link>
         </section>
+
+        <GoogleAd slot={SLOT_ID} />
 
         <section className="my-8 max-w-3xl bg-yellow-100 border border-yellow-500 p-4 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-2 text-yellow-800">
