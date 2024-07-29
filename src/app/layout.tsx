@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import { GoogleAdScript } from "components/googleads-script";
 import "styles/globals.css";
 
@@ -35,7 +36,10 @@ export default function RootLayout({
   return (
     <>
       <html lang="en">
-        <body>{children}</body>
+        <body>
+          {children}
+          <Analytics />
+        </body>
       </html>
       <GoogleAdScript />
     </>
