@@ -133,8 +133,6 @@ export default function AlbumTable(props: Props): JSX.Element {
       const result = await response.json();
       const albums: Album[] = result.albums.rows;
 
-      console.log("albums: ", albums);
-
       albums.forEach((doc: Album) => {
         tableRows.push(
           <TableRow key={doc.id}>
