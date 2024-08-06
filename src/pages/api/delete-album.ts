@@ -12,7 +12,7 @@ export default async function handler(
   try {
     const { productId, registrantId } = request.body;
 
-    console.log("Request Body:", request.body); // 受信したリクエストボディをコンソールに出力
+    console.log("Request Body:", request.body); // Outputs the received request body to the console
 
     if (!productId || !registrantId) {
       throw new Error("productId and registrantId are required");
@@ -33,7 +33,7 @@ export default async function handler(
 
     return response.status(200).json({ message: "Album deleted successfully" });
   } catch (error: any) {
-    console.error("Error:", error); // エラーをコンソールに出力
+    console.error("Error:", error); // Output errors to console
     return response.status(500).json({ error: error.message });
   }
 }
