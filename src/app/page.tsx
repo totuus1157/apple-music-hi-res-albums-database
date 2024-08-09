@@ -25,6 +25,11 @@ const HomePage: NextPage = (): JSX.Element => {
             A List of Hi-Res Lossless Albums for All &quot;Apple and Music
             Lovers&quot;
           </h2>
+        </section>
+
+        <GoogleAd slot={SLOT_ID} />
+
+        <div className="my-12">
           <Link
             href="/datatable"
             className="bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
@@ -32,9 +37,7 @@ const HomePage: NextPage = (): JSX.Element => {
           >
             View Hi-Res Albums
           </Link>
-        </section>
-
-        <GoogleAd slot={SLOT_ID} />
+        </div>
 
         <section className="my-8 max-w-3xl bg-yellow-100 border border-yellow-500 p-4 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-2 text-yellow-800">
