@@ -63,7 +63,11 @@ export default function ButtonGroup(props: Props): JSX.Element {
       </div>
       <div>
         {!isEditMode && (
-          <Button color="primary" isDisabled={!user} onClick={handleShow}>
+          <Button
+            color="primary"
+            isDisabled={!user && process.env.NODE_ENV === "production"}
+            onClick={handleShow}
+          >
             Add
           </Button>
         )}{" "}
