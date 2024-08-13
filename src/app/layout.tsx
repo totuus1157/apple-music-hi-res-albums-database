@@ -39,8 +39,8 @@ export default function RootLayout({
         <body>
           {children}
           <Analytics />
+          <GoogleAdScript />
         </body>
-        <GoogleAdScript />
       </html>
     </>
   );
