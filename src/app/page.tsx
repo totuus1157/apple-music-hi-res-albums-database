@@ -27,7 +27,13 @@ const HomePage: NextPage = (): JSX.Element => {
           </h2>
         </section>
 
-        <GoogleAd slot={SLOT_ID} />
+        <div className="w-full max-w-[728px] mx-auto">
+          <GoogleAd
+            slot={SLOT_ID}
+            format="auto"
+            style={{ width: "100%", height: "auto" }}
+          />
+        </div>
 
         <div className="my-12">
           <Link
