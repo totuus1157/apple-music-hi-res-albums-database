@@ -41,25 +41,27 @@ export default function ButtonGroup(props: Props): JSX.Element {
   return (
     <div className="m-4 flex justify-between">
       <div>
-        <Button
-          color="success"
-          isDisabled={
-            !selectedItem.artist &&
-            !selectedItem.genre &&
-            !selectedItem.composer &&
-            !selectedItem.sampleRate
-          }
-          onClick={(): void =>
-            setSelectedItem({
-              artist: "",
-              genre: "",
-              composer: "",
-              sampleRate: "",
-            })
-          }
-        >
-          All Items
-        </Button>
+        {!isEditMode && (
+          <Button
+            color="success"
+            isDisabled={
+              !selectedItem.artist &&
+              !selectedItem.genre &&
+              !selectedItem.composer &&
+              !selectedItem.sampleRate
+            }
+            onClick={(): void =>
+              setSelectedItem({
+                artist: "",
+                genre: "",
+                composer: "",
+                sampleRate: "",
+              })
+            }
+          >
+            All Items
+          </Button>
+        )}
       </div>
       <div>
         {!isEditMode && (
