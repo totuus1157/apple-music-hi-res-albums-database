@@ -40,7 +40,7 @@ export default function ButtonGroup(props: Props): JSX.Element {
 
   return (
     <div className="m-4 flex justify-between">
-      <div>
+      <div className="px-2">
         {!isEditMode && (
           <Button
             color="success"
@@ -63,7 +63,7 @@ export default function ButtonGroup(props: Props): JSX.Element {
           </Button>
         )}
       </div>
-      <div>
+      <div className="px-2">
         {!isEditMode && (
           <Button
             color="primary"
