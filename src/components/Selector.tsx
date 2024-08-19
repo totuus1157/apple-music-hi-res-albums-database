@@ -34,7 +34,10 @@ export default function Selector(props: Props): JSX.Element {
   };
 
   return (
-    <Dropdown shouldBlockScroll={false}>
+    <Dropdown
+      shouldBlockScroll={false}
+      className={name !== "Sample Rate" ? "w-screen mx-auto xl:w-auto" : ""}
+    >
       <DropdownTrigger>
         <Link size="sm" as="button" underline="hover">
           {name}&#x25bc;
