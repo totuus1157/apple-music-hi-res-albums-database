@@ -98,7 +98,7 @@ const HomePage: NextPage = (): JSX.Element => {
         <p className="text-sm text-gray-500 mb-2">
           © {year}{" "}
           <a
-            href="https://x.com/totuus_tweet"
+            href="https://github.com/totuus1157"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 hover:underline"
