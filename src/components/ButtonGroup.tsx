@@ -76,7 +76,7 @@ export default function ButtonGroup(props: Props): JSX.Element {
         {!isEditMode ? (
           <Button
             color="default"
-            isDisabled={!user}
+            isDisabled={!user && process.env.NODE_ENV === "production"}
             onClick={(): void => setIsEditMode(true)}
           >
             Edit

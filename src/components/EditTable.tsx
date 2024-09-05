@@ -61,8 +61,10 @@ export default function EditTable(props: Props): JSX.Element {
 
   const { user, error, isLoading } = useUser();
 
+  const userID = user?.sub || process.env.NEXT_PUBLIC_AUTH0_DEVELOPER_USER_ID;
+
   const handleDelete = async (productId: string): Promise<void> => {
-    if (!user?.sub) {
+    if (!userID) {
       alert("User not authenticated");
       return;
     }
@@ -77,7 +79,7 @@ export default function EditTable(props: Props): JSX.Element {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ productId, registrantId: user.sub }),
+        body: JSON.stringify({ productId, registrantId: userID }),
       });
 
       if (!response.ok) {
@@ -94,11 +96,9 @@ export default function EditTable(props: Props): JSX.Element {
   };
 
   const fetchData = async () => {
-    if (!user?.sub) return; // Check if user.sub is defined
-
     try {
       const response = await fetch(
-        `/api/get-albums-by-registrant?registrantId=${user.sub}`,
+        `/api/get-albums-by-registrant?registrantId=${userID}`,
       );
       const result = await response.json();
       setData(result.albums.rows);
@@ -127,7 +127,7 @@ export default function EditTable(props: Props): JSX.Element {
 
   return (
     <>
-      {isLoaded ? (
+      {isLoaded || userID ? (
         <Table isStriped shadow="none">
           <TableHeader>
             <TableColumn>Artist</TableColumn>

@@ -103,7 +103,9 @@ export default function Register(props: Props): JSX.Element {
     e.preventDefault();
     const newErrors = findFormErrors();
     const productId = albumId(link);
-    const registrantId = user && user.sub;
+    const registrantId = user
+      ? user.sub
+      : process.env.NEXT_PUBLIC_AUTH0_DEVELOPER_USER_ID;
     const countryCode = "us"; // Provisional measures
 
     if (Object.keys(newErrors).length > 0) {
