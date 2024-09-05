@@ -11,6 +11,20 @@ import {
   Link,
 } from "@nextui-org/react";
 
+type AlbumData = {
+  id: string;
+  product_id: string;
+  title: string;
+  artist: string;
+  genre: string[];
+  composer: string[];
+  sample_rate: string;
+  registrant_id: string;
+  created_at: Date;
+  updated_at: Date;
+  country_code: string;
+};
+
 type SelectedItem = {
   artist: string;
   genre: string;
@@ -26,6 +40,7 @@ type AlbumElements = {
 };
 
 type Props = {
+  albumDataArray: AlbumData[];
   isOpen: boolean;
   registeredAlbumIDs: string[];
   setRegisteredAlbumIDs: (arg0: string[]) => void;
@@ -51,6 +66,7 @@ type Album = {
 
 export default function AlbumTable(props: Props): JSX.Element {
   const {
+    albumDataArray,
     isOpen,
     registeredAlbumIDs,
     setRegisteredAlbumIDs,
@@ -87,13 +103,28 @@ export default function AlbumTable(props: Props): JSX.Element {
       });
   };
 
-  useEffect((): void => {
-    const fetchAlbumElements = async () => {
-      const response = await fetch("/api/get-albums");
-      const result = await response.json();
-      const albums: Album[] = result.albums.rows;
+  const filterAlbums = (
+    albumDataArray: AlbumData[],
+    artist?: string,
+    genre?: string,
+    composer?: string,
+    sample_rate?: string,
+  ): AlbumData[] => {
+    return albumDataArray.filter((album): boolean => {
+      const matchArtist = artist ? album.artist === artist : true;
+      const matchGenre = genre ? album.genre.includes(genre) : true;
+      const matchComposer = composer ? album.composer.includes(composer) : true;
+      const matchSampleRate = sample_rate
+        ? album.sample_rate === sample_rate
+        : true;
 
-      albums.forEach((doc: Album) => {
+      return matchArtist && matchGenre && matchComposer && matchSampleRate;
+    });
+  };
+
+  useEffect((): void => {
+    const fetchAlbumElements = (): void => {
+      albumDataArray.forEach((doc: AlbumData): void => {
         let artistName: string = doc.artist;
         if (/^The /.test(artistName)) {
           artistName = artistName.replace(/^The /, "");
@@ -111,29 +142,24 @@ export default function AlbumTable(props: Props): JSX.Element {
     };
 
     fetchAlbumElements();
-  }, [isOpen]);
+  }, [albumDataArray]);
 
   useEffect((): void => {
-    const fetchData = async () => {
-      const queryParams = new URLSearchParams();
-
+    const fetchData = (): void => {
       let selectedArtistName = selectedItem.artist;
       if (nonArticleNames.includes(selectedArtistName)) {
         selectedArtistName = `The ${selectedArtistName}`;
       }
 
-      if (selectedArtistName) queryParams.append("artist", selectedArtistName);
-      if (selectedItem.genre) queryParams.append("genre", selectedItem.genre);
-      if (selectedItem.composer)
-        queryParams.append("composer", selectedItem.composer);
-      if (selectedItem.sampleRate)
-        queryParams.append("sample_rate", selectedItem.sampleRate);
+      const filteredAlbums = filterAlbums(
+        albumDataArray,
+        selectedArtistName,
+        selectedItem.genre,
+        selectedItem.composer,
+        selectedItem.sampleRate,
+      );
 
-      const response = await fetch(`/api/get-albums?${queryParams.toString()}`);
-      const result = await response.json();
-      const albums: Album[] = result.albums.rows;
-
-      albums.forEach((doc: Album) => {
+      filteredAlbums.forEach((doc: AlbumData): void => {
         tableRows.push(
           <TableRow key={doc.id}>
             <TableCell>{doc.artist}</TableCell>
@@ -173,7 +199,7 @@ export default function AlbumTable(props: Props): JSX.Element {
     };
 
     fetchData();
-  }, [isOpen, selectedItem]);
+  }, [albumDataArray, selectedItem]);
 
   return (
     <>

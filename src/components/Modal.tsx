@@ -9,6 +9,7 @@ type Props = {
   onOpenChange: () => void;
   onClose: () => void;
   registeredAlbumIDs: string[];
+  setAlbumFetchTrigger: (arg0: number) => void;
 };
 
 export default function Modal(props: Props): JSX.Element {
@@ -20,6 +21,7 @@ export default function Modal(props: Props): JSX.Element {
     onOpenChange,
     onClose,
     registeredAlbumIDs,
+    setAlbumFetchTrigger,
   } = props;
 
   if (modalContent === "register") {
@@ -30,6 +32,7 @@ export default function Modal(props: Props): JSX.Element {
         onOpenChange={onOpenChange}
         onClose={onClose}
         registeredAlbumIDs={registeredAlbumIDs}
+        setAlbumFetchTrigger={setAlbumFetchTrigger}
       />
     );
   }

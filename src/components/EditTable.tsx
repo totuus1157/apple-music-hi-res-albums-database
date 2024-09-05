@@ -12,6 +12,20 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 
+type AlbumData = {
+  id: string;
+  product_id: string;
+  title: string;
+  artist: string;
+  genre: string[];
+  composer: string[];
+  sample_rate: string;
+  registrant_id: string;
+  created_at: Date;
+  updated_at: Date;
+  country_code: string;
+};
+
 type Album = {
   id: string;
   product_id: string;
@@ -23,15 +37,25 @@ type Album = {
 };
 
 type Props = {
+  albumDataArray: AlbumData[];
   albumInfo: string;
   setAlbumInfo: (arg0: string) => void;
   onOpen: () => void;
   setModalContent: (arg0: string) => void;
   isOpen: boolean;
+  setAlbumFetchTrigger: (arg0: number) => void;
 };
 
 export default function EditTable(props: Props): JSX.Element {
-  const { albumInfo, setAlbumInfo, onOpen, setModalContent, isOpen } = props;
+  const {
+    albumDataArray,
+    albumInfo,
+    setAlbumInfo,
+    onOpen,
+    setModalContent,
+    isOpen,
+    setAlbumFetchTrigger,
+  } = props;
   const [data, setData] = useState<Album[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -62,7 +86,7 @@ export default function EditTable(props: Props): JSX.Element {
       }
 
       // Refresh the album list after successful deletion
-      fetchData();
+      setAlbumFetchTrigger(Date.now());
     } catch (error: any) {
       console.error("Error deleting album:", error);
       alert("Failed to delete the album: " + error.message);
@@ -85,10 +109,13 @@ export default function EditTable(props: Props): JSX.Element {
   };
 
   useEffect((): void => {
-    if (user) {
-      fetchData();
+    if (userID) {
+      const getUserAlbumsData = albumDataArray.filter((albumData): boolean => {
+        return albumData.registrant_id === userID;
+      });
+      setData(getUserAlbumsData);
     }
-  }, [user, isOpen]);
+  }, [albumDataArray]);
 
   if (isLoading) {
     return <p>Loading user...</p>;

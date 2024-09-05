@@ -34,10 +34,18 @@ type Props = {
   onOpenChange: () => void;
   onClose: () => void;
   registeredAlbumIDs: string[];
+  setAlbumFetchTrigger: (arg0: number) => void;
 };
 
 export default function Register(props: Props): JSX.Element {
-  const { isOpen, onOpen, onOpenChange, onClose, registeredAlbumIDs } = props;
+  const {
+    isOpen,
+    onOpen,
+    onOpenChange,
+    onClose,
+    registeredAlbumIDs,
+    setAlbumFetchTrigger,
+  } = props;
 
   const [artist, setArtist] = useState<string | null>(null);
   const [title, setTitle] = useState<string | null>(null);
@@ -138,6 +146,7 @@ export default function Register(props: Props): JSX.Element {
 
             const data = await response.json();
             if (response.ok) {
+              setAlbumFetchTrigger(Date.now());
               handleClose();
             } else {
               console.log(`Error: ${data.error}`);
