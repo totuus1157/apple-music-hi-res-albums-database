@@ -1,6 +1,6 @@
 import type { NextPage, Metadata } from "next";
 import Link from "next/link";
-import GoogleAd from "components/googlead";
+import GoogleAd from "app/googlead";
 
 export const metadata: Metadata = {
   title: "Home Page",

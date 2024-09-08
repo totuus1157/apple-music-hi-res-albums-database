@@ -1,6 +1,10 @@
 import { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
-import { GoogleAdScript } from "components/googleads-script";
+import {
+  GoogleAdScript,
+  AdBlockRecoveryScript,
+  AdBlockWarning,
+} from "app/googleads-script";
 import "styles/globals.css";
 
 export const metadata: Metadata = {
