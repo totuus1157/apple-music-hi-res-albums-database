@@ -41,6 +41,8 @@ export default function RootLayout({
           <Analytics />
           <GoogleAdScript />
         </body>
+        <AdBlockRecoveryScript />
+        <AdBlockWarning />
       </html>
     </>
   );
