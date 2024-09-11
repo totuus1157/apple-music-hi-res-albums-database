@@ -97,7 +97,13 @@ export default function AlbumTable(props: Props): JSX.Element {
       )
       .filter(Boolean);
     return Array.from(new Set(elements))
-      .sort()
+      .sort((a, b) => {
+        if (_category === "sampleRate") {
+          return parseFloat(a) - parseFloat(b);
+        } else {
+          return a.localeCompare(b);
+        }
+      })
       .map((uniqueElement, key): SelectionElements => {
         return { id: key + 1, element: uniqueElement as string };
       });
@@ -134,6 +140,7 @@ export default function AlbumTable(props: Props): JSX.Element {
           artist: artistName,
           genre: doc.genre,
           composer: doc.composer,
+          sampleRate: doc.sample_rate,
         });
       });
 
@@ -243,12 +250,7 @@ export default function AlbumTable(props: Props): JSX.Element {
                 name="Sample Rate"
                 selectedItem={selectedItem}
                 setSelectedItem={setSelectedItem}
-                selectionElements={sampleRateList.map(
-                  (value): SelectionElements => ({
-                    id: value.id,
-                    element: value.sampleRate,
-                  }),
-                )}
+                selectionElements={selectionElements("sampleRate")}
               />
             </TableColumn>
             <TableColumn>Title</TableColumn>
