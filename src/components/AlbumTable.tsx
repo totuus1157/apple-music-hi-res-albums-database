@@ -144,12 +144,36 @@ export default function AlbumTable(props: Props): JSX.Element {
         });
       });
 
-      setAlbumElementsList(albumElements);
+      const filteredAlbums = albumElements.filter(
+        (_album): boolean | undefined => {
+          const matchesArtist = selectedItem.artist
+            ? _album.artist?.includes(selectedItem.artist)
+            : true;
+          const matchesGenre = selectedItem.genre
+            ? _album.genre?.includes(selectedItem.genre)
+            : true;
+          const matchesComposer = selectedItem.composer
+            ? _album.composer?.includes(selectedItem.composer)
+            : true;
+          const matchesSampleRate = selectedItem.sampleRate
+            ? _album.sampleRate?.includes(selectedItem.sampleRate)
+            : true;
+
+          return (
+            matchesArtist &&
+            matchesGenre &&
+            matchesComposer &&
+            matchesSampleRate
+          );
+        },
+      );
+
+      setAlbumElementsList(filteredAlbums);
       setNonArticleNames(namesDeletedThe);
     };
 
     fetchAlbumElements();
-  }, [albumDataArray]);
+  }, [albumDataArray, selectedItem]);
 
   useEffect((): void => {
     const fetchData = (): void => {
