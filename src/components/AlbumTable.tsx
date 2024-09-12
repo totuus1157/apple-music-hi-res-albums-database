@@ -240,7 +240,10 @@ export default function AlbumTable(props: Props): JSX.Element {
           shadow="none"
           topContent={
             <caption className="flex justify-start ml-4">
-              Total: {albumElementsList.length}
+              {albumDataArray.length === albumElementsList.length
+                ? "All Albums: "
+                : "Selected Albums: "}
+              {albumElementsList.length}
             </caption>
           }
         >
