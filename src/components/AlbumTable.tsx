@@ -250,7 +250,8 @@ export default function AlbumTable(props: Props): JSX.Element {
           <TableHeader>
             <TableColumn className={selectedItem.artist && "selected"}>
               <Selector
-                name="Artist"
+                displayName="Artist"
+                propertyName="artist"
                 selectedItem={selectedItem}
                 setSelectedItem={setSelectedItem}
                 selectionElements={selectionElements("artist")}
@@ -258,7 +259,8 @@ export default function AlbumTable(props: Props): JSX.Element {
             </TableColumn>
             <TableColumn className={selectedItem.genre && "selected"}>
               <Selector
-                name="Genre"
+                displayName="Genre"
+                propertyName="genre"
                 selectedItem={selectedItem}
                 setSelectedItem={setSelectedItem}
                 selectionElements={selectionElements("genre")}
@@ -266,7 +268,8 @@ export default function AlbumTable(props: Props): JSX.Element {
             </TableColumn>
             <TableColumn className={selectedItem.composer && "selected"}>
               <Selector
-                name="Composer"
+                displayName="Composer"
+                propertyName="composer"
                 selectedItem={selectedItem}
                 setSelectedItem={setSelectedItem}
                 selectionElements={selectionElements("composer")}
@@ -274,7 +277,8 @@ export default function AlbumTable(props: Props): JSX.Element {
             </TableColumn>
             <TableColumn className={selectedItem.sampleRate && "selected"}>
               <Selector
-                name="Sample Rate"
+                displayName="Sample Rate"
+                propertyName="sampleRate"
                 selectedItem={selectedItem}
                 setSelectedItem={setSelectedItem}
                 selectionElements={selectionElements("sampleRate")}

@@ -14,19 +14,23 @@ type SelectedItem = {
 };
 
 type Props = {
-  name: string;
+  displayName: string;
+  propertyName: string;
   selectedItem: SelectedItem;
   setSelectedItem: (arg0: SelectedItem) => void;
   selectionElements: { id?: number; element?: string }[];
 };
 
 export default function Selector(props: Props): JSX.Element {
-  const { name, selectedItem, setSelectedItem, selectionElements } = props;
+  const {
+    displayName,
+    propertyName,
+    selectedItem,
+    setSelectedItem,
+    selectionElements,
+  } = props;
 
-  const selectItems = (eventkey: string | number): void => {
-    const propertyName = (
-      name.slice(0, 1).toLowerCase() + name.slice(1)
-    ).replace(/\s+/g, "");
+  const selectItems = (eventkey: string): void => {
     setSelectedItem({
       ...selectedItem,
       [propertyName]: eventkey,
@@ -36,11 +40,13 @@ export default function Selector(props: Props): JSX.Element {
   return (
     <Dropdown
       shouldBlockScroll={false}
-      className={name !== "Sample Rate" ? "w-screen mx-auto xl:w-auto" : ""}
+      className={
+        propertyName !== "sampleRate" ? "w-screen mx-auto xl:w-auto" : ""
+      }
     >
       <DropdownTrigger>
         <Link size="sm" as="button" underline="hover">
-          {name}&#x25bc;
+          {displayName}&#x25bc;
         </Link>
       </DropdownTrigger>
       <DropdownMenu
