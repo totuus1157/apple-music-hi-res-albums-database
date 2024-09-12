@@ -15,7 +15,7 @@ type SelectedItem = {
 
 type Props = {
   displayName: string;
-  propertyName: string;
+  propertyName: keyof SelectedItem;
   selectedItem: SelectedItem;
   setSelectedItem: (arg0: SelectedItem) => void;
   selectionElements: { id?: number; element?: string }[];
@@ -45,13 +45,18 @@ export default function Selector(props: Props): JSX.Element {
       }
     >
       <DropdownTrigger>
-        <Link size="sm" as="button" underline="hover">
+        <Link
+          size="sm"
+          as="button"
+          underline="hover"
+          color={selectedItem[propertyName] ? "secondary" : "primary"}
+        >
           {displayName}&#x25bc;
         </Link>
       </DropdownTrigger>
       <DropdownMenu
         items={selectionElements}
-        onAction={(key): void => selectItems(key)}
+        onAction={(key): void => selectItems(String(key))}
       >
         {(item) => (
           <DropdownItem key={item.element}>{item.element}</DropdownItem>
