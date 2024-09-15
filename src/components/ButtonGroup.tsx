@@ -59,7 +59,7 @@ export default function ButtonGroup(props: Props): JSX.Element {
               })
             }
           >
-            All Items
+            All Albums
           </Button>
         )}
       </div>
