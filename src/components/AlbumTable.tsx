@@ -9,6 +9,7 @@ import {
   TableRow,
   TableCell,
   Link,
+  Spinner,
 } from "@nextui-org/react";
 
 type AlbumData = {
@@ -289,7 +290,7 @@ export default function AlbumTable(props: Props): JSX.Element {
           <TableBody>{data}</TableBody>
         </Table>
       ) : (
-        <p>Now loading...</p>
+        <Spinner label="Loading..." className="ml-4" />
       )}
     </>
   );

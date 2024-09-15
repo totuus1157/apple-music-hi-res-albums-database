@@ -8,6 +8,7 @@ import {
   TableRow,
   TableCell,
   Button,
+  Spinner,
 } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
@@ -172,7 +173,7 @@ export default function EditTable(props: Props): JSX.Element {
           </TableBody>
         </Table>
       ) : (
-        <p>Now loading...</p>
+        <Spinner label="Loading..." className="ml-4" />
       )}
     </>
   );
