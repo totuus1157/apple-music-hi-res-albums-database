@@ -3,6 +3,7 @@ import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
+  DropdownSection,
   DropdownItem,
 } from "@nextui-org/react";
 
@@ -58,9 +59,22 @@ export default function Selector(props: Props): JSX.Element {
         items={selectionElements}
         onAction={(key): void => selectItems(String(key))}
       >
-        {(item) => (
-          <DropdownItem key={item.element}>{item.element}</DropdownItem>
-        )}
+        <DropdownSection aria-label="Reset" showDivider>
+          <DropdownItem
+            key=""
+            className="text-primary"
+            color="primary"
+            variant="flat"
+            isDisabled={selectedItem[propertyName] ? false : true}
+          >
+            Reset
+          </DropdownItem>
+        </DropdownSection>
+        <DropdownSection aria-label="Items">
+          {selectionElements.map((item) => (
+            <DropdownItem key={item.element}>{item.element}</DropdownItem>
+          ))}
+        </DropdownSection>
       </DropdownMenu>
     </Dropdown>
   );
