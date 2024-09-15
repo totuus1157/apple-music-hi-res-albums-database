@@ -96,19 +96,6 @@ export default function EditTable(props: Props): JSX.Element {
     }
   };
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(
-        `/api/get-albums-by-registrant?registrantId=${userID}`,
-      );
-      const result = await response.json();
-      setData(result.albums.rows);
-      setIsLoaded(true);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
   useEffect((): void => {
     if (userID) {
       const getUserAlbumsData = albumDataArray.filter((albumData): boolean => {
