@@ -6,6 +6,18 @@ import EditTable from "components/EditTable";
 import Modal from "components/Modal";
 import { useDisclosure } from "@nextui-org/react";
 
+type Storefront = {
+  id: string;
+  type: string;
+  href: string;
+  attributes: {
+    defaultLanguageTag: string;
+    explicitContentPolicy: "allowed" | "opt-in" | "prohibited";
+    name: string;
+    supportedLanguageTags: string[];
+  };
+};
+
 type AlbumData = {
   id: string;
   product_id: string;
@@ -34,6 +46,18 @@ export default function Main(): JSX.Element {
     sampleRate: "",
   });
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+
+  useEffect((): void => {
+    const getStorefronts = async (): Promise<void> => {
+      const response = await fetch("api/get-storefronts");
+      const result = await response.json();
+      const storefronts: Storefront[] = result.data;
+
+      setStorefrontArray(storefronts);
+    };
+
+    getStorefronts();
+  }, []);
 
   useEffect((): void => {
     const getAlbumDatabase = async (): Promise<void> => {
