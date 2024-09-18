@@ -33,6 +33,7 @@ type AlbumData = {
 };
 
 export default function Main(): JSX.Element {
+  const [storefrontArray, setStorefrontArray] = useState<Storefront[]>([]);
   const [albumDataArray, setAlbumDataArray] = useState<AlbumData[]>([]);
   const [modalContent, setModalContent] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -84,6 +85,7 @@ export default function Main(): JSX.Element {
       />
       {isEditMode !== true ? (
         <AlbumTable
+          storefrontArray={storefrontArray}
           albumDataArray={albumDataArray}
           isOpen={isOpen}
           registeredAlbumIDs={registeredAlbumIDs}

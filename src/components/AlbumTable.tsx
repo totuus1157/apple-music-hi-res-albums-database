@@ -12,6 +12,18 @@ import {
   Spinner,
 } from "@nextui-org/react";
 
+type Storefront = {
+  id: string;
+  type: string;
+  href: string;
+  attributes: {
+    defaultLanguageTag: string;
+    explicitContentPolicy: "allowed" | "opt-in" | "prohibited";
+    name: string;
+    supportedLanguageTags: string[];
+  };
+};
+
 type AlbumData = {
   id: string;
   product_id: string;
@@ -41,6 +53,7 @@ type AlbumElements = {
 };
 
 type Props = {
+  storefrontArray: Storefront[];
   albumDataArray: AlbumData[];
   isOpen: boolean;
   registeredAlbumIDs: string[];
@@ -67,6 +80,7 @@ type Album = {
 
 export default function AlbumTable(props: Props): JSX.Element {
   const {
+    storefrontArray,
     albumDataArray,
     isOpen,
     registeredAlbumIDs,
@@ -127,6 +141,18 @@ export default function AlbumTable(props: Props): JSX.Element {
 
       return matchArtist && matchGenre && matchComposer && matchSampleRate;
     });
+  };
+
+  const extractStorefrontNames = (countryCode: string): string => {
+    const foundStorefront = storefrontArray.find((storefront): boolean => {
+      return storefront.id === countryCode;
+    });
+
+    if (!foundStorefront) {
+      return "Unknown";
+    } else {
+      return foundStorefront?.attributes.name;
+    }
   };
 
   useEffect((): void => {
@@ -217,9 +243,10 @@ export default function AlbumTable(props: Props): JSX.Element {
                 size="sm"
                 underline="hover"
               >
-                {doc.title} [{doc.country_code.toUpperCase()}]
+                {doc.title}
               </Link>
             </TableCell>
+            <TableCell>{extractStorefrontNames(doc.country_code)}</TableCell>
           </TableRow>,
         );
         albumIds.push(doc.product_id);
@@ -286,6 +313,7 @@ export default function AlbumTable(props: Props): JSX.Element {
               />
             </TableColumn>
             <TableColumn>Title</TableColumn>
+            <TableColumn>Storefront</TableColumn>
           </TableHeader>
           <TableBody>{data}</TableBody>
         </Table>
