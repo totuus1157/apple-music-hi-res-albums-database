@@ -1,6 +1,18 @@
 import Register from "components/Register";
 import Delete from "components/Delete";
 
+type Storefront = {
+  id: string;
+  type: string;
+  href: string;
+  attributes: {
+    defaultLanguageTag: string;
+    explicitContentPolicy: "allowed" | "opt-in" | "prohibited";
+    name: string;
+    supportedLanguageTags: string[];
+  };
+};
+
 type Props = {
   modalContent: string | null;
   albumInfo: string;
@@ -8,6 +20,7 @@ type Props = {
   onOpen: () => void;
   onOpenChange: () => void;
   onClose: () => void;
+  storefrontArray: Storefront[];
   registeredAlbumIDs: string[];
   setAlbumFetchTrigger: (arg0: number) => void;
 };
@@ -20,6 +33,7 @@ export default function Modal(props: Props): JSX.Element {
     onOpen,
     onOpenChange,
     onClose,
+    storefrontArray,
     registeredAlbumIDs,
     setAlbumFetchTrigger,
   } = props;
@@ -31,6 +45,7 @@ export default function Modal(props: Props): JSX.Element {
         onOpen={onOpen}
         onOpenChange={onOpenChange}
         onClose={onClose}
+        storefrontArray={storefrontArray}
         registeredAlbumIDs={registeredAlbumIDs}
         setAlbumFetchTrigger={setAlbumFetchTrigger}
       />

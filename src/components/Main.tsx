@@ -111,6 +111,7 @@ export default function Main(): JSX.Element {
         onOpenChange={onOpenChange}
         onClose={onClose}
         albumInfo={albumInfo}
+        storefrontArray={storefrontArray}
         registeredAlbumIDs={registeredAlbumIDs}
         setAlbumFetchTrigger={setAlbumFetchTrigger}
       />

@@ -14,6 +14,18 @@ import {
   Radio,
 } from "@nextui-org/react";
 
+type Storefront = {
+  id: string;
+  type: string;
+  href: string;
+  attributes: {
+    defaultLanguageTag: string;
+    explicitContentPolicy: "allowed" | "opt-in" | "prohibited";
+    name: string;
+    supportedLanguageTags: string[];
+  };
+};
+
 type Errors = {
   artist?: string | null;
   title?: string | null;
@@ -33,6 +45,7 @@ type Props = {
   onOpen: () => void;
   onOpenChange: () => void;
   onClose: () => void;
+  storefrontArray: Storefront[];
   registeredAlbumIDs: string[];
   setAlbumFetchTrigger: (arg0: number) => void;
 };
@@ -43,6 +56,7 @@ export default function Register(props: Props): JSX.Element {
     onOpen,
     onOpenChange,
     onClose,
+    storefrontArray,
     registeredAlbumIDs,
     setAlbumFetchTrigger,
   } = props;
