@@ -1,6 +1,9 @@
-async function makeApiRequest(albumId: string): Promise<any> {
+async function makeApiRequest(
+  storefrontId: string,
+  albumId: string,
+): Promise<any> {
   try {
-    const response = await fetch(albumId);
+    const response = await fetch(`/api/${storefrontId}/${albumId}`);
 
     if (response.ok) {
       const data = await response.json();
@@ -15,7 +18,10 @@ async function makeApiRequest(albumId: string): Promise<any> {
   }
 }
 
-export async function makeApiRequestWithRetry(albumId: string): Promise<any> {
+export async function makeApiRequestWithRetry(
+  storefrontId: string,
+  albumId: string,
+): Promise<any> {
   const maxRetries = 3;
   const retryDelay = 5000;
 
@@ -23,7 +29,7 @@ export async function makeApiRequestWithRetry(albumId: string): Promise<any> {
 
   while (retryCount < maxRetries) {
     try {
-      return await makeApiRequest(albumId);
+      return await makeApiRequest(storefrontId, albumId);
     } catch (err: any) {
       if (err.message === "Too Many Requests") {
         console.log(

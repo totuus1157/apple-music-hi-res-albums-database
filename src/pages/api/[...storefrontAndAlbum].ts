@@ -4,12 +4,18 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> {
-  const albumid = req.query.albumid;
+  const { storefrontAndAlbum } = req.query;
+
+  if (!Array.isArray(storefrontAndAlbum) || storefrontAndAlbum.length !== 2) {
+    return res.status(400).json({ error: "Invalid parameters." });
+  }
+
+  const [storefrontId, albumId] = storefrontAndAlbum; // Extract storefrontId and albumId from the URL
 
   try {
     if (req.method === "GET") {
       const response = await fetch(
-        `https://api.music.apple.com/v1/catalog/us/albums/${albumid}`,
+        `https://api.music.apple.com/v1/catalog/${storefrontId}/albums/${albumId}`,
         {
           headers: {
             Authorization: `Bearer ${process.env.APPLE_MUSIC_API_KEY}`,
@@ -21,10 +27,8 @@ export default async function handler(
       const code = response.status;
 
       if (response.ok) {
-        // Request was successful
         return res.status(code).json(data);
       } else {
-        // Handle API errors
         let errorMessage = "An error occurred while processing the request.";
 
         switch (code) {
@@ -54,7 +58,6 @@ export default async function handler(
             errorMessage =
               "Service Unavailable: The service is currently unavailable.";
             break;
-          // Add more cases as needed based on the Apple Music API documentation
           default:
             errorMessage = "An error occurred while processing the request.";
         }
