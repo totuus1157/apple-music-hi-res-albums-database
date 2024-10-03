@@ -12,6 +12,14 @@ import {
   Input,
   RadioGroup,
   Radio,
+  Table,
+  TableHeader,
+  TableBody,
+  TableColumn,
+  TableRow,
+  TableCell,
+  getKeyValue,
+  Spinner,
 } from "@nextui-org/react";
 
 type Storefront = {
@@ -40,6 +48,14 @@ type TargetValue = {
   };
 };
 
+type FormatAlbumDisplay = {
+  key: string;
+  artist: string;
+  album: string;
+  genre: string;
+  storefront: string;
+};
+
 type Props = {
   isOpen: boolean;
   onOpen: () => void;
@@ -61,14 +77,19 @@ export default function Register(props: Props): JSX.Element {
     setAlbumFetchTrigger,
   } = props;
 
-  const [artist, setArtist] = useState<string | null>(null);
-  const [title, setTitle] = useState<string | null>(null);
-  const [genre, setGenre] = useState<string | null>(null);
-  const [composer, setComposer] = useState<string | null>(null);
   const [link, setLink] = useState<string | null>(null);
   const [sampleRate, setSampleRate] = useState("96");
   const [errors, setErrors] = useState<Errors>({});
-  const [apiError, setApiError] = useState<string | null>(null); // API error state
+  const [apiError, setApiError] = useState<string | null>(null);
+  const [albumDataArrayExceptUS, setAlbumDataArrayExceptUS] = useState<any[]>(
+    [],
+  );
+  const [rowsForAlbumSelection, setRowsForAlbumSelection] = useState<
+    FormatAlbumDisplay[]
+  >([]);
+  const [selectedKeys, setSelectedKeys] = useState(new Set([""]));
+  const [isFetchingNonUSStorefrontData, setIsFetchingNonUSStorefrontData] =
+    useState(false);
 
   const { user } = useUser();
 
@@ -76,10 +97,6 @@ export default function Register(props: Props): JSX.Element {
     const inputLink = String(e.target.value);
     setLink(inputLink.trim());
     errors.link && setErrors({ ...errors, link: null });
-  };
-
-  const onChangeSampleRate = (e: TargetValue): void => {
-    setSampleRate(e.target.value);
   };
 
   const albumId = (link: string | null): string | undefined => {
@@ -93,87 +110,152 @@ export default function Register(props: Props): JSX.Element {
     }
   };
 
-  function extractUniqueComposerNames(data: any): string[] {
-    const composerNamesSet: Set<string> = new Set();
-
-    data.data.forEach((album: any): void => {
-      album.relationships.tracks.data.forEach((track: any): void => {
-        composerNamesSet.add(track.attributes.composerName);
-      });
-    });
-
-    return Array.from(composerNamesSet);
-  }
-
-  const convertArrayToDatabaseColumnString = (array: string[]) => {
-    return `{${array
-      .map((item) => {
-        return `"${item.replace(/"/g, '\\"')}"`;
-      })
-      .join(", ")}}`;
-  };
-
   const doAction = async (e: { preventDefault: () => void }): Promise<void> => {
     e.preventDefault();
+    setApiError(null);
     const newErrors = findFormErrors();
     const productId = albumId(link);
     const registrantId = user
       ? user.sub
       : process.env.NEXT_PUBLIC_AUTH0_DEVELOPER_USER_ID;
-    const countryCode = "us"; // Provisional measures
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else if (productId && registrantId) {
       try {
-        const albumData = await makeApiRequestWithRetry(`/api/${productId}`);
-        if (!albumData) {
-          setApiError(
-            "This album may not be compatible with the US storefront. Currently, this service does not allow albums from non-US storefronts to be registered.",
-          );
-          return;
-        }
+        // First get the album data from US storefront
+        const usAlbumData = await makeApiRequestWithRetry("us", productId);
+        if (usAlbumData) {
+          // If data for US storefronts is available, it will be registered in database
+          await saveAlbumToDatabase(usAlbumData, productId, registrantId, "us");
+        } else {
+          // If US storefront data retrieval fails, set fetching flag to true
+          setIsFetchingNonUSStorefrontData(true);
 
-        const ob = extractAlbumInfo(albumData);
-
-        for (let item of ob) {
-          const artist = item.artistName;
-          const title = item.name;
-          const genre = convertArrayToDatabaseColumnString(item.genreNames);
-          const composer = convertArrayToDatabaseColumnString(
-            item.composerName,
-          );
-
-          try {
-            const response = await fetch("/api/add-album", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                artist,
-                title,
-                genre,
-                composer,
+          // If it fails in US storefront, get it in another storefront
+          const allAlbumData: any[] = [];
+          for (const storefront of storefrontArray) {
+            if (storefront.id !== "us") {
+              const otherAlbumData = await makeApiRequestWithRetry(
+                storefront.id,
                 productId,
-                sampleRate,
-                registrantId,
-                countryCode,
-              }),
-            });
-
-            const data = await response.json();
-            if (response.ok) {
-              setAlbumFetchTrigger(Date.now());
-              handleClose();
-            } else {
-              console.log(`Error: ${data.error}`);
+              );
+              if (otherAlbumData) {
+                allAlbumData.push({
+                  ...otherAlbumData,
+                  storefront: storefront.id,
+                });
+              }
             }
-          } catch (err: any) {
-            console.log(`Error: ${err.message}`);
+          }
+          if (allAlbumData.length > 0) {
+            setAlbumDataArrayExceptUS(allAlbumData); // Set the data for other storefronts
+
+            const formatAlbumDisplay = (
+              albumData: any,
+              storefrontArray: Storefront[],
+            ): FormatAlbumDisplay => {
+              const key: string = albumData.storefront;
+              const artist: string = albumData.data[0].attributes.artistName;
+              const album: string = albumData.data[0].attributes.name;
+              const genre: string = albumData.data[0].attributes.genreNames[0];
+              const storefront: string =
+                storefrontArray.find(
+                  (storefront): boolean =>
+                    storefront.id === albumData.storefront,
+                )?.attributes.name || "Unknown";
+
+              return { key, artist, album, genre, storefront };
+            };
+
+            setRowsForAlbumSelection(
+              allAlbumData.map((albumData): FormatAlbumDisplay => {
+                return formatAlbumDisplay(albumData, storefrontArray);
+              }),
+            );
           }
         }
       } catch (err: any) {
         console.log(`Error: ${err.message}`);
+        setApiError("Failed to fetch album data.");
       }
+    }
+  };
+
+  const convertArrayToDatabaseColumnString = (array: string[]): string => {
+    return `{${array
+      .map((item): string => {
+        return `"${item.replace(/"/g, '\\"')}"`;
+      })
+      .join(", ")}}`;
+  };
+
+  const saveAlbumToDatabase = async (
+    albumData: any,
+    productId: string,
+    registrantId: string,
+    countryCode: string,
+  ): Promise<void> => {
+    const object = extractAlbumInfo(albumData);
+
+    for (let item of object) {
+      const artist = item.artistName;
+      const title = item.name;
+      const genre = convertArrayToDatabaseColumnString(item.genreNames);
+      const composer = convertArrayToDatabaseColumnString(item.composerName);
+
+      try {
+        const response = await fetch("/api/add-album", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            artist,
+            title,
+            genre,
+            composer,
+            productId,
+            sampleRate,
+            registrantId,
+            countryCode,
+          }),
+        });
+
+        if (response.ok) {
+          setAlbumFetchTrigger(Date.now());
+          handleClose();
+        } else {
+          const data = await response.json();
+          console.log(`Error: ${data.error}`);
+        }
+      } catch (err: any) {
+        console.log(`Error: ${err.message}`);
+      }
+    }
+  };
+
+  const handleSaveAlbum = async (): Promise<void> => {
+    const selectedStorefrontKey = Array.from(selectedKeys)[0];
+    const selectedAlbum = albumDataArrayExceptUS.find(
+      (album): boolean => album.storefront === selectedStorefrontKey,
+    );
+
+    if (selectedAlbum) {
+      const productId = albumId(link);
+      const registrantId = user
+        ? user.sub
+        : process.env.NEXT_PUBLIC_AUTH0_DEVELOPER_USER_ID;
+      const storefront: string = selectedAlbum.storefront;
+
+      if (productId && registrantId && storefront) {
+        await saveAlbumToDatabase(
+          selectedAlbum,
+          productId,
+          registrantId,
+          storefront,
+        );
+      }
+    } else {
+      await doAction({ preventDefault: (): void => {} });
     }
   };
 
@@ -195,20 +277,32 @@ export default function Register(props: Props): JSX.Element {
     return newErrors;
   };
 
+  const columnsForAlbumSelection = [
+    { key: "artist", label: "Artist" },
+    { key: "album", label: "Album" },
+    { key: "genre", label: "Genre" },
+    { key: "storefront", label: "Storefront" },
+  ];
+
   const handleClose = (): void => {
-    setArtist(null);
-    setTitle(null);
-    setGenre(null);
-    setComposer(null);
     setLink(null);
     setSampleRate("96");
     setErrors({});
-    setApiError(null); // Reset API error
+    setApiError(null);
+    setAlbumDataArrayExceptUS([]);
+    setRowsForAlbumSelection([]);
+    setSelectedKeys(new Set([""]));
+    setIsFetchingNonUSStorefrontData(false);
     onClose();
   };
 
   return (
-    <Modal isOpen={isOpen} placement="center" onOpenChange={onOpenChange}>
+    <Modal
+      isOpen={isOpen}
+      placement="center"
+      onOpenChange={onOpenChange}
+      scrollBehavior="inside"
+    >
       <ModalContent>
         {() => (
           <>
@@ -235,11 +329,57 @@ export default function Register(props: Props): JSX.Element {
                 <Radio value="176.4">176.4</Radio>
                 <Radio value="192">192</Radio>
               </RadioGroup>
+
+              {isFetchingNonUSStorefrontData &&
+                albumDataArrayExceptUS.length === 0 &&
+                !apiError && (
+                  <Spinner
+                    label="Please wait while we try to retrieve the album data from other storefronts..."
+                    color="warning"
+                    labelColor="primary"
+                  />
+                )}
+
+              {isFetchingNonUSStorefrontData &&
+                albumDataArrayExceptUS.length > 0 &&
+                !apiError && (
+                  <p className="text-blue-500 text-center mt-4">
+                    Please select one of the available storefronts below and
+                    press the &quot;Save&quot; button to register the album.
+                  </p>
+                )}
+
+              {albumDataArrayExceptUS.length > 0 && !apiError && (
+                <Table
+                  hideHeader
+                  selectionMode="single"
+                  selectedKeys={selectedKeys}
+                  onSelectionChange={(keys): void => {
+                    setSelectedKeys(keys as Set<string>);
+                  }}
+                >
+                  <TableHeader columns={columnsForAlbumSelection}>
+                    {(column) => (
+                      <TableColumn key={column.key}>{column.label}</TableColumn>
+                    )}
+                  </TableHeader>
+                  <TableBody items={rowsForAlbumSelection}>
+                    {(item) => (
+                      <TableRow key={item.key}>
+                        {(columnKey) => (
+                          <TableCell>{getKeyValue(item, columnKey)}</TableCell>
+                        )}
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              )}
+
               {apiError && <p className="text-red-500">{apiError}</p>}
             </ModalBody>
             <ModalFooter>
               <Button onClick={handleClose}>Close</Button>
-              <Button color="primary" onClick={doAction}>
+              <Button color="primary" onClick={handleSaveAlbum}>
                 Save
               </Button>
             </ModalFooter>
