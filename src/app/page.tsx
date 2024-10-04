@@ -57,6 +57,17 @@ const HomePage: NextPage = (): JSX.Element => {
           </p>
         </section>
 
+        <section className="my-8 max-w-3xl bg-green-100 border border-green-500 p-4 rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold mb-2 text-green-800">
+            Update Notice
+          </h2>
+          <p className="text-left text-green-700 leading-7">
+            October 2024: The database has been updated with new features,
+            including multi-criteria filtering and support for non-US
+            Storefronts!
+          </p>
+        </section>
+
         <section className="my-12 max-w-2xl">
           <h2 className="text-3xl font-semibold mb-6 text-gray-900">
             Why I Created This Service
