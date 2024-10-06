@@ -3,7 +3,7 @@ async function makeApiRequest(
   albumId: string,
 ): Promise<any> {
   try {
-    const response = await fetch(`/api/${storefrontId}/${albumId}`);
+    const response = await fetch(`/api/applemusic/${storefrontId}/${albumId}`);
 
     if (response.ok) {
       const data = await response.json();

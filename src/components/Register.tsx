@@ -205,7 +205,7 @@ export default function Register(props: Props): JSX.Element {
       const composer = convertArrayToDatabaseColumnString(item.composerName);
 
       try {
-        const response = await fetch("/api/add-album", {
+        const response = await fetch("/api/database/add-album", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

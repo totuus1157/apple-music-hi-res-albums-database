@@ -50,7 +50,7 @@ export default function Main(): JSX.Element {
 
   useEffect((): void => {
     const getStorefronts = async (): Promise<void> => {
-      const response = await fetch("api/get-storefronts");
+      const response = await fetch("api/applemusic/get-storefronts");
       const result = await response.json();
       const storefronts: Storefront[] = result.data;
 
@@ -62,7 +62,7 @@ export default function Main(): JSX.Element {
 
   useEffect((): void => {
     const getAlbumDatabase = async (): Promise<void> => {
-      const response = await fetch("/api/get-albums");
+      const response = await fetch("/api/database/get-albums");
       const result = await response.json();
       const albums: AlbumData[] = result.albums.rows;
 

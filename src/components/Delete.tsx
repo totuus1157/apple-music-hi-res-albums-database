@@ -47,7 +47,7 @@ export default function Delete(props: Props): JSX.Element {
       const requestBody = { productId: albumId, registrantId: user.sub };
       console.log("Request Body:", requestBody); // リクエストボディをコンソールに出力
 
-      const response = await fetch("/api/delete-album", {
+      const response = await fetch("/api/database/delete-album", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

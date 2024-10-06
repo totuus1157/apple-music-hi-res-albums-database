@@ -75,7 +75,7 @@ export default function EditTable(props: Props): JSX.Element {
     }
 
     try {
-      const response = await fetch("/api/delete-album", {
+      const response = await fetch("/api/database/delete-album", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
