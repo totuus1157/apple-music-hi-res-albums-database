@@ -51,9 +51,12 @@ const HomePage: NextPage = (): JSX.Element => {
           </h2>
           <p className="text-left text-yellow-700 leading-7">
             Due to a complete overhaul, previously registered album data can no
-            longer be deleted. Additionally, not all album data could be
-            migrated due to my residential area constraints. I apologize for any
-            inconvenience this may cause.
+            longer be deleted.{" "}
+            <span className="line-through">
+              Additionally, not all album data could be migrated due to my
+              residential area constraints.
+            </span>{" "}
+            (Resolved on October 9, 2024.)
           </p>
         </section>
 
