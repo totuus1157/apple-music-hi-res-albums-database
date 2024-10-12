@@ -380,7 +380,7 @@ export default function Register(props: Props): JSX.Element {
             <ModalFooter>
               <Button onClick={handleClose}>Close</Button>
               <Button color="primary" onClick={handleSaveAlbum}>
-                Save
+                Register
               </Button>
             </ModalFooter>
           </>
