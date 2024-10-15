@@ -300,8 +300,9 @@ export default function Register(props: Props): JSX.Element {
     <Modal
       isOpen={isOpen}
       placement="center"
-      onOpenChange={onOpenChange}
       scrollBehavior="inside"
+      onOpenChange={onOpenChange}
+      onClose={handleClose}
     >
       <ModalContent>
         {() => (
