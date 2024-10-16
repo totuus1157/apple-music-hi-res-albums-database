@@ -1,4 +1,5 @@
 import type { NextPage, Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import GoogleAd from "app/googlead";
 
@@ -61,13 +62,33 @@ const HomePage: NextPage = (): JSX.Element => {
         </section>
 
         <section className="my-8 max-w-3xl bg-green-100 border border-green-500 p-4 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-2 text-green-800">
+          <h2 className="text-3xl font-semibold mb-6 text-green-800">
             Update Notice
           </h2>
+
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
+            October 16, 2024
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            Significant additions have been made to the content of the homepage
+            (this page)!
+          </p>
+
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
+            October 3, 2024
+          </h3>
           <p className="text-left text-green-700 leading-7">
-            October 2024: The database has been updated with new features,
-            including multi-criteria filtering and support for non-US
-            Storefronts!
+            The database has been updated with new features, including
+            multi-criteria filtering and support for non-US Storefronts!
+          </p>
+        </section>
+
+        <section className="my-12 max-w-2xl">
+          <h2 className="text-3xl font-semibold mb-6 text-gray-900">About</h2>
+          <p className="text-left text-gray-800 leading-8">
+            This is a database where users who discover Hi-Res Lossless albums
+            available on Apple Music can register them and share them with other
+            users.
           </p>
         </section>
 
@@ -103,6 +124,205 @@ const HomePage: NextPage = (): JSX.Element => {
           </p>
           <p className="text-left text-gray-800 leading-8 mt-6">
             Let&apos;s enjoy the universal language of the world: music!
+          </p>
+        </section>
+
+        <section className="my-12 max-w-2xl">
+          <h2 className="text-3xl font-semibold mb-6 text-gray-900">
+            App Overview
+          </h2>
+          <ul className="list-disc text-left text-gray-800 leading-8 ml-6">
+            <li>
+              You can easily add Hi-Res Lossless albums found on Apple Music to
+              the database with just a few simple steps (Apple ID login
+              required).
+            </li>
+            <li>
+              Filter content by &quot;Artist&quot; &quot;Genre&quot;
+              &quot;Composer&quot; and &quot;Sample Rate&quot; to narrow down
+              what is displayed.
+            </li>
+            <li>
+              The app supports responsive design, making it usable on PC,
+              tablet, and smartphone without limitations.
+            </li>
+          </ul>
+        </section>
+
+        <section className="my-12 max-w-2xl">
+          <h2 className="text-3xl font-semibold mb-6 text-gray-900">
+            How to Register an Album
+          </h2>
+
+          {/* Desktop Instructions */}
+          <h3 className="text-2xl font-semibold mb-4">On Desktop</h3>
+          <ol className="list-decimal text-left text-gray-800 leading-8 ml-6">
+            <li className="mb-6">
+              Check the sample rate.
+              <div className="my-4">
+                <Image
+                  src="/images/desktop/desktopss01.jpg"
+                  alt="Check sample rate on desktop"
+                  width={1712}
+                  height={1886}
+                  className="rounded-lg shadow-md"
+                />
+              </div>
+            </li>
+            <li className="mb-6">
+              Copy the album link.
+              <div className="my-4">
+                <Image
+                  src="/images/desktop/desktopss02.jpg"
+                  alt="Copy album link on desktop"
+                  width={1712}
+                  height={1886}
+                  className="rounded-lg shadow-md"
+                />
+              </div>
+            </li>
+            <li className="mb-6">
+              Paste it into the app.
+              <div className="my-4">
+                <Image
+                  src="/images/desktop/desktopss03.jpg"
+                  alt="Paste link into the app on desktop"
+                  width={1712}
+                  height={1886}
+                  className="rounded-lg shadow-md"
+                />
+              </div>
+            </li>
+          </ol>
+
+          {/* Mobile Instructions */}
+          <h3 className="text-2xl font-semibold mb-4">On Mobile</h3>
+          <ol className="list-decimal text-left text-gray-800 leading-8 ml-6">
+            <li className="mb-6">
+              Check the sample rate.
+              <div className="grid grid-cols-2 gap-4 my-4">
+                <Image
+                  src="/images/mobile/mobiless01.jpg"
+                  alt="Check sample rate on mobile"
+                  width={621}
+                  height={1334}
+                  className="rounded-lg shadow-md"
+                />
+                <Image
+                  src="/images/mobile/mobiless02.jpg"
+                  alt="Check sample rate on mobile step 2"
+                  width={621}
+                  height={1334}
+                  className="rounded-lg shadow-md"
+                />
+                <Image
+                  src="/images/mobile/mobiless03.jpg"
+                  alt="Check sample rate on mobile step 3"
+                  width={621}
+                  height={1334}
+                  className="rounded-lg shadow-md"
+                />
+              </div>
+            </li>
+            <li className="mb-6">
+              Copy the album link.
+              <div className="grid grid-cols-2 gap-4 my-4">
+                <Image
+                  src="/images/mobile/mobiless04.jpg"
+                  alt="Copy album link on mobile"
+                  width={621}
+                  height={1334}
+                  className="rounded-lg shadow-md"
+                />
+                <Image
+                  src="/images/mobile/mobiless05.jpg"
+                  alt="Copy album link on mobile step 2"
+                  width={621}
+                  height={1334}
+                  className="rounded-lg shadow-md"
+                />
+              </div>
+            </li>
+            <li className="mb-6">
+              Paste it into the app.
+              <div className="grid grid-cols-2 gap-4 my-4">
+                <Image
+                  src="/images/mobile/mobiless06.jpg"
+                  alt="Paste link into the app on mobile"
+                  width={621}
+                  height={1334}
+                  className="rounded-lg shadow-md"
+                />
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <section className="my-12 max-w-2xl">
+          <h2 className="text-3xl font-semibold mb-6 text-gray-900">
+            Frequently Asked Questions
+          </h2>
+
+          <h3 className="text-2xl font-semibold mb-4">
+            I found an album that&apos;s different from Apple Music&apos;s
+            content or has been removed. What should I do?
+          </h3>
+          <p className="text-left text-gray-800 leading-8">
+            Please contact me via{" "}
+            <Link
+              href="https://x.com/totuus_tweet"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              X
+            </Link>{" "}
+            or{" "}
+            <Link
+              href="mailto:totuus_webservices@icloud.com"
+              className="text-blue-600 hover:underline"
+            >
+              my email
+            </Link>
+            . I&apos;ll make the necessary corrections.
+          </p>
+
+          <h3 className="text-2xl font-semibold mb-4 mt-8">
+            I want to delete my registered account, but where is the menu for
+            that?
+          </h3>
+          <p className="text-left text-gray-800 leading-8">
+            Unfortunately, there is no feature that allows users to delete their
+            accounts directly. Please contact me via{" "}
+            <Link
+              href="https://x.com/totuus_tweet"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              X
+            </Link>{" "}
+            or{" "}
+            <Link
+              href="mailto:totuus_webservices@icloud.com"
+              className="text-blue-600 hover:underline"
+            >
+              my email
+            </Link>
+            , and I&apos;ll handle the deletion for you. However, any album data
+            you have registered will not be removed from the database.
+          </p>
+        </section>
+
+        <section className="my-12 max-w-2xl">
+          <h2 className="text-3xl font-semibold mb-6 text-gray-900">
+            In Conclusion
+          </h2>
+          <p className="text-left text-gray-800 leading-8">
+            &quot;Apple Music Hi-Res Albums Database&quot; is a modest service
+            developed for all those who love Apple and music. Please feel free
+            to use it and enjoy discovering better music with friends around the
+            world!
           </p>
         </section>
       </main>
