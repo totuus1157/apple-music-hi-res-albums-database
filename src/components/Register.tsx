@@ -381,7 +381,15 @@ export default function Register(props: Props): JSX.Element {
             </ModalBody>
             <ModalFooter>
               <Button onClick={handleClose}>Close</Button>
-              <Button color="primary" onClick={handleSaveAlbum}>
+              <Button
+                color="primary"
+                onClick={handleSaveAlbum}
+                isDisabled={
+                  isFetchingNonUSStorefrontData &&
+                  albumDataArrayExceptUS.length === 0 &&
+                  !apiError
+                }
+              >
                 Register
               </Button>
             </ModalFooter>
