@@ -158,7 +158,8 @@ export default function Register(props: Props): JSX.Element {
               const key: string = albumData.storefront;
               const artist: string = albumData.data[0].attributes.artistName;
               const album: string = albumData.data[0].attributes.name;
-              const genre: string = albumData.data[0].attributes.genreNames[0];
+              const genre: string =
+                albumData.data[0].attributes.genreNames.join();
               const storefront: string =
                 storefrontArray.find(
                   (storefront): boolean =>
