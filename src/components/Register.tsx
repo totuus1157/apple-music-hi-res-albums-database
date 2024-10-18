@@ -338,7 +338,7 @@ export default function Register(props: Props): JSX.Element {
                   <Spinner
                     label="Please wait while we try to retrieve the album data from other storefronts..."
                     color="warning"
-                    labelColor="primary"
+                    labelColor="secondary"
                   />
                 )}
 
