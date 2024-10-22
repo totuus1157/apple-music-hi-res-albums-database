@@ -67,6 +67,15 @@ const HomePage: NextPage = (): JSX.Element => {
           </h2>
 
           <h3 className="text-xl font-semibold mb-2 text-green-800">
+            October 19, 2024
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            🎉 We have surpassed <strong>1000 registered albums</strong> in the
+            database! Thank you to all contributors for your support! Let&apos;s
+            keep discovering amazing music together! 🎶🌟
+          </p>
+
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
             October 16, 2024
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
