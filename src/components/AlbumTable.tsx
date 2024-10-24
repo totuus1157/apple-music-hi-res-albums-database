@@ -67,17 +67,6 @@ type Props = {
   };
 };
 
-type Album = {
-  id: string;
-  product_id: string;
-  artist: string;
-  genre: string[];
-  composer: string[];
-  sample_rate: string;
-  title: string;
-  country_code: string;
-};
-
 export default function AlbumTable(props: Props): JSX.Element {
   const {
     storefrontArray,
