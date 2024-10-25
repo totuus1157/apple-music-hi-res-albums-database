@@ -144,108 +144,102 @@ export default function AlbumTable(props: Props): JSX.Element {
     }
   };
 
-  useEffect((): void => {
-    const fetchAlbumElements = (): void => {
-      albumDataArray.forEach((doc: AlbumData): void => {
-        let artistName: string = doc.artist;
-        if (/^The /.test(artistName)) {
-          artistName = artistName.replace(/^The /, "");
-          namesDeletedThe.push(artistName);
-        }
-        albumElements.push({
-          artist: artistName,
-          genre: doc.genre,
-          composer: doc.composer,
-          sampleRate: doc.sample_rate,
-        });
-      });
-
-      const filteredAlbums = albumElements.filter(
-        (_album): boolean | undefined => {
-          const matchesArtist = selectedItem.artist
-            ? _album.artist?.includes(selectedItem.artist)
-            : true;
-          const matchesGenre = selectedItem.genre
-            ? _album.genre?.includes(selectedItem.genre)
-            : true;
-          const matchesComposer = selectedItem.composer
-            ? _album.composer?.includes(selectedItem.composer)
-            : true;
-          const matchesSampleRate = selectedItem.sampleRate
-            ? _album.sampleRate?.includes(selectedItem.sampleRate)
-            : true;
-
-          return (
-            matchesArtist &&
-            matchesGenre &&
-            matchesComposer &&
-            matchesSampleRate
-          );
-        },
-      );
-
-      setAlbumElementsList(filteredAlbums);
-      setNonArticleNames(namesDeletedThe);
-    };
-
-    fetchAlbumElements();
-  }, [albumDataArray, selectedItem]);
-
-  useEffect((): void => {
-    const fetchData = (): void => {
-      let selectedArtistName = selectedItem.artist;
-      if (nonArticleNames.includes(selectedArtistName)) {
-        selectedArtistName = `The ${selectedArtistName}`;
+  const fetchAlbumElements = (): void => {
+    albumDataArray.forEach((doc: AlbumData): void => {
+      let artistName: string = doc.artist;
+      if (/^The /.test(artistName)) {
+        artistName = artistName.replace(/^The /, "");
+        namesDeletedThe.push(artistName);
       }
-
-      const filteredAlbums = filterAlbums(
-        albumDataArray,
-        selectedArtistName,
-        selectedItem.genre,
-        selectedItem.composer,
-        selectedItem.sampleRate,
-      );
-
-      filteredAlbums.forEach((doc: AlbumData): void => {
-        tableRows.push(
-          <TableRow key={doc.id}>
-            <TableCell>{doc.artist}</TableCell>
-            <TableCell>
-              <ul>
-                {doc.genre.map((genre, index) => (
-                  <li key={index}>{genre}</li>
-                ))}
-              </ul>
-            </TableCell>
-            <TableCell>
-              <ul>
-                {doc.composer.map((composer, index) => (
-                  <li key={index}>{composer}</li>
-                ))}
-              </ul>
-            </TableCell>
-            <TableCell>{doc.sample_rate}</TableCell>
-            <TableCell>
-              <Link
-                isExternal
-                href={`https://music.apple.com/${doc.country_code}/album/${doc.product_id}`}
-                size="sm"
-                underline="hover"
-              >
-                {doc.title}
-              </Link>
-            </TableCell>
-            <TableCell>{extractStorefrontNames(doc.country_code)}</TableCell>
-          </TableRow>,
-        );
-        albumIds.push(doc.product_id);
+      albumElements.push({
+        artist: artistName,
+        genre: doc.genre,
+        composer: doc.composer,
+        sampleRate: doc.sample_rate,
       });
+    });
 
-      setData(tableRows);
-      setRegisteredAlbumIDs(albumIds);
-      setIsLoaded(true);
-    };
+    const filteredAlbums = albumElements.filter(
+      (_album): boolean | undefined => {
+        const matchesArtist = selectedItem.artist
+          ? _album.artist?.includes(selectedItem.artist)
+          : true;
+        const matchesGenre = selectedItem.genre
+          ? _album.genre?.includes(selectedItem.genre)
+          : true;
+        const matchesComposer = selectedItem.composer
+          ? _album.composer?.includes(selectedItem.composer)
+          : true;
+        const matchesSampleRate = selectedItem.sampleRate
+          ? _album.sampleRate?.includes(selectedItem.sampleRate)
+          : true;
 
+        return (
+          matchesArtist && matchesGenre && matchesComposer && matchesSampleRate
+        );
+      },
+    );
+
+    setAlbumElementsList(filteredAlbums);
+    setNonArticleNames(namesDeletedThe);
+  };
+
+  const fetchData = (): void => {
+    let selectedArtistName = selectedItem.artist;
+    if (nonArticleNames.includes(selectedArtistName)) {
+      selectedArtistName = `The ${selectedArtistName}`;
+    }
+
+    const filteredAlbums = filterAlbums(
+      albumDataArray,
+      selectedArtistName,
+      selectedItem.genre,
+      selectedItem.composer,
+      selectedItem.sampleRate,
+    );
+
+    filteredAlbums.forEach((doc: AlbumData): void => {
+      tableRows.push(
+        <TableRow key={doc.id}>
+          <TableCell>{doc.artist}</TableCell>
+          <TableCell>
+            <ul>
+              {doc.genre.map((genre, index) => (
+                <li key={index}>{genre}</li>
+              ))}
+            </ul>
+          </TableCell>
+          <TableCell>
+            <ul>
+              {doc.composer.map((composer, index) => (
+                <li key={index}>{composer}</li>
+              ))}
+            </ul>
+          </TableCell>
+          <TableCell>{doc.sample_rate}</TableCell>
+          <TableCell>
+            <Link
+              isExternal
+              href={`https://music.apple.com/${doc.country_code}/album/${doc.product_id}`}
+              size="sm"
+              underline="hover"
+            >
+              {doc.title}
+            </Link>
+          </TableCell>
+          <TableCell>{extractStorefrontNames(doc.country_code)}</TableCell>
+        </TableRow>,
+      );
+      albumIds.push(doc.product_id);
+    });
+
+    setData(tableRows);
+    setRegisteredAlbumIDs(albumIds);
+    setIsLoaded(true);
+  };
+
+  useEffect((): void => {
+    fetchAlbumElements();
     fetchData();
   }, [albumDataArray, selectedItem]);
 
