@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { summarizeAlbumData } from "components/albumFormatter";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import {
   Table,
@@ -12,30 +13,7 @@ import {
 } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
-
-type AlbumData = {
-  id: string;
-  product_id: string;
-  title: string;
-  artist: string;
-  genre: string[];
-  composer: string[];
-  sample_rate: string;
-  registrant_id: string;
-  created_at: Date;
-  updated_at: Date;
-  country_code: string;
-};
-
-type Album = {
-  id: string;
-  product_id: string;
-  artist: string;
-  genre: string[];
-  composer: string[];
-  sample_rate: string;
-  title: string;
-};
+import type { AlbumData, FormatAlbumForTable } from "types/types";
 
 type Props = {
   albumDataArray: AlbumData[];
@@ -57,7 +35,7 @@ export default function EditTable(props: Props): JSX.Element {
     isOpen,
     setAlbumFetchTrigger,
   } = props;
-  const [data, setData] = useState<Album[]>([]);
+  const [data, setData] = useState<FormatAlbumForTable[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const { user, error, isLoading } = useUser();
@@ -101,7 +79,8 @@ export default function EditTable(props: Props): JSX.Element {
       const getUserAlbumsData = albumDataArray.filter((albumData): boolean => {
         return albumData.registrant_id === userID;
       });
-      setData(getUserAlbumsData);
+      const formatAlbumForTable = summarizeAlbumData(getUserAlbumsData);
+      setData(formatAlbumForTable);
     }
   }, [albumDataArray]);
 
@@ -116,7 +95,11 @@ export default function EditTable(props: Props): JSX.Element {
   return (
     <>
       {isLoaded || userID ? (
-        <Table isStriped shadow="none">
+        <Table
+          isStriped
+          shadow="none"
+          classNames={{ td: "whitespace-pre-wrap" }}
+        >
           <TableHeader>
             <TableColumn>Artist</TableColumn>
             <TableColumn>Genre</TableColumn>
@@ -126,23 +109,11 @@ export default function EditTable(props: Props): JSX.Element {
             <TableColumn>Action</TableColumn>
           </TableHeader>
           <TableBody>
-            {data.map((doc: Album) => (
+            {data.map((doc) => (
               <TableRow key={doc.id}>
                 <TableCell>{doc.artist}</TableCell>
-                <TableCell>
-                  <ul>
-                    {doc.genre.map((genre, index) => (
-                      <li key={index}>{genre}</li>
-                    ))}
-                  </ul>
-                </TableCell>
-                <TableCell>
-                  <ul>
-                    {doc.composer.map((composer, index) => (
-                      <li key={index}>{composer}</li>
-                    ))}
-                  </ul>
-                </TableCell>
+                <TableCell>{doc.genre}</TableCell>
+                <TableCell>{doc.composer}</TableCell>
                 <TableCell>{doc.sample_rate}</TableCell>
                 <TableCell>{doc.title}</TableCell>
                 <TableCell style={{ border: "none" }}>

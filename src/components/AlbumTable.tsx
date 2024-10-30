@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import sampleRateList from "components/sampleRateList";
 import Selector from "components/Selector";
+import { summarizeAlbumData } from "components/albumFormatter";
 import {
   Table,
   TableHeader,
@@ -11,6 +12,7 @@ import {
   Link,
   Spinner,
 } from "@nextui-org/react";
+import type { AlbumData, FormatAlbumForTable } from "types/types";
 
 type Storefront = {
   id: string;
@@ -22,20 +24,6 @@ type Storefront = {
     name: string;
     supportedLanguageTags: string[];
   };
-};
-
-type AlbumData = {
-  id: string;
-  product_id: string;
-  title: string;
-  artist: string;
-  genre: string[];
-  composer: string[];
-  sample_rate: string;
-  registrant_id: string;
-  created_at: Date;
-  updated_at: Date;
-  country_code: string;
 };
 
 type SelectedItem = {
@@ -151,6 +139,7 @@ export default function AlbumTable(props: Props): JSX.Element {
         artistName = artistName.replace(/^The /, "");
         namesDeletedThe.push(artistName);
       }
+
       albumElements.push({
         artist: artistName,
         genre: doc.genre,
@@ -198,24 +187,14 @@ export default function AlbumTable(props: Props): JSX.Element {
       selectedItem.sampleRate,
     );
 
-    filteredAlbums.forEach((doc: AlbumData): void => {
+    const formatAlbumForTable = summarizeAlbumData(filteredAlbums);
+
+    formatAlbumForTable.forEach((doc): void => {
       tableRows.push(
         <TableRow key={doc.id}>
           <TableCell>{doc.artist}</TableCell>
-          <TableCell>
-            <ul>
-              {doc.genre.map((genre, index) => (
-                <li key={index}>{genre}</li>
-              ))}
-            </ul>
-          </TableCell>
-          <TableCell>
-            <ul>
-              {doc.composer.map((composer, index) => (
-                <li key={index}>{composer}</li>
-              ))}
-            </ul>
-          </TableCell>
+          <TableCell>{doc.genre}</TableCell>
+          <TableCell>{doc.composer}</TableCell>
           <TableCell>{doc.sample_rate}</TableCell>
           <TableCell>
             <Link
@@ -257,6 +236,7 @@ export default function AlbumTable(props: Props): JSX.Element {
               {albumElementsList.length}
             </caption>
           }
+          classNames={{ td: "whitespace-pre-wrap" }}
         >
           <TableHeader>
             <TableColumn className={selectedItem.artist && "selected"}>
