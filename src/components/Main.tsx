@@ -5,6 +5,7 @@ import AlbumTable from "components/AlbumTable";
 import EditTable from "components/EditTable";
 import Modal from "components/Modal";
 import { useDisclosure } from "@nextui-org/react";
+import type { AlbumData } from "types/types";
 
 type Storefront = {
   id: string;
@@ -16,20 +17,6 @@ type Storefront = {
     name: string;
     supportedLanguageTags: string[];
   };
-};
-
-type AlbumData = {
-  id: string;
-  product_id: string;
-  title: string;
-  artist: string;
-  genre: string[];
-  composer: string[];
-  sample_rate: string;
-  registrant_id: string;
-  created_at: Date;
-  updated_at: Date;
-  country_code: string;
 };
 
 export default function Main(): JSX.Element {
