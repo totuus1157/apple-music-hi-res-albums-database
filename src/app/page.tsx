@@ -67,6 +67,16 @@ const HomePage: NextPage = (): JSX.Element => {
           </h2>
 
           <h3 className="text-xl font-semibold mb-2 text-green-800">
+            October 30, 2024
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            **Improved Content Display for Composer Column:** In cases where the
+            Composer cell contains a large amount of information, it has been
+            adjusted to truncate the content for better readability. This change
+            does not affect the search functionality in any way.
+          </p>
+
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
             October 19, 2024
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
@@ -81,14 +91,6 @@ const HomePage: NextPage = (): JSX.Element => {
           <p className="text-left text-green-700 leading-7 mb-6">
             Significant additions have been made to the content of the homepage
             (this page)!
-          </p>
-
-          <h3 className="text-xl font-semibold mb-2 text-green-800">
-            October 3, 2024
-          </h3>
-          <p className="text-left text-green-700 leading-7">
-            The database has been updated with new features, including
-            multi-criteria filtering and support for non-US Storefronts!
           </p>
         </section>
 
