@@ -14,12 +14,9 @@ type Props = {
   setIsEditMode: (arg0: boolean) => void;
   setModalContent: (arg0: string) => void;
   selectedItem: SelectedItem;
-  setSelectedItem: {
-    (arg0: SelectedItem): void;
-    (arg0: SelectedItem): void;
-    (arg0: SelectedItem): void;
-    (arg0: SelectedItem): void;
-  };
+  setSelectedItem: (arg0: SelectedItem) => void;
+  isRandomMode: boolean;
+  setIsRandomMode: (arg0: boolean) => void;
 };
 
 export default function ButtonGroup(props: Props): JSX.Element {
@@ -30,38 +27,50 @@ export default function ButtonGroup(props: Props): JSX.Element {
     setModalContent,
     selectedItem,
     setSelectedItem,
+    isRandomMode,
+    setIsRandomMode,
   } = props;
-  const { user, error, isLoading } = useUser();
+  const { user } = useUser();
 
   const handleShow = (): void => {
     setModalContent("register");
     onOpen();
   };
 
+  const handleAllAlbumsClick = (): void => {
+    setIsRandomMode(false);
+    setSelectedItem({
+      artist: "",
+      genre: "",
+      composer: "",
+      sampleRate: "",
+    });
+  };
+
+  const handleRandomAlbumsClick = (): void => {
+    setIsRandomMode(true);
+  };
+
+  const isSelectedItemNotEmpty = Object.values(selectedItem).some(
+    (value): boolean => value !== "",
+  );
+
   return (
     <div className="m-4 flex justify-between">
       <div className="px-2">
-        {!isEditMode && (
-          <Button
-            color="success"
-            isDisabled={
-              !selectedItem.artist &&
-              !selectedItem.genre &&
-              !selectedItem.composer &&
-              !selectedItem.sampleRate
-            }
-            onClick={(): void =>
-              setSelectedItem({
-                artist: "",
-                genre: "",
-                composer: "",
-                sampleRate: "",
-              })
-            }
-          >
-            All Albums
-          </Button>
-        )}
+        {!isEditMode &&
+          (isRandomMode || isSelectedItemNotEmpty ? (
+            <Button color="success" onClick={handleAllAlbumsClick}>
+              All Albums
+            </Button>
+          ) : (
+            <Button
+              className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+              onClick={handleRandomAlbumsClick}
+            >
+              Random Albums
+            </Button>
+          ))}
       </div>
       <div className="px-2">
         {!isEditMode && (

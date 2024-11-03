@@ -22,8 +22,12 @@ type Storefront = {
 export default function Main(): JSX.Element {
   const [storefrontArray, setStorefrontArray] = useState<Storefront[]>([]);
   const [albumDataArray, setAlbumDataArray] = useState<AlbumData[]>([]);
+  const [originalAlbumDataArray, setOriginalAlbumDataArray] = useState<
+    AlbumData[]
+  >([]);
   const [modalContent, setModalContent] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isRandomMode, setIsRandomMode] = useState(false);
   const [albumFetchTrigger, setAlbumFetchTrigger] = useState(Date.now());
   const [albumInfo, setAlbumInfo] = useState("");
   const [registeredAlbumIDs, setRegisteredAlbumIDs] = useState<string[]>([]);
@@ -54,10 +58,26 @@ export default function Main(): JSX.Element {
       const albums: AlbumData[] = result.albums.rows;
 
       setAlbumDataArray(albums);
+      setOriginalAlbumDataArray(albums);
     };
 
     getAlbumDatabase();
   }, [albumFetchTrigger]);
+
+  const selectRandomAlbums = (): void => {
+    const shuffledAlbums = [...originalAlbumDataArray]
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 10);
+    setAlbumDataArray(shuffledAlbums);
+  };
+
+  useEffect(() => {
+    if (isRandomMode) {
+      selectRandomAlbums();
+    } else {
+      setAlbumDataArray(originalAlbumDataArray);
+    }
+  }, [isRandomMode]);
 
   return (
     <main>
@@ -69,6 +89,8 @@ export default function Main(): JSX.Element {
         setIsEditMode={setIsEditMode}
         selectedItem={selectedItem}
         setSelectedItem={setSelectedItem}
+        isRandomMode={isRandomMode}
+        setIsRandomMode={setIsRandomMode}
       />
       {isEditMode !== true ? (
         <AlbumTable
@@ -79,6 +101,7 @@ export default function Main(): JSX.Element {
           setRegisteredAlbumIDs={setRegisteredAlbumIDs}
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
+          isRandomMode={isRandomMode}
         />
       ) : (
         <EditTable

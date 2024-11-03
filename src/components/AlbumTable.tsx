@@ -53,6 +53,7 @@ type Props = {
     (arg0: SelectedItem): void;
     (arg0: SelectedItem): void;
   };
+  isRandomMode: boolean;
 };
 
 export default function AlbumTable(props: Props): JSX.Element {
@@ -64,6 +65,7 @@ export default function AlbumTable(props: Props): JSX.Element {
     setRegisteredAlbumIDs,
     selectedItem,
     setSelectedItem,
+    isRandomMode,
   } = props;
 
   const tableRows: JSX.Element[] = [];
@@ -230,9 +232,10 @@ export default function AlbumTable(props: Props): JSX.Element {
           shadow="none"
           topContent={
             <caption className="flex justify-start ml-4">
-              {albumDataArray.length === albumElementsList.length
-                ? "All Albums: "
-                : "Selected Albums: "}
+              {isRandomMode ||
+              albumDataArray.length !== albumElementsList.length
+                ? "Selected Albums: "
+                : "All Albums: "}
               {albumElementsList.length}
             </caption>
           }
