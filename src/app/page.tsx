@@ -67,6 +67,15 @@ const HomePage: NextPage = (): JSX.Element => {
           </h2>
 
           <h3 className="text-xl font-semibold mb-2 text-green-800">
+            November 2, 2024
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            **Exciting New Feature:** The &apos;Random Albums&apos; button now
+            allows you to randomly select 10 albums! Enjoy discovering
+            unexpected music with just one click.
+          </p>
+
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
             October 30, 2024
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
@@ -83,14 +92,6 @@ const HomePage: NextPage = (): JSX.Element => {
             🎉 We have surpassed <strong>1000 registered albums</strong> in the
             database! Thank you to all contributors for your support! Let&apos;s
             keep discovering amazing music together! 🎶🌟
-          </p>
-
-          <h3 className="text-xl font-semibold mb-2 text-green-800">
-            October 16, 2024
-          </h3>
-          <p className="text-left text-green-700 leading-7 mb-6">
-            Significant additions have been made to the content of the homepage
-            (this page)!
           </p>
         </section>
 
@@ -152,6 +153,11 @@ const HomePage: NextPage = (): JSX.Element => {
               Filter content by &quot;Artist&quot; &quot;Genre&quot;
               &quot;Composer&quot; and &quot;Sample Rate&quot; to narrow down
               what is displayed.
+            </li>
+            <li>
+              By pressing the &quot;Random Albums&quot; button, you can display
+              10 albums selected at random, allowing you to discover unexpected
+              music.
             </li>
             <li>
               The app supports responsive design, making it usable on PC,
