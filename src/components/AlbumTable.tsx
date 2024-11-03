@@ -10,7 +10,7 @@ import {
   TableRow,
   TableCell,
   Link,
-  Spinner,
+  Progress,
 } from "@nextui-org/react";
 import type { AlbumData, FormatAlbumForTable } from "types/types";
 
@@ -284,7 +284,13 @@ export default function AlbumTable(props: Props): JSX.Element {
           <TableBody>{data}</TableBody>
         </Table>
       ) : (
-        <Spinner label="Loading..." className="ml-4" />
+        <Progress
+          label="Loading..."
+          size="sm"
+          isIndeterminate
+          aria-label="Loading..."
+          classNames={{ label: "ml-6" }}
+        />
       )}
     </>
   );
