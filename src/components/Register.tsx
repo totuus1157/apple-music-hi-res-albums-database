@@ -195,7 +195,7 @@ export default function Register(props: Props): JSX.Element {
     albumData: any,
     productId: string,
     registrantId: string,
-    countryCode: string,
+    storefront: string,
   ): Promise<void> => {
     const object = extractAlbumInfo(albumData);
 
@@ -217,7 +217,7 @@ export default function Register(props: Props): JSX.Element {
             productId,
             sampleRate,
             registrantId,
-            countryCode,
+            storefront,
           }),
         });
 

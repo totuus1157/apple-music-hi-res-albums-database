@@ -9,7 +9,7 @@ export type AlbumData = {
   registrant_id: string;
   created_at: Date;
   updated_at: Date;
-  country_code: string;
+  storefront: string;
 };
 
 export type FormatAlbumForTable = {
@@ -23,5 +23,5 @@ export type FormatAlbumForTable = {
   registrant_id: string;
   created_at: Date;
   updated_at: Date;
-  country_code: string;
+  storefront: string;
 };

@@ -201,14 +201,14 @@ export default function AlbumTable(props: Props): JSX.Element {
           <TableCell>
             <Link
               isExternal
-              href={`https://music.apple.com/${doc.country_code}/album/${doc.product_id}`}
+              href={`https://music.apple.com/${doc.storefront}/album/${doc.product_id}`}
               size="sm"
               underline="hover"
             >
               {doc.title}
             </Link>
           </TableCell>
-          <TableCell>{extractStorefrontNames(doc.country_code)}</TableCell>
+          <TableCell>{extractStorefrontNames(doc.storefront)}</TableCell>
         </TableRow>,
       );
       albumIds.push(doc.product_id);
