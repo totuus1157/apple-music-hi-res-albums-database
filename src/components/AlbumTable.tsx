@@ -12,14 +12,12 @@ import {
   Link,
   Progress,
 } from "@nextui-org/react";
-import type { AlbumData, FormatAlbumForTable, Storefront } from "types/types";
-
-type SelectedItem = {
-  artist: string;
-  genre: string;
-  composer: string;
-  sampleRate: string;
-};
+import type {
+  AlbumData,
+  FormatAlbumForTable,
+  Storefront,
+  SelectedItem,
+} from "types/types";
 
 type AlbumElements = {
   artist?: string;

@@ -37,3 +37,10 @@ export type Storefront = {
     supportedLanguageTags: string[];
   };
 };
+
+export type SelectedItem = {
+  artist: string;
+  genre: string;
+  composer: string;
+  sampleRate: string;
+};

@@ -6,13 +6,7 @@ import {
   DropdownSection,
   DropdownItem,
 } from "@nextui-org/react";
-
-type SelectedItem = {
-  artist: string;
-  genre: string;
-  composer: string;
-  sampleRate: string;
-};
+import { SelectedItem } from "types/types";
 
 type Props = {
   displayName: string;

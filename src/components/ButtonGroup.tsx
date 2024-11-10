@@ -1,12 +1,6 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { Button } from "@nextui-org/react";
-
-type SelectedItem = {
-  artist: string;
-  genre: string;
-  composer: string;
-  sampleRate: string;
-};
+import { SelectedItem } from "types/types";
 
 type Props = {
   onOpen: () => void;
