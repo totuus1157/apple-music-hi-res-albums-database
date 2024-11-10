@@ -21,18 +21,7 @@ import {
   getKeyValue,
   Spinner,
 } from "@nextui-org/react";
-
-type Storefront = {
-  id: string;
-  type: string;
-  href: string;
-  attributes: {
-    defaultLanguageTag: string;
-    explicitContentPolicy: "allowed" | "opt-in" | "prohibited";
-    name: string;
-    supportedLanguageTags: string[];
-  };
-};
+import { Storefront } from "types/types";
 
 type Errors = {
   artist?: string | null;

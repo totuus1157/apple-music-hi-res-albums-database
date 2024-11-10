@@ -25,3 +25,15 @@ export type FormatAlbumForTable = {
   updated_at: Date;
   storefront: string;
 };
+
+export type Storefront = {
+  id: string;
+  type: string;
+  href: string;
+  attributes: {
+    defaultLanguageTag: string;
+    explicitContentPolicy: "allowed" | "opt-in" | "prohibited";
+    name: string;
+    supportedLanguageTags: string[];
+  };
+};

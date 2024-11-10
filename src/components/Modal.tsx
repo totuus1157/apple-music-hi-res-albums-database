@@ -1,17 +1,6 @@
 import Register from "components/Register";
 import Delete from "components/Delete";
-
-type Storefront = {
-  id: string;
-  type: string;
-  href: string;
-  attributes: {
-    defaultLanguageTag: string;
-    explicitContentPolicy: "allowed" | "opt-in" | "prohibited";
-    name: string;
-    supportedLanguageTags: string[];
-  };
-};
+import { Storefront } from "types/types";
 
 type Props = {
   modalContent: string | null;

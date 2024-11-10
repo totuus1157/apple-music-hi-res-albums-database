@@ -5,19 +5,7 @@ import AlbumTable from "components/AlbumTable";
 import EditTable from "components/EditTable";
 import Modal from "components/Modal";
 import { useDisclosure } from "@nextui-org/react";
-import type { AlbumData } from "types/types";
-
-type Storefront = {
-  id: string;
-  type: string;
-  href: string;
-  attributes: {
-    defaultLanguageTag: string;
-    explicitContentPolicy: "allowed" | "opt-in" | "prohibited";
-    name: string;
-    supportedLanguageTags: string[];
-  };
-};
+import type { AlbumData, Storefront } from "types/types";
 
 export default function Main(): JSX.Element {
   const [storefrontArray, setStorefrontArray] = useState<Storefront[]>([]);

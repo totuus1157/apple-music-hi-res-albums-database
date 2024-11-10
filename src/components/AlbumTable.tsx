@@ -12,19 +12,7 @@ import {
   Link,
   Progress,
 } from "@nextui-org/react";
-import type { AlbumData, FormatAlbumForTable } from "types/types";
-
-type Storefront = {
-  id: string;
-  type: string;
-  href: string;
-  attributes: {
-    defaultLanguageTag: string;
-    explicitContentPolicy: "allowed" | "opt-in" | "prohibited";
-    name: string;
-    supportedLanguageTags: string[];
-  };
-};
+import type { AlbumData, FormatAlbumForTable, Storefront } from "types/types";
 
 type SelectedItem = {
   artist: string;
