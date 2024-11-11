@@ -21,7 +21,7 @@ import {
   getKeyValue,
   Spinner,
 } from "@nextui-org/react";
-import { Storefront } from "types/types";
+import type { Storefront } from "types/types";
 
 type Errors = {
   artist?: string | null;

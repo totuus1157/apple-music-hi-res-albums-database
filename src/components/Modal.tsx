@@ -1,6 +1,6 @@
 import Register from "components/Register";
 import Delete from "components/Delete";
-import { Storefront } from "types/types";
+import type { Storefront } from "types/types";
 
 type Props = {
   modalContent: string | null;

@@ -6,7 +6,7 @@ import {
   DropdownSection,
   DropdownItem,
 } from "@nextui-org/react";
-import { SelectedItem } from "types/types";
+import type { SelectedItem } from "types/types";
 
 type Props = {
   displayName: string;
