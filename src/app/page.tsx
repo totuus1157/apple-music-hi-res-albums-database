@@ -354,32 +354,35 @@ const HomePage: NextPage = (): JSX.Element => {
       <footer className="w-full h-20 flex flex-col justify-center items-center border-t">
         <p className="text-sm text-gray-500 mb-2">
           © {year}{" "}
-          <a
+          <Link
+            isExternal
             href="https://x.com/totuus_tweet"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:underline"
+            underline="hover"
+            showAnchorIcon
+            size="sm"
           >
             Totuus1157
-          </a>
+          </Link>
         </p>
         <div className="text-sm text-gray-500">
-          <a
+          <Link
+            isExternal
             href="https://app.getterms.io/view/sHbek/privacy/en-us"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:underline mr-4"
+            underline="hover"
+            showAnchorIcon
+            size="sm"
           >
             Privacy Policy
-          </a>
-          <a
+          </Link>{" "}
+          <Link
+            isExternal
             href="https://app.getterms.io/view/sHbek/cookie/en-us"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:underline"
+            underline="hover"
+            showAnchorIcon
+            size="sm"
           >
             Cookie Policy
-          </a>
+          </Link>
         </div>
       </footer>
     </div>
