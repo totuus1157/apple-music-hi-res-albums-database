@@ -1,7 +1,10 @@
 import type { NextPage, Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import GoogleAd from "app/googlead";
+import { Link, Button } from "@nextui-org/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 
 export const metadata: Metadata = {
   title: "Home Page",
@@ -37,13 +40,15 @@ const HomePage: NextPage = (): JSX.Element => {
         </div>
 
         <div className="my-12">
-          <Link
+          <Button
             href="/datatable"
-            className="bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
-            passHref
+            as={Link}
+            size="lg"
+            color="primary"
+            showAnchorIcon
           >
             View Hi-Res Albums
-          </Link>
+          </Button>
         </div>
 
         <section className="my-8 max-w-3xl bg-yellow-100 border border-yellow-500 p-4 rounded-lg shadow-md">
@@ -287,17 +292,18 @@ const HomePage: NextPage = (): JSX.Element => {
           <p className="text-left text-gray-800 leading-8">
             Please contact me via{" "}
             <Link
+              isExternal
               href="https://x.com/totuus_tweet"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              underline="hover"
+              showAnchorIcon
             >
               X
             </Link>{" "}
             or{" "}
             <Link
               href="mailto:totuus_webservices@icloud.com"
-              className="text-blue-600 hover:underline"
+              underline="hover"
+              showAnchorIcon
             >
               my email
             </Link>
@@ -312,17 +318,18 @@ const HomePage: NextPage = (): JSX.Element => {
             Unfortunately, there is no feature that allows users to delete their
             accounts directly. Please contact me via{" "}
             <Link
+              isExternal
               href="https://x.com/totuus_tweet"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              underline="hover"
+              showAnchorIcon
             >
               X
             </Link>{" "}
             or{" "}
             <Link
               href="mailto:totuus_webservices@icloud.com"
-              className="text-blue-600 hover:underline"
+              underline="hover"
+              showAnchorIcon
             >
               my email
             </Link>
@@ -345,7 +352,6 @@ const HomePage: NextPage = (): JSX.Element => {
       </main>
 
       <footer className="w-full h-20 flex flex-col justify-center items-center border-t">
-        {" "}
         <p className="text-sm text-gray-500 mb-2">
           © {year}{" "}
           <a
