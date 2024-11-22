@@ -7,6 +7,10 @@ import {
 } from "app/googleads-script";
 import "styles/globals.css";
 
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
+
 export const metadata: Metadata = {
   title: {
     template: "%s | Apple Music Hi-Res Albums Database",
