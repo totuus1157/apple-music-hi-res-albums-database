@@ -355,7 +355,7 @@ const HomePage: NextPage = (): JSX.Element => {
         <div className="flex gap-4 mt-8 mb-2">
           <Button
             as={Link}
-            href="https://twitter.com/intent/tweet?text=Apple%20Music%20Hi-Res%20Albums%20Database%0A%0A&url=https%3A%2F%2Fwww.applemusichiresalbumsdb.com&hashtags=Applemusichiresalbumsdb,AppleMusic"
+            href="https://twitter.com/intent/tweet?text=Apple%20Music%20Hi-Res%20Albums%20Database%0A%0A&url=https%3A%2F%2Fwww.applemusichiresalbumsdb.com&hashtags=Applemusichiresalbumsdb,AppleMusic,Apple"
             isExternal
             size="lg"
             className="bg-transparent text-black shadow-none hover:bg-transparent hover:shadow-none"
