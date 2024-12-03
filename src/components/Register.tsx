@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeApiRequestWithRetry } from "components/apiRequest";
 import extractAlbumInfo from "components/extractAlbumInfo";
 import { useUser } from "@auth0/nextjs-auth0/client";
@@ -19,7 +19,9 @@ import {
   TableRow,
   TableCell,
   getKeyValue,
+  Spacer,
   Spinner,
+  Switch,
 } from "@nextui-org/react";
 import type { Storefront } from "types/types";
 
@@ -55,6 +57,25 @@ type Props = {
   setAlbumFetchTrigger: (arg0: number) => void;
 };
 
+function usePersistentState<T>(
+  key: string,
+  defaultValue: T,
+): [T, React.Dispatch<React.SetStateAction<T>>] {
+  const [state, setState] = useState<T>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem(key);
+      return saved !== null ? JSON.parse(saved) : defaultValue;
+    }
+    return defaultValue;
+  });
+
+  useEffect((): void => {
+    localStorage.setItem(key, JSON.stringify(state));
+  }, [key, state]);
+
+  return [state, setState];
+}
+
 export default function Register(props: Props): JSX.Element {
   const {
     isOpen,
@@ -79,6 +100,12 @@ export default function Register(props: Props): JSX.Element {
   const [selectedKeys, setSelectedKeys] = useState(new Set([""]));
   const [isFetchingNonUSStorefrontData, setIsFetchingNonUSStorefrontData] =
     useState(false);
+  const [isTweetEnabled, setTweetEnabled] = usePersistentState<boolean>(
+    "isTweetEnabled",
+    false,
+  );
+
+  const handleToggle = (): void => setTweetEnabled((prev): boolean => !prev);
 
   const { user } = useUser();
 
@@ -213,6 +240,22 @@ export default function Register(props: Props): JSX.Element {
         if (response.ok) {
           setAlbumFetchTrigger(Date.now());
           handleClose();
+
+          if (isTweetEnabled) {
+            const tweetContent = `Registered "${title}" by '${artist}'!\n\nhttps://applemusichiresalbumsdb.com\n\n#ApplemusichiresalbumsDB`;
+            try {
+              const tweetResponse = await fetch("/api/twitter/tweet", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ tweetContent }),
+              });
+              if (!tweetResponse.ok) {
+                console.error("Failed to post tweet");
+              }
+            } catch (tweetError) {
+              console.error("Error posting tweet", tweetError);
+            }
+          }
         } else {
           const data = await response.json();
           console.log(`Error: ${data.error}`);
@@ -309,6 +352,7 @@ export default function Register(props: Props): JSX.Element {
                 errorMessage={errors.link}
                 onChange={onChangeLink}
               />
+
               <RadioGroup
                 label="Sample Rate"
                 value={sampleRate}
@@ -320,6 +364,16 @@ export default function Register(props: Props): JSX.Element {
                 <Radio value="176.4">176.4</Radio>
                 <Radio value="192">192</Radio>
               </RadioGroup>
+
+              <Spacer />
+
+              <Switch
+                size="sm"
+                isSelected={isTweetEnabled}
+                onValueChange={handleToggle}
+              >
+                Post registered album on X ( ex-Twitter )
+              </Switch>
 
               {isFetchingNonUSStorefrontData &&
                 albumDataArrayExceptUS.length === 0 &&
