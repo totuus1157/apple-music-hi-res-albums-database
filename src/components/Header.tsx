@@ -39,6 +39,7 @@ export default function Header(props: Props): JSX.Element {
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       <meta name="author" content={author} />
+      <meta name="robots" content="none" />
       <link rel="icon" href="/favicon.ico" />
 
       {/* Open Graph tags */}
