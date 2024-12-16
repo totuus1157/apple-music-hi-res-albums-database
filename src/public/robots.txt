@@ -1,7 +1,6 @@
 User-Agent: *
 Allow: /
-Disallow: /datatable/
+# Disallow: /datatable/
 Disallow: /api/applemusic/
 Disallow: /api/auth/
 Disallow: /api/database/
-
