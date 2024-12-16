@@ -1,13 +1,15 @@
 import type { NextPage, Metadata } from "next";
 import Image from "next/image";
+import GoToDatabaseButton from "app/goToDatabaseButton";
 import GoogleAd from "app/googlead";
 import SocialActionsBar from "app/socialActionsBar";
-import { Link, Button } from "@nextui-org/react";
+import { Link } from "@nextui-org/react";
 
 export const metadata: Metadata = {
   title: "Home Page",
   description:
     "Explore and share Hi-Res Lossless albums on Apple Music with our comprehensive database. Discover new music and contribute by adding your favorite high-quality albums.",
+  robots: { index: true, follow: false },
 };
 
 const SLOT_ID = "1788301069";
@@ -38,15 +40,7 @@ const HomePage: NextPage = (): JSX.Element => {
         </div>
 
         <div className="my-12">
-          <Button
-            href="/datatable"
-            as={Link}
-            size="lg"
-            color="primary"
-            showAnchorIcon
-          >
-            View Hi-Res Albums
-          </Button>
+          <GoToDatabaseButton />
         </div>
 
         <section className="my-8 max-w-3xl bg-yellow-100 border border-yellow-500 p-4 rounded-lg shadow-md">

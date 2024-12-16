@@ -1,9 +1,27 @@
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import Header from "components/Header";
 import Main from "components/Main";
 
 const DataTable: NextPage = (): JSX.Element => {
-  return (
+  const router = useRouter();
+  const [isDisplay, setIsDisplay] = useState(false);
+
+  useEffect((): void => {
+    if (process.env.NODE_ENV !== "development") {
+      if (localStorage.getItem("display") === "ok") {
+        setIsDisplay(true);
+        localStorage.removeItem("display");
+      } else {
+        router.push("/");
+      }
+    } else {
+      setIsDisplay(true);
+    }
+  }, []);
+
+  return isDisplay ? (
     <>
       <Header
         title="Data Table"
@@ -13,6 +31,8 @@ const DataTable: NextPage = (): JSX.Element => {
       />
       <Main />
     </>
+  ) : (
+    <></>
   );
 };
 
