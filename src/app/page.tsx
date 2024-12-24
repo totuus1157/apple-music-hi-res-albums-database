@@ -62,6 +62,16 @@ const HomePage: NextPage = (): JSX.Element => {
           <h2 className="text-3xl font-semibold mb-6 text-green-800">
             Update Notice
           </h2>
+
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
+            December 23, 2024
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            🎉 We have surpassed <strong>2000 registered albums</strong> in the
+            database! Thank you to all contributors for your support! Let&apos;s
+            keep discovering amazing music together! 🎶🌟
+          </p>
+
           <h3 className="text-xl font-semibold mb-2 text-green-800">
             December 3, 2024
           </h3>
@@ -78,16 +88,6 @@ const HomePage: NextPage = (): JSX.Element => {
             **Exciting New Feature:** The &apos;Random Albums&apos; button now
             allows you to randomly select 10 albums! Enjoy discovering
             unexpected music with just one click.
-          </p>
-
-          <h3 className="text-xl font-semibold mb-2 text-green-800">
-            October 30, 2024
-          </h3>
-          <p className="text-left text-green-700 leading-7 mb-6">
-            **Improved Content Display for Composer Column:** In cases where the
-            Composer cell contains a large amount of information, it has been
-            adjusted to truncate the content for better readability. This change
-            does not affect the search functionality in any way.
           </p>
         </section>
 
