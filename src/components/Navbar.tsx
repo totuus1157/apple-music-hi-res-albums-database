@@ -40,6 +40,9 @@ export default function Navbar(props: Props): JSX.Element {
               as={Link}
               variant="bordered"
               color="primary"
+              onPress={(): void => {
+                localStorage.setItem("display", "ok");
+              }}
             >
               Login
             </Button>
@@ -49,6 +52,9 @@ export default function Navbar(props: Props): JSX.Element {
               as={Link}
               variant="bordered"
               color="primary"
+              onPress={(): void => {
+                localStorage.setItem("display", "ok");
+              }}
             >
               Logout
             </Button>
