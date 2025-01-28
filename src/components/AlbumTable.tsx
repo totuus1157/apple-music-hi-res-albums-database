@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import sampleRateList from "components/sampleRateList";
-import Selector from "components/Selector";
 import { summarizeAlbumData } from "components/albumFormatter";
 import {
   Table,
@@ -11,6 +10,9 @@ import {
   TableCell,
   Link,
   Progress,
+  Autocomplete,
+  AutocompleteItem,
+  Pagination,
 } from "@nextui-org/react";
 import type {
   AlbumData,
@@ -24,6 +26,11 @@ type AlbumElements = {
   genre?: string[];
   composer?: string[];
   sampleRate?: string;
+};
+
+type SelectionElements = {
+  id: number;
+  element: string;
 };
 
 type Props = {
@@ -62,11 +69,9 @@ export default function AlbumTable(props: Props): JSX.Element {
   const [isLoaded, setIsLoaded] = useState(false);
   const [albumElementsList, setAlbumElementsList] = useState(albumElements);
   const [nonArticleNames, setNonArticleNames] = useState(namesDeletedThe);
+  const [page, setPage] = useState(1);
 
-  type SelectionElements = {
-    id: number;
-    element?: string;
-  };
+  const rowsPerPage = 100;
 
   const selectionElements = (
     _category: keyof AlbumElements,
@@ -163,8 +168,10 @@ export default function AlbumTable(props: Props): JSX.Element {
 
   const fetchData = (): void => {
     let selectedArtistName = selectedItem.artist;
-    if (nonArticleNames.includes(selectedArtistName)) {
-      selectedArtistName = `The ${selectedArtistName}`;
+    if (selectedArtistName) {
+      if (nonArticleNames.includes(selectedArtistName)) {
+        selectedArtistName = `The ${selectedArtistName}`;
+      }
     }
 
     const filteredAlbums = filterAlbums(
@@ -210,64 +217,88 @@ export default function AlbumTable(props: Props): JSX.Element {
     fetchData();
   }, [albumDataArray, selectedItem]);
 
+  const autocompleteConfigs: { key: keyof AlbumElements; label: string }[] = [
+    { key: "artist", label: "Search an artist" },
+    { key: "genre", label: "Search a genre" },
+    { key: "composer", label: "Search a composer" },
+    { key: "sampleRate", label: "Search a sample rate" },
+  ];
+
+  const topContent = (
+    <div>
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mb-4">
+        {autocompleteConfigs.map(({ key, label }) => (
+          <Autocomplete
+            key={key}
+            defaultItems={selectionElements(key)}
+            label={label}
+            selectedKey={selectedItem[key]}
+            size="sm"
+            variant="faded"
+            onSelectionChange={(keyValue): void => {
+              setSelectedItem({
+                ...selectedItem,
+                [key]: keyValue === null ? null : String(keyValue),
+              });
+            }}
+          >
+            {(item) => (
+              <AutocompleteItem key={item.element}>
+                {item.element}
+              </AutocompleteItem>
+            )}
+          </Autocomplete>
+        ))}
+      </div>
+      <caption className="flex justify-start ml-4">
+        {isRandomMode || albumDataArray.length !== albumElementsList.length
+          ? "Selected Albums: "
+          : "All Albums: "}
+        {albumElementsList.length}
+      </caption>
+    </div>
+  );
+
+  const pages = Math.ceil(data.length / rowsPerPage);
+
+  const items = useMemo(() => {
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+
+    return data.slice(start, end);
+  }, [page, data]);
+
+  const bottomContent = (
+    <div className="flex w-full justify-center">
+      <Pagination
+        showControls
+        showShadow
+        page={page}
+        total={pages}
+        onChange={(page): void => setPage(page)}
+      />
+    </div>
+  );
+
   return (
     <>
       {isLoaded ? (
         <Table
           isStriped
           shadow="none"
-          topContent={
-            <caption className="flex justify-start ml-4">
-              {isRandomMode ||
-              albumDataArray.length !== albumElementsList.length
-                ? "Selected Albums: "
-                : "All Albums: "}
-              {albumElementsList.length}
-            </caption>
-          }
+          topContent={topContent}
+          bottomContent={bottomContent}
           classNames={{ td: "whitespace-pre-wrap" }}
         >
           <TableHeader>
-            <TableColumn className={selectedItem.artist && "selected"}>
-              <Selector
-                displayName="Artist"
-                propertyName="artist"
-                selectedItem={selectedItem}
-                setSelectedItem={setSelectedItem}
-                selectionElements={selectionElements("artist")}
-              />
-            </TableColumn>
-            <TableColumn className={selectedItem.genre && "selected"}>
-              <Selector
-                displayName="Genre"
-                propertyName="genre"
-                selectedItem={selectedItem}
-                setSelectedItem={setSelectedItem}
-                selectionElements={selectionElements("genre")}
-              />
-            </TableColumn>
-            <TableColumn className={selectedItem.composer && "selected"}>
-              <Selector
-                displayName="Composer"
-                propertyName="composer"
-                selectedItem={selectedItem}
-                setSelectedItem={setSelectedItem}
-                selectionElements={selectionElements("composer")}
-              />
-            </TableColumn>
-            <TableColumn className={selectedItem.sampleRate && "selected"}>
-              <Selector
-                displayName="Sample Rate"
-                propertyName="sampleRate"
-                selectedItem={selectedItem}
-                setSelectedItem={setSelectedItem}
-                selectionElements={selectionElements("sampleRate")}
-              />
-            </TableColumn>
+            <TableColumn>Artist</TableColumn>
             <TableColumn>Title</TableColumn>
+            <TableColumn>Genre</TableColumn>
+            <TableColumn>Composer</TableColumn>
+            <TableColumn>Sample Rate</TableColumn>
             <TableColumn>Storefront</TableColumn>
           </TableHeader>
-          <TableBody>{data}</TableBody>
+          <TableBody>{items}</TableBody>
         </Table>
       ) : (
         <Progress
