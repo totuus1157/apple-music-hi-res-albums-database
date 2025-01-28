@@ -91,10 +91,10 @@ export default function AlbumTable(props: Props): JSX.Element {
 
   const filterAlbums = (
     albumDataArray: AlbumData[],
-    artist?: string,
-    genre?: string,
-    composer?: string,
-    sample_rate?: string,
+    artist?: string | null,
+    genre?: string | null,
+    composer?: string | null,
+    sample_rate?: string | null,
   ): AlbumData[] => {
     return albumDataArray.filter((album): boolean => {
       const matchArtist = artist ? album.artist === artist : true;

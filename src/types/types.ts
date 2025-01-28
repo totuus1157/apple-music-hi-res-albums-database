@@ -39,8 +39,15 @@ export type Storefront = {
 };
 
 export type SelectedItem = {
-  artist: string;
-  genre: string;
-  composer: string;
-  sampleRate: string;
+  artist: string | null;
+  genre: string | null;
+  composer: string | null;
+  sampleRate: string | null;
+};
+
+export type AlbumElements = {
+  artist?: string;
+  genre?: string[];
+  composer?: string[];
+  sampleRate?: string;
 };

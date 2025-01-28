@@ -5,7 +5,7 @@ import AlbumTable from "components/AlbumTable";
 import EditTable from "components/EditTable";
 import Modal from "components/Modal";
 import { useDisclosure } from "@nextui-org/react";
-import type { AlbumData, Storefront } from "types/types";
+import type { AlbumData, Storefront, SelectedItem } from "types/types";
 
 export default function Main(): JSX.Element {
   const [storefrontArray, setStorefrontArray] = useState<Storefront[]>([]);
@@ -19,11 +19,11 @@ export default function Main(): JSX.Element {
   const [albumFetchTrigger, setAlbumFetchTrigger] = useState(Date.now());
   const [albumInfo, setAlbumInfo] = useState("");
   const [registeredAlbumIDs, setRegisteredAlbumIDs] = useState<string[]>([]);
-  const [selectedItem, setSelectedItem] = useState({
-    artist: "",
-    genre: "",
-    composer: "",
-    sampleRate: "",
+  const [selectedItem, setSelectedItem] = useState<SelectedItem>({
+    artist: null,
+    genre: null,
+    composer: null,
+    sampleRate: null,
   });
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 

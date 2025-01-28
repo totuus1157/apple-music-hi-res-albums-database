@@ -34,10 +34,10 @@ export default function ButtonGroup(props: Props): JSX.Element {
   const handleAllAlbumsClick = (): void => {
     setIsRandomMode(false);
     setSelectedItem({
-      artist: "",
-      genre: "",
-      composer: "",
-      sampleRate: "",
+      artist: null,
+      genre: null,
+      composer: null,
+      sampleRate: null,
     });
   };
 
@@ -46,7 +46,7 @@ export default function ButtonGroup(props: Props): JSX.Element {
   };
 
   const isSelectedItemNotEmpty = Object.values(selectedItem).some(
-    (value): boolean => value !== "",
+    (value): boolean => value !== null,
   );
 
   return (
