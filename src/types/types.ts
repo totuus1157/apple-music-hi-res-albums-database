@@ -1,5 +1,5 @@
 export type AlbumData = {
-  id: string;
+  id: number;
   product_id: string;
   title: string;
   artist: string;
@@ -13,7 +13,7 @@ export type AlbumData = {
 };
 
 export type FormatAlbumForTable = {
-  id: string;
+  id: number;
   product_id: string;
   title: string;
   artist: string;
