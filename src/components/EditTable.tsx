@@ -102,20 +102,20 @@ export default function EditTable(props: Props): JSX.Element {
         >
           <TableHeader>
             <TableColumn>Artist</TableColumn>
+            <TableColumn>Title</TableColumn>
             <TableColumn>Genre</TableColumn>
             <TableColumn>Composer</TableColumn>
             <TableColumn>Sample Rate</TableColumn>
-            <TableColumn>Title</TableColumn>
             <TableColumn>Action</TableColumn>
           </TableHeader>
           <TableBody>
             {data.map((doc) => (
               <TableRow key={doc.id}>
                 <TableCell>{doc.artist}</TableCell>
+                <TableCell>{doc.title}</TableCell>
                 <TableCell>{doc.genre}</TableCell>
                 <TableCell>{doc.composer}</TableCell>
                 <TableCell>{doc.sample_rate}</TableCell>
-                <TableCell>{doc.title}</TableCell>
                 <TableCell style={{ border: "none" }}>
                   <Button
                     isIconOnly

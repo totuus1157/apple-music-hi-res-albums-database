@@ -181,9 +181,6 @@ export default function AlbumTable(props: Props): JSX.Element {
       tableRows.push(
         <TableRow key={doc.id}>
           <TableCell>{doc.artist}</TableCell>
-          <TableCell>{doc.genre}</TableCell>
-          <TableCell>{doc.composer}</TableCell>
-          <TableCell>{doc.sample_rate}</TableCell>
           <TableCell>
             <Link
               isExternal
@@ -194,6 +191,9 @@ export default function AlbumTable(props: Props): JSX.Element {
               {doc.title}
             </Link>
           </TableCell>
+          <TableCell>{doc.genre}</TableCell>
+          <TableCell>{doc.composer}</TableCell>
+          <TableCell>{doc.sample_rate}</TableCell>
           <TableCell>{extractStorefrontNames(doc.storefront)}</TableCell>
         </TableRow>,
       );
