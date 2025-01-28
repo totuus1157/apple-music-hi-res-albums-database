@@ -10,7 +10,7 @@ import {
   TableCell,
   Button,
   Spinner,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import type { AlbumData, FormatAlbumForTable } from "types/types";

@@ -1,15 +1,15 @@
 import { UserProvider } from "@auth0/nextjs-auth0/client";
-import { NextUIProvider } from "@nextui-org/react";
+import { HeroUIProvider } from "@heroui/react";
 import type { AppProps } from "next/app";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <NextUIProvider>
+    <HeroUIProvider>
       <UserProvider>
         <Component {...pageProps} />
       </UserProvider>
-    </NextUIProvider>
+    </HeroUIProvider>
   );
 }
 export default MyApp;

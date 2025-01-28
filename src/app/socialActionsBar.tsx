@@ -1,6 +1,6 @@
 "use client";
 
-import { Link, Button } from "@nextui-org/react";
+import { Link, Button } from "@heroui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareXTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";

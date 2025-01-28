@@ -4,7 +4,7 @@ import ButtonGroup from "components/ButtonGroup";
 import AlbumTable from "components/AlbumTable";
 import EditTable from "components/EditTable";
 import Modal from "components/Modal";
-import { useDisclosure } from "@nextui-org/react";
+import { useDisclosure } from "@heroui/react";
 import type { AlbumData, Storefront, SelectedItem } from "types/types";
 
 export default function Main(): JSX.Element {

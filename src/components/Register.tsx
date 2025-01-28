@@ -22,7 +22,7 @@ import {
   Spacer,
   Spinner,
   Switch,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import type { Storefront } from "types/types";
 
 type Errors = {

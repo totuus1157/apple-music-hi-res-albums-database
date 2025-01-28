@@ -1,5 +1,5 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 import type { SelectedItem } from "types/types";
 
 type Props = {

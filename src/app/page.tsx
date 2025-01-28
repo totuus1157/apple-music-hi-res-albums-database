@@ -3,7 +3,7 @@ import Image from "next/image";
 import GoToDatabaseButton from "app/goToDatabaseButton";
 import GoogleAd from "app/googlead";
 import SocialActionsBar from "app/socialActionsBar";
-import { Link } from "@nextui-org/react";
+import { Link } from "@heroui/react";
 
 export const metadata: Metadata = {
   title: "Home Page",

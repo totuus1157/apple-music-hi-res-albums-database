@@ -7,7 +7,7 @@ import {
   Link,
   Button,
   link,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 type Props = {
   setModalContent: (arg0: string | null) => void;

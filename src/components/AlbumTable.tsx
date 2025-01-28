@@ -13,7 +13,7 @@ import {
   Autocomplete,
   AutocompleteItem,
   Pagination,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import type {
   AlbumData,
   FormatAlbumForTable,
