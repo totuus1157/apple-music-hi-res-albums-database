@@ -329,6 +329,28 @@ const HomePage: NextPage = (): JSX.Element => {
           </p>
         </section>
 
+        <section className="my-12 max-w-2xl bg-blue-100 border border-blue-500 p-4 rounded-lg shadow-md text-center">
+          <h2 className="text-3xl font-semibold mb-4 text-blue-800">
+            Support My Work
+          </h2>
+          <p className="text-gray-800 leading-7">
+            I develop and maintain the{" "}
+            <strong>Apple Music Hi-Res Albums Database</strong> as an
+            independent project. Software development is often a battle against
+            sleepiness, and coffee is my greatest ally. If you enjoy this
+            service, consider buying me a coffee to keep me energized! ☕✨
+          </p>
+          <div className="mt-6">
+            <Link
+              isExternal
+              href="https://www.buymeacoffee.com/totuus1157"
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300"
+            >
+              ☕ Buy Me a Coffee
+            </Link>
+          </div>
+        </section>
+
         <section className="my-12 max-w-2xl">
           <h2 className="text-3xl font-semibold mb-6 text-gray-900">
             In Conclusion
