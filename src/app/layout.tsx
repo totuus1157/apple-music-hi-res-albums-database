@@ -6,6 +6,7 @@ import {
   AdBlockWarning,
 } from "app/googleads-script";
 import "styles/globals.css";
+import { Providers } from "app/providers";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -45,7 +46,7 @@ export default function RootLayout({
     <>
       <html lang="en">
         <body>
-          {children}
+          <Providers>{children}</Providers>
           <Analytics />
           <GoogleAdScript />
         </body>
