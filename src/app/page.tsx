@@ -64,6 +64,15 @@ const HomePage: NextPage = (): JSX.Element => {
           </h2>
 
           <h3 className="text-xl font-semibold mb-2 text-green-800">
+            February 12, 2025
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            🎉 We have surpassed <strong>3000 registered albums</strong> in the
+            database! Thank you to all contributors for your support! Let&apos;s
+            keep discovering amazing music together! 🎶🌟
+          </p>
+
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
             December 23, 2024
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
@@ -79,15 +88,6 @@ const HomePage: NextPage = (): JSX.Element => {
             **Experimental New Feature:** A new feature has been added that
             allows you to post albums you&apos;ve registered to X (formerly
             Twitter)! (You can post up to 15 times per day.)
-          </p>
-
-          <h3 className="text-xl font-semibold mb-2 text-green-800">
-            November 2, 2024
-          </h3>
-          <p className="text-left text-green-700 leading-7 mb-6">
-            **Exciting New Feature:** The &apos;Random Albums&apos; button now
-            allows you to randomly select 10 albums! Enjoy discovering
-            unexpected music with just one click.
           </p>
         </section>
 
