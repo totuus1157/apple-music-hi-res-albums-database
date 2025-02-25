@@ -64,6 +64,16 @@ const HomePage: NextPage = (): JSX.Element => {
           </h2>
 
           <h3 className="text-xl font-semibold mb-2 text-green-800">
+            February 24, 2025
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            ✨ Big News: Fuzzy Search is Here! 🎊 We’ve implemented a powerful
+            fuzzy search feature that makes discovering albums easier than ever.
+            Enjoy a smarter, more forgiving search experience that finds what
+            you’re looking for—even when your input isn’t exact! 🚀🔍
+          </p>
+
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
             February 12, 2025
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
@@ -79,15 +89,6 @@ const HomePage: NextPage = (): JSX.Element => {
             🎉 We have surpassed <strong>2000 registered albums</strong> in the
             database! Thank you to all contributors for your support! Let&apos;s
             keep discovering amazing music together! 🎶🌟
-          </p>
-
-          <h3 className="text-xl font-semibold mb-2 text-green-800">
-            December 3, 2024
-          </h3>
-          <p className="text-left text-green-700 leading-7 mb-6">
-            **Experimental New Feature:** A new feature has been added that
-            allows you to post albums you&apos;ve registered to X (formerly
-            Twitter)! (You can post up to 15 times per day.)
           </p>
         </section>
 
