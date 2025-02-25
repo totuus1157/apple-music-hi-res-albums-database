@@ -234,7 +234,7 @@ export default function AlbumTable(props: Props) {
             defaultItems={selectionElements(key)}
             label={label}
             selectedKey={selectedItem[key]}
-            size="sm"
+            size="lg"
             variant="faded"
             onSelectionChange={(keyValue): void => {
               setSelectedItem({
