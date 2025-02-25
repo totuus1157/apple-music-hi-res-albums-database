@@ -5,7 +5,7 @@ import {
   AdBlockRecoveryScript,
   AdBlockWarning,
 } from "app/googleads-script";
-import "styles/globals.css";
+import "app/globals.css";
 import { Providers } from "app/providers";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
