@@ -7,6 +7,7 @@ import ButtonGroup from "app/datatable/button-group";
 import AlbumTable from "app/datatable/album-table";
 import EditTable from "app/datatable/edit-table";
 import Modal from "app/datatable/modal";
+import BuyMeACoffee from "app/datatable/buy-me-a-coffee-widget";
 import { useDisclosure } from "@heroui/react";
 
 export default function Main() {
@@ -115,6 +116,7 @@ export default function Main() {
         registeredAlbumIDs={registeredAlbumIDs}
         setAlbumFetchTrigger={setAlbumFetchTrigger}
       />
+      <BuyMeACoffee />
     </main>
   );
 }
