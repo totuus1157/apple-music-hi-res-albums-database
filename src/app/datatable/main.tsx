@@ -32,7 +32,7 @@ export default function Main() {
 
   useEffect((): void => {
     const getStorefronts = async (): Promise<void> => {
-      const response = await fetch("api/applemusic/get-storefronts");
+      const response = await fetch("api/apple-music/get-storefronts");
       const result = await response.json();
       const storefronts: Storefront[] = result.data;
 
