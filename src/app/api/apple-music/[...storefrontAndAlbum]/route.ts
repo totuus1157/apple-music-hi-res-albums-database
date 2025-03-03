@@ -2,7 +2,7 @@ export async function GET(
   request: Request,
   { params }: { params: Promise<{ storefrontAndAlbum: string[] }> },
 ): Promise<Response> {
-  const { storefrontAndAlbum } = params;
+  const { storefrontAndAlbum } = await params;
 
   // If the parameter is an array and the number of elements is not 2, a 400 error will occur.
   if (!Array.isArray(storefrontAndAlbum) || storefrontAndAlbum.length !== 2) {
