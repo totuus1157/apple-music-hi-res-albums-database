@@ -32,7 +32,7 @@ export default async function handler(
     `;
 
     return response.status(200).json({ message: "Album deleted successfully" });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error:", error); // Output errors to console
     return response.status(500).json({ error: error.message });
   }

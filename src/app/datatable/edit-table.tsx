@@ -3,6 +3,7 @@
 import type { AlbumData, FormatAlbumForTable } from "app/datatable/types";
 import { useState, useEffect } from "react";
 import { summarizeAlbumData } from "app/datatable/album-formatter";
+import { getErrorMessage } from "app/datatable/get-error-message";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import {
   Table,
@@ -70,9 +71,10 @@ export default function EditTable(props: Props) {
 
       // Refresh the album list after successful deletion
       setAlbumFetchTrigger(Date.now());
-    } catch (error: any) {
-      console.error("Error deleting album:", error);
-      alert("Failed to delete the album: " + error.message);
+    } catch (err) {
+      const errorMessage: string = getErrorMessage(err);
+      console.error("Error deleting album:", err);
+      alert(`Failed to delete the album: ${errorMessage}`);
     }
   };
 

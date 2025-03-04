@@ -60,7 +60,7 @@ export default async function handler(
     `;
 
     return response.status(200).json({ message: "Album added successfully" });
-  } catch (error: any) {
+  } catch (error) {
     return response.status(500).json({ error: error.message });
   }
 }

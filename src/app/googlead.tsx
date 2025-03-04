@@ -15,7 +15,7 @@ type GoogleAdProps = {
   slot: string;
   format?: string;
   responsive?: string;
-  style?: any;
+  style?;
 };
 
 const GoogleAd = ({

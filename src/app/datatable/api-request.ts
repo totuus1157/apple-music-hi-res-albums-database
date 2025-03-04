@@ -1,7 +1,6 @@
-async function makeApiRequest(
-  storefrontId: string,
-  albumId: string,
-): Promise<any> {
+import { getErrorMessage } from "app/datatable/get-error-message";
+
+async function makeApiRequest(storefrontId: string, albumId: string) {
   try {
     const response = await fetch(`/api/apple-music/${storefrontId}/${albumId}`);
 
@@ -13,15 +12,16 @@ async function makeApiRequest(
     } else {
       throw new Error(`Error: ${response.status}`);
     }
-  } catch (err: any) {
-    throw new Error(`Request failed: ${err.message}`);
+  } catch (err) {
+    const errorMessage: string = getErrorMessage(err);
+    throw new Error(`Request failed: ${errorMessage}`);
   }
 }
 
 export async function makeApiRequestWithRetry(
   storefrontId: string,
   albumId: string,
-): Promise<any> {
+) {
   const maxRetries = 3;
   const retryDelay = 5000;
 
@@ -30,15 +30,16 @@ export async function makeApiRequestWithRetry(
   while (retryCount < maxRetries) {
     try {
       return await makeApiRequest(storefrontId, albumId);
-    } catch (err: any) {
-      if (err.message === "Too Many Requests") {
+    } catch (err) {
+      const errorMessage: string = getErrorMessage(err);
+      if (errorMessage === "Too Many Requests") {
         console.log(
           `Too Many Requests. Retrying in ${retryDelay / 1000} seconds.`,
         );
         await sleep(retryDelay);
         retryCount++;
       } else {
-        console.error(err.message);
+        console.error(errorMessage);
         return null;
       }
     }

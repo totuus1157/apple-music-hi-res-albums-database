@@ -35,12 +35,6 @@ type Errors = {
   link?: string | null;
 };
 
-type TargetValue = {
-  target: {
-    value: any;
-  };
-};
-
 type FormatAlbumDisplay = {
   key: string;
   artist: string;
@@ -93,9 +87,7 @@ export default function Register(props: Props) {
   const [sampleRate, setSampleRate] = useState("96");
   const [errors, setErrors] = useState<Errors>({});
   const [apiError, setApiError] = useState<string | null>(null);
-  const [albumDataArrayExceptUS, setAlbumDataArrayExceptUS] = useState<any[]>(
-    [],
-  );
+  const [albumDataArrayExceptUS, setAlbumDataArrayExceptUS] = useState([]);
   const [rowsForAlbumSelection, setRowsForAlbumSelection] = useState<
     FormatAlbumDisplay[]
   >([]);
@@ -111,10 +103,12 @@ export default function Register(props: Props) {
 
   const { user } = useUser();
 
-  const onChangeLink = (e: TargetValue): void => {
+  const onChangeLink = (e): void => {
     const inputLink = String(e.target.value);
     setLink(inputLink.trim());
-    errors.link && setErrors({ ...errors, link: null });
+    if (errors.link) {
+      setErrors({ ...errors, link: null });
+    }
   };
 
   const albumId = (link: string | null): string | undefined => {
@@ -151,7 +145,7 @@ export default function Register(props: Props) {
           setIsFetchingNonUSStorefrontData(true);
 
           // If it fails in US storefront, get it in another storefront
-          const allAlbumData: any[] = [];
+          const allAlbumData = [];
           for (const storefront of storefrontArray) {
             if (storefront.id !== "us") {
               const otherAlbumData = await makeApiRequestWithRetry(
@@ -170,7 +164,7 @@ export default function Register(props: Props) {
             setAlbumDataArrayExceptUS(allAlbumData); // Set the data for other storefronts
 
             const formatAlbumDisplay = (
-              albumData: any,
+              albumData,
               storefrontArray: Storefront[],
             ): FormatAlbumDisplay => {
               const key: string = albumData.storefront;
@@ -194,7 +188,7 @@ export default function Register(props: Props) {
             );
           }
         }
-      } catch (err: any) {
+      } catch (err) {
         console.log(`Error: ${err.message}`);
         setApiError("Failed to fetch album data.");
       }
@@ -210,14 +204,14 @@ export default function Register(props: Props) {
   };
 
   const saveAlbumToDatabase = async (
-    albumData: any,
+    albumData,
     productId: string,
     registrantId: string,
     storefront: string,
   ): Promise<void> => {
     const object = extractAlbumInfo(albumData);
 
-    for (let item of object) {
+    for (const item of object) {
       const artist = item.artistName;
       const title = item.name;
       const genre = convertArrayToDatabaseColumnString(item.genreNames);
@@ -262,7 +256,7 @@ export default function Register(props: Props) {
           const data = await response.json();
           console.log(`Error: ${data.error}`);
         }
-      } catch (err: any) {
+      } catch (err) {
         console.log(`Error: ${err.message}`);
       }
     }
