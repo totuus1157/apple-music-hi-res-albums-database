@@ -26,11 +26,11 @@
     "twitter-api-v2": "^1.18.2"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.2.0",
-    "@eslint/js": "^9.20.0",
+    "@eslint/eslintrc": "^3.3.0",
+    "@eslint/js": "^9.21.0",
     "autoprefixer": "^10.4.20",
-    "eslint": "^8.0.0",
-    "eslint-config-next": "^15.1.6",
+    "eslint": "^9.21.0",
+    "eslint-config-next": "^15.2.0",
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.2"
