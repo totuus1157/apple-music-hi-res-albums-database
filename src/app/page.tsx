@@ -5,13 +5,6 @@ import GoogleAd from "app/googlead";
 import SocialActionsBar from "app/socialActionsBar";
 import { Link } from "@heroui/react";
 
-export const metadata: Metadata = {
-  title: "Home Page",
-  description:
-    "Explore and share Hi-Res Lossless albums on Apple Music with our comprehensive database. Discover new music and contribute by adding your favorite high-quality albums.",
-  robots: { index: true, follow: false },
-};
-
 const SLOT_ID = "1788301069";
 
 const year = new Date().getFullYear().toString();
