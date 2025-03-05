@@ -147,9 +147,9 @@ const HomePage: NextPage = (): JSX.Element => {
               required).
             </li>
             <li>
-              Filter content by &quot;Artist&quot; &quot;Genre&quot;
-              &quot;Composer&quot; and &quot;Sample Rate&quot; to narrow down
-              what is displayed.
+              Narrow down displayed content by filtering with
+              &quot;Artist&quot;, &quot;Genre&quot;, &quot;Composer&quot;, and
+              &quot;Sample Rate&quot;. Partial text search is also supported.
             </li>
             <li>
               By pressing the &quot;Random Albums&quot; button, you can display
