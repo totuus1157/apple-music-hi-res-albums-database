@@ -340,6 +340,7 @@ export default function Register(props: Props) {
             <ModalBody>
               <Input
                 isRequired
+                size="lg"
                 type="url"
                 label="Link"
                 labelPlacement="outside"
