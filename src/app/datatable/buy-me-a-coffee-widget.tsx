@@ -7,7 +7,7 @@ export default function BuyMeACoffee() {
     const script = document.createElement("script");
     script.setAttribute("data-name", "BMC-Widget");
     script.src = "https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js";
-    script.setAttribute("data-id", "totuus1157");
+    script.setAttribute("data-id", "anzumaru_software");
     script.setAttribute("data-description", "Support me on Buy me a coffee!");
     script.setAttribute(
       "data-message",

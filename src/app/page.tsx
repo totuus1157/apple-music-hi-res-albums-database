@@ -337,7 +337,7 @@ const HomePage: NextPage = (): JSX.Element => {
           <div className="mt-6">
             <Link
               isExternal
-              href="https://www.buymeacoffee.com/totuus1157"
+              href="https://www.buymeacoffee.com/anzumaru_software"
               className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300"
             >
               ☕ Buy Me a Coffee
