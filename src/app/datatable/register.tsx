@@ -238,7 +238,7 @@ export default function Register(props: Props) {
           handleClose();
 
           if (isTweetEnabled) {
-            const tweetContent = `Registered "${title}" by '${artist}'!\n\nhttps://applemusichiresalbumsdb.com\n\n#ApplemusichiresalbumsDB`;
+            const tweetContent = `Registered "${title}" by '${artist}'!\n\nhttps://applemusichiresalbumsdb.com\n\n#ApplemusichiresalbumsDB\n#AppleMusic\n#HiRes`;
             try {
               const tweetResponse = await fetch("/api/twitter/tweet", {
                 method: "POST",
