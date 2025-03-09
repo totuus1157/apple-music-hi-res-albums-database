@@ -364,13 +364,15 @@ export default function Register(props: Props) {
 
               <Spacer />
 
-              <Switch
-                size="sm"
-                isSelected={isTweetEnabled}
-                onValueChange={handleToggle}
-              >
-                Post registered album on X (ex-Twitter)
-              </Switch>
+              {process.env.NODE_ENV === "development" && (
+                <Switch
+                  size="sm"
+                  isSelected={isTweetEnabled}
+                  onValueChange={handleToggle}
+                >
+                  Post registered album on X (ex-Twitter)
+                </Switch>
+              )}
 
               {isFetchingNonUSStorefrontData &&
                 albumDataArrayExceptUS.length === 0 &&
