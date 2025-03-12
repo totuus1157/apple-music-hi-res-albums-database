@@ -16,6 +16,7 @@ export default function SocialActionsBar() {
         href="https://www.facebook.com/dialog/share?app_id=1094439279122110&href=https%3A%2F%2Fwww.applemusichiresalbumsdb.com%2F&hashtag=%23AppleMusicHiResAlbumsDB"
         isExternal
         size="lg"
+        disableAnimation
         className="bg-transparent text-black shadow-none hover:bg-transparent hover:shadow-none"
       >
         {<FontAwesomeIcon icon={faSquareFacebook} size="2xl" />}
@@ -25,6 +26,7 @@ export default function SocialActionsBar() {
         href="https://twitter.com/intent/tweet?text=Apple%20Music%20Hi-Res%20Albums%20Database%0A%0A&url=https%3A%2F%2Fwww.applemusichiresalbumsdb.com%2F&hashtags=AppleMusicHiResAlbumsDB,AppleMusic,HiRes"
         isExternal
         size="lg"
+        disableAnimation
         className="bg-transparent text-black shadow-none hover:bg-transparent hover:shadow-none"
       >
         {<FontAwesomeIcon icon={faSquareXTwitter} size="2xl" />}
@@ -33,6 +35,7 @@ export default function SocialActionsBar() {
         as={Link}
         href="mailto:anzumaru_software@icloud.com"
         size="lg"
+        disableAnimation
         className="bg-transparent text-black shadow-none hover:bg-transparent hover:shadow-none"
       >
         {<FontAwesomeIcon icon={faEnvelope} size="2xl" />}
