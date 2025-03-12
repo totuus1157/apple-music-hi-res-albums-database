@@ -19,7 +19,7 @@ export default function SocialActionsBar() {
       </Button>
       <Button
         as={Link}
-        href="mailto:totuus_webservices@icloud.com"
+        href="mailto:anzumaru_software@icloud.com"
         size="lg"
         className="bg-transparent text-black shadow-none hover:bg-transparent hover:shadow-none"
       >

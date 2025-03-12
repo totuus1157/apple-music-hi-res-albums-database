@@ -277,16 +277,7 @@ const HomePage: NextPage = (): JSX.Element => {
           <p className="text-left text-gray-800 leading-8">
             Please contact me via{" "}
             <Link
-              isExternal
-              href="https://x.com/totuus_tweet"
-              underline="hover"
-              showAnchorIcon
-            >
-              X
-            </Link>{" "}
-            or{" "}
-            <Link
-              href="mailto:totuus_webservices@icloud.com"
+              href="mailto:anzumaru_software@icloud.com"
               underline="hover"
               showAnchorIcon
             >
@@ -303,16 +294,7 @@ const HomePage: NextPage = (): JSX.Element => {
             Unfortunately, there is no feature that allows users to delete their
             accounts directly. Please contact me via{" "}
             <Link
-              isExternal
-              href="https://x.com/totuus_tweet"
-              underline="hover"
-              showAnchorIcon
-            >
-              X
-            </Link>{" "}
-            or{" "}
-            <Link
-              href="mailto:totuus_webservices@icloud.com"
+              href="mailto:anzumaru_software@icloud.com"
               underline="hover"
               showAnchorIcon
             >
