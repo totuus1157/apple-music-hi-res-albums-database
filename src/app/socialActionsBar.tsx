@@ -49,6 +49,7 @@ export default function SocialActionsBar() {
             href={parameter.href}
             isExternal
             size="lg"
+            isIconOnly
             disableAnimation
             className="bg-transparent text-black shadow-none hover:bg-transparent hover:shadow-none"
           >
