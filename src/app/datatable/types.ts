@@ -26,18 +26,6 @@ export type FormatAlbumForTable = {
   storefront: string;
 };
 
-export type Storefront = {
-  id: string;
-  type: string;
-  href: string;
-  attributes: {
-    defaultLanguageTag: string;
-    explicitContentPolicy: "allowed" | "opt-in" | "prohibited";
-    name: string;
-    supportedLanguageTags: string[];
-  };
-};
-
 export type SelectedItem = {
   artist: string | null;
   genre: string | null;
@@ -50,4 +38,18 @@ export type AlbumElements = {
   genre?: string[];
   composer?: string[];
   sampleRate?: string;
+};
+
+export type StorefrontsResponse = {
+  data: {
+    id: string;
+    type: string;
+    href: string;
+    attributes?: {
+      defaultLanguageTag: string;
+      explicitContentPolicy: "allowed" | "opt-in" | "prohibited";
+      name: string;
+      supportedLanguageTags: string[];
+    };
+  }[];
 };

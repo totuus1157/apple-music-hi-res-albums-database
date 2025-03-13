@@ -1,6 +1,6 @@
 "use client";
 
-import type { Storefront } from "app/datatable/types";
+import type { StorefrontsResponse } from "app/datatable/types";
 import React, { useState, useEffect } from "react";
 import { makeApiRequestWithRetry } from "app/datatable/api-request";
 import extractAlbumInfo from "app/datatable/extract-album-info";
@@ -48,7 +48,7 @@ type Props = {
   onOpen: () => void;
   onOpenChange: () => void;
   onClose: () => void;
-  storefrontArray: Storefront[];
+  storefrontArray: StorefrontsResponse;
   registeredAlbumIDs: string[];
   setAlbumFetchTrigger: (arg0: number) => void;
 };
@@ -146,7 +146,7 @@ export default function Register(props: Props) {
 
           // If it fails in US storefront, get it in another storefront
           const allAlbumData = [];
-          for (const storefront of storefrontArray) {
+          for (const storefront of storefrontArray.data) {
             if (storefront.id !== "us") {
               const otherAlbumData = await makeApiRequestWithRetry(
                 storefront.id,
@@ -165,7 +165,7 @@ export default function Register(props: Props) {
 
             const formatAlbumDisplay = (
               albumData,
-              storefrontArray: Storefront[],
+              storefrontArray: StorefrontsResponse,
             ): FormatAlbumDisplay => {
               const key: string = albumData.storefront;
               const artist: string = albumData.data[0].attributes.artistName;
@@ -173,7 +173,7 @@ export default function Register(props: Props) {
               const genre: string =
                 albumData.data[0].attributes.genreNames.join("\n");
               const storefront: string =
-                storefrontArray.find(
+                storefrontArray.data.find(
                   (storefront): boolean =>
                     storefront.id === albumData.storefront,
                 )?.attributes.name || "Unknown";

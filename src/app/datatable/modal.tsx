@@ -1,6 +1,6 @@
 "use client";
 
-import type { Storefront } from "app/datatable/types";
+import type { StorefrontsResponse } from "app/datatable/types";
 import Register from "app/datatable/register";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
   onOpen: () => void;
   onOpenChange: () => void;
   onClose: () => void;
-  storefrontArray: Storefront[];
+  storefrontArray: StorefrontsResponse;
   registeredAlbumIDs: string[];
   setAlbumFetchTrigger: (arg0: number) => void;
 };

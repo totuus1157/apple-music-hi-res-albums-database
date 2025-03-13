@@ -3,8 +3,8 @@
 import type {
   AlbumData,
   FormatAlbumForTable,
-  Storefront,
   SelectedItem,
+  StorefrontsResponse,
 } from "app/datatable/types";
 import { useState, useEffect, useMemo } from "react";
 import { summarizeAlbumData } from "app/datatable/album-formatter";
@@ -35,7 +35,7 @@ type SelectionElements = {
 };
 
 type Props = {
-  storefrontArray: Storefront[];
+  storefrontArray: StorefrontsResponse;
   albumDataArray: AlbumData[];
   isOpen: boolean;
   registeredAlbumIDs: string[];
@@ -115,7 +115,7 @@ export default function AlbumTable(props: Props) {
   };
 
   const extractStorefrontNames = (countryCode: string): string => {
-    const foundStorefront = storefrontArray.find((storefront): boolean => {
+    const foundStorefront = storefrontArray.data.find((storefront): boolean => {
       return storefront.id === countryCode;
     });
 

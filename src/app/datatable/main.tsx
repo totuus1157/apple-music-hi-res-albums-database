@@ -1,6 +1,10 @@
 "use client";
 
-import type { AlbumData, Storefront, SelectedItem } from "app/datatable/types";
+import type {
+  AlbumData,
+  SelectedItem,
+  StorefrontsResponse,
+} from "app/datatable/types";
 import { useState, useEffect } from "react";
 import Navbar from "app/datatable/navbar";
 import ButtonGroup from "app/datatable/button-group";
@@ -11,7 +15,9 @@ import BuyMeACoffee from "app/datatable/buy-me-a-coffee-widget";
 import { useDisclosure } from "@heroui/react";
 
 export default function Main() {
-  const [storefrontArray, setStorefrontArray] = useState<Storefront[]>([]);
+  const [storefrontArray, setStorefrontArray] = useState<StorefrontsResponse>(
+    [],
+  );
   const [albumDataArray, setAlbumDataArray] = useState<AlbumData[]>([]);
   const [originalAlbumDataArray, setOriginalAlbumDataArray] = useState<
     AlbumData[]
@@ -34,7 +40,7 @@ export default function Main() {
     const getStorefronts = async (): Promise<void> => {
       const response = await fetch("api/apple-music/get-storefronts");
       const result = await response.json();
-      const storefronts: Storefront[] = result.data;
+      const storefronts: StorefrontsResponse = result;
 
       setStorefrontArray(storefronts);
     };
