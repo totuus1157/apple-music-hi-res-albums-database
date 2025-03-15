@@ -1,9 +1,9 @@
 import type { NextPage, Metadata } from "next";
 import Image from "next/image";
 import SNSLinkButtons from "app/sns-link-buttons";
-import GoToDatabaseButton from "app/goToDatabaseButton";
+import GoToDatabaseButton from "app/go-to-database-button";
 import GoogleAd from "app/googlead";
-import SocialActionsBar from "app/socialActionsBar";
+import SocialActionsBar from "app/social-actions-bar";
 import { Link } from "@heroui/react";
 
 const SLOT_ID = "1788301069";
