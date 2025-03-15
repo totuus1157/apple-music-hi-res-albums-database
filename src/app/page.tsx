@@ -20,8 +20,7 @@ const HomePage: NextPage = (): JSX.Element => {
 
         <section className="mt-6">
           <h2 className="text-3xl font-semibold mb-6 text-gray-900">
-            A List of Hi-Res Lossless Albums for All &quot;Apple and Music
-            Lovers&quot;
+            A List of Hi-Res Lossless Albums for Every Music Lover
           </h2>
         </section>
 
