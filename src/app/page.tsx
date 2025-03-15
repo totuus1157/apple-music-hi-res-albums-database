@@ -1,5 +1,6 @@
 import type { NextPage, Metadata } from "next";
 import Image from "next/image";
+import SNSLinkButtons from "app/sns-link-buttons";
 import GoToDatabaseButton from "app/goToDatabaseButton";
 import GoogleAd from "app/googlead";
 import SocialActionsBar from "app/socialActionsBar";
@@ -17,12 +18,16 @@ const HomePage: NextPage = (): JSX.Element => {
           Apple Music Hi-Res Albums Database
         </h1>
 
-        <section className="my-12">
+        <section className="mt-6">
           <h2 className="text-3xl font-semibold mb-6 text-gray-900">
             A List of Hi-Res Lossless Albums for All &quot;Apple and Music
             Lovers&quot;
           </h2>
         </section>
+
+        <div className="w-full max-w-[728px] flex justify-end gap-4 mb-4">
+          <SNSLinkButtons />
+        </div>
 
         <div className="w-full max-w-[728px] mx-auto">
           <GoogleAd
