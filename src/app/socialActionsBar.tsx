@@ -40,7 +40,7 @@ const parameters = [
 
 export default function SocialActionsBar() {
   return (
-    <div className="flex gap-4 mt-8 mb-2">
+    <>
       {parameters.map((parameter): void => {
         return (
           <Button
@@ -57,6 +57,6 @@ export default function SocialActionsBar() {
           </Button>
         );
       })}
-    </div>
+    </>
   );
 }

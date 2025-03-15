@@ -346,7 +346,9 @@ const HomePage: NextPage = (): JSX.Element => {
       </main>
 
       <footer className="w-full h-20 flex flex-col justify-center items-center border-t">
-        <SocialActionsBar />
+        <div className="flex gap-4 mt-8 mb-2">
+          <SocialActionsBar />
+        </div>
         <p className="text-sm text-gray-500 mb-2">
           © {year}{" "}
           <Link
