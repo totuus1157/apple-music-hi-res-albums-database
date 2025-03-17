@@ -5,8 +5,8 @@ async function makeApiRequest(storefrontId: string, albumId: string) {
     const response = await fetch(`/api/apple-music/${storefrontId}/${albumId}`);
 
     if (response.ok) {
-      const data = await response.json();
-      return data;
+      const albumsResponse = await response.json();
+      return albumsResponse;
     } else if (response.status === 429) {
       throw new Error("Too Many Requests");
     } else {
