@@ -226,7 +226,7 @@ export default function AlbumTable(props: Props) {
   ];
 
   const topContent = (
-    <div>
+    <>
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mb-4">
         {autocompleteConfigs.map(({ key, label }) => (
           <Autocomplete
@@ -257,7 +257,7 @@ export default function AlbumTable(props: Props) {
           : "All Albums: "}
         {albumElementsList.length}
       </caption>
-    </div>
+    </>
   );
 
   const pages = Math.ceil(data.length / rowsPerPage);
