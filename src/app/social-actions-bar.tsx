@@ -41,7 +41,7 @@ const parameters = [
 export default function SocialActionsBar() {
   return (
     <>
-      {parameters.map((parameter): void => {
+      {parameters.map((parameter) => {
         return (
           <Button
             key={parameter.id}

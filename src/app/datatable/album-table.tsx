@@ -119,10 +119,10 @@ export default function AlbumTable(props: Props) {
       return storefront.id === countryCode;
     });
 
-    if (!foundStorefront) {
+    if (!foundStorefront || !foundStorefront.attributes) {
       return "Unknown";
     } else {
-      return foundStorefront?.attributes.name;
+      return foundStorefront.attributes.name;
     }
   };
 

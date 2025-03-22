@@ -15,9 +15,9 @@ import BuyMeACoffee from "app/datatable/buy-me-a-coffee-widget";
 import { useDisclosure } from "@heroui/react";
 
 export default function Main() {
-  const [storefrontArray, setStorefrontArray] = useState<StorefrontsResponse>(
-    [],
-  );
+  const [storefrontArray, setStorefrontArray] = useState<StorefrontsResponse>({
+    data: [],
+  });
   const [albumDataArray, setAlbumDataArray] = useState<AlbumData[]>([]);
   const [originalAlbumDataArray, setOriginalAlbumDataArray] = useState<
     AlbumData[]

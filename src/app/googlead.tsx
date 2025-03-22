@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
@@ -15,7 +16,7 @@ type GoogleAdProps = {
   slot: string;
   format?: string;
   responsive?: string;
-  style?;
+  style?: CSSProperties;
 };
 
 const GoogleAd = ({

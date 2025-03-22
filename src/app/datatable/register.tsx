@@ -106,7 +106,7 @@ export default function Register(props: Props) {
 
   const { user } = useUser();
 
-  const onChangeLink = (e): void => {
+  const onChangeLink = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const inputLink = String(e.target.value);
     setLink(inputLink.trim());
     if (errors.link) {
@@ -167,32 +167,34 @@ export default function Register(props: Props) {
             setAlbumDataArrayExceptUS(allAlbumData); // Set the data for other storefronts
 
             const formatAlbumDisplay = (
-              albumData,
+              albumDataExceptUS: AlbumsResponse & { storefront: string },
               storefrontArray: StorefrontsResponse,
             ): FormatAlbumDisplay => {
-              const key: string = albumData.storefront;
-              const artist: string = albumData.data[0].attributes.artistName;
-              const album: string = albumData.data[0].attributes.name;
-              const genre: string =
-                albumData.data[0].attributes.genreNames.join("\n");
-              const storefront: string =
+              const key = albumDataExceptUS.storefront;
+              const artist =
+                albumDataExceptUS.data[0].attributes?.artistName ?? "";
+              const album = albumDataExceptUS.data[0].attributes?.name ?? "";
+              const genre =
+                albumDataExceptUS.data[0].attributes?.genreNames.join("\n") ??
+                "";
+              const storefront =
                 storefrontArray.data.find(
                   (storefront): boolean =>
-                    storefront.id === albumData.storefront,
-                )?.attributes.name || "Unknown";
+                    storefront.id === albumDataExceptUS.storefront,
+                )?.attributes?.name || "Unknown";
 
               return { key, artist, album, genre, storefront };
             };
 
             setRowsForAlbumSelection(
-              allAlbumData.map((albumData): FormatAlbumDisplay => {
-                return formatAlbumDisplay(albumData, storefrontArray);
+              allAlbumData.map((albumDataExceptUS): FormatAlbumDisplay => {
+                return formatAlbumDisplay(albumDataExceptUS, storefrontArray);
               }),
             );
           }
         }
       } catch (err) {
-        console.log(`Error: ${err.message}`);
+        console.error("Error", err);
         setApiError("Failed to fetch album data.");
       }
     }
@@ -260,7 +262,7 @@ export default function Register(props: Props) {
           console.log(`Error: ${data.error}`);
         }
       } catch (err) {
-        console.log(`Error: ${err.message}`);
+        console.error("Error:", err);
       }
     }
   };

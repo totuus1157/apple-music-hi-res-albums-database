@@ -7,19 +7,20 @@ type AlbumInfo = {
   composerName: string[];
 };
 
-const extractAlbumInfo = (albumData): AlbumInfo[] =>
+const extractAlbumInfo = (albumData: AlbumsResponse): AlbumInfo[] =>
   albumData.data.map((album): AlbumInfo => {
     const attributes = album.attributes;
-    const relationships = album.relationships;
-    const tracks = relationships.tracks.data;
+    const relationships = album.relationships ?? {};
+    const tracks = relationships.tracks?.data ?? [];
 
     // Filter out undefined composer names and get unique names
     const uniqueComposerNames = Array.from(
       new Set(
         tracks
-          .map((track) => track.attributes.composerName)
+          .map((track): string | undefined => track.attributes?.composerName)
           .filter(
-            (name: string | undefined): name is string => name !== undefined,
+            (composerName): composerName is string =>
+              composerName !== undefined,
           ),
       ),
     );
@@ -30,10 +31,10 @@ const extractAlbumInfo = (albumData): AlbumInfo[] =>
     }
 
     return {
-      artistName: attributes.artistName,
-      name: attributes.name,
-      genreNames: attributes.genreNames,
-      composerName: uniqueComposerNames as string[],
+      artistName: attributes?.artistName ?? "",
+      name: attributes?.name ?? "",
+      genreNames: attributes?.genreNames ?? [],
+      composerName: uniqueComposerNames,
     };
   });
 
