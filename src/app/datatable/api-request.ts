@@ -1,3 +1,4 @@
+import type { AlbumsResponse } from "app/datatable/types";
 import { getErrorMessage } from "app/datatable/get-error-message";
 
 async function makeApiRequest(storefrontId: string, albumId: string) {
@@ -5,7 +6,7 @@ async function makeApiRequest(storefrontId: string, albumId: string) {
     const response = await fetch(`/api/apple-music/${storefrontId}/${albumId}`);
 
     if (response.ok) {
-      const albumsResponse = await response.json();
+      const albumsResponse: AlbumsResponse = await response.json();
       return albumsResponse;
     } else if (response.status === 429) {
       throw new Error("Too Many Requests");
@@ -21,7 +22,7 @@ async function makeApiRequest(storefrontId: string, albumId: string) {
 export async function makeApiRequestWithRetry(
   storefrontId: string,
   albumId: string,
-) {
+): Promise<AlbumsResponse | null | undefined> {
   const maxRetries = 3;
   const retryDelay = 5000;
 

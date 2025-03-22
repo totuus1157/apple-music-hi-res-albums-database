@@ -1,6 +1,6 @@
 "use client";
 
-import type { StorefrontsResponse } from "app/datatable/types";
+import type { StorefrontsResponse, AlbumsResponse } from "app/datatable/types";
 import React, { useState, useEffect } from "react";
 import { makeApiRequestWithRetry } from "app/datatable/api-request";
 import extractAlbumInfo from "app/datatable/extract-album-info";
@@ -42,6 +42,8 @@ type FormatAlbumDisplay = {
   genre: string;
   storefront: string;
 };
+
+type AlbumDataArrayExceptUS = (AlbumsResponse & { storefront: string })[];
 
 type Props = {
   isOpen: boolean;
@@ -87,7 +89,8 @@ export default function Register(props: Props) {
   const [sampleRate, setSampleRate] = useState("96");
   const [errors, setErrors] = useState<Errors>({});
   const [apiError, setApiError] = useState<string | null>(null);
-  const [albumDataArrayExceptUS, setAlbumDataArrayExceptUS] = useState([]);
+  const [albumDataArrayExceptUS, setAlbumDataArrayExceptUS] =
+    useState<AlbumDataArrayExceptUS>([]);
   const [rowsForAlbumSelection, setRowsForAlbumSelection] = useState<
     FormatAlbumDisplay[]
   >([]);
@@ -145,7 +148,7 @@ export default function Register(props: Props) {
           setIsFetchingNonUSStorefrontData(true);
 
           // If it fails in US storefront, get it in another storefront
-          const allAlbumData = [];
+          const allAlbumData: AlbumDataArrayExceptUS = [];
           for (const storefront of storefrontArray.data) {
             if (storefront.id !== "us") {
               const otherAlbumData = await makeApiRequestWithRetry(
@@ -204,7 +207,7 @@ export default function Register(props: Props) {
   };
 
   const saveAlbumToDatabase = async (
-    albumData,
+    albumData: AlbumsResponse,
     productId: string,
     registrantId: string,
     storefront: string,
@@ -273,11 +276,12 @@ export default function Register(props: Props) {
       const registrantId = user
         ? user.sub
         : process.env.NEXT_PUBLIC_AUTH0_DEVELOPER_USER_ID;
-      const storefront: string = selectedAlbum.storefront;
+      const storefront = selectedAlbum.storefront;
 
       if (productId && registrantId && storefront) {
+        const albumDataExceptUS: AlbumsResponse = { data: selectedAlbum.data };
         await saveAlbumToDatabase(
-          selectedAlbum,
+          albumDataExceptUS,
           productId,
           registrantId,
           storefront,

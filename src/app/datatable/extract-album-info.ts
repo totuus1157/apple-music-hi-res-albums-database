@@ -1,3 +1,5 @@
+import type { AlbumsResponse } from "app/datatable/types";
+
 type AlbumInfo = {
   artistName: string;
   name: string;

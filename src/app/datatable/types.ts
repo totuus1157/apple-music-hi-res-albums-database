@@ -53,3 +53,55 @@ export type StorefrontsResponse = {
     };
   }[];
 };
+
+export type AlbumsResponse = {
+  data: {
+    id: string;
+    type: "albums";
+    href: string;
+    attributes?: {
+      artistName: string;
+      artistUrl?: string;
+      artwork: {
+        bgColor?: string;
+        height: number;
+        width: number;
+        textColor1?: string;
+        textColor2?: string;
+        textColor3?: string;
+        textColor4?: string;
+        url: string;
+      };
+      audioVariants?: (
+        | "dolby-atmos"
+        | "dolby-audio"
+        | "hi-res-lossless"
+        | "lossless"
+        | "lossy-stereo"
+      )[];
+      contentRating?: "clean" | "explicit";
+      copyright?: string;
+      editorialNotes?: {
+        short?: string;
+        standard?: string;
+        name?: string;
+        tagline?: string;
+      };
+      genreNames: string[];
+      isCompilation: boolean;
+      isComplete: boolean;
+      isMasteredForItunes: boolean;
+      isSingle: boolean;
+      name: string;
+      playParams?: { id: string; kind: string };
+      recordLabel?: string;
+      releaseDate?: string;
+      trackCount: number;
+      upc?: string;
+      url: string;
+    };
+    relationships?: {
+      tracks?: { data: { attributes?: { composerName?: string } }[] };
+    };
+  }[];
+};
