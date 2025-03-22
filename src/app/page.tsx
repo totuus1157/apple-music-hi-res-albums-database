@@ -60,6 +60,15 @@ const HomePage: NextPage = (): JSX.Element => {
             Update Notice
           </h2>
           <h3 className="text-xl font-semibold mb-2 text-green-800">
+            March 22, 2025
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            🎉 We have surpassed <strong>4000 registered albums</strong> in the
+            database! Thank you to all contributors for your support! Let&apos;s
+            keep discovering amazing music together! 🎶🌟
+          </p>
+
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
             March 15, 2025
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
@@ -77,15 +86,6 @@ const HomePage: NextPage = (): JSX.Element => {
             fuzzy search feature that makes discovering albums easier than ever.
             Enjoy a smarter, more forgiving search experience that finds what
             you’re looking for—even when your input isn’t exact! 🚀🔍
-          </p>
-
-          <h3 className="text-xl font-semibold mb-2 text-green-800">
-            February 12, 2025
-          </h3>
-          <p className="text-left text-green-700 leading-7 mb-6">
-            🎉 We have surpassed <strong>3000 registered albums</strong> in the
-            database! Thank you to all contributors for your support! Let&apos;s
-            keep discovering amazing music together! 🎶🌟
           </p>
         </section>
 
