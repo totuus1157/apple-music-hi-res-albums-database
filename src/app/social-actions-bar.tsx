@@ -24,12 +24,12 @@ const parameters = [
   {
     id: 3,
     icon: faSquareThreads,
-    href: "https://www.threads.net/intent/post?text=Apple%20Music%20Hi-Res%20Albums%20Database%0A%0A&url=https%3A%2F%2Fwww.applemusichiresalbumsdb.com%2F",
+    href: "https://www.threads.net/intent/post?text=Apple%20Music%20Hi-Res%20Albums%20Database%0A%0A%23ApplemusichiresalbumsDB&url=https%3A%2F%2Fapplemusichiresalbumsdb.com%2F",
   },
   {
     id: 4,
     icon: faSquareBluesky,
-    href: "https://bsky.app/intent/compose?text=Apple%20Music%20Hi-Res%20Albums%20Database%0Ahttps%3A%2F%2Fwww.applemusichiresalbumsdb.com%2F",
+    href: "https://bsky.app/intent/compose?text=Apple%20Music%20Hi-Res%20Albums%20Database%0A%0Ahttps%3A%2F%2Fapplemusichiresalbumsdb.com%0A%0A%23ApplemusichiresalbumsDB",
   },
   {
     id: 5,
