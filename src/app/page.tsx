@@ -5,8 +5,7 @@ import GoToDatabaseButton from "app/go-to-database-button";
 import GoogleAd from "app/googlead";
 import SocialActionsBar from "app/social-actions-bar";
 import { Link } from "@heroui/react";
-
-const SLOT_ID = "1788301069";
+import googleAdSlotId from "app/googlead-slot-id";
 
 const year = new Date().getFullYear().toString();
 
@@ -30,7 +29,7 @@ const HomePage: NextPage = (): JSX.Element => {
 
         <div className="w-full max-w-[728px] mx-auto">
           <GoogleAd
-            slot={SLOT_ID}
+            slot={googleAdSlotId.subtitle}
             format="auto"
             style={{ width: "100%", height: "auto" }}
           />
@@ -89,6 +88,14 @@ const HomePage: NextPage = (): JSX.Element => {
           </p>
         </section>
 
+        <div className="w-full max-w-[728px] mx-auto">
+          <GoogleAd
+            slot={googleAdSlotId.updateNotice}
+            format="auto"
+            style={{ width: "100%", height: "auto" }}
+          />
+        </div>
+
         <section className="my-12 max-w-2xl">
           <h2 className="text-3xl font-semibold mb-6 text-gray-900">About</h2>
           <p className="text-left text-gray-800 leading-8">
@@ -133,6 +140,14 @@ const HomePage: NextPage = (): JSX.Element => {
           </p>
         </section>
 
+        <div className="w-full max-w-[728px] mx-auto">
+          <GoogleAd
+            slot={googleAdSlotId.whyICreatedThisService}
+            format="auto"
+            style={{ width: "100%", height: "auto" }}
+          />
+        </div>
+
         <section className="my-12 max-w-2xl">
           <h2 className="text-3xl font-semibold mb-6 text-gray-900">
             App Overview
@@ -159,6 +174,14 @@ const HomePage: NextPage = (): JSX.Element => {
             </li>
           </ul>
         </section>
+
+        <div className="w-full max-w-[728px] mx-auto">
+          <GoogleAd
+            slot={googleAdSlotId.appOverview}
+            format="auto"
+            style={{ width: "100%", height: "auto" }}
+          />
+        </div>
 
         <section className="my-12 max-w-2xl">
           <h2 className="text-3xl font-semibold mb-6 text-gray-900">
@@ -269,6 +292,14 @@ const HomePage: NextPage = (): JSX.Element => {
           </ol>
         </section>
 
+        <div className="w-full max-w-[728px] mx-auto">
+          <GoogleAd
+            slot={googleAdSlotId.howToRegisterAnAlbum}
+            format="auto"
+            style={{ width: "100%", height: "auto" }}
+          />
+        </div>
+
         <section className="my-12 max-w-2xl">
           <h2 className="text-3xl font-semibold mb-6 text-gray-900">
             Frequently Asked Questions
@@ -330,6 +361,14 @@ const HomePage: NextPage = (): JSX.Element => {
             </Link>
           </div>
         </section>
+
+        <div className="w-full max-w-[728px] mx-auto">
+          <GoogleAd
+            slot={googleAdSlotId.supportMyWork}
+            format="auto"
+            style={{ width: "100%", height: "auto" }}
+          />
+        </div>
 
         <section className="my-12 max-w-2xl">
           <h2 className="text-3xl font-semibold mb-6 text-gray-900">
