@@ -5,6 +5,7 @@ import {
   AdBlockRecoveryScript,
   AdBlockWarning,
 } from "app/googleads-script";
+import CookieConsentWidgetScript from "app/cookie-consent-widget-script";
 import "app/globals.css";
 import { Providers } from "app/providers";
 
@@ -54,6 +55,7 @@ export default function RootLayout({
         </body>
         <AdBlockRecoveryScript />
         <AdBlockWarning />
+        <CookieConsentWidgetScript />
       </html>
     </>
   );
