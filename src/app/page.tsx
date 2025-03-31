@@ -1,4 +1,4 @@
-import type { NextPage, Metadata } from "next";
+import type { NextPage } from "next";
 import Image from "next/image";
 import SNSLinkButtons from "app/sns-link-buttons";
 import GoToDatabaseButton from "app/go-to-database-button";
