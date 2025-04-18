@@ -59,6 +59,29 @@ const HomePage: NextPage = (): JSX.Element => {
             Update Notice
           </h2>
           <h3 className="text-xl font-semibold mb-2 text-green-800">
+            April 08, 2025
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            🎉 Big Milestone Achieved! We’ve officially reached{" "}
+            <strong>5,000 registered albums</strong> in the database! This
+            achievement comes after 3 years and 2 months since launch — a
+            journey made possible thanks to the incredible dedication of our
+            users. 🙏
+            <br />
+            <br />
+            If we compare this journey to a mountain climb, we’ve just reached
+            the 5th station 🏔️—an impressive height, but still only halfway to
+            the summit! ⛰️✨
+            <br />
+            <br />
+            From here on, your continued support is more important than ever. If
+            you know someone who’s passionate about Apple Music&apos;s Hi-Res
+            Lossless albums, please invite them to join and contribute. And
+            don’t forget to help spread the word! 📣 Let’s keep climbing
+            together! 🚀🎶
+          </p>
+
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
             March 22, 2025
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
@@ -75,16 +98,6 @@ const HomePage: NextPage = (): JSX.Element => {
             accounts, and new social media share buttons have been jazzed up in
             the footer 🎉. We’re on a mission to boost our user base by 100x
             🚀—so help us spread the word and join the fun!
-          </p>
-
-          <h3 className="text-xl font-semibold mb-2 text-green-800">
-            February 24, 2025
-          </h3>
-          <p className="text-left text-green-700 leading-7 mb-6">
-            ✨ Big News: Fuzzy Search is Here! 🎊 We’ve implemented a powerful
-            fuzzy search feature that makes discovering albums easier than ever.
-            Enjoy a smarter, more forgiving search experience that finds what
-            you’re looking for—even when your input isn’t exact! 🚀🔍
           </p>
         </section>
 
