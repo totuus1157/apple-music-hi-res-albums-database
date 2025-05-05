@@ -59,40 +59,26 @@ const HomePage: NextPage = (): JSX.Element => {
             Update Notice
           </h2>
           <h3 className="text-xl font-semibold mb-2 text-green-800">
-            April 18, 2025
+            May 5, 2025
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
-            🎉 We have surpassed <strong>6000 registered albums</strong> in the
+            🎉 We have surpassed <strong>8000 registered albums</strong> in the
             database! Thank you to all contributors for your support! Let&apos;s
             keep discovering amazing music together! 🎶🌟
           </p>
           <h3 className="text-xl font-semibold mb-2 text-green-800">
-            April 08, 2025
+            April 26, 2025
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
-            🎉 Big Milestone Achieved! We’ve officially reached{" "}
-            <strong>5,000 registered albums</strong> in the database! This
-            achievement comes after 3 years and 2 months since launch — a
-            journey made possible thanks to the incredible dedication of our
-            users. 🙏
-            <br />
-            <br />
-            If we compare this journey to a mountain climb, we’ve just reached
-            the 5th station 🏔️—an impressive height, but still only halfway to
-            the summit! ⛰️✨
-            <br />
-            <br />
-            From here on, your continued support is more important than ever. If
-            you know someone who’s passionate about Apple Music&apos;s Hi-Res
-            Lossless albums, please invite them to join and contribute. And
-            don’t forget to help spread the word! 📣 Let’s keep climbing
-            together! 🚀🎶
+            🎉 We have surpassed <strong>7000 registered albums</strong> in the
+            database! Thank you to all contributors for your support! Let&apos;s
+            keep discovering amazing music together! 🎶🌟
           </p>
           <h3 className="text-xl font-semibold mb-2 text-green-800">
-            March 22, 2025
+            April 18, 2025
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
-            🎉 We have surpassed <strong>4000 registered albums</strong> in the
+            🎉 We have surpassed <strong>6000 registered albums</strong> in the
             database! Thank you to all contributors for your support! Let&apos;s
             keep discovering amazing music together! 🎶🌟
           </p>
