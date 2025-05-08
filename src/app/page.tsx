@@ -387,12 +387,12 @@ const HomePage: NextPage = (): JSX.Element => {
           © {year}{" "}
           <Link
             isExternal
-            href="https://x.com/totuus_tweet"
+            href="https://buymeacoffee.com/anzumaru_software"
             underline="hover"
             showAnchorIcon
             size="sm"
           >
-            Totuus1157
+            Anzumaru Software
           </Link>
         </p>
         <div className="text-sm text-gray-500">
