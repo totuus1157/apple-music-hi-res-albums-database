@@ -114,11 +114,12 @@ export default function Register(props: Props) {
     }
   };
 
+  const appleMusicLinkRegex =
+    /^https?:\/\/music\.apple\.com\/(?:[a-z]{2}\/)?album\/(?:[^\/]+\/)?([0-9]+)(?:\?.*)?$/;
+
   const albumId = (link: string | null): string | undefined => {
     if (link) {
-      const matches = link.match(
-        /^https?:\/\/music\.apple\.com\/(?:[a-z]{2}\/)?album\/(?:[^\/]+\/)?([0-9]+)(?:\?l=\w+-\w+)?$/,
-      );
+      const matches = link.match(appleMusicLinkRegex);
       if (matches) {
         return matches[1];
       }
@@ -297,9 +298,7 @@ export default function Register(props: Props) {
   const findFormErrors = (): Errors => {
     const newErrors: Errors = {};
     const regex = {
-      appleMusicLink: new RegExp(
-        /^https?:\/\/music\.apple\.com\/(?:[a-z]{2}\/)?album\/(?:[^\/]+\/)?([0-9]+)(?:\?l=\w+-\w+)?$/,
-      ),
+      appleMusicLink: appleMusicLinkRegex,
     };
 
     if (!link || link === "") newErrors.link = "cannot be blank!";
