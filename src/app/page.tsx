@@ -59,6 +59,15 @@ const HomePage: NextPage = (): JSX.Element => {
             Update Notice
           </h2>
           <h3 className="text-xl font-semibold mb-2 text-green-800">
+            May 12, 2025
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            🎉 We have surpassed <strong>9000 registered albums</strong> in the
+            database! 🚀 As we set our sights on the grand milestone of{" "}
+            <strong>10,000 albums</strong>, we humbly invite you to lend your
+            passion and support—together, let’s make this dream a reality! ✨
+          </p>
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
             May 5, 2025
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
@@ -71,14 +80,6 @@ const HomePage: NextPage = (): JSX.Element => {
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
             🎉 We have surpassed <strong>7000 registered albums</strong> in the
-            database! Thank you to all contributors for your support! Let&apos;s
-            keep discovering amazing music together! 🎶🌟
-          </p>
-          <h3 className="text-xl font-semibold mb-2 text-green-800">
-            April 18, 2025
-          </h3>
-          <p className="text-left text-green-700 leading-7 mb-6">
-            🎉 We have surpassed <strong>6000 registered albums</strong> in the
             database! Thank you to all contributors for your support! Let&apos;s
             keep discovering amazing music together! 🎶🌟
           </p>
