@@ -12,6 +12,7 @@ import AlbumTable from "app/datatable/album-table";
 import EditTable from "app/datatable/edit-table";
 import Modal from "app/datatable/modal";
 import { useDisclosure } from "@heroui/react";
+import { KofiFloatingButtonReact } from "kofi-react-widget";
 
 export default function Main() {
   const [storefrontArray, setStorefrontArray] = useState<StorefrontsResponse>({
@@ -76,51 +77,59 @@ export default function Main() {
   }, [isRandomMode]);
 
   return (
-    <main>
-      <Navbar setModalContent={setModalContent} onOpen={onOpen} />
-      <ButtonGroup
-        setModalContent={setModalContent}
-        onOpen={onOpen}
-        isEditMode={isEditMode}
-        setIsEditMode={setIsEditMode}
-        selectedItem={selectedItem}
-        setSelectedItem={setSelectedItem}
-        isRandomMode={isRandomMode}
-        setIsRandomMode={setIsRandomMode}
-      />
-      {!isEditMode ? (
-        <AlbumTable
-          storefrontArray={storefrontArray}
-          albumDataArray={albumDataArray}
-          isOpen={isOpen}
-          registeredAlbumIDs={registeredAlbumIDs}
-          setRegisteredAlbumIDs={setRegisteredAlbumIDs}
+    <div>
+      <main>
+        <Navbar setModalContent={setModalContent} onOpen={onOpen} />
+        <ButtonGroup
+          setModalContent={setModalContent}
+          onOpen={onOpen}
+          isEditMode={isEditMode}
+          setIsEditMode={setIsEditMode}
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
           isRandomMode={isRandomMode}
+          setIsRandomMode={setIsRandomMode}
         />
-      ) : (
-        <EditTable
-          albumDataArray={albumDataArray}
+        {!isEditMode ? (
+          <AlbumTable
+            storefrontArray={storefrontArray}
+            albumDataArray={albumDataArray}
+            isOpen={isOpen}
+            registeredAlbumIDs={registeredAlbumIDs}
+            setRegisteredAlbumIDs={setRegisteredAlbumIDs}
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem}
+            isRandomMode={isRandomMode}
+          />
+        ) : (
+          <EditTable
+            albumDataArray={albumDataArray}
+            isOpen={isOpen}
+            onOpen={onOpen}
+            setModalContent={setModalContent}
+            albumInfo={albumInfo}
+            setAlbumInfo={setAlbumInfo}
+            setAlbumFetchTrigger={setAlbumFetchTrigger}
+          />
+        )}
+        <Modal
+          modalContent={modalContent}
           isOpen={isOpen}
           onOpen={onOpen}
-          setModalContent={setModalContent}
+          onOpenChange={onOpenChange}
+          onClose={onClose}
           albumInfo={albumInfo}
-          setAlbumInfo={setAlbumInfo}
+          storefrontArray={storefrontArray}
+          registeredAlbumIDs={registeredAlbumIDs}
           setAlbumFetchTrigger={setAlbumFetchTrigger}
         />
-      )}
-      <Modal
-        modalContent={modalContent}
-        isOpen={isOpen}
-        onOpen={onOpen}
-        onOpenChange={onOpenChange}
-        onClose={onClose}
-        albumInfo={albumInfo}
-        storefrontArray={storefrontArray}
-        registeredAlbumIDs={registeredAlbumIDs}
-        setAlbumFetchTrigger={setAlbumFetchTrigger}
+      </main>
+      <KofiFloatingButtonReact
+        username="anzumaru_software"
+        background="#fcbf47"
+        textColor="#323842"
+        text="Support Us"
       />
-    </main>
+    </div>
   );
 }
