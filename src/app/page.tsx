@@ -4,8 +4,9 @@ import SNSLinkButtons from "app/sns-link-buttons";
 import GoToDatabaseButton from "app/go-to-database-button";
 import GoogleAd from "app/googlead";
 import SocialActionsBar from "app/social-actions-bar";
-import { Link } from "@heroui/react";
+import { Button, Link } from "@heroui/react";
 import googleAdSlotId from "app/googlead-slot-id";
+import KofiSymbol from "app/kofi-symbol";
 
 const year = new Date().getFullYear().toString();
 
@@ -349,13 +350,15 @@ const HomePage: NextPage = (): JSX.Element => {
             service, consider buying me a coffee to keep me energized! ☕✨
           </p>
           <div className="mt-6">
-            <Link
-              isExternal
+            <Button
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold"
+              as={Link}
               href="https://ko-fi.com/anzumaru_software"
-              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300"
+              size="lg"
+              startContent={<KofiSymbol width={30} height={30} />}
             >
-              ☕ Support me on Ko-fi
-            </Link>
+              Support me on Ko-fi
+            </Button>
           </div>
         </section>
 
