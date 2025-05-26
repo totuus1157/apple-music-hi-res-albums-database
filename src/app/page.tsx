@@ -310,13 +310,32 @@ const HomePage: NextPage = (): JSX.Element => {
           <p className="text-left text-gray-800 leading-8">
             Please contact me via{" "}
             <Link
-              href="mailto:anzumaru_software@icloud.com"
+              href="https://www.facebook.com/anzumaru.software"
+              size="lg"
               underline="hover"
               showAnchorIcon
             >
-              my email
+              Facebook
             </Link>
-            . I&apos;ll make the necessary corrections.
+            ,{" "}
+            <Link
+              href="https://x.com/anzumaru_sw"
+              size="lg"
+              underline="hover"
+              showAnchorIcon
+            >
+              X
+            </Link>
+            , or{" "}
+            <Link
+              href="mailto:anzumaru_software@icloud.com"
+              size="lg"
+              underline="hover"
+              showAnchorIcon
+            >
+              email
+            </Link>
+            . I will make the necessary corrections.
           </p>
 
           <h3 className="text-2xl font-semibold mb-4 mt-8">
@@ -327,13 +346,32 @@ const HomePage: NextPage = (): JSX.Element => {
             Unfortunately, there is no feature that allows users to delete their
             accounts directly. Please contact me via{" "}
             <Link
-              href="mailto:anzumaru_software@icloud.com"
+              href="https://www.facebook.com/anzumaru.software"
+              size="lg"
               underline="hover"
               showAnchorIcon
             >
-              my email
+              Facebook
             </Link>
-            , and I&apos;ll handle the deletion for you. However, any album data
+            ,{" "}
+            <Link
+              href="https://x.com/anzumaru_sw"
+              size="lg"
+              underline="hover"
+              showAnchorIcon
+            >
+              X
+            </Link>
+            , or{" "}
+            <Link
+              href="mailto:anzumaru_software@icloud.com"
+              size="lg"
+              underline="hover"
+              showAnchorIcon
+            >
+              email
+            </Link>
+            , and I will handle the deletion for you. However, any album data
             you have registered will not be removed from the database.
           </p>
         </section>
