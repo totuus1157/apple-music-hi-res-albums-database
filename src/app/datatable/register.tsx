@@ -355,11 +355,15 @@ export default function Register(props: Props) {
                 onChange={onChangeLink}
               />
 
+              <Spacer />
+
               <RadioGroup
                 label="Sample Rate (kHz)"
+                orientation="horizontal"
                 value={sampleRate}
                 defaultValue="96"
                 onValueChange={setSampleRate}
+                classNames={{ label: "text-[#11181c]" }}
               >
                 <Radio value="88.2">88.2</Radio>
                 <Radio value="96">96</Radio>
