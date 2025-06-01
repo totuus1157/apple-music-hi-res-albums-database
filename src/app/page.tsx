@@ -60,6 +60,31 @@ const HomePage: NextPage = (): JSX.Element => {
             Update Notice
           </h2>
           <h3 className="text-xl font-semibold mb-2 text-green-800">
+            May 30, 2025
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-4">
+            🎉🎉 We have officially surpassed{" "}
+            <strong>10,000 registered albums</strong> in the database! 🚀 Thank
+            you to all users and contributors for helping us reach this
+            incredible milestone. Let’s continue sharing the joy of
+            high-resolution music with the world! 🌍🎶✨
+          </p>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            • 🗓️ Three years and three months since our service first launched.
+            <br />
+            • 🏔️ We have finally climbed to the summit of one great mountain.
+            <br />
+            • 🌅 What does the view from this peak look like? A crystal-clear
+            blue sky? A sea of white clouds stretching below?
+            <br />
+            • 👀 I can see yet more mountains lined up on the horizon.
+            <br />
+            • 🎧 The journey to discover Hi-Res Lossless albums is far from
+            over. New masterpieces are born every day, and surely there are past
+            treasures still waiting to be uncovered.
+            <br />• 🎉 Let’s continue this exciting journey together! 🚀
+          </p>
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
             May 12, 2025
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
@@ -73,14 +98,6 @@ const HomePage: NextPage = (): JSX.Element => {
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
             🎉 We have surpassed <strong>8000 registered albums</strong> in the
-            database! Thank you to all contributors for your support! Let&apos;s
-            keep discovering amazing music together! 🎶🌟
-          </p>
-          <h3 className="text-xl font-semibold mb-2 text-green-800">
-            April 26, 2025
-          </h3>
-          <p className="text-left text-green-700 leading-7 mb-6">
-            🎉 We have surpassed <strong>7000 registered albums</strong> in the
             database! Thank you to all contributors for your support! Let&apos;s
             keep discovering amazing music together! 🎶🌟
           </p>
