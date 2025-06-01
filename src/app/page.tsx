@@ -40,21 +40,6 @@ const HomePage: NextPage = (): JSX.Element => {
           <GoToDatabaseButton />
         </div>
 
-        <section className="my-8 max-w-3xl bg-yellow-100 border border-yellow-500 p-4 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-2 text-yellow-800">
-            Notice to Users Before April 2024
-          </h2>
-          <p className="text-left text-yellow-700 leading-7">
-            Due to a complete overhaul, previously registered album data can no
-            longer be deleted.{" "}
-            <span className="line-through">
-              Additionally, not all album data could be migrated due to my
-              residential area constraints.
-            </span>{" "}
-            (Resolved on October 9, 2024.)
-          </p>
-        </section>
-
         <section className="my-8 max-w-3xl bg-green-100 border border-green-500 p-4 rounded-lg shadow-md">
           <h2 className="text-3xl font-semibold mb-6 text-green-800">
             Update Notice
