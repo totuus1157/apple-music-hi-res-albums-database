@@ -19,11 +19,11 @@ export const metadata: Metadata = {
     default: "Apple Music Hi-Res Albums Database",
   },
   description:
-    "Find your Apple Music Hi-Res Lossless albums list here! Discover, register, and share high-quality music. Explore our comprehensive database tailored for audiophiles. Join us now!",
+    "Discover over 10,000 Apple Music Hi-Res albums in our searchable database. Filter by artist, genre, composer, or sample rate to find exactly what you’re looking for.",
   openGraph: {
     title: "Apple Music Hi-Res Albums Database",
     description:
-      "Find your Apple Music Hi-Res Lossless albums list here! Discover, register, and share high-quality music. Explore our comprehensive database tailored for audiophiles. Join us now!",
+      "Discover over 10,000 Apple Music Hi-Res albums in our searchable database. Filter by artist, genre, composer, or sample rate to find exactly what you’re looking for.",
     url: "https://www.applemusichiresalbumsdb.com",
     siteName: "Apple Music Hi-Res Albums Database",
     images: {
