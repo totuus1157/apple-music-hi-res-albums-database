@@ -27,8 +27,8 @@ export async function GET() {
           Apple Music Hi-Res Albums Database
         </div>
         <div style={{ fontSize: "38px" }}>
-          A List of Hi-Res Lossless Albums for All &quot;Apple and Music
-          Lovers&quot;
+          Discover over 10,000 Apple Music Hi-Res albums in our searchable
+          database.
         </div>
       </div>
     ),
