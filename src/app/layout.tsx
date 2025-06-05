@@ -34,8 +34,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
-  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   twitter: { card: "summary_large_image" },
+  appleWebApp: { title: "Hi-Res DB" },
 };
 
 export default function RootLayout({
