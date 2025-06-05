@@ -4,7 +4,14 @@ import SNSLinkButtons from "app/sns-link-buttons";
 import GoToDatabaseButton from "app/go-to-database-button";
 import GoogleAd from "app/googlead";
 import SocialActionsBar from "app/social-actions-bar";
-import { Button, Link } from "@heroui/react";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Button,
+  Link,
+} from "@heroui/react";
 import googleAdSlotId from "app/googlead-slot-id";
 import KofiSymbol from "app/kofi-symbol";
 
@@ -14,14 +21,33 @@ const HomePage: NextPage = (): JSX.Element => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white text-gray-800">
       <main className="flex flex-col items-center justify-center w-full flex-1 px-6 text-center">
+        <Navbar position="static">
+          <NavbarBrand>
+            <Image src="/favicon.ico" alt="Site logo" width={36} height={36} />
+            <p className="font-bold text-inherit leading-none text-left sm:text-center">
+              <span className="block sm:inline align-top -mb-2">
+                Apple Music
+              </span>
+              <br className="block sm:hidden" />
+              <span className="block sm:inline align-top">
+                Hi-Res Albums Database
+              </span>
+            </p>
+          </NavbarBrand>
+        </Navbar>
+
         <h1 className="text-5xl font-extrabold my-10 text-black">
-          Apple Music Hi-Res Albums Database
+          Discover Over 10,000
+          <br />
+          Apple Music Hi-Res Albums
+          <br />
+          in Our Database
         </h1>
 
         <section className="mt-6">
-          <h2 className="text-3xl font-semibold mb-6 text-gray-900">
-            A List of Hi-Res Lossless Albums for Every Music Lover
-          </h2>
+          <p className="text-3xl font-semibold mb-6 text-gray-900">
+            Search and filter by artist, genre, composer, or sample rate.
+          </p>
         </section>
 
         <div className="w-full max-w-[728px] flex justify-end gap-4 mb-4">
