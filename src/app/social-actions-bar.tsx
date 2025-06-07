@@ -8,7 +8,6 @@ import {
   faSquareThreads,
   faSquareBluesky,
 } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 
 const parameters = [
   {
@@ -30,11 +29,6 @@ const parameters = [
     id: 4,
     icon: faSquareBluesky,
     href: "https://bsky.app/intent/compose?text=Apple%20Music%20Hi-Res%20Albums%20Database%0A%0Ahttps%3A%2F%2Fapplemusichiresalbumsdb.com%0A%0A%23ApplemusichiresalbumsDB",
-  },
-  {
-    id: 5,
-    icon: faEnvelope,
-    href: "mailto:anzumaru_software@icloud.com",
   },
 ];
 

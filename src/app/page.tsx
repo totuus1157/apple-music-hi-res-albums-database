@@ -50,8 +50,8 @@ const HomePage: NextPage = (): JSX.Element => {
           </p>
         </section>
 
-        <div className="w-full max-w-[728px] flex justify-end gap-4 mb-4">
-          <SNSLinkButtons />
+        <div className="w-full max-w-[728px] flex justify-end mb-4">
+          <SocialActionsBar />
         </div>
 
         <div className="w-full max-w-[728px] mx-auto">
@@ -451,7 +451,7 @@ const HomePage: NextPage = (): JSX.Element => {
 
       <footer className="w-full h-20 flex flex-col justify-center items-center border-t">
         <div className="flex gap-4 mt-8 mb-2">
-          <SocialActionsBar />
+          <SNSLinkButtons />
         </div>
         <p className="text-sm text-gray-500 mb-2">
           © 2022-{year}{" "}
