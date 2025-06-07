@@ -4,6 +4,8 @@ import SNSLinkButtons from "app/sns-link-buttons";
 import GoToDatabaseButton from "app/go-to-database-button";
 import GoogleAd from "app/googlead";
 import SocialActionsBar from "app/social-actions-bar";
+import googleAdSlotId from "app/googlead-slot-id";
+import KofiSymbol from "app/kofi-symbol";
 import {
   Navbar,
   NavbarBrand,
@@ -12,8 +14,6 @@ import {
   Button,
   Link,
 } from "@heroui/react";
-import googleAdSlotId from "app/googlead-slot-id";
-import KofiSymbol from "app/kofi-symbol";
 
 const year = new Date().getFullYear().toString();
 
