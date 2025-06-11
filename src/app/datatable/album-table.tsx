@@ -30,7 +30,6 @@ type AlbumElements = {
 };
 
 type SelectionElements = {
-  id: number;
   element: string;
 };
 
@@ -90,8 +89,8 @@ export default function AlbumTable(props: Props) {
           return a.localeCompare(b);
         }
       })
-      .map((uniqueElement, key): SelectionElements => {
-        return { id: key + 1, element: uniqueElement as string };
+      .map((uniqueElement): SelectionElements => {
+        return { element: uniqueElement as string };
       });
   };
 
