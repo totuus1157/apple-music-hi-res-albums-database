@@ -6,7 +6,25 @@ export default async function handler(
   response: NextApiResponse,
 ): Promise<void> {
   try {
-    const albums = await sql`SELECT * FROM albums ORDER BY id DESC;`;
+    const albums = await sql`SELECT
+  id,
+  product_id,
+  title,
+  artist,
+  ARRAY(
+    SELECT unnest(genre)
+    EXCEPT
+    VALUES ('Music'), ('Musica'), ('Música'), ('Musique'), ('ミュージック')
+  ) AS genre,
+  composer,
+  sample_rate,
+  registrant_id,
+  created_at,
+  updated_at,
+  storefront
+FROM albums
+ORDER BY id DESC;
+`;
     return response.status(200).json({ albums });
   } catch (err) {
     console.error("Error fetching albums:", err);
