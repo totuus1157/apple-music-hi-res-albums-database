@@ -128,7 +128,7 @@ export default function AlbumTable(props: Props) {
   const fetchAlbumElements = (): void => {
     albumDataArray.forEach((doc: AlbumData): void => {
       let artistName: string = doc.artist;
-      if (/^The /.test(artistName)) {
+      if (/^The /.test(artistName) && artistName !== "The Band") {
         artistName = artistName.replace(/^The /, "");
         namesDeletedThe.push(artistName);
       }
