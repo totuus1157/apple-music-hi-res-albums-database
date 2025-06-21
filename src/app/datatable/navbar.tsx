@@ -10,6 +10,8 @@ import {
   Button,
   link,
 } from "@heroui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChartBar } from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
   setModalContent: (arg0: string | null) => void;
@@ -25,6 +27,11 @@ export default function Navbar(props: Props) {
   const { setModalContent, onOpen } = props;
   const { user, error, isLoading } = useUser();
 
+  const handleShow = (): void => {
+    setModalContent("analytics");
+    onOpen();
+  };
+
   return (
     <NextUINavbar maxWidth="full" isBordered>
       <NavbarContent>
@@ -36,6 +43,15 @@ export default function Navbar(props: Props) {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
+          <Button
+            color="secondary"
+            variant="bordered"
+            radius="full"
+            isIconOnly
+            onPress={handleShow}
+          >
+            {<FontAwesomeIcon icon={faChartBar} />}
+          </Button>{" "}
           {!user ? (
             <Button
               href="/api/auth/login"

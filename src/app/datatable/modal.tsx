@@ -1,7 +1,8 @@
 "use client";
 
-import type { StorefrontsResponse } from "app/datatable/types";
+import type { StorefrontsResponse, AlbumData } from "app/datatable/types";
 import Register from "app/datatable/register";
+import Analytics from "app/datatable/analytics";
 
 type Props = {
   modalContent: string | null;
@@ -13,6 +14,7 @@ type Props = {
   storefrontArray: StorefrontsResponse;
   registeredAlbumIDs: string[];
   setAlbumFetchTrigger: (arg0: number) => void;
+  originalAlbumDataArray: AlbumData[];
 };
 
 export default function Modal(props: Props) {
@@ -26,6 +28,7 @@ export default function Modal(props: Props) {
     storefrontArray,
     registeredAlbumIDs,
     setAlbumFetchTrigger,
+    originalAlbumDataArray,
   } = props;
 
   if (modalContent === "register") {
@@ -38,6 +41,16 @@ export default function Modal(props: Props) {
         storefrontArray={storefrontArray}
         registeredAlbumIDs={registeredAlbumIDs}
         setAlbumFetchTrigger={setAlbumFetchTrigger}
+      />
+    );
+  }
+
+  if (modalContent === "analytics") {
+    return (
+      <Analytics
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        originalAlbumDataArray={originalAlbumDataArray}
       />
     );
   }

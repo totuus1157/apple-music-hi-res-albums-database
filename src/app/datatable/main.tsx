@@ -122,6 +122,7 @@ export default function Main() {
           storefrontArray={storefrontArray}
           registeredAlbumIDs={registeredAlbumIDs}
           setAlbumFetchTrigger={setAlbumFetchTrigger}
+          originalAlbumDataArray={originalAlbumDataArray}
         />
       </main>
       <KofiFloatingButtonReact
