@@ -8,6 +8,7 @@ import {
   NavbarItem,
   Link,
   Button,
+  Tooltip,
   link,
 } from "@heroui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -43,15 +44,22 @@ export default function Navbar(props: Props) {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button
+          <Tooltip
             color="secondary"
-            variant="bordered"
-            radius="full"
-            isIconOnly
-            onPress={handleShow}
+            content="View Album Stats"
+            placement="left"
+            showArrow={true}
           >
-            {<FontAwesomeIcon icon={faChartBar} />}
-          </Button>{" "}
+            <Button
+              color="secondary"
+              variant="bordered"
+              radius="full"
+              isIconOnly
+              onPress={handleShow}
+            >
+              {<FontAwesomeIcon icon={faChartBar} />}
+            </Button>
+          </Tooltip>{" "}
           {!user ? (
             <Button
               href="/api/auth/login"
