@@ -2,7 +2,7 @@
 
 import type { StorefrontsResponse, AlbumData } from "app/datatable/types";
 import Register from "app/datatable/register";
-import Analytics from "app/datatable/analytics";
+import AlbumStats from "app/datatable/album-stats";
 
 type Props = {
   modalContent: string | null;
@@ -45,9 +45,9 @@ export default function Modal(props: Props) {
     );
   }
 
-  if (modalContent === "analytics") {
+  if (modalContent === "albumStats") {
     return (
-      <Analytics
+      <AlbumStats
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         originalAlbumDataArray={originalAlbumDataArray}

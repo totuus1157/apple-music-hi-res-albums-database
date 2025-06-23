@@ -28,7 +28,7 @@ export default function Navbar(props: Props) {
   const { user, error, isLoading } = useUser();
 
   const handleShow = (): void => {
-    setModalContent("analytics");
+    setModalContent("albumStats");
     onOpen();
   };
 
