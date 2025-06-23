@@ -66,12 +66,16 @@ export default function Navbar(props: Props) {
             </Button>
           ) : (
             <Button
-              href="/api/auth/logout"
-              as={Link}
               variant="bordered"
-              color="primary"
+              color="danger"
               onPress={(): void => {
-                localStorage.setItem("display", "ok");
+                const confirmed = window.confirm(
+                  "Are you sure you want to log out?",
+                );
+                if (confirmed) {
+                  localStorage.setItem("display", "ok");
+                  window.location.href = "/api/auth/logout";
+                }
               }}
             >
               Logout
