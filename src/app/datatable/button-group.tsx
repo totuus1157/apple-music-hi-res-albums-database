@@ -2,7 +2,7 @@
 
 import type { SelectedItem } from "app/datatable/types";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { Button } from "@heroui/react";
+import { Button, Spacer } from "@heroui/react";
 
 type Props = {
   onOpen: () => void;
@@ -68,7 +68,7 @@ export default function ButtonGroup(props: Props) {
             </Button>
           ))}
       </div>
-      <div className="px-2">
+      <div className="flex px-2">
         {!isEditMode && (
           <Button
             color="primary"
@@ -77,7 +77,8 @@ export default function ButtonGroup(props: Props) {
           >
             Add
           </Button>
-        )}{" "}
+        )}
+        <Spacer x={2} />
         {!isEditMode ? (
           <Button
             color="default"

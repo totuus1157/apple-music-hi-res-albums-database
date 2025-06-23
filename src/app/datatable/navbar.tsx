@@ -9,6 +9,7 @@ import {
   Link,
   Button,
   Tooltip,
+  Spacer,
   link,
 } from "@heroui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -44,51 +45,54 @@ export default function Navbar(props: Props) {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Tooltip
-            color="secondary"
-            content="View Album Stats"
-            placement="left"
-            showArrow={true}
-          >
-            <Button
+          <div className="flex">
+            <Tooltip
               color="secondary"
-              variant="bordered"
-              radius="full"
-              isIconOnly
-              onPress={handleShow}
+              content="View Album Stats"
+              placement="left"
+              showArrow={true}
             >
-              {<FontAwesomeIcon icon={faChartBar} />}
-            </Button>
-          </Tooltip>{" "}
-          {!user ? (
-            <Button
-              href="/api/auth/login"
-              as={Link}
-              variant="bordered"
-              color="primary"
-              onPress={(): void => {
-                localStorage.setItem("display", "ok");
-              }}
-            >
-              Login
-            </Button>
-          ) : (
-            <Button
-              variant="bordered"
-              color="danger"
-              onPress={(): void => {
-                const confirmed = window.confirm(
-                  "Are you sure you want to log out?",
-                );
-                if (confirmed) {
+              <Button
+                color="secondary"
+                variant="bordered"
+                radius="full"
+                isIconOnly
+                onPress={handleShow}
+              >
+                {<FontAwesomeIcon icon={faChartBar} />}
+              </Button>
+            </Tooltip>
+            <Spacer x={2} />
+            {!user ? (
+              <Button
+                href="/api/auth/login"
+                as={Link}
+                variant="bordered"
+                color="primary"
+                onPress={(): void => {
                   localStorage.setItem("display", "ok");
-                  window.location.href = "/api/auth/logout";
-                }
-              }}
-            >
-              Logout
-            </Button>
-          )}
+                }}
+              >
+                Login
+              </Button>
+            ) : (
+              <Button
+                variant="bordered"
+                color="danger"
+                onPress={(): void => {
+                  const confirmed = window.confirm(
+                    "Are you sure you want to log out?",
+                  );
+                  if (confirmed) {
+                    localStorage.setItem("display", "ok");
+                    window.location.href = "/api/auth/logout";
+                  }
+                }}
+              >
+                Logout
+              </Button>
+            )}
+          </div>
         </NavbarItem>
       </NavbarContent>
     </NextUINavbar>
