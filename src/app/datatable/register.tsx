@@ -1,6 +1,7 @@
 "use client";
 
 import type { StorefrontsResponse, AlbumsResponse } from "app/datatable/types";
+import type { Selection } from "@heroui/react";
 import React, { useState, useEffect } from "react";
 import { makeApiRequestWithRetry } from "app/datatable/api-request";
 import extractAlbumInfo from "app/datatable/extract-album-info";
@@ -94,7 +95,7 @@ export default function Register(props: Props) {
   const [rowsForAlbumSelection, setRowsForAlbumSelection] = useState<
     FormatAlbumDisplay[]
   >([]);
-  const [selectedKeys, setSelectedKeys] = useState(new Set([""]));
+  const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set([""]));
   const [isFetchingNonUSStorefrontData, setIsFetchingNonUSStorefrontData] =
     useState(false);
   const [isTweetEnabled, setTweetEnabled] = usePersistentState<boolean>(
