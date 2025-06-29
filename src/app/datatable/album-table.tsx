@@ -15,11 +15,11 @@ import {
   TableColumn,
   TableRow,
   TableCell,
-  Link,
   Progress,
   Autocomplete,
   AutocompleteItem,
   Pagination,
+  getKeyValue,
 } from "@heroui/react";
 
 type AlbumElements = {
@@ -31,6 +31,12 @@ type AlbumElements = {
 
 type SelectionElements = {
   element: string;
+};
+
+type RowData = Omit<FormatAlbumForTable, "id" | "storefront"> & {
+  key: number;
+  storefront_name: string;
+  storefront_code: string;
 };
 
 type Props = {
@@ -61,11 +67,10 @@ export default function AlbumTable(props: Props) {
     isRandomMode,
   } = props;
 
-  const tableRows: JSX.Element[] = [];
   const albumElements: AlbumElements[] = [];
   const albumIds: string[] = [];
   const namesDeletedThe: string[] = [];
-  const [data, setData] = useState(tableRows);
+  const [rows, setRows] = useState<RowData[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [albumElementsList, setAlbumElementsList] = useState(albumElements);
   const [nonArticleNames, setNonArticleNames] = useState(namesDeletedThe);
@@ -184,30 +189,20 @@ export default function AlbumTable(props: Props) {
 
     const formatAlbumForTable = summarizeAlbumData(filteredAlbums);
 
-    formatAlbumForTable.forEach((doc): void => {
-      tableRows.push(
-        <TableRow key={doc.id}>
-          <TableCell>{doc.artist}</TableCell>
-          <TableCell>
-            <Link
-              isExternal
-              href={`https://music.apple.com/${doc.storefront}/album/${doc.product_id}`}
-              size="sm"
-              underline="hover"
-            >
-              {doc.title}
-            </Link>
-          </TableCell>
-          <TableCell>{doc.genre}</TableCell>
-          <TableCell>{doc.composer}</TableCell>
-          <TableCell>{doc.sample_rate}</TableCell>
-          <TableCell>{extractStorefrontNames(doc.storefront)}</TableCell>
-        </TableRow>,
-      );
-      albumIds.push(doc.product_id);
-    });
+    const newRows = formatAlbumForTable.map(
+      ({ id, storefront, ...rest }): RowData => ({
+        ...rest,
+        key: id,
+        storefront_name: extractStorefrontNames(storefront),
+        storefront_code: storefront,
+      }),
+    );
 
-    setData(tableRows);
+    const albumIds = formatAlbumForTable.map(
+      (album): string => album.product_id,
+    );
+
+    setRows(newRows);
     setRegisteredAlbumIDs(albumIds);
     setIsLoaded(true);
   };
@@ -259,14 +254,14 @@ export default function AlbumTable(props: Props) {
     </>
   );
 
-  const pages = Math.ceil(data.length / rowsPerPage);
+  const pages = Math.ceil(rows.length / rowsPerPage);
 
   const items = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
 
-    return data.slice(start, end);
-  }, [page, data]);
+    return rows.slice(start, end);
+  }, [page, rows]);
 
   const bottomContent = (
     <div className="flex w-full justify-center">
@@ -280,25 +275,48 @@ export default function AlbumTable(props: Props) {
     </div>
   );
 
+  const columns = [
+    { key: "artist", label: "Artist" },
+    { key: "title", label: "Title" },
+    { key: "genre", label: "Genre" },
+    { key: "composer", label: "Composer" },
+    { key: "sample_rate", label: "Sample Rate" },
+    { key: "storefront_name", label: "Storefront" },
+  ];
+
   return (
     <>
       {isLoaded ? (
         <Table
-          isStriped
           shadow="none"
           topContent={topContent}
           bottomContent={bottomContent}
+          selectionMode="single"
+          onRowAction={(key): void => {
+            const album = rows.find((row): boolean => row.key === Number(key));
+            if (album) {
+              window.open(
+                `https://music.apple.com/${album.storefront_code}/album/${album.product_id}`,
+                "_blank",
+              );
+            }
+          }}
           classNames={{ td: "whitespace-pre-wrap" }}
         >
-          <TableHeader>
-            <TableColumn>Artist</TableColumn>
-            <TableColumn>Title</TableColumn>
-            <TableColumn>Genre</TableColumn>
-            <TableColumn>Composer</TableColumn>
-            <TableColumn>Sample Rate</TableColumn>
-            <TableColumn>Storefront</TableColumn>
+          <TableHeader columns={columns}>
+            {(column) => (
+              <TableColumn key={column.key}>{column.label}</TableColumn>
+            )}
           </TableHeader>
-          <TableBody>{items}</TableBody>
+          <TableBody items={items}>
+            {(item) => (
+              <TableRow key={item.key}>
+                {(columnKey) => (
+                  <TableCell>{getKeyValue(item, columnKey)}</TableCell>
+                )}
+              </TableRow>
+            )}
+          </TableBody>
         </Table>
       ) : (
         <Progress
