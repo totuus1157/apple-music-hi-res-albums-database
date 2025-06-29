@@ -301,6 +301,7 @@ export default function AlbumTable(props: Props) {
               );
             }
           }}
+          className="max-md:mb-16"
           classNames={{ td: "whitespace-pre-wrap" }}
         >
           <TableHeader columns={columns}>
