@@ -8,6 +8,8 @@ import type {
 } from "app/datatable/types";
 import { useState, useEffect, useMemo } from "react";
 import { summarizeAlbumData } from "app/datatable/album-formatter";
+import { getErrorMessage } from "app/datatable/get-error-message";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import {
   Table,
   TableHeader,
@@ -37,6 +39,8 @@ type RowData = Omit<FormatAlbumForTable, "id" | "storefront"> & {
   key: number;
   storefront_name: string;
   storefront_code: string;
+  product_id: string;
+  registrant_id: string;
 };
 
 type Props = {
@@ -53,6 +57,8 @@ type Props = {
     (arg0: SelectedItem): void;
   };
   isRandomMode: boolean;
+  isEditMode: boolean;
+  setAlbumFetchTrigger: (arg0: number) => void;
 };
 
 export default function AlbumTable(props: Props) {
@@ -65,7 +71,12 @@ export default function AlbumTable(props: Props) {
     selectedItem,
     setSelectedItem,
     isRandomMode,
+    isEditMode,
+    setAlbumFetchTrigger,
   } = props;
+
+  const { user } = useUser();
+  const userID = user?.sub || process.env.NEXT_PUBLIC_AUTH0_DEVELOPER_USER_ID;
 
   const albumElements: AlbumElements[] = [];
   const albumIds: string[] = [];
@@ -77,6 +88,37 @@ export default function AlbumTable(props: Props) {
   const [page, setPage] = useState(1);
 
   const rowsPerPage = 100;
+
+  const handleDelete = async (productId: string): Promise<void> => {
+    if (!userID) {
+      alert("You must be logged in to delete albums.");
+      return;
+    }
+
+    if (!confirm("Are you sure you want to delete this album?")) {
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/database/delete-album", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productId, registrantId: userID }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to delete the album");
+      }
+
+      setAlbumFetchTrigger(Date.now());
+    } catch (err) {
+      const errorMessage: string = getErrorMessage(err);
+      alert(`Failed to delete the album: ${errorMessage}`);
+    }
+  };
 
   const selectionElements = (
     _category: keyof AlbumElements,
@@ -179,7 +221,7 @@ export default function AlbumTable(props: Props) {
       }
     }
 
-    const filteredAlbums = filterAlbums(
+    let filteredAlbums = filterAlbums(
       albumDataArray,
       selectedArtistName,
       selectedItem.genre,
@@ -187,14 +229,22 @@ export default function AlbumTable(props: Props) {
       selectedItem.sampleRate,
     );
 
+    if (isEditMode && userID) {
+      filteredAlbums = filteredAlbums.filter(
+        (album): boolean => album.registrant_id === userID,
+      );
+    }
+
     const formatAlbumForTable = summarizeAlbumData(filteredAlbums);
 
     const newRows = formatAlbumForTable.map(
-      ({ id, storefront, ...rest }): RowData => ({
+      ({ id, storefront, product_id, registrant_id, ...rest }): RowData => ({
         ...rest,
         key: id,
         storefront_name: extractStorefrontNames(storefront),
         storefront_code: storefront,
+        product_id,
+        registrant_id,
       }),
     );
 
@@ -256,7 +306,7 @@ export default function AlbumTable(props: Props) {
 
   const pages = Math.ceil(rows.length / rowsPerPage);
 
-  const items = useMemo(() => {
+  const items = useMemo((): RowData[] => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
 
@@ -294,7 +344,11 @@ export default function AlbumTable(props: Props) {
           selectionMode="single"
           onRowAction={(key): void => {
             const album = rows.find((row): boolean => row.key === Number(key));
-            if (album) {
+            if (!album) return;
+
+            if (isEditMode && album.registrant_id === userID) {
+              handleDelete(album.product_id);
+            } else {
               window.open(
                 `https://music.apple.com/${album.storefront_code}/album/${album.product_id}`,
                 "_blank",

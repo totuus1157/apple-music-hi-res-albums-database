@@ -9,7 +9,6 @@ import { useState, useEffect } from "react";
 import Navbar from "app/datatable/navbar";
 import ButtonGroup from "app/datatable/button-group";
 import AlbumTable from "app/datatable/album-table";
-import EditTable from "app/datatable/edit-table";
 import Modal from "app/datatable/modal";
 import { useDisclosure } from "@heroui/react";
 import { KofiFloatingButtonReact } from "kofi-react-widget";
@@ -90,28 +89,18 @@ export default function Main() {
           isRandomMode={isRandomMode}
           setIsRandomMode={setIsRandomMode}
         />
-        {!isEditMode ? (
-          <AlbumTable
-            storefrontArray={storefrontArray}
-            albumDataArray={albumDataArray}
-            isOpen={isOpen}
-            registeredAlbumIDs={registeredAlbumIDs}
-            setRegisteredAlbumIDs={setRegisteredAlbumIDs}
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
-            isRandomMode={isRandomMode}
-          />
-        ) : (
-          <EditTable
-            albumDataArray={albumDataArray}
-            isOpen={isOpen}
-            onOpen={onOpen}
-            setModalContent={setModalContent}
-            albumInfo={albumInfo}
-            setAlbumInfo={setAlbumInfo}
-            setAlbumFetchTrigger={setAlbumFetchTrigger}
-          />
-        )}
+        <AlbumTable
+          storefrontArray={storefrontArray}
+          albumDataArray={albumDataArray}
+          isOpen={isOpen}
+          registeredAlbumIDs={registeredAlbumIDs}
+          setRegisteredAlbumIDs={setRegisteredAlbumIDs}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+          isRandomMode={isRandomMode}
+          isEditMode={isEditMode}
+          setAlbumFetchTrigger={setAlbumFetchTrigger}
+        />
         <Modal
           modalContent={modalContent}
           isOpen={isOpen}
