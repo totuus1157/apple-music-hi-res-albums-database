@@ -68,6 +68,104 @@ const HomePage: NextPage = (): JSX.Element => {
           <GoToDatabaseButton />
         </div>
 
+        <section className="my-8 max-w-3xl bg-red-100 border border-red-500 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-semibold mb-4 text-red-800">
+            Important Notice
+          </h2>
+
+          <p className="text-left text-red-700 leading-7 mb-4">
+            Since launching this service, we have not generated any revenue, and
+            projected costs will exceed <strong>$1,000</strong> by the end of
+            this year. Without sufficient support, we may have to cancel the{" "}
+            <strong>October 2025</strong> Apple Developer Program renewal and
+            close the service.
+          </p>
+
+          <p className="text-left text-red-700 leading-7 mb-4">
+            One year ago, this site had only a dozen daily visitors. Today, we
+            see an average of over 100 visitors per day, and the trend continues
+            to rise. To achieve sustainability, we need at least 5×, ideally
+            10×, the current traffic.
+          </p>
+
+          <p className="text-left text-red-700 leading-7 mb-4">
+            There must be countless Apple Music users who crave access to Hi-Res
+            album information, but simply don’t know that such a solution
+            exists.
+          </p>
+
+          <p className="text-left text-red-700 leading-7 mb-4">
+            You probably found this site via web search. That suggests you’re a
+            person of high information literacy. But not everyone is like you.
+          </p>
+
+          <p className="text-left text-red-700 leading-7 mb-4">
+            Steve Jobs once said:{" "}
+            <em>
+              \&quot;A lot of times, people don’t know what they want until you
+              show it to them.\&quot;
+            </em>{" "}
+            There are surely many frustrated Apple Music users who have no idea
+            a solution like this exists. We need your help to reach them.
+          </p>
+
+          <p className="text-left text-red-700 leading-7 mb-4">
+            If you believe this web service is a public good worth preserving,
+            please help spread the word to like-minded people. Share using the
+            social links under the title above, and let us know if you want more
+            services to be supported.
+          </p>
+
+          <p className="text-left text-red-700 leading-7 mb-4">
+            Follow our official social channels and help us reach more people:
+            <br />• Facebook:{" "}
+            <Link
+              isExternal
+              showAnchorIcon
+              href="https://www.facebook.com/anzumaru.software"
+            >
+              facebook.com/anzumaru.software
+            </Link>
+            <br />• X/Twitter:{" "}
+            <Link isExternal showAnchorIcon href="https://x.com/anzumaru_sw">
+              x.com/anzumaru_sw
+            </Link>
+          </p>
+
+          <p className="text-left text-red-700 leading-7 mb-4">
+            If you have favorite social media influencers or YouTubers, please
+            encourage them to introduce our service. We don’t have the budget to
+            ask them directly—your action is our only hope!
+          </p>
+
+          <p className="text-left text-red-700 leading-7 mb-4">
+            Of course, a diverse and international user base would greatly
+            contribute to the richness and completeness of the database—this is
+            the core mission of our service.
+          </p>
+
+          <p className="text-left text-red-700 leading-7 mb-4">
+            If you would like to support us directly, we are on Ko-fi:{" "}
+            <Link
+              isExternal
+              showAnchorIcon
+              href="https://ko-fi.com/anzumaru_software"
+            >
+              ko-fi.com/anzumaru_software
+            </Link>
+            <br />— your help is truly appreciated. Previously, we received a
+            few kind donations via Buy Me a Coffee, but sadly our account was
+            suddenly closed during withdrawal review, despite our clean track
+            record. We had to start over from scratch.
+          </p>
+
+          <p className="text-left text-red-700 leading-7">
+            And if this project’s monetization cycle begins to succeed, I will
+            be able to start developing a new application I’ve been planning—one
+            that is also closely related to Apple Music. Stay tuned.
+          </p>
+        </section>
+
         <section className="my-8 max-w-3xl bg-green-100 border border-green-500 p-4 rounded-lg shadow-md">
           <h2 className="text-3xl font-semibold mb-6 text-green-800">
             Update Notice
