@@ -2,7 +2,7 @@
 
 import type { SelectedItem } from "app/datatable/types";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { Button, Spacer } from "@heroui/react";
+import { Button, RadioGroup, Radio, Spacer } from "@heroui/react";
 
 type Props = {
   onOpen: () => void;
@@ -68,8 +68,8 @@ export default function ButtonGroup(props: Props) {
             </Button>
           ))}
       </div>
-      <div className="flex px-2">
-        {!isEditMode && (
+      {!isEditMode ? (
+        <div className="flex px-2">
           <Button
             color="primary"
             isDisabled={!user && process.env.NODE_ENV === "production"}
@@ -77,9 +77,7 @@ export default function ButtonGroup(props: Props) {
           >
             Add
           </Button>
-        )}
-        <Spacer x={2} />
-        {!isEditMode ? (
+          <Spacer x={2} />
           <Button
             color="default"
             isDisabled={!user && process.env.NODE_ENV === "production"}
@@ -87,7 +85,13 @@ export default function ButtonGroup(props: Props) {
           >
             Edit
           </Button>
-        ) : (
+        </div>
+      ) : (
+        <div className="flex px-2">
+          <RadioGroup color="danger" defaultValue="delete" className="pt-2">
+            <Radio value="delete">Delete</Radio>
+          </RadioGroup>
+          <Spacer x={4} />
           <Button
             color="default"
             variant="bordered"
@@ -97,8 +101,8 @@ export default function ButtonGroup(props: Props) {
           >
             Exit
           </Button>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
