@@ -87,7 +87,7 @@ export default function AlbumTable(props: Props) {
   const [nonArticleNames, setNonArticleNames] = useState(namesDeletedThe);
   const [page, setPage] = useState(1);
 
-  const rowsPerPage = 100;
+  const rowsPerPage = 50;
 
   const handleDelete = async (productId: string): Promise<void> => {
     if (!userID) {
