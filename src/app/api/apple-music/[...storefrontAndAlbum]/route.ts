@@ -16,7 +16,7 @@ export async function GET(
 
   try {
     const response = await fetch(
-      `https://api.music.apple.com/v1/catalog/${storefrontId}/albums/${albumId}`,
+      `https://api.music.apple.com/v1/catalog/${storefrontId}/albums/${albumId}?extend=audioVariants`,
       {
         headers: {
           Authorization: `Bearer ${process.env.APPLE_MUSIC_API_KEY}`,

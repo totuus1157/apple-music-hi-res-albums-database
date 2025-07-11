@@ -3,6 +3,7 @@
 import type {
   AlbumData,
   SelectedItem,
+  FocusedAlbum,
   StorefrontsResponse,
 } from "app/datatable/types";
 import { useState, useEffect } from "react";
@@ -32,6 +33,10 @@ export default function Main() {
     genre: null,
     composer: null,
     sampleRate: null,
+  });
+  const [focusedAlbum, setFocusedAlbum] = useState<FocusedAlbum>({
+    id: null,
+    storefront: null,
   });
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
@@ -93,6 +98,7 @@ export default function Main() {
           storefrontArray={storefrontArray}
           albumDataArray={albumDataArray}
           isOpen={isOpen}
+          onOpen={onOpen}
           registeredAlbumIDs={registeredAlbumIDs}
           setRegisteredAlbumIDs={setRegisteredAlbumIDs}
           selectedItem={selectedItem}
@@ -100,6 +106,8 @@ export default function Main() {
           isRandomMode={isRandomMode}
           isEditMode={isEditMode}
           setAlbumFetchTrigger={setAlbumFetchTrigger}
+          setModalContent={setModalContent}
+          setFocusedAlbum={setFocusedAlbum}
         />
         <Modal
           modalContent={modalContent}
@@ -112,6 +120,7 @@ export default function Main() {
           registeredAlbumIDs={registeredAlbumIDs}
           setAlbumFetchTrigger={setAlbumFetchTrigger}
           originalAlbumDataArray={originalAlbumDataArray}
+          focusedAlbum={focusedAlbum}
         />
       </main>
       <KofiFloatingButtonReact

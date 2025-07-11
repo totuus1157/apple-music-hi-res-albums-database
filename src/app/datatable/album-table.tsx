@@ -4,6 +4,7 @@ import type {
   AlbumData,
   FormatAlbumForTable,
   SelectedItem,
+  FocusedAlbum,
   StorefrontsResponse,
 } from "app/datatable/types";
 import { useState, useEffect, useMemo } from "react";
@@ -47,6 +48,7 @@ type Props = {
   storefrontArray: StorefrontsResponse;
   albumDataArray: AlbumData[];
   isOpen: boolean;
+  onOpen: () => void;
   registeredAlbumIDs: string[];
   setRegisteredAlbumIDs: (arg0: string[]) => void;
   selectedItem: SelectedItem;
@@ -59,6 +61,8 @@ type Props = {
   isRandomMode: boolean;
   isEditMode: boolean;
   setAlbumFetchTrigger: (arg0: number) => void;
+  setModalContent: (arg0: string) => void;
+  setFocusedAlbum: (album: FocusedAlbum) => void;
 };
 
 export default function AlbumTable(props: Props) {
@@ -66,6 +70,7 @@ export default function AlbumTable(props: Props) {
     storefrontArray,
     albumDataArray,
     isOpen,
+    onOpen,
     registeredAlbumIDs,
     setRegisteredAlbumIDs,
     selectedItem,
@@ -73,6 +78,8 @@ export default function AlbumTable(props: Props) {
     isRandomMode,
     isEditMode,
     setAlbumFetchTrigger,
+    setModalContent,
+    setFocusedAlbum,
   } = props;
 
   const { user } = useUser();
@@ -325,6 +332,12 @@ export default function AlbumTable(props: Props) {
     </div>
   );
 
+  const handleShow = (productId: string, storefront: string): void => {
+    setFocusedAlbum({ id: productId, storefront });
+    setModalContent("albumDetail");
+    onOpen();
+  };
+
   const columns = [
     { key: "artist", label: "Artist" },
     { key: "title", label: "Title" },
@@ -349,10 +362,7 @@ export default function AlbumTable(props: Props) {
             if (isEditMode && album.registrant_id === userID) {
               handleDelete(album.product_id);
             } else {
-              window.open(
-                `https://music.apple.com/${album.storefront_code}/album/${album.product_id}`,
-                "_blank",
-              );
+              handleShow(album.product_id, album.storefront_code);
             }
           }}
           className="max-md:mb-16"

@@ -40,6 +40,8 @@ export type AlbumElements = {
   sampleRate?: string;
 };
 
+export type FocusedAlbum = { id: string | null; storefront: string | null };
+
 export type StorefrontsResponse = {
   data: {
     id: string;
@@ -101,7 +103,31 @@ export type AlbumsResponse = {
       url: string;
     };
     relationships?: {
-      tracks?: { data: { attributes?: { composerName?: string } }[] };
+      tracks?: {
+        data: {
+          id: string;
+          type: "songs";
+          href: string;
+          attributes?: {
+            composerName?: string;
+            discNumber?: number;
+            trackNumber?: number;
+            durationInMillis: number;
+            name: string;
+          };
+        }[];
+      };
     };
+  }[];
+};
+
+export type AppleMusicErrorsResponse = {
+  errors: {
+    code: string;
+    detail?: string;
+    id: string;
+    source?: { parameter?: string; pointer?: string };
+    status: string;
+    title: string;
   }[];
 };
