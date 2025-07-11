@@ -171,6 +171,22 @@ const HomePage: NextPage = (): JSX.Element => {
             Update Notice
           </h2>
           <h3 className="text-xl font-semibold mb-2 text-green-800">
+            July 11, 2025
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            🎉 <strong>A major update</strong> after a while! You can now click
+            on any row in the database to instantly view{" "}
+            <strong>detailed album information</strong>. 🔍💿 It’s now much more{" "}
+            <strong>efficient</strong> to browse through albums without
+            switching to the Music app! 🚀
+          </p>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            You can view the following information at a glance:
+            <br /> ・🎨 Album artwork
+            <br /> ・🎵 Full tracklist
+            <br /> ・🎧 Dolby Atmos availability
+          </p>
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
             June 22, 2025
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
@@ -222,15 +238,6 @@ const HomePage: NextPage = (): JSX.Element => {
             over. New masterpieces are born every day, and surely there are past
             treasures still waiting to be uncovered.
             <br />• 🎉 Let’s continue this exciting journey together! 🚀
-          </p>
-          <h3 className="text-xl font-semibold mb-2 text-green-800">
-            May 12, 2025
-          </h3>
-          <p className="text-left text-green-700 leading-7 mb-6">
-            🎉 We have surpassed <strong>9000 registered albums</strong> in the
-            database! 🚀 As we set our sights on the grand milestone of{" "}
-            <strong>10,000 albums</strong>, we humbly invite you to lend your
-            passion and support—together, let’s make this dream a reality! ✨
           </p>
         </section>
 
