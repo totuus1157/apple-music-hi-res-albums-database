@@ -60,6 +60,9 @@ export default function AlbumDetail(props: Props) {
   useEffect((): void => {
     const { id, storefront } = focusedAlbum;
     if (isOpen && id && storefront) {
+      setAlbumData(null);
+      setError(null);
+
       makeApiRequestWithRetry(storefront, id)
         .then((data): void => setAlbumData(data ?? null))
         .catch((err): void => setError(err.message));
