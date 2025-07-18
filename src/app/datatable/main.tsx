@@ -26,6 +26,7 @@ export default function Main() {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isRandomMode, setIsRandomMode] = useState(false);
   const [albumFetchTrigger, setAlbumFetchTrigger] = useState(Date.now());
+  const [isLoading, setIsLoading] = useState(true);
   const [albumInfo, setAlbumInfo] = useState("");
   const [registeredAlbumIDs, setRegisteredAlbumIDs] = useState<string[]>([]);
   const [selectedItem, setSelectedItem] = useState<SelectedItem>({
@@ -54,12 +55,14 @@ export default function Main() {
 
   useEffect((): void => {
     const getAlbumDatabase = async (): Promise<void> => {
+      setIsLoading(true);
       const response = await fetch("/api/database/get-albums");
       const result = await response.json();
       const albums: AlbumData[] = result.albums.rows;
 
       setAlbumDataArray(albums);
       setOriginalAlbumDataArray(albums);
+      setIsLoading(false);
     };
 
     getAlbumDatabase();
@@ -108,6 +111,7 @@ export default function Main() {
           setAlbumFetchTrigger={setAlbumFetchTrigger}
           setModalContent={setModalContent}
           setFocusedAlbum={setFocusedAlbum}
+          isLoading={isLoading}
         />
         <Modal
           modalContent={modalContent}

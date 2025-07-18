@@ -63,6 +63,7 @@ type Props = {
   setAlbumFetchTrigger: (arg0: number) => void;
   setModalContent: (arg0: string) => void;
   setFocusedAlbum: (album: FocusedAlbum) => void;
+  isLoading: boolean;
 };
 
 export default function AlbumTable(props: Props) {
@@ -80,6 +81,7 @@ export default function AlbumTable(props: Props) {
     setAlbumFetchTrigger,
     setModalContent,
     setFocusedAlbum,
+    isLoading,
   } = props;
 
   const { user } = useUser();
@@ -89,7 +91,6 @@ export default function AlbumTable(props: Props) {
   const albumIds: string[] = [];
   const namesDeletedThe: string[] = [];
   const [rows, setRows] = useState<RowData[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [albumElementsList, setAlbumElementsList] = useState(albumElements);
   const [nonArticleNames, setNonArticleNames] = useState(namesDeletedThe);
   const [page, setPage] = useState(1);
@@ -261,7 +262,6 @@ export default function AlbumTable(props: Props) {
 
     setRows(newRows);
     setRegisteredAlbumIDs(albumIds);
-    setIsLoaded(true);
   };
 
   useEffect((): void => {
@@ -349,7 +349,7 @@ export default function AlbumTable(props: Props) {
 
   return (
     <>
-      {isLoaded ? (
+      {!isLoading ? (
         <Table
           shadow="none"
           topContent={topContent}
