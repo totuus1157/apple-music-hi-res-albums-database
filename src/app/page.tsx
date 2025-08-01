@@ -39,7 +39,7 @@ const HomePage: NextPage = (): JSX.Element => {
         </Navbar>
 
         <h1 className="text-5xl font-extrabold my-10 text-black">
-          Discover Over 10,000
+          Discover Over 15,000
           <br />
           Apple Music Hi-Res Albums
           <br />
