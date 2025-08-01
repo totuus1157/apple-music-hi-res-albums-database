@@ -171,6 +171,15 @@ const HomePage: NextPage = (): JSX.Element => {
             Update Notice
           </h2>
           <h3 className="text-xl font-semibold mb-2 text-green-800">
+            Aug 1, 2025
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            🎉 We have surpassed <strong>15,000 registered albums</strong> in
+            the database! 🚀 As we set our sights on the grand milestone of{" "}
+            <strong>20,000 albums</strong>, we humbly invite you to lend your
+            passion and support—together, let’s make this dream a reality! ✨
+          </p>
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
             July 11, 2025
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
@@ -213,31 +222,6 @@ const HomePage: NextPage = (): JSX.Element => {
             This is just the beginning—we plan to expand this feature with even
             more insights over time. Thank you for supporting the evolution of
             the Apple Music Hi-Res Albums Database! 🚀📀
-          </p>
-          <h3 className="text-xl font-semibold mb-2 text-green-800">
-            May 30, 2025
-          </h3>
-          <p className="text-left text-green-700 leading-7 mb-4">
-            🎉🎉 We have officially surpassed{" "}
-            <strong>10,000 registered albums</strong> in the database! 🚀 Thank
-            you to all users and contributors for helping us reach this
-            incredible milestone. Let’s continue sharing the joy of
-            high-resolution music with the world! 🌍🎶✨
-          </p>
-          <p className="text-left text-green-700 leading-7 mb-6">
-            • 🗓️ Three years and three months since our service first launched.
-            <br />
-            • 🏔️ We have finally climbed to the summit of one great mountain.
-            <br />
-            • 🌅 What does the view from this peak look like? A crystal-clear
-            blue sky? A sea of white clouds stretching below?
-            <br />
-            • 👀 I can see yet more mountains lined up on the horizon.
-            <br />
-            • 🎧 The journey to discover Hi-Res Lossless albums is far from
-            over. New masterpieces are born every day, and surely there are past
-            treasures still waiting to be uncovered.
-            <br />• 🎉 Let’s continue this exciting journey together! 🚀
           </p>
         </section>
 
