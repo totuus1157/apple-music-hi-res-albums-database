@@ -64,6 +64,10 @@ type Props = {
   setModalContent: (arg0: string) => void;
   setFocusedAlbum: (album: FocusedAlbum) => void;
   isLoading: boolean;
+  totalAlbums: number;
+  page: number;
+  setPage: (page: number) => void;
+  rowsPerPage: number;
 };
 
 export default function AlbumTable(props: Props) {
@@ -82,6 +86,10 @@ export default function AlbumTable(props: Props) {
     setModalContent,
     setFocusedAlbum,
     isLoading,
+    totalAlbums,
+    page,
+    setPage,
+    rowsPerPage,
   } = props;
 
   const { user } = useUser();
@@ -93,9 +101,6 @@ export default function AlbumTable(props: Props) {
   const [rows, setRows] = useState<RowData[]>([]);
   const [albumElementsList, setAlbumElementsList] = useState(albumElements);
   const [nonArticleNames, setNonArticleNames] = useState(namesDeletedThe);
-  const [page, setPage] = useState(1);
-
-  const rowsPerPage = 50;
 
   const handleDelete = async (productId: string): Promise<void> => {
     if (!userID) {
@@ -149,25 +154,6 @@ export default function AlbumTable(props: Props) {
       });
   };
 
-  const filterAlbums = (
-    albumDataArray: AlbumData[],
-    artist?: string | null,
-    genre?: string | null,
-    composer?: string | null,
-    sample_rate?: string | null,
-  ): AlbumData[] => {
-    return albumDataArray.filter((album): boolean => {
-      const matchArtist = artist ? album.artist === artist : true;
-      const matchGenre = genre ? album.genre.includes(genre) : true;
-      const matchComposer = composer ? album.composer.includes(composer) : true;
-      const matchSampleRate = sample_rate
-        ? album.sample_rate === sample_rate
-        : true;
-
-      return matchArtist && matchGenre && matchComposer && matchSampleRate;
-    });
-  };
-
   const extractStorefrontNames = (countryCode: string): string => {
     const foundStorefront = storefrontArray.data.find((storefront): boolean => {
       return storefront.id === countryCode;
@@ -180,70 +166,8 @@ export default function AlbumTable(props: Props) {
     }
   };
 
-  const fetchAlbumElements = (): void => {
-    albumDataArray.forEach((doc: AlbumData): void => {
-      let artistName: string = doc.artist;
-      if (/^The /.test(artistName) && artistName !== "The Band") {
-        artistName = artistName.replace(/^The /, "");
-        namesDeletedThe.push(artistName);
-      }
-
-      albumElements.push({
-        artist: artistName,
-        genre: doc.genre,
-        composer: doc.composer,
-        sampleRate: doc.sample_rate,
-      });
-    });
-
-    const filteredAlbums = albumElements.filter(
-      (_album): boolean | undefined => {
-        const matchesArtist = selectedItem.artist
-          ? _album.artist?.includes(selectedItem.artist)
-          : true;
-        const matchesGenre = selectedItem.genre
-          ? _album.genre?.includes(selectedItem.genre)
-          : true;
-        const matchesComposer = selectedItem.composer
-          ? _album.composer?.includes(selectedItem.composer)
-          : true;
-        const matchesSampleRate = selectedItem.sampleRate
-          ? _album.sampleRate?.includes(selectedItem.sampleRate)
-          : true;
-
-        return (
-          matchesArtist && matchesGenre && matchesComposer && matchesSampleRate
-        );
-      },
-    );
-
-    setAlbumElementsList(filteredAlbums);
-    setNonArticleNames(namesDeletedThe);
-  };
-
   const fetchData = (): void => {
-    let selectedArtistName = selectedItem.artist;
-    if (selectedArtistName) {
-      if (nonArticleNames.includes(selectedArtistName)) {
-        selectedArtistName = `The ${selectedArtistName}`;
-      }
-    }
-
-    let filteredAlbums = filterAlbums(
-      albumDataArray,
-      selectedArtistName,
-      selectedItem.genre,
-      selectedItem.composer,
-      selectedItem.sampleRate,
-    );
-
-    if (isEditMode && userID) {
-      filteredAlbums = filteredAlbums.filter(
-        (album): boolean => album.registrant_id === userID,
-      );
-    }
-
-    const formatAlbumForTable = summarizeAlbumData(filteredAlbums);
+    const formatAlbumForTable = summarizeAlbumData(albumDataArray);
 
     const newRows = formatAlbumForTable.map(
       ({ id, storefront, product_id, registrant_id, ...rest }): RowData => ({
@@ -265,9 +189,9 @@ export default function AlbumTable(props: Props) {
   };
 
   useEffect((): void => {
-    fetchAlbumElements();
+    // fetchDataはalbumDataArrayの変更にのみ依存
     fetchData();
-  }, [albumDataArray, selectedItem]);
+  }, [albumDataArray]);
 
   const autocompleteConfigs: { key: keyof AlbumElements; label: string }[] = [
     { key: "artist", label: "Search an artist" },
@@ -306,19 +230,12 @@ export default function AlbumTable(props: Props) {
         {isRandomMode || albumDataArray.length !== albumElementsList.length
           ? "Selected Albums: "
           : "All Albums: "}
-        {albumElementsList.length}
+        {totalAlbums}
       </caption>
     </>
   );
 
-  const pages = Math.ceil(rows.length / rowsPerPage);
-
-  const items = useMemo((): RowData[] => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-
-    return rows.slice(start, end);
-  }, [page, rows]);
+  const pages = Math.ceil(totalAlbums / rowsPerPage);
 
   const bottomContent = (
     <div className="flex w-full justify-center">
@@ -373,7 +290,7 @@ export default function AlbumTable(props: Props) {
               <TableColumn key={column.key}>{column.label}</TableColumn>
             )}
           </TableHeader>
-          <TableBody items={items}>
+          <TableBody items={rows}>
             {(item) => (
               <TableRow key={item.key}>
                 {(columnKey) => (

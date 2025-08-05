@@ -13,15 +13,14 @@ import AlbumTable from "app/datatable/album-table";
 import Modal from "app/datatable/modal";
 import { useDisclosure } from "@heroui/react";
 import { KofiFloatingButtonReact } from "kofi-react-widget";
+import useSWR from "swr";
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Main() {
   const [storefrontArray, setStorefrontArray] = useState<StorefrontsResponse>({
     data: [],
   });
-  const [albumDataArray, setAlbumDataArray] = useState<AlbumData[]>([]);
-  const [originalAlbumDataArray, setOriginalAlbumDataArray] = useState<
-    AlbumData[]
-  >([]);
   const [modalContent, setModalContent] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isRandomMode, setIsRandomMode] = useState(false);
@@ -39,7 +38,14 @@ export default function Main() {
     id: null,
     storefront: null,
   });
-  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const [page, setPage] = useState(1);
+  const rowsPerPage = 50;
+
+  const { data, isLoading: isSWRLoading } = useSWR(
+    `/api/database/get-albums?page=${page}&limit=${rowsPerPage}`,
+    fetcher,
+    { keepPreviousData: true },
+  );
 
   useEffect((): void => {
     const getStorefronts = async (): Promise<void> => {
@@ -53,35 +59,10 @@ export default function Main() {
     getStorefronts();
   }, []);
 
-  useEffect((): void => {
-    const getAlbumDatabase = async (): Promise<void> => {
-      setIsLoading(true);
-      const response = await fetch("/api/database/get-albums");
-      const result = await response.json();
-      const albums: AlbumData[] = result.albums.rows;
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
-      setAlbumDataArray(albums);
-      setOriginalAlbumDataArray(albums);
-      setIsLoading(false);
-    };
-
-    getAlbumDatabase();
-  }, [albumFetchTrigger]);
-
-  const selectRandomAlbums = (): void => {
-    const shuffledAlbums = [...originalAlbumDataArray]
-      .sort((): number => 0.5 - Math.random())
-      .slice(0, 10);
-    setAlbumDataArray(shuffledAlbums);
-  };
-
-  useEffect((): void => {
-    if (isRandomMode) {
-      selectRandomAlbums();
-    } else {
-      setAlbumDataArray(originalAlbumDataArray);
-    }
-  }, [isRandomMode]);
+  const albumDataArray = data?.albums.rows || [];
+  const totalAlbums = data?.totalAlbums || 0;
 
   return (
     <div>
@@ -111,7 +92,11 @@ export default function Main() {
           setAlbumFetchTrigger={setAlbumFetchTrigger}
           setModalContent={setModalContent}
           setFocusedAlbum={setFocusedAlbum}
-          isLoading={isLoading}
+          isLoading={isSWRLoading}
+          totalAlbums={totalAlbums}
+          page={page}
+          setPage={setPage}
+          rowsPerPage={rowsPerPage}
         />
         <Modal
           modalContent={modalContent}
@@ -123,7 +108,7 @@ export default function Main() {
           storefrontArray={storefrontArray}
           registeredAlbumIDs={registeredAlbumIDs}
           setAlbumFetchTrigger={setAlbumFetchTrigger}
-          originalAlbumDataArray={originalAlbumDataArray}
+          originalAlbumDataArray={[]}
           focusedAlbum={focusedAlbum}
         />
       </main>
