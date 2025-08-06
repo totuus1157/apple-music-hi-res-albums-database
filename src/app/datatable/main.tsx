@@ -14,6 +14,7 @@ import Modal from "app/datatable/modal";
 import { useDisclosure } from "@heroui/react";
 import { KofiFloatingButtonReact } from "kofi-react-widget";
 import useSWR from "swr";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -39,10 +40,14 @@ export default function Main() {
     storefront: null,
   });
   const [page, setPage] = useState(1);
+
+  const { user } = useUser();
+  const userID = user?.sub || process.env.NEXT_PUBLIC_AUTH0_DEVELOPER_USER_ID;
+
   const rowsPerPage = 50;
 
   const { data, isLoading: isSWRLoading } = useSWR(
-    `/api/database/get-albums?page=${page}&limit=${rowsPerPage}&filters=${encodeURIComponent(JSON.stringify(selectedItem))}`,
+    `/api/database/get-albums?page=${page}&limit=${rowsPerPage}&filters=${encodeURIComponent(JSON.stringify(selectedItem))}&isEditMode=${isEditMode}&userID=${userID}&t=${albumFetchTrigger}`,
     fetcher,
     { keepPreviousData: true },
   );

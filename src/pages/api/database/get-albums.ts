@@ -13,6 +13,9 @@ export default async function handler(
       ? JSON.parse(request.query.filters as string)
       : {};
 
+    const { isEditMode, userID } = request.query;
+    const isEditModeEnabled = isEditMode === "true";
+
     const whereClauses = [];
     const values = [];
 
@@ -29,6 +32,10 @@ export default async function handler(
     if (filters.sampleRate) {
       whereClauses.push(`sample_rate = $${values.length + 1}`);
       values.push(filters.sampleRate);
+    }
+    if (isEditModeEnabled && userID) {
+      whereClauses.push(`registrant_id = $${values.length + 1}`);
+      values.push(userID);
     }
 
     const whereClause =
