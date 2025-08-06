@@ -24,6 +24,7 @@ import {
   Pagination,
   getKeyValue,
 } from "@heroui/react";
+import { useAsyncList } from "@react-stately/data";
 
 type AlbumElements = {
   artist?: string;
@@ -95,12 +96,7 @@ export default function AlbumTable(props: Props) {
   const { user } = useUser();
   const userID = user?.sub || process.env.NEXT_PUBLIC_AUTH0_DEVELOPER_USER_ID;
 
-  const albumElements: AlbumElements[] = [];
-  const albumIds: string[] = [];
-  const namesDeletedThe: string[] = [];
   const [rows, setRows] = useState<RowData[]>([]);
-  const [albumElementsList, setAlbumElementsList] = useState(albumElements);
-  const [nonArticleNames, setNonArticleNames] = useState(namesDeletedThe);
 
   const handleDelete = async (productId: string): Promise<void> => {
     if (!userID) {
@@ -131,27 +127,6 @@ export default function AlbumTable(props: Props) {
       const errorMessage: string = getErrorMessage(err);
       alert(`Failed to delete the album: ${errorMessage}`);
     }
-  };
-
-  const selectionElements = (
-    _category: keyof AlbumElements,
-  ): SelectionElements[] => {
-    const elements = albumElementsList
-      .flatMap((value) =>
-        Array.isArray(value[_category]) ? value[_category] : [value[_category]],
-      )
-      .filter(Boolean);
-    return Array.from(new Set(elements))
-      .sort((a, b) => {
-        if (_category === "sampleRate") {
-          return parseFloat(a) - parseFloat(b);
-        } else {
-          return a.localeCompare(b);
-        }
-      })
-      .map((uniqueElement): SelectionElements => {
-        return { element: uniqueElement as string };
-      });
   };
 
   const extractStorefrontNames = (countryCode: string): string => {
@@ -189,25 +164,97 @@ export default function AlbumTable(props: Props) {
   };
 
   useEffect((): void => {
-    // fetchDataはalbumDataArrayの変更にのみ依存
     fetchData();
   }, [albumDataArray]);
 
-  const autocompleteConfigs: { key: keyof AlbumElements; label: string }[] = [
-    { key: "artist", label: "Search an artist" },
-    { key: "genre", label: "Search a genre" },
-    { key: "composer", label: "Search a composer" },
-    { key: "sampleRate", label: "Search a sample rate" },
+  const autocompleteConfigs: {
+    key: keyof AlbumElements;
+    label: string;
+    placeholder: string;
+  }[] = [
+    { key: "artist", label: "Search an artist", placeholder: "Artist" },
+    { key: "genre", label: "Search a genre", placeholder: "Genre" },
+    { key: "composer", label: "Search a composer", placeholder: "Composer" },
+    {
+      key: "sampleRate",
+      label: "Search a sample rate",
+      placeholder: "Sample Rate",
+    },
   ];
+
+  const artistList = useAsyncList<SelectionElements>({
+    async load({ signal, filterText }) {
+      const res = await fetch(
+        `/api/database/search-elements?category=artist&query=${filterText}&filters=${encodeURIComponent(JSON.stringify(selectedItem))}`,
+        { signal },
+      );
+      const json = await res.json();
+      const elements = json.elements.map((element: string) => ({ element }));
+      return { items: elements };
+    },
+  });
+
+  const genreList = useAsyncList<SelectionElements>({
+    async load({ signal, filterText }) {
+      const res = await fetch(
+        `/api/database/search-elements?category=genre&query=${filterText}&filters=${encodeURIComponent(JSON.stringify(selectedItem))}`,
+        { signal },
+      );
+      const json = await res.json();
+      const elements = json.elements.map((element: string) => ({ element }));
+      return { items: elements };
+    },
+  });
+
+  const composerList = useAsyncList<SelectionElements>({
+    async load({ signal, filterText }) {
+      const res = await fetch(
+        `/api/database/search-elements?category=composer&query=${filterText}&filters=${encodeURIComponent(JSON.stringify(selectedItem))}`,
+        { signal },
+      );
+      const json = await res.json();
+      const elements = json.elements.map((element: string) => ({ element }));
+      return { items: elements };
+    },
+  });
+
+  const sampleRateList = useAsyncList<SelectionElements>({
+    async load({ signal, filterText }) {
+      const res = await fetch(
+        `/api/database/search-elements?category=sampleRate&query=${filterText}&filters=${encodeURIComponent(JSON.stringify(selectedItem))}`,
+        { signal },
+      );
+      const json = await res.json();
+      const elements = json.elements.map((element: string) => ({ element }));
+      return { items: elements };
+    },
+  });
+
+  const listMap = useMemo(
+    () => ({
+      artist: artistList,
+      genre: genreList,
+      composer: composerList,
+      sampleRate: sampleRateList,
+    }),
+    [artistList, genreList, composerList, sampleRateList],
+  );
+
+  useEffect((): void => {
+    artistList.reload();
+    genreList.reload();
+    composerList.reload();
+    sampleRateList.reload();
+  }, [selectedItem]);
 
   const topContent = (
     <>
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mb-4">
-        {autocompleteConfigs.map(({ key, label }) => (
+        {autocompleteConfigs.map(({ key, label, placeholder }) => (
           <Autocomplete
             key={key}
-            defaultItems={selectionElements(key)}
             label={label}
+            placeholder={placeholder}
             selectedKey={selectedItem[key]}
             size="lg"
             variant="faded"
@@ -217,6 +264,9 @@ export default function AlbumTable(props: Props) {
                 [key]: keyValue === null ? null : String(keyValue),
               });
             }}
+            items={listMap[key].items}
+            isLoading={listMap[key].isLoading}
+            onInputChange={listMap[key].setFilterText}
           >
             {(item) => (
               <AutocompleteItem key={item.element}>
@@ -226,12 +276,6 @@ export default function AlbumTable(props: Props) {
           </Autocomplete>
         ))}
       </div>
-      <caption className="flex justify-start ml-4">
-        {isRandomMode || albumDataArray.length !== albumElementsList.length
-          ? "Selected Albums: "
-          : "All Albums: "}
-        {totalAlbums}
-      </caption>
     </>
   );
 
@@ -266,6 +310,10 @@ export default function AlbumTable(props: Props) {
 
   return (
     <>
+      <div className="flex justify-start ml-4">
+        {isRandomMode ? "Selected Albums: " : "All Albums: "}
+        {totalAlbums}
+      </div>
       {!isLoading ? (
         <Table
           shadow="none"

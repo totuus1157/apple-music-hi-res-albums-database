@@ -9,8 +9,32 @@ export default async function handler(
     const page = Number(request.query.page) || 1;
     const limit = Number(request.query.limit) || 50;
     const offset = (page - 1) * limit;
+    const filters = request.query.filters
+      ? JSON.parse(request.query.filters as string)
+      : {};
 
-    const albumsPromise = sql`
+    const whereClauses = [];
+    const values = [];
+
+    if (filters.artist) {
+      whereClauses.push(`artist = $${values.length + 1}`);
+      values.push(filters.artist);
+    }
+    if (filters.genre) {
+      whereClauses.push(`'${filters.genre}' = ANY(genre)`);
+    }
+    if (filters.composer) {
+      whereClauses.push(`'${filters.composer}' = ANY(composer)`);
+    }
+    if (filters.sampleRate) {
+      whereClauses.push(`sample_rate = $${values.length + 1}`);
+      values.push(filters.sampleRate);
+    }
+
+    const whereClause =
+      whereClauses.length > 0 ? `WHERE ${whereClauses.join(" AND ")}` : "";
+    const totalAlbumsQuery = `SELECT COUNT(*) FROM albums ${whereClause};`;
+    const albumsQuery = `
       SELECT
         id,
         product_id,
@@ -28,16 +52,15 @@ export default async function handler(
         updated_at,
         storefront
       FROM albums
+      ${whereClause}
       ORDER BY id DESC
-      OFFSET ${offset}
-      LIMIT ${limit};
+      OFFSET $${values.length + 1}
+      LIMIT $${values.length + 2};
     `;
 
-    const countPromise = sql`SELECT COUNT(*) FROM albums;`;
-
-    const [albumsResult, countResult] = await Promise.all([
-      albumsPromise,
-      countPromise,
+    const [countResult, albumsResult] = await Promise.all([
+      sql.query(totalAlbumsQuery, values),
+      sql.query(albumsQuery, [...values, offset, limit]),
     ]);
 
     const totalAlbums = Number(countResult.rows[0].count);

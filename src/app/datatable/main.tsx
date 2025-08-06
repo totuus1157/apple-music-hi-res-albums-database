@@ -42,7 +42,7 @@ export default function Main() {
   const rowsPerPage = 50;
 
   const { data, isLoading: isSWRLoading } = useSWR(
-    `/api/database/get-albums?page=${page}&limit=${rowsPerPage}`,
+    `/api/database/get-albums?page=${page}&limit=${rowsPerPage}&filters=${encodeURIComponent(JSON.stringify(selectedItem))}`,
     fetcher,
     { keepPreviousData: true },
   );
