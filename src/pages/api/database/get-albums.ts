@@ -7,7 +7,13 @@ export default async function handler(
 ): Promise<void> {
   try {
     const page = Number(request.query.page) || 1;
-    const limit = Number(request.query.limit) || 50;
+    let limit = Number(request.query.limit) || 50;
+
+    const isRandom = request.query.random === "true";
+    if (isRandom) {
+      limit = 10;
+    }
+
     const offset = (page - 1) * limit;
     const filters = request.query.filters
       ? JSON.parse(request.query.filters as string)
@@ -40,6 +46,9 @@ export default async function handler(
 
     const whereClause =
       whereClauses.length > 0 ? `WHERE ${whereClauses.join(" AND ")}` : "";
+
+    const orderByClause = isRandom ? "ORDER BY RANDOM()" : "ORDER BY id DESC";
+
     const totalAlbumsQuery = `SELECT COUNT(*) FROM albums ${whereClause};`;
     const albumsQuery = `
       SELECT
@@ -60,7 +69,7 @@ export default async function handler(
         storefront
       FROM albums
       ${whereClause}
-      ORDER BY id DESC
+      ${orderByClause}
       OFFSET $${values.length + 1}
       LIMIT $${values.length + 2};
     `;
