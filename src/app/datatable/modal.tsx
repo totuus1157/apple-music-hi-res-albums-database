@@ -17,9 +17,7 @@ type Props = {
   onOpenChange: () => void;
   onClose: () => void;
   storefrontArray: StorefrontsResponse;
-  registeredAlbumIDs: string[];
   setAlbumFetchTrigger: (arg0: number) => void;
-  originalAlbumDataArray: AlbumData[];
   focusedAlbum: FocusedAlbum;
 };
 
@@ -32,9 +30,7 @@ export default function Modal(props: Props) {
     onOpenChange,
     onClose,
     storefrontArray,
-    registeredAlbumIDs,
     setAlbumFetchTrigger,
-    originalAlbumDataArray,
     focusedAlbum,
   } = props;
 
@@ -46,7 +42,6 @@ export default function Modal(props: Props) {
         onOpenChange={onOpenChange}
         onClose={onClose}
         storefrontArray={storefrontArray}
-        registeredAlbumIDs={registeredAlbumIDs}
         setAlbumFetchTrigger={setAlbumFetchTrigger}
       />
     );
@@ -64,13 +59,7 @@ export default function Modal(props: Props) {
   }
 
   if (modalContent === "albumStats") {
-    return (
-      <AlbumStats
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        originalAlbumDataArray={originalAlbumDataArray}
-      />
-    );
+    return <AlbumStats isOpen={isOpen} onOpenChange={onOpenChange} />;
   }
 
   return null;

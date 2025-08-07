@@ -28,7 +28,6 @@ export default function Main() {
   const [albumFetchTrigger, setAlbumFetchTrigger] = useState(Date.now());
   const [isLoading, setIsLoading] = useState(true);
   const [albumInfo, setAlbumInfo] = useState("");
-  const [registeredAlbumIDs, setRegisteredAlbumIDs] = useState<string[]>([]);
   const [selectedItem, setSelectedItem] = useState<SelectedItem>({
     artist: null,
     genre: null,
@@ -88,8 +87,6 @@ export default function Main() {
           albumDataArray={albumDataArray}
           isOpen={isOpen}
           onOpen={onOpen}
-          registeredAlbumIDs={registeredAlbumIDs}
-          setRegisteredAlbumIDs={setRegisteredAlbumIDs}
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
           isRandomMode={isRandomMode}
@@ -111,9 +108,7 @@ export default function Main() {
           onClose={onClose}
           albumInfo={albumInfo}
           storefrontArray={storefrontArray}
-          registeredAlbumIDs={registeredAlbumIDs}
           setAlbumFetchTrigger={setAlbumFetchTrigger}
-          originalAlbumDataArray={[]}
           focusedAlbum={focusedAlbum}
         />
       </main>

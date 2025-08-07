@@ -48,10 +48,20 @@ export default async function handler(
         "sampleRate must be one of the following: 88.2, 96, 176.4, 192",
       );
     }
+
     // Check value of storefront
     const storefrontRegex = /^[a-zA-Z]{2}$/;
     if (!storefrontRegex.test(storefront)) {
       throw new Error("Invalid country code");
+    }
+
+    // Add duplicate check query
+    const existingAlbum =
+      await sql`SELECT id FROM albums WHERE product_id = ${productId};`;
+    if (existingAlbum.rows.length > 0) {
+      return response
+        .status(409)
+        .json({ message: "Album with this product_id already exists." });
     }
 
     await sql`

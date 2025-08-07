@@ -52,7 +52,6 @@ type Props = {
   onOpenChange: () => void;
   onClose: () => void;
   storefrontArray: StorefrontsResponse;
-  registeredAlbumIDs: string[];
   setAlbumFetchTrigger: (arg0: number) => void;
 };
 
@@ -82,7 +81,6 @@ export default function Register(props: Props) {
     onOpenChange,
     onClose,
     storefrontArray,
-    registeredAlbumIDs,
     setAlbumFetchTrigger,
   } = props;
 
@@ -95,6 +93,7 @@ export default function Register(props: Props) {
   const [rowsForAlbumSelection, setRowsForAlbumSelection] = useState<
     FormatAlbumDisplay[]
   >([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set([""]));
   const [isFetchingNonUSStorefrontData, setIsFetchingNonUSStorefrontData] =
     useState(false);
@@ -224,6 +223,8 @@ export default function Register(props: Props) {
       const genre = convertArrayToDatabaseColumnString(item.genreNames);
       const composer = convertArrayToDatabaseColumnString(item.composerName);
 
+      setIsLoading(true);
+
       try {
         const response = await fetch("/api/database/add-album", {
           method: "POST",
@@ -240,7 +241,9 @@ export default function Register(props: Props) {
           }),
         });
 
-        if (response.ok) {
+        if (response.status === 409) {
+          setErrors({ link: "This album is already registered" });
+        } else if (response.ok) {
           setAlbumFetchTrigger(Date.now());
           handleClose();
 
@@ -265,11 +268,20 @@ export default function Register(props: Props) {
         }
       } catch (err) {
         console.error("Error:", err);
+      } finally {
+        setIsLoading(false);
       }
     }
   };
 
   const handleSaveAlbum = async (): Promise<void> => {
+    setErrors({}); // Clear previous errors
+    const newErrors = findFormErrors();
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     const selectedStorefrontKey = Array.from(selectedKeys)[0];
     const selectedAlbum = albumDataArrayExceptUS.find(
       (album): boolean => album.storefront === selectedStorefrontKey,
@@ -305,9 +317,6 @@ export default function Register(props: Props) {
     if (!link || link === "") newErrors.link = "cannot be blank!";
     else if (!regex.appleMusicLink.test(link))
       newErrors.link = "only links to Apple Music albums can be allowed.";
-    else if (registeredAlbumIDs.find((id): boolean => id === albumId(link))) {
-      newErrors.link = "This album is already registered";
-    }
 
     return newErrors;
   };
@@ -438,9 +447,10 @@ export default function Register(props: Props) {
                 color="primary"
                 onClick={handleSaveAlbum}
                 isDisabled={
-                  isFetchingNonUSStorefrontData &&
-                  albumDataArrayExceptUS.length === 0 &&
-                  !apiError
+                  isLoading ||
+                  (isFetchingNonUSStorefrontData &&
+                    albumDataArrayExceptUS.length === 0 &&
+                    !apiError)
                 }
               >
                 Register

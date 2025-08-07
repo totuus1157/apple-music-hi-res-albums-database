@@ -50,8 +50,6 @@ type Props = {
   albumDataArray: AlbumData[];
   isOpen: boolean;
   onOpen: () => void;
-  registeredAlbumIDs: string[];
-  setRegisteredAlbumIDs: (arg0: string[]) => void;
   selectedItem: SelectedItem;
   setSelectedItem: {
     (arg0: SelectedItem): void;
@@ -77,8 +75,6 @@ export default function AlbumTable(props: Props) {
     albumDataArray,
     isOpen,
     onOpen,
-    registeredAlbumIDs,
-    setRegisteredAlbumIDs,
     selectedItem,
     setSelectedItem,
     isRandomMode,
@@ -160,7 +156,6 @@ export default function AlbumTable(props: Props) {
     );
 
     setRows(newRows);
-    setRegisteredAlbumIDs(albumIds);
   };
 
   useEffect((): void => {
