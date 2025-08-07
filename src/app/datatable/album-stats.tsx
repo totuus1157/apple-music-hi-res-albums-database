@@ -1,6 +1,5 @@
 "use client";
 
-import type { AlbumData } from "app/datatable/types";
 import {
   Modal,
   ModalContent,
@@ -8,85 +7,69 @@ import {
   ModalBody,
   Progress,
 } from "@heroui/react";
+import useSWR from "swr";
+
+type StatsData = {
+  sampleRateStats: { label: string; value: number }[];
+  genreStats: { label: string; value: number }[];
+};
 
 type Props = {
   isOpen: boolean;
   onOpenChange: () => void;
-  originalAlbumDataArray: AlbumData[];
 };
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const sampleRates = ["88.2", "96", "176.4", "192"] as const;
 
-const countItems = <T extends string>(
-  data: AlbumData[],
-  key: keyof AlbumData,
-  filterValues?: readonly T[],
-): Record<string, number> => {
-  const counts: Record<string, number> = {};
-
-  data.forEach((album): void => {
-    const value = album[key];
-
-    if (Array.isArray(value)) {
-      value.forEach((item): void => {
-        if (!filterValues || filterValues.includes(item as T)) {
-          counts[item] = (counts[item] || 0) + 1;
-        }
-      });
-    } else if (typeof value === "string") {
-      if (!filterValues || filterValues.includes(value as T)) {
-        counts[value] = (counts[value] || 0) + 1;
-      }
-    }
-  });
-
-  return counts;
-};
-
-const calculateMaxValue = (counts: Record<string, number>): number => {
-  const max = Math.max(...Object.values(counts));
+const calculateMaxValue = (counts: { value: number }[]): number => {
+  if (counts.length === 0) return 1000;
+  const max = Math.max(...counts.map((c): number => c.value));
   return Math.ceil(max / 1000) * 1000 || 1000;
 };
 
 const renderProgressBars = (
-  counts: Record<string, number>,
+  counts: { label: string; value: number }[],
   maxValue: number,
   labelSuffix: string = "",
   orderedKeys?: string[],
 ) => {
-  const entries: [string, number][] = orderedKeys
-    ? orderedKeys.map((key): [string, number] => [key, counts[key] || 0])
-    : (Object.entries(counts)
-        .map(([label, value]): [string, number] => [label, Number(value)])
-        .sort((a, b): number => b[1] - a[1]) as [string, number][]);
+  const entries = orderedKeys
+    ? orderedKeys.map((key) => ({
+        label: key,
+        value: counts.find((c): boolean => c.label === key)?.value || 0,
+      }))
+    : counts;
 
-  return entries.map(([label, value]) => (
+  return entries.map((item) => (
     <Progress
-      key={label}
+      key={item.label}
       className="max-w-md"
       color="primary"
       formatOptions={{ maximumSignificantDigits: 3 }}
-      label={`${label}${labelSuffix}`}
+      label={`${item.label}${labelSuffix}`}
       maxValue={maxValue}
       showValueLabel={true}
       size="sm"
-      value={value}
+      value={item.value}
     />
   ));
 };
 
 export default function AlbumStats(props: Props) {
-  const { isOpen, onOpenChange, originalAlbumDataArray } = props;
-
-  const sampleRateCounts = countItems(
-    originalAlbumDataArray,
-    "sample_rate",
-    sampleRates,
+  const { isOpen, onOpenChange } = props;
+  const { data: statsData } = useSWR<StatsData>(
+    isOpen ? "/api/database/get-album-stats" : null,
+    fetcher,
   );
-  const sampleRateMax = calculateMaxValue(sampleRateCounts);
 
-  const genreCounts = countItems(originalAlbumDataArray, "genre");
-  const genreMax = calculateMaxValue(genreCounts);
+  if (!statsData) {
+    return null;
+  }
+
+  const sampleRateMax = calculateMaxValue(statsData.sampleRateStats);
+  const genreMax = calculateMaxValue(statsData.genreStats);
 
   return (
     <Modal
@@ -102,14 +85,14 @@ export default function AlbumStats(props: Props) {
             <ModalBody>
               <h3 className="text-md font-semibold mb-2">Sample Rate Counts</h3>
               {renderProgressBars(
-                sampleRateCounts,
+                statsData.sampleRateStats,
                 sampleRateMax,
                 " kHz",
                 sampleRates as unknown as string[],
               )}
 
               <h3 className="text-md font-semibold mt-6 mb-2">Genre Counts</h3>
-              {renderProgressBars(genreCounts, genreMax)}
+              {renderProgressBars(statsData.genreStats, genreMax)}
             </ModalBody>
           </>
         )}
