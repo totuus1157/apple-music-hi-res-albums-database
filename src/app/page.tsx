@@ -15,8 +15,6 @@ import {
   Link,
   Divider,
 } from "@heroui/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartBar } from "@fortawesome/free-solid-svg-icons";
 
 const year = new Date().getFullYear().toString();
 
@@ -40,7 +38,7 @@ const HomePage: NextPage = (): JSX.Element => {
         </Navbar>
 
         <h1 className="text-5xl font-extrabold my-10 text-black">
-          Discover Over 15,000
+          Discover Over 20,000
           <br />
           Apple Music Hi-Res Albums
           <br />
@@ -214,6 +212,31 @@ const HomePage: NextPage = (): JSX.Element => {
             Update Notice
           </h2>
           <h3 className="text-xl font-semibold mb-2 text-green-800">
+            Aug 14, 2025
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-4">
+            🎉🎉 We have officially surpassed{" "}
+            <strong>20,000 registered albums</strong> in the database! 🚀 This
+            marks an extraordinary milestone for our community of Hi-Res music
+            lovers. Thank you to every user and contributor who helped make this
+            possible—your passion is the heartbeat of this project. 🌍🎶✨
+          </p>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            • 🗓️ Just three years and five months since our launch, and we’ve
+            already doubled the count from 10k to 20k.
+            <br />
+            • 🏔️ From the summit of one mountain, we’ve climbed to an even
+            greater peak.
+            <br />
+            • 🌌 The view now? A breathtaking horizon filled with limitless
+            musical possibilities.
+            <br />
+            • 🎧 Each album represents a story, a moment in time, a piece of art
+            waiting to be discovered.
+            <br />• 🚀 Let’s keep exploring, sharing, and celebrating Hi-Res
+            Lossless music together—the journey is far from over!
+          </p>
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
             Aug 1, 2025
           </h3>
           <p className="text-left text-green-700 leading-7 mb-6">
@@ -237,34 +260,6 @@ const HomePage: NextPage = (): JSX.Element => {
             <br /> ・🎨 Album artwork
             <br /> ・🎵 Full tracklist
             <br /> ・🎧 Dolby Atmos availability
-          </p>
-          <h3 className="text-xl font-semibold mb-2 text-green-800">
-            June 22, 2025
-          </h3>
-          <p className="text-left text-green-700 leading-7 mb-6">
-            📊 A powerful new feature has arrived! You can now explore detailed{" "}
-            <strong>statistics on registered albums</strong>—including
-            distributions by <strong>Sample Rate</strong> and{" "}
-            <strong>Genre</strong>—through a brand new{" "}
-            <strong>&quot;Album Stats&quot;</strong> chart modal. 🎧✨
-          </p>
-          <p className="text-left text-green-700 leading-7 mb-6">
-            • 📈 Want to know how many albums are available in 96kHz? Or which
-            genre leads the Hi-Res scene?
-            <br />
-            • 🎼 Our visual charts make it easier than ever to get a sense of
-            what&apos;s in the database.
-            <br />• 🖱️ Try clicking the{" "}
-            <strong>
-              &quot;View Album Stats ( {<FontAwesomeIcon icon={faChartBar} />} )
-              &quot;
-            </strong>{" "}
-            button and see for yourself!
-          </p>
-          <p className="text-left text-green-700 leading-7 mb-6">
-            This is just the beginning—we plan to expand this feature with even
-            more insights over time. Thank you for supporting the evolution of
-            the Apple Music Hi-Res Albums Database! 🚀📀
           </p>
         </section>
 
