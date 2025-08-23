@@ -27,7 +27,7 @@ export async function GET() {
           Apple Music Hi-Res Albums Database
         </div>
         <div style={{ fontSize: "38px" }}>
-          Discover over 20,000 Apple Music Hi-Res albums in our searchable
+          Discover over 30,000 Apple Music Hi-Res albums in our searchable
           database.
         </div>
       </div>

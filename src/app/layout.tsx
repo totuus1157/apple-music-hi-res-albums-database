@@ -19,11 +19,11 @@ export const metadata: Metadata = {
     default: "Apple Music Hi-Res Albums Database",
   },
   description:
-    "Discover over 20,000 Apple Music Hi-Res albums in our searchable database. Filter by artist, genre, composer, or sample rate to find exactly what you’re looking for.",
+    "Discover over 30,000 Apple Music Hi-Res albums in our searchable database. Filter by artist, genre, composer, or sample rate to find exactly what you’re looking for.",
   openGraph: {
     title: "Apple Music Hi-Res Albums Database",
     description:
-      "Discover over 20,000 Apple Music Hi-Res albums in our searchable database. Filter by artist, genre, composer, or sample rate to find exactly what you’re looking for.",
+      "Discover over 30,000 Apple Music Hi-Res albums in our searchable database. Filter by artist, genre, composer, or sample rate to find exactly what you’re looking for.",
     url: "https://www.applemusichiresalbumsdb.com",
     siteName: "Apple Music Hi-Res Albums Database",
     images: {
