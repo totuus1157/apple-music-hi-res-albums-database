@@ -73,45 +73,28 @@ const HomePage: NextPage = (): JSX.Element => {
           </h2>
 
           <h3 className="text-lg font-semibold mb-2 text-red-700">
-            August 1, 2025 – One Month Later
+            User Feedback Survey
           </h3>
           <p className="text-left text-red-700 leading-7 mb-4">
-            It&apos;s now been almost exactly one month since this message was
-            first posted. Unfortunately, traffic has not dramatically
-            increased—in fact, the growth has stalled.
+            We are considering adding a ranking or popularity feature to the
+            Apple Music Hi-Res Albums Database. Your feedback will help us
+            decide whether this is the right direction for our community.
           </p>
-          <div className="my-4">
-            <Image
-              src="/images/vercel-web-analytics.jpg"
-              alt="Vercel Web Analytics"
-              width={800}
-              height={400}
-              className="rounded-lg shadow-md"
-            />
-          </div>
-          <p className="text-left text-red-700 leading-7 mb-4">
-            Google AdSense earnings reached only 87% of the payout threshold,
-            meaning ad revenue was again zero this month.
+          <p className="text-left text-red-700 leading-7 mb-4 font-semibold">
+            Please take a moment to answer our short survey (open until August
+            31, 2025 – 23:59 JST):
+            <br />
+            <Link
+              isExternal
+              showAnchorIcon
+              href="https://forms.gle/uCjQWJqdHQy5K7zD9"
+            >
+              Google Forms
+            </Link>
           </p>
-          <p className="text-left text-red-700 leading-7 mb-4">
-            We have received some kind support via Ko-fi, but due to PayPal’s
-            strict withdrawal review process, it&apos;s unclear whether the
-            funds will actually be transferred.
-          </p>
-          <p className="text-left text-red-700 leading-7 mb-4">
-            My family is increasingly concerned about the ongoing financial loss
-            from running this service and is now urging me to shut it down
-            immediately—without waiting for the October renewal.
-          </p>
-          <p className="text-left text-red-700 leading-7 mb-4">
-            For now, I’ve bought some time by selling a few items from my
-            personal collection to cover the cost. But this kind of solution
-            cannot last forever.
-          </p>
-          <p className="text-left text-red-700 leading-7 mb-6 font-semibold">
-            I’m not asking someone else—I’m asking you, the person reading this
-            right now. If you care about the future of this service, please take
-            that first step.
+          <p className="text-left text-red-700 leading-7">
+            Your input is invaluable in shaping the future of this service.
+            Thank you for your support!
           </p>
           <Divider className="my-4" />
           <p className="text-left text-red-700 leading-7 mb-4">
