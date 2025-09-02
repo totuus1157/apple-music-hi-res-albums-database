@@ -73,17 +73,43 @@ const HomePage: NextPage = (): JSX.Element => {
           </h2>
 
           <h3 className="text-lg font-semibold mb-2 text-red-700">
-            User Feedback Survey
+            Sep 1, 2025
           </h3>
           <p className="text-left text-red-700 leading-7 mb-4">
-            We are considering adding a ranking or popularity feature to the
-            Apple Music Hi-Res Albums Database. Your feedback will help us
-            decide whether this is the right direction for our community.
+            At last, the Google AdSense revenue has reached the payout
+            threshold! 🎉 This month’s earnings came to <strong>$63.90</strong>.
+          </p>
+          <p className="text-left text-red-700 leading-7 mb-4">
+            Ko-fi contributions currently total <strong>$110.00</strong>, and it
+            seems likely that PayPal withdrawals will finally succeed. For now,
+            it looks like I won’t need to sell off any more of my precious
+            collections — a relief, and honestly, a bit funny 😅
+          </p>
+          <p className="text-left text-red-700 leading-7 mb-4">
+            That said, August brought a mystery: on <strong>August 8</strong>,
+            site traffic suddenly spiked to more than 10× the usual number of
+            visitors.
+          </p>
+          <div className="my-4">
+            <Image
+              src="/images/vercel-web-analytics.jpg"
+              alt="Site analytics showing unusual traffic spike"
+              width={728}
+              height={400}
+              className="rounded-lg shadow-md mx-auto"
+            />
+          </div>
+          <p className="text-left text-red-700 leading-7 mb-4">
+            The “epicenter” remains unknown, despite my efforts to track it
+            down. If anyone has clues, please let me know!
+          </p>
+          <p className="text-left text-red-700 leading-7 mb-4">
+            From a week ago, I have been running a survey on whether we should
+            add a ranking feature. So far, only <strong>3 responses</strong>{" "}
+            have been received—not enough to draw conclusions. The survey will
+            remain open longer, so please take a moment to share your thoughts:
           </p>
           <p className="text-left text-red-700 leading-7 mb-4 font-semibold">
-            Please take a moment to answer our short survey (open until August
-            31, 2025 – 23:59 JST):
-            <br />
             <Link
               isExternal
               showAnchorIcon
@@ -91,10 +117,6 @@ const HomePage: NextPage = (): JSX.Element => {
             >
               Google Forms
             </Link>
-          </p>
-          <p className="text-left text-red-700 leading-7">
-            Your input is invaluable in shaping the future of this service.
-            Thank you for your support!
           </p>
           <Divider className="my-4" />
           <p className="text-left text-red-700 leading-7 mb-4">
