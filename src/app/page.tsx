@@ -27,7 +27,7 @@ const HomePage: NextPage = (): JSX.Element => {
             <Image src="/favicon.ico" alt="Site logo" width={36} height={36} />
             <p className="font-bold text-inherit leading-none text-left sm:text-center">
               <span className="block sm:inline align-top -mb-2">
-                Apple Music
+                Apple Music{" "}
               </span>
               <br className="block sm:hidden" />
               <span className="block sm:inline align-top">
