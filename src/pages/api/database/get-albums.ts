@@ -7,17 +7,13 @@ export default async function handler(
 ): Promise<void> {
   try {
     const page = Number(request.query.page) || 1;
-    let limit = Number(request.query.limit) || 50;
-
-    const isRandom = request.query.random === "true";
-    if (isRandom) {
-      limit = 10;
-    }
-
+    const limit = Number(request.query.limit) || 50;
     const offset = (page - 1) * limit;
     const filters = request.query.filters
       ? JSON.parse(request.query.filters as string)
       : {};
+
+    const isRandom = request.query.random === "true";
 
     const { isEditMode, userID } = request.query;
     const isEditModeEnabled = isEditMode === "true";
