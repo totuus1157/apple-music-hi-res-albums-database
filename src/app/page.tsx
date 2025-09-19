@@ -18,7 +18,7 @@ import {
 
 const year = new Date().getFullYear().toString();
 
-const HomePage: NextPage = (): JSX.Element => {
+const HomePage: NextPage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white text-gray-800">
       <main className="flex flex-col items-center justify-center w-full flex-1 px-6 text-center">
