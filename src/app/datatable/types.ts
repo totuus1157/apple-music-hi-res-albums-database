@@ -10,6 +10,7 @@ export type AlbumData = {
   created_at: Date;
   updated_at: Date;
   storefront: string;
+  like_count?: number;
 };
 
 export type FormatAlbumForTable = {
@@ -24,6 +25,7 @@ export type FormatAlbumForTable = {
   created_at: Date;
   updated_at: Date;
   storefront: string;
+  like_count?: number;
 };
 
 export type SelectedItem = {
@@ -41,6 +43,8 @@ export type AlbumElements = {
 };
 
 export type FocusedAlbum = { id: string | null; storefront: string | null };
+
+export type SortMode = "id_desc" | "likes_desc" | "random";
 
 export type StorefrontsResponse = {
   data: {

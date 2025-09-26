@@ -1,8 +1,14 @@
 "use client";
 
-import type { SelectedItem } from "app/datatable/types";
+import type { SelectedItem, SortMode } from "app/datatable/types";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { Button, RadioGroup, Radio, Spacer } from "@heroui/react";
+import { Button, ButtonGroup, RadioGroup, Radio, Spacer } from "@heroui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowDownWideShort,
+  faShuffle,
+  faThumbsUp,
+} from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
   onOpen: () => void;
@@ -11,11 +17,11 @@ type Props = {
   setModalContent: (arg0: string) => void;
   selectedItem: SelectedItem;
   setSelectedItem: (arg0: SelectedItem) => void;
-  isRandomMode: boolean;
-  setIsRandomMode: (arg0: boolean) => void;
+  sortMode: SortMode;
+  setSortMode: (arg0: SortMode) => void;
 };
 
-export default function ButtonGroup(props: Props) {
+export default function ActionPanel(props: Props) {
   const {
     onOpen,
     isEditMode,
@@ -23,8 +29,8 @@ export default function ButtonGroup(props: Props) {
     setModalContent,
     selectedItem,
     setSelectedItem,
-    isRandomMode,
-    setIsRandomMode,
+    sortMode,
+    setSortMode,
   } = props;
   const { user } = useUser();
 
@@ -34,17 +40,12 @@ export default function ButtonGroup(props: Props) {
   };
 
   const handleAllAlbumsClick = (): void => {
-    setIsRandomMode(false);
     setSelectedItem({
       artist: null,
       genre: null,
       composer: null,
       sampleRate: null,
     });
-  };
-
-  const handleRandomAlbumsClick = (): void => {
-    setIsRandomMode(true);
   };
 
   const isSelectedItemNotEmpty = Object.values(selectedItem).some(
@@ -54,19 +55,35 @@ export default function ButtonGroup(props: Props) {
   return (
     <div className="m-4 flex justify-between">
       <div className="px-2">
-        {!isEditMode &&
-          (isRandomMode || isSelectedItemNotEmpty ? (
-            <Button color="success" onClick={handleAllAlbumsClick}>
-              All Albums
-            </Button>
-          ) : (
+        {!isEditMode && isSelectedItemNotEmpty ? (
+          <Button color="success" onClick={handleAllAlbumsClick}>
+            All Albums
+          </Button>
+        ) : (
+          <ButtonGroup>
             <Button
-              className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
-              onClick={handleRandomAlbumsClick}
+              isIconOnly
+              onClick={() => setSortMode("id_desc")}
+              isDisabled={sortMode === "id_desc"}
             >
-              Random Albums
+              {<FontAwesomeIcon icon={faArrowDownWideShort} size="xl" />}
             </Button>
-          ))}
+            <Button
+              isIconOnly
+              onClick={() => setSortMode("likes_desc")}
+              isDisabled={sortMode === "likes_desc"}
+            >
+              {<FontAwesomeIcon icon={faThumbsUp} size="xl" />}
+            </Button>
+            <Button
+              isIconOnly
+              onClick={() => setSortMode("random")}
+              isDisabled={sortMode === "random"}
+            >
+              {<FontAwesomeIcon icon={faShuffle} size="xl" />}
+            </Button>
+          </ButtonGroup>
+        )}
       </div>
       {!isEditMode ? (
         <div className="flex px-2">

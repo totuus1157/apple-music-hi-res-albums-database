@@ -17,9 +17,13 @@ import {
   TableRow,
   TableCell,
   Spinner,
+  Button,
 } from "@heroui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp as faThumbsUpSolid } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp as faThumbsUpRegular } from "@fortawesome/free-regular-svg-icons";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 type Track = {
   id: string;
@@ -56,6 +60,15 @@ export default function AlbumDetail(props: Props) {
   const { isOpen, onOpenChange, onClose, focusedAlbum } = props;
   const [albumData, setAlbumData] = useState<AlbumsResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isLiked, setIsLiked] = useState(false);
+
+  const { user } = useUser();
+
+  const registrantId = useMemo(() => {
+    return user
+      ? user.sub
+      : process.env.NEXT_PUBLIC_AUTH0_DEVELOPER_USER_ID || null;
+  }, [user]);
 
   useEffect((): void => {
     const { id, storefront } = focusedAlbum;
@@ -66,8 +79,21 @@ export default function AlbumDetail(props: Props) {
       makeApiRequestWithRetry(storefront, id)
         .then((data): void => setAlbumData(data ?? null))
         .catch((err): void => setError(err.message));
+
+      if (registrantId) {
+        fetch(`/api/likes/state?album_id=${id}&user_id=${registrantId}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setIsLiked(data.liked === true);
+          })
+          .catch((err) => {
+            console.error("Failed to fetch like state:", err);
+          });
+      } else {
+        setIsLiked(false);
+      }
     }
-  }, [isOpen, focusedAlbum]);
+  }, [isOpen, focusedAlbum, registrantId]);
 
   const album = useMemo(() => albumData?.data?.[0], [albumData]);
   const attrs = album?.attributes;
@@ -105,6 +131,38 @@ export default function AlbumDetail(props: Props) {
     return Object.keys(groupedTracks);
   }, [groupedTracks]);
   const isMultiDisc = discNumbers.length > 1;
+
+  const toggleLike = async (): Promise<void> => {
+    if (!album || !registrantId) return;
+
+    const payload = {
+      album_id: album.id,
+      user_id: registrantId,
+    };
+
+    try {
+      if (isLiked) {
+        await fetch("/api/likes", {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        setIsLiked(false);
+      } else {
+        await fetch("/api/likes", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        setIsLiked(true);
+      }
+    } catch (err) {
+      console.error("Failed to toggle like:", err);
+    }
+  };
+
+  const isProduction = process.env.NODE_ENV === "production";
+  const isDisabled = !user && isProduction;
 
   return (
     <Modal
@@ -161,7 +219,26 @@ export default function AlbumDetail(props: Props) {
 
                   {/* Title, Artist, Genre */}
                   <div>
-                    <h2 className="text-xl font-bold">{attrs.name}</h2>
+                    <div className="flex items-center justify-between">
+                      <h2 className="text-xl font-bold">{attrs.name}</h2>
+                      <Button
+                        aria-label="Like"
+                        size="sm"
+                        radius="full"
+                        color="primary"
+                        isIconOnly
+                        onPress={toggleLike}
+                        isDisabled={isDisabled}
+                        variant={isLiked ? "solid" : "bordered"}
+                      >
+                        {
+                          <FontAwesomeIcon
+                            icon={isLiked ? faThumbsUpSolid : faThumbsUpRegular}
+                            size="xl"
+                          />
+                        }
+                      </Button>
+                    </div>
                     <p className="text-base text-gray-700">
                       {attrs.artistName}
                     </p>

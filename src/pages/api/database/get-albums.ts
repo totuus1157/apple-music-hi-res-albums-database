@@ -13,12 +13,12 @@ export default async function handler(
       ? JSON.parse(request.query.filters as string)
       : {};
 
-    const isRandom = request.query.random === "true";
+    const sortMode = (request.query.sort as string) || "id_desc";
 
     const { isEditMode, userID } = request.query;
     const isEditModeEnabled = isEditMode === "true";
 
-    const whereClauses = [];
+    const whereClauses: string[] = [];
     const values = [];
 
     if (filters.artist) {
@@ -26,10 +26,12 @@ export default async function handler(
       values.push(filters.artist);
     }
     if (filters.genre) {
-      whereClauses.push(`'${filters.genre}' = ANY(genre)`);
+      whereClauses.push(`$${values.length + 1} = ANY(genre)`);
+      values.push(filters.genre);
     }
     if (filters.composer) {
-      whereClauses.push(`'${filters.composer}' = ANY(composer)`);
+      whereClauses.push(`$${values.length + 1} = ANY(composer)`);
+      values.push(filters.composer);
     }
     if (filters.sampleRate) {
       whereClauses.push(`sample_rate = $${values.length + 1}`);
@@ -43,27 +45,42 @@ export default async function handler(
     const whereClause =
       whereClauses.length > 0 ? `WHERE ${whereClauses.join(" AND ")}` : "";
 
-    const orderByClause = isRandom ? "ORDER BY RANDOM()" : "ORDER BY id DESC";
+    // Sorting Rule.
+    let orderByClause = "ORDER BY a.id DESC";
+    if (sortMode === "likes_desc") {
+      orderByClause = "ORDER BY like_count DESC, a.id DESC";
+    } else if (sortMode === "random") {
+      orderByClause = "ORDER BY RANDOM()";
+    }
 
+    // Item Count (No need for likes join)
     const totalAlbumsQuery = `SELECT COUNT(*) FROM albums ${whereClause};`;
+
+    // Actual data acquisition (LEFT JOIN for likes aggregation)
     const albumsQuery = `
       SELECT
-        id,
-        product_id,
-        title,
-        artist,
+        a.id,
+        a.product_id,
+        a.title,
+        a.artist,
         ARRAY(
-          SELECT unnest(genre)
+          SELECT unnest(a.genre)
           EXCEPT
           VALUES ('Music'), ('Musica'), ('Música'), ('Musique'), ('ミュージック')
         ) AS genre,
-        composer,
-        sample_rate,
-        registrant_id,
-        created_at,
-        updated_at,
-        storefront
-      FROM albums
+        a.composer,
+        a.sample_rate,
+        a.registrant_id,
+        a.created_at,
+        a.updated_at,
+        a.storefront,
+        COALESCE(lc.like_count, 0) AS like_count
+      FROM albums a
+      LEFT JOIN (
+        SELECT album_id, COUNT(*) AS like_count
+        FROM likes
+        GROUP BY album_id
+      ) lc ON lc.album_id = a.product_id
       ${whereClause}
       ${orderByClause}
       OFFSET $${values.length + 1}

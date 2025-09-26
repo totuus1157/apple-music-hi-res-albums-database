@@ -5,6 +5,7 @@ import type {
   FormatAlbumForTable,
   SelectedItem,
   FocusedAlbum,
+  SortMode,
   StorefrontsResponse,
 } from "app/datatable/types";
 import { useState, useEffect, useMemo } from "react";
@@ -25,6 +26,8 @@ import {
   getKeyValue,
 } from "@heroui/react";
 import { useAsyncList } from "@react-stately/data";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
 type AlbumElements = {
   artist?: string;
@@ -43,6 +46,7 @@ type RowData = Omit<FormatAlbumForTable, "id" | "storefront"> & {
   storefront_code: string;
   product_id: string;
   registrant_id: string;
+  like_count?: number;
 };
 
 type Props = {
@@ -57,7 +61,7 @@ type Props = {
     (arg0: SelectedItem): void;
     (arg0: SelectedItem): void;
   };
-  isRandomMode: boolean;
+  sortMode: SortMode;
   isEditMode: boolean;
   setAlbumFetchTrigger: (arg0: number) => void;
   setModalContent: (arg0: string) => void;
@@ -77,7 +81,7 @@ export default function AlbumTable(props: Props) {
     onOpen,
     selectedItem,
     setSelectedItem,
-    isRandomMode,
+    sortMode,
     isEditMode,
     setAlbumFetchTrigger,
     setModalContent,
@@ -141,18 +145,22 @@ export default function AlbumTable(props: Props) {
     const formatAlbumForTable = summarizeAlbumData(albumDataArray);
 
     const newRows = formatAlbumForTable.map(
-      ({ id, storefront, product_id, registrant_id, ...rest }): RowData => ({
+      ({
+        id,
+        storefront,
+        product_id,
+        registrant_id,
+        like_count,
+        ...rest
+      }): RowData => ({
         ...rest,
         key: id,
         storefront_name: extractStorefrontNames(storefront),
         storefront_code: storefront,
         product_id,
         registrant_id,
+        like_count: like_count ?? 0,
       }),
-    );
-
-    const albumIds = formatAlbumForTable.map(
-      (album): string => album.product_id,
     );
 
     setRows(newRows);
@@ -295,6 +303,7 @@ export default function AlbumTable(props: Props) {
   };
 
   const columns = [
+    { key: "like_count", label: "Like" },
     { key: "artist", label: "Artist" },
     { key: "title", label: "Title" },
     { key: "genre", label: "Genre" },
@@ -306,7 +315,7 @@ export default function AlbumTable(props: Props) {
   return (
     <>
       <div className="flex justify-start ml-4">
-        {isRandomMode ? "Selected Albums: " : "All Albums: "}
+        {sortMode === "random" ? "Selected Albums: " : "All Albums: "}
         {totalAlbums}
       </div>
       {!isLoading ? (
@@ -337,7 +346,19 @@ export default function AlbumTable(props: Props) {
             {(item) => (
               <TableRow key={item.key}>
                 {(columnKey) => (
-                  <TableCell>{getKeyValue(item, columnKey)}</TableCell>
+                  <TableCell>
+                    {columnKey === "like_count" ? (
+                      <span className="flex items-center gap-1">
+                        <FontAwesomeIcon
+                          icon={faThumbsUp}
+                          className="text-primary-500"
+                        />
+                        {item.like_count ?? 0}
+                      </span>
+                    ) : (
+                      getKeyValue(item, columnKey)
+                    )}
+                  </TableCell>
                 )}
               </TableRow>
             )}

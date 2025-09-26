@@ -1,14 +1,14 @@
 "use client";
 
 import type {
-  AlbumData,
   SelectedItem,
   FocusedAlbum,
+  SortMode,
   StorefrontsResponse,
 } from "app/datatable/types";
 import { useState, useEffect } from "react";
 import Navbar from "app/datatable/navbar";
-import ButtonGroup from "app/datatable/button-group";
+import ActionPanel from "app/datatable/action-panel";
 import AlbumTable from "app/datatable/album-table";
 import Modal from "app/datatable/modal";
 import { useDisclosure } from "@heroui/react";
@@ -24,7 +24,7 @@ export default function Main() {
   });
   const [modalContent, setModalContent] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [isRandomMode, setIsRandomMode] = useState(false);
+  const [sortMode, setSortMode] = useState<SortMode>("id_desc");
   const [albumFetchTrigger, setAlbumFetchTrigger] = useState(Date.now());
   const [isLoading, setIsLoading] = useState(true);
   const [albumInfo, setAlbumInfo] = useState("");
@@ -46,7 +46,7 @@ export default function Main() {
   const rowsPerPage = 50;
 
   const { data, isLoading: isSWRLoading } = useSWR(
-    `/api/database/get-albums?page=${page}&limit=${rowsPerPage}&filters=${encodeURIComponent(JSON.stringify(selectedItem))}&random=${isRandomMode}&t=${albumFetchTrigger}`,
+    `/api/database/get-albums?page=${page}&limit=${rowsPerPage}&filters=${encodeURIComponent(JSON.stringify(selectedItem))}&sort=${sortMode}&t=${albumFetchTrigger}`,
     fetcher,
     { keepPreviousData: true },
   );
@@ -72,15 +72,15 @@ export default function Main() {
     <div>
       <main>
         <Navbar setModalContent={setModalContent} onOpen={onOpen} />
-        <ButtonGroup
+        <ActionPanel
           setModalContent={setModalContent}
           onOpen={onOpen}
           isEditMode={isEditMode}
           setIsEditMode={setIsEditMode}
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
-          isRandomMode={isRandomMode}
-          setIsRandomMode={setIsRandomMode}
+          sortMode={sortMode}
+          setSortMode={setSortMode}
         />
         <AlbumTable
           storefrontArray={storefrontArray}
@@ -89,7 +89,7 @@ export default function Main() {
           onOpen={onOpen}
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
-          isRandomMode={isRandomMode}
+          sortMode={sortMode}
           isEditMode={isEditMode}
           setAlbumFetchTrigger={setAlbumFetchTrigger}
           setModalContent={setModalContent}
