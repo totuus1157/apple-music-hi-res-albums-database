@@ -54,6 +54,7 @@ export default function Modal(props: Props) {
         onOpenChange={onOpenChange}
         onClose={onClose}
         focusedAlbum={focusedAlbum}
+        setAlbumFetchTrigger={setAlbumFetchTrigger}
       />
     );
   }

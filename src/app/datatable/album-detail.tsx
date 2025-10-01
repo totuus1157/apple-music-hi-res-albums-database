@@ -40,6 +40,7 @@ type Props = {
   onOpenChange: () => void;
   onClose: () => void;
   focusedAlbum: FocusedAlbum;
+  setAlbumFetchTrigger: (arg0: number) => void;
 };
 
 const decodeHTMLEntities = (text: string): string => {
@@ -164,6 +165,7 @@ export default function AlbumDetail(props: Props) {
         });
         setIsLiked(true);
       }
+      setAlbumFetchTrigger(Date.now());
     } catch (err) {
       console.error("Failed to toggle like:", err);
     }
