@@ -57,10 +57,12 @@ const formatMillisToDuration = (ms?: number): string => {
 };
 
 export default function AlbumDetail(props: Props) {
-  const { isOpen, onOpenChange, onClose, focusedAlbum } = props;
+  const { isOpen, onOpenChange, onClose, focusedAlbum, setAlbumFetchTrigger } =
+    props;
   const [albumData, setAlbumData] = useState<AlbumsResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLiked, setIsLiked] = useState(false);
+  const [likeLoaded, setLikeLoaded] = useState(false);
 
   const { user } = useUser();
 
@@ -80,18 +82,24 @@ export default function AlbumDetail(props: Props) {
         .then((data): void => setAlbumData(data ?? null))
         .catch((err): void => setError(err.message));
 
-      if (registrantId) {
-        fetch(`/api/likes/state?album_id=${id}&user_id=${registrantId}`)
-          .then((res) => res.json())
-          .then((data) => {
-            setIsLiked(data.liked === true);
-          })
-          .catch((err) => {
-            console.error("Failed to fetch like state:", err);
-          });
-      } else {
+      if (!id || !registrantId) {
         setIsLiked(false);
+        setLikeLoaded(true);
+        return;
       }
+
+      setLikeLoaded(false);
+
+      fetch(`/api/likes/state?album_id=${id}&user_id=${registrantId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setIsLiked(data.liked === true);
+          setLikeLoaded(true);
+        })
+        .catch((err) => {
+          console.error("Failed to fetch like state:", err);
+          setLikeLoaded(true);
+        });
     }
   }, [isOpen, focusedAlbum, registrantId]);
 
@@ -221,23 +229,23 @@ export default function AlbumDetail(props: Props) {
                   <div>
                     <div className="flex items-center justify-between">
                       <h2 className="text-xl font-bold">{attrs.name}</h2>
-                      <Button
-                        aria-label="Like"
-                        size="sm"
-                        radius="full"
-                        color="primary"
-                        isIconOnly
-                        onPress={toggleLike}
-                        isDisabled={isDisabled}
-                        variant={isLiked ? "solid" : "bordered"}
-                      >
-                        {
+                      {likeLoaded && (
+                        <Button
+                          aria-label="Like"
+                          size="sm"
+                          radius="full"
+                          color="primary"
+                          isIconOnly
+                          onPress={toggleLike}
+                          isDisabled={isDisabled}
+                          variant={isLiked ? "solid" : "bordered"}
+                        >
                           <FontAwesomeIcon
                             icon={isLiked ? faThumbsUpSolid : faThumbsUpRegular}
                             size="xl"
                           />
-                        }
-                      </Button>
+                        </Button>
+                      )}
                     </div>
                     <p className="text-base text-gray-700">
                       {attrs.artistName}
