@@ -73,50 +73,32 @@ const HomePage: NextPage = () => {
           </h2>
 
           <h3 className="text-lg font-semibold mb-2 text-red-700">
-            Sep 1, 2025
+            Oct 1, 2025
           </h3>
           <p className="text-left text-red-700 leading-7 mb-4">
-            At last, the Google AdSense revenue has reached the payout
-            threshold! 🎉 This month’s earnings came to <strong>$63.90</strong>.
-          </p>
-          <p className="text-left text-red-700 leading-7 mb-4">
-            Ko-fi contributions currently total <strong>$110.00</strong>, and it
-            seems likely that PayPal withdrawals will finally succeed. For now,
-            it looks like I won’t need to sell off any more of my precious
-            collections — a relief, and honestly, a bit funny 😅
-          </p>
-          <p className="text-left text-red-700 leading-7 mb-4">
-            That said, August brought a mystery: on <strong>August 8</strong>,
-            site traffic suddenly spiked to more than 10× the usual number of
-            visitors.
-          </p>
-          <div className="my-4">
-            <Image
-              src="/images/vercel-web-analytics.jpg"
-              alt="Site analytics showing unusual traffic spike"
-              width={728}
-              height={400}
-              className="rounded-lg shadow-md mx-auto"
-            />
-          </div>
-          <p className="text-left text-red-700 leading-7 mb-4">
-            The “epicenter” remains unknown, despite my efforts to track it
-            down. If anyone has clues, please let me know!
-          </p>
-          <p className="text-left text-red-700 leading-7 mb-4">
-            From a week ago, I have been running a survey on whether we should
-            add a ranking feature. So far, only <strong>3 responses</strong>{" "}
-            have been received—not enough to draw conclusions. The survey will
-            remain open longer, so please take a moment to share your thoughts:
-          </p>
-          <p className="text-left text-red-700 leading-7 mb-4 font-semibold">
-            <Link
-              isExternal
-              showAnchorIcon
-              href="https://forms.gle/uCjQWJqdHQy5K7zD9"
+            We are currently seeking support on Ko-fi for the{" "}
+            <strong>Apple Developer Program Annual Fee ($99)</strong>. The
+            current achievement rate stands at <strong>80%</strong>. The renewal
+            deadline is <strong>October 17</strong>, and we are aiming for 100%
+            before then. Your cooperation would be greatly appreciated!{" "}
+            <a
+              href="https://ko-fi.com/anzumaru_software"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline text-blue-600"
             >
-              Google Forms
-            </Link>
+              Support us on Ko-fi
+            </a>
+            .
+          </p>
+          <p className="text-left text-red-700 leading-7 mb-4">
+            Thank you to everyone who participated in our recent survey on the
+            ranking feature. Although the response count was smaller than
+            expected, your feedback gave me renewed motivation to implement a
+            ranking system. The service will now continue with a ranking feature
+            based primarily on user “Likes,” keeping the database simple and
+            transparent while reflecting the community’s voice in album
+            discovery.
           </p>
           <Divider className="my-4" />
           <p className="text-left text-red-700 leading-7 mb-4">
