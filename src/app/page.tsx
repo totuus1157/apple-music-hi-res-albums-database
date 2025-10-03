@@ -198,6 +198,21 @@ const HomePage: NextPage = () => {
           <h2 className="text-3xl font-semibold mb-6 text-green-800">
             Update Notice
           </h2>
+          <h3 className="text-lg font-semibold mb-2 text-green-800">
+            Oct 1, 2025
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-4">
+            We are excited to announce the launch of the new{" "}
+            <strong>Ranking Feature</strong>! 🏆 Albums can now be sorted by the
+            number of user “Likes” 👍, making it easier than ever to discover
+            the most popular Hi-Res albums in the community. 🎶
+          </p>
+          <p className="text-left text-green-700 leading-7 mb-4">
+            Logged-in users (via Apple ID 🔑) can now “Like” their favorite
+            albums ❤️, and those Likes directly contribute to the ranking. This
+            makes the database not only a reference, but also a community-driven
+            guide for discovering Hi-Res music ✨.
+          </p>
           <h3 className="text-xl font-semibold mb-2 text-green-800">
             Aug 24, 2025
           </h3>
@@ -248,15 +263,6 @@ const HomePage: NextPage = () => {
             waiting to be discovered.
             <br />• 🚀 Let’s keep exploring, sharing, and celebrating Hi-Res
             Lossless music together—the journey is far from over!
-          </p>
-          <h3 className="text-xl font-semibold mb-2 text-green-800">
-            Aug 1, 2025
-          </h3>
-          <p className="text-left text-green-700 leading-7 mb-6">
-            🎉 We have surpassed <strong>15,000 registered albums</strong> in
-            the database! 🚀 As we set our sights on the grand milestone of{" "}
-            <strong>20,000 albums</strong>, we humbly invite you to lend your
-            passion and support—together, let’s make this dream a reality! ✨
           </p>
         </section>
 
