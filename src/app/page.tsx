@@ -342,9 +342,12 @@ const HomePage: NextPage = () => {
               &quot;Sample Rate&quot;. Partial text search is also supported.
             </li>
             <li>
-              By pressing the &quot;Random Albums&quot; button, you can display
-              10 albums selected at random, allowing you to discover unexpected
-              music.
+              You can “Like” your favorite albums to show appreciation and
+              contribute to the ranking (Apple ID login required).
+            </li>
+            <li>
+              You can choose how albums are sorted in the table: by registration
+              order, by number of Likes, or at random.
             </li>
             <li>
               The app supports responsive design, making it usable on PC,
