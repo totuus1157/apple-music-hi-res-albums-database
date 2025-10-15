@@ -69,128 +69,49 @@ const HomePage: NextPage = () => {
 
         <section className="my-8 max-w-3xl bg-red-100 border border-red-500 p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4 text-red-800">
-            Important Notice
+            Important Notice — Oct 15, 2025
           </h2>
 
-          <h3 className="text-lg font-semibold mb-2 text-red-700">
-            Oct 1, 2025
-          </h3>
           <p className="text-left text-red-700 leading-7 mb-4">
-            We are currently seeking support on Ko-fi for the{" "}
-            <strong>Apple Developer Program Annual Fee ($99)</strong>. The
-            current achievement rate stands at <strong>80%</strong>. The renewal
-            deadline is <strong>October 17</strong>, and we are aiming for 100%
-            before then. Your cooperation would be greatly appreciated!{" "}
+            Thanks to the generous support from Ko-fi contributors, I’ve been
+            able to cover the renewal fee for the{" "}
+            <strong>Apple Developer Program</strong>. 🎉 This means the Apple
+            Music Hi-Res Albums Database can continue its operation for the
+            foreseeable future — something I truly couldn’t have achieved alone.
+          </p>
+
+          <p className="text-left text-red-700 leading-7 mb-4">
+            To everyone who stepped forward to help, whether by donating,
+            sharing the site, or simply visiting — <strong>thank you</strong>.
+            Your kindness and encouragement have kept this project alive. 🙏
+          </p>
+
+          <p className="text-left text-red-700 leading-7 mb-4">
+            That said, there are still ongoing expenses — particularly the{" "}
+            <strong>$20 monthly server cost</strong>. If you believe in what
+            this project stands for and would like to help sustain it, please
+            consider offering support through Ko-fi:
             <a
               href="https://ko-fi.com/anzumaru_software"
+              className="text-blue-700 underline"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline text-blue-600"
             >
-              Support us on Ko-fi
+              https://ko-fi.com/anzumaru_software
             </a>
-            .
-          </p>
-          <p className="text-left text-red-700 leading-7 mb-4">
-            Thank you to everyone who participated in our recent survey on the
-            ranking feature. Although the response count was smaller than
-            expected, your feedback gave me renewed motivation to implement a
-            ranking system. The service will now continue with a ranking feature
-            based primarily on user “Likes,” keeping the database simple and
-            transparent while reflecting the community’s voice in album
-            discovery.
-          </p>
-          <Divider className="my-4" />
-          <p className="text-left text-red-700 leading-7 mb-4">
-            Since launching this service, we have not generated any revenue, and
-            projected costs will exceed <strong>$1,000</strong> by the end of
-            this year. Without sufficient support, we may have to cancel the{" "}
-            <strong>October 2025</strong> Apple Developer Program renewal and
-            close the service.
           </p>
 
           <p className="text-left text-red-700 leading-7 mb-4">
-            One year ago, this site had only a dozen daily visitors. Today, we
-            see an average of over 100 visitors per day, and the trend continues
-            to rise. To achieve sustainability, we need at least 5×, ideally
-            10×, the current traffic.
+            Every bit of help — big or small — makes a real difference in
+            keeping this independent service running. I remain committed to
+            improving and expanding it for all Apple Music Hi-Res listeners
+            worldwide. 🌍🎧
           </p>
 
-          <p className="text-left text-red-700 leading-7 mb-4">
-            There must be countless Apple Music users who crave access to Hi-Res
-            album information, but simply don’t know that such a solution
-            exists.
-          </p>
-
-          <p className="text-left text-red-700 leading-7 mb-4">
-            You probably found this site via web search. That suggests you’re a
-            person of high information literacy. But not everyone is like you.
-          </p>
-
-          <p className="text-left text-red-700 leading-7 mb-4">
-            Steve Jobs once said:{" "}
-            <em>
-              \&quot;A lot of times, people don’t know what they want until you
-              show it to them.\&quot;
-            </em>{" "}
-            There are surely many frustrated Apple Music users who have no idea
-            a solution like this exists. We need your help to reach them.
-          </p>
-
-          <p className="text-left text-red-700 leading-7 mb-4">
-            If you believe this web service is a public good worth preserving,
-            please help spread the word to like-minded people. Share using the
-            social links under the title above, and let us know if you want more
-            services to be supported.
-          </p>
-
-          <p className="text-left text-red-700 leading-7 mb-4">
-            Follow our official social channels and help us reach more people:
-            <br />• Facebook:{" "}
-            <Link
-              isExternal
-              showAnchorIcon
-              href="https://www.facebook.com/anzumaru.software"
-            >
-              facebook.com/anzumaru.software
-            </Link>
-            <br />• X/Twitter:{" "}
-            <Link isExternal showAnchorIcon href="https://x.com/anzumaru_sw">
-              x.com/anzumaru_sw
-            </Link>
-          </p>
-
-          <p className="text-left text-red-700 leading-7 mb-4">
-            If you have favorite social media influencers or YouTubers, please
-            encourage them to introduce our service. We don’t have the budget to
-            ask them directly—your action is our only hope!
-          </p>
-
-          <p className="text-left text-red-700 leading-7 mb-4">
-            Of course, a diverse and international user base would greatly
-            contribute to the richness and completeness of the database—this is
-            the core mission of our service.
-          </p>
-
-          <p className="text-left text-red-700 leading-7 mb-4">
-            If you would like to support us directly, we are on Ko-fi:{" "}
-            <Link
-              isExternal
-              showAnchorIcon
-              href="https://ko-fi.com/anzumaru_software"
-            >
-              ko-fi.com/anzumaru_software
-            </Link>
-            <br />— your help is truly appreciated. Previously, we received a
-            few kind donations via Buy Me a Coffee, but sadly our account was
-            suddenly closed during withdrawal review, despite our clean track
-            record. We had to start over from scratch.
-          </p>
-
-          <p className="text-left text-red-700 leading-7">
-            And if this project’s monetization cycle begins to succeed, I will
-            be able to start developing a new application I’ve been planning—one
-            that is also closely related to Apple Music. Stay tuned.
+          <p className="text-left text-red-700 leading-7 font-semibold">
+            Thank you again for standing with me and for helping this project
+            survive another year. ❤️ Let’s continue discovering amazing Hi-Res
+            albums together.
           </p>
         </section>
 
