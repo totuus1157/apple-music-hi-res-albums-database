@@ -108,6 +108,13 @@ const HomePage: NextPage = () => {
             worldwide. 🌍🎧
           </p>
 
+          <p className="text-left text-red-700 leading-7 mb-4">
+            By the way, the new <strong>Ranking feature</strong> isn’t getting
+            much use yet — so please don’t hesitate to hit that 👍️ and “Like”
+            your favorite albums! The more you interact, the more meaningful and
+            fun the ranking data will become. 📈🎵
+          </p>
+
           <p className="text-left text-red-700 leading-7 font-semibold">
             Thank you again for standing with me and for helping this project
             survive another year. ❤️ Let’s continue discovering amazing Hi-Res
