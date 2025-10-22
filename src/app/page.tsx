@@ -126,6 +126,30 @@ const HomePage: NextPage = () => {
           <h2 className="text-3xl font-semibold mb-6 text-green-800">
             Update Notice
           </h2>
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
+            Oct 21, 2025
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-4">
+            🎉🎉🎉🎉 We have officially reached{" "}
+            <strong>40,000 registered albums</strong> in the database! 🚀 What
+            an incredible milestone—made possible by the passion and dedication
+            of Hi-Res music lovers around the world. 🌍🎶✨
+          </p>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            • 🗓️ In just a few months, we’ve added another 10,000 albums—our
+            fastest growth ever!
+            <br />
+            • 🌄 The database now stands as one of the most comprehensive
+            collections of Hi-Res Lossless music on Apple Music.
+            <br />
+            • 🎧 Each album is another voice in the symphony of global music
+            culture.
+            <br />• 🚀 Thank you for your continued support—together, let’s aim
+            for <strong>50,000 albums</strong> and beyond!
+            <br />• 💫 The journey continues. Let’s keep discovering new
+            soundscapes together!
+          </p>
+
           <h3 className="text-lg font-semibold mb-2 text-green-800">
             Oct 1, 2025
           </h3>
@@ -165,32 +189,6 @@ const HomePage: NextPage = () => {
             continue to join our collection every day.
             <br />• 🚀 Let’s continue building this global archive
             together—onward to <strong>40,000 albums</strong> and beyond!
-          </p>
-
-          <h3 className="text-xl font-semibold mb-2 text-green-800">
-            Aug 14, 2025
-          </h3>
-          <p className="text-left text-green-700 leading-7 mb-4">
-            🎉🎉 We have officially surpassed{" "}
-            <strong>20,000 registered albums</strong> in the database! 🚀 This
-            marks an extraordinary milestone for our community of Hi-Res music
-            lovers. Thank you to every user and contributor who helped make this
-            possible—your passion is the heartbeat of this project. 🌍🎶✨
-          </p>
-          <p className="text-left text-green-700 leading-7 mb-6">
-            • 🗓️ Just three years and five months since our launch, and we’ve
-            already doubled the count from 10k to 20k.
-            <br />
-            • 🏔️ From the summit of one mountain, we’ve climbed to an even
-            greater peak.
-            <br />
-            • 🌌 The view now? A breathtaking horizon filled with limitless
-            musical possibilities.
-            <br />
-            • 🎧 Each album represents a story, a moment in time, a piece of art
-            waiting to be discovered.
-            <br />• 🚀 Let’s keep exploring, sharing, and celebrating Hi-Res
-            Lossless music together—the journey is far from over!
           </p>
         </section>
 
