@@ -95,11 +95,11 @@ export default async function handler(
     ]);
 
     // Handle both array and { rows: T[] } formats for countResult
-    const countRows = Array.isArray(countResult) ? countResult : countResult.rows;
-    const totalAlbums = Number(countRows[0].count);
+    const countRows = Array.isArray(countResult) ? countResult : (countResult as { rows: unknown[] }).rows;
+    const totalAlbums = Number((countRows[0] as { count: number }).count);
 
     // Handle both array and { rows: T[] } formats for albumsResult
-    const albumsRows = Array.isArray(albumsResult) ? albumsResult : albumsResult.rows;
+    const albumsRows = Array.isArray(albumsResult) ? albumsResult : (albumsResult as { rows: unknown[] }).rows;
 
     return response.status(200).json({ albums: { rows: albumsRows }, totalAlbums });
   } catch (err) {

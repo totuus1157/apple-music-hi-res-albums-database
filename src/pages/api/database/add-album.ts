@@ -61,7 +61,7 @@ export default async function handler(
     const existingAlbum =
       await sql`SELECT id FROM albums WHERE product_id = ${productId};`;
     // Handle both array and { rows: T[] } formats
-    const existingRows = Array.isArray(existingAlbum) ? existingAlbum : existingAlbum.rows;
+    const existingRows = Array.isArray(existingAlbum) ? existingAlbum : (existingAlbum as { rows: unknown[] }).rows;
     if (existingRows.length > 0) {
       return response
         .status(409)
