@@ -1,5 +1,7 @@
-import { sql } from "@vercel/postgres";
+import { neon } from "@neondatabase/serverless";
 import { NextApiResponse, NextApiRequest } from "next";
+
+const sql = neon(process.env.DATABASE_URL!);
 
 export default async function handler(
   request: NextApiRequest,
