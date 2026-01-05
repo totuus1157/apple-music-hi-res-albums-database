@@ -46,14 +46,19 @@ export default async function handler(
     ]);
 
     // Handle both array and { rows: T[] } formats
-    const sampleRateRows = Array.isArray(sampleRateResult) ? sampleRateResult : sampleRateResult.rows;
-    const sampleRateStats = sampleRateRows.map((row: any) => ({
+    type SampleRateRow = { sample_rate: string | number; count: string | number };
+    type GenreRow = { genre_name: string; count: string | number };
+    
+    const sampleRateData = sampleRateResult as unknown as Array<SampleRateRow> | { rows: Array<SampleRateRow> };
+    const sampleRateRows = Array.isArray(sampleRateData) ? sampleRateData : sampleRateData.rows;
+    const sampleRateStats = sampleRateRows.map((row) => ({
       label: row.sample_rate,
       value: Number(row.count),
     }));
 
-    const genreRows = Array.isArray(genreResult) ? genreResult : genreResult.rows;
-    const genreStats = genreRows.map((row: any) => ({
+    const genreData = genreResult as unknown as Array<GenreRow> | { rows: Array<GenreRow> };
+    const genreRows = Array.isArray(genreData) ? genreData : genreData.rows;
+    const genreStats = genreRows.map((row) => ({
       label: row.genre_name,
       value: Number(row.count),
     }));

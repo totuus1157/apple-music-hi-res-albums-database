@@ -47,7 +47,7 @@ export default async function handler(
       values.push(parsedFilters.sampleRate);
     }
 
-    let result: Array<{ element: any }> | { rows: Array<{ element: any }> };
+    let result: Array<{ element: string }> | { rows: Array<{ element: string }> };
 
     if (category === "artist" || category === "sampleRate") {
       whereClauses.push(`${columnName} ILIKE $${values.length + 1}`);
@@ -62,7 +62,7 @@ export default async function handler(
         ${finalWhereClause}
         ORDER BY element ASC;
       `;
-      result = await sql.query(sqlQuery, values) as unknown as Array<{ element: any }> | { rows: Array<{ element: any }> };
+      result = await sql.query(sqlQuery, values) as unknown as Array<{ element: string }> | { rows: Array<{ element: string }> };
     } else {
       whereClauses.push(`element ILIKE $${values.length + 1}`);
       values.push(likeQuery);
@@ -91,7 +91,7 @@ export default async function handler(
         ${finalWhereClause}
         ORDER BY element ASC;
       `;
-      result = await sql.query(sqlQuery, values) as unknown as Array<{ element: any }> | { rows: Array<{ element: any }> };
+      result = await sql.query(sqlQuery, values) as unknown as Array<{ element: string }> | { rows: Array<{ element: string }> };
     }
 
     // Handle both array and { rows: T[] } formats
