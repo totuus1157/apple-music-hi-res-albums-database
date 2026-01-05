@@ -60,7 +60,9 @@ export default async function handler(
     // Add duplicate check query
     const existingAlbum =
       await sql`SELECT id FROM albums WHERE product_id = ${productId};`;
-    if (existingAlbum.rows.length > 0) {
+    // Handle both array and { rows: T[] } formats
+    const existingRows = Array.isArray(existingAlbum) ? existingAlbum : existingAlbum.rows;
+    if (existingRows.length > 0) {
       return response
         .status(409)
         .json({ message: "Album with this product_id already exists." });

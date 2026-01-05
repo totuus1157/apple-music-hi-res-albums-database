@@ -47,7 +47,7 @@ export default async function handler(
       values.push(parsedFilters.sampleRate);
     }
 
-    let result;
+    let result: Array<{ element: any }> | { rows: Array<{ element: any }> };
 
     if (category === "artist" || category === "sampleRate") {
       whereClauses.push(`${columnName} ILIKE $${values.length + 1}`);
@@ -62,7 +62,7 @@ export default async function handler(
         ${finalWhereClause}
         ORDER BY element ASC;
       `;
-      result = await sql.query(sqlQuery, values);
+      result = await sql.query(sqlQuery, values) as unknown as Array<{ element: any }> | { rows: Array<{ element: any }> };
     } else {
       whereClauses.push(`element ILIKE $${values.length + 1}`);
       values.push(likeQuery);
@@ -91,10 +91,12 @@ export default async function handler(
         ${finalWhereClause}
         ORDER BY element ASC;
       `;
-      result = await sql.query(sqlQuery, values);
+      result = await sql.query(sqlQuery, values) as unknown as Array<{ element: any }> | { rows: Array<{ element: any }> };
     }
 
-    const elements = result.rows.map((row) => row.element);
+    // Handle both array and { rows: T[] } formats
+    const rows = Array.isArray(result) ? result : result.rows;
+    const elements = rows.map((row) => row.element);
 
     return response.status(200).json({ elements });
   } catch (err) {

@@ -94,9 +94,14 @@ export default async function handler(
       sql.query(albumsQuery, [...values, offset, limit]),
     ]);
 
-    const totalAlbums = Number(countResult.rows[0].count);
+    // Handle both array and { rows: T[] } formats for countResult
+    const countRows = Array.isArray(countResult) ? countResult : countResult.rows;
+    const totalAlbums = Number(countRows[0].count);
 
-    return response.status(200).json({ albums: albumsResult, totalAlbums });
+    // Handle both array and { rows: T[] } formats for albumsResult
+    const albumsRows = Array.isArray(albumsResult) ? albumsResult : albumsResult.rows;
+
+    return response.status(200).json({ albums: { rows: albumsRows }, totalAlbums });
   } catch (err) {
     console.error("Error fetching albums:", err);
     return response.status(500).json({

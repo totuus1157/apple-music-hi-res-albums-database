@@ -45,12 +45,15 @@ export default async function handler(
       sql.query(genreQuery),
     ]);
 
-    const sampleRateStats = sampleRateResult.rows.map((row) => ({
+    // Handle both array and { rows: T[] } formats
+    const sampleRateRows = Array.isArray(sampleRateResult) ? sampleRateResult : sampleRateResult.rows;
+    const sampleRateStats = sampleRateRows.map((row: any) => ({
       label: row.sample_rate,
       value: Number(row.count),
     }));
 
-    const genreStats = genreResult.rows.map((row) => ({
+    const genreRows = Array.isArray(genreResult) ? genreResult : genreResult.rows;
+    const genreStats = genreRows.map((row: any) => ({
       label: row.genre_name,
       value: Number(row.count),
     }));
