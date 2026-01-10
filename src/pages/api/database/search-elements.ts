@@ -1,7 +1,7 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { neon } from "@neondatabase/serverless";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { getSql } from "@/lib/db";
 
-const sql = neon(process.env.DATABASE_URL!);
+type ElementRow = { element: string };
 
 export default async function handler(
   request: NextApiRequest,
@@ -9,11 +9,12 @@ export default async function handler(
 ): Promise<void> {
   try {
     const { category, query, filters } = request.query;
+
     const filterQuery = typeof query === "string" ? query : "";
     const likeQuery = `%${filterQuery}%`;
 
-    const validCategories = ["artist", "genre", "composer", "sampleRate"];
-    if (!category || !validCategories.includes(category as string)) {
+    const validCategories = ["artist", "genre", "composer", "sampleRate"] as const;
+    if (!category || !validCategories.includes(category as string as typeof validCategories[number])) {
       return response.status(400).json({
         message: "Invalid or missing 'category' parameter.",
       });
@@ -27,83 +28,90 @@ export default async function handler(
     };
     const columnName = columnMap[category as string];
 
-    const parsedFilters = filters ? JSON.parse(filters as string) : {};
+    const parsedFilters =
+      typeof filters === "string" ? JSON.parse(filters) : {};
 
-    const whereClauses = [];
-    const values = [];
+    const whereClauses: string[] = [];
+    const values: unknown[] = [];
 
     if (parsedFilters.artist && category !== "artist") {
       whereClauses.push(`albums.artist = $${values.length + 1}`);
       values.push(parsedFilters.artist);
     }
+
     if (parsedFilters.genre && category !== "genre") {
-      whereClauses.push(`'${parsedFilters.genre}' = ANY(albums.genre)`);
+      whereClauses.push(`$${values.length + 1} = ANY(albums.genre)`);
+      values.push(parsedFilters.genre);
     }
+
     if (parsedFilters.composer && category !== "composer") {
-      whereClauses.push(`'${parsedFilters.composer}' = ANY(albums.composer)`);
+      whereClauses.push(`$${values.length + 1} = ANY(albums.composer)`);
+      values.push(parsedFilters.composer);
     }
+
     if (parsedFilters.sampleRate && category !== "sampleRate") {
       whereClauses.push(`albums.sample_rate = $${values.length + 1}`);
       values.push(parsedFilters.sampleRate);
     }
 
-    let result: Array<{ element: string }> | { rows: Array<{ element: string }> };
+    const sql = getSql();
+    let rows: ElementRow[];
 
     if (category === "artist" || category === "sampleRate") {
       whereClauses.push(`${columnName} ILIKE $${values.length + 1}`);
       values.push(likeQuery);
 
-      const finalWhereClause =
+      const where =
         whereClauses.length > 0 ? `WHERE ${whereClauses.join(" AND ")}` : "";
 
-      const sqlQuery = `
+      const queryText = `
         SELECT DISTINCT ${columnName} AS element
         FROM albums
-        ${finalWhereClause}
+        ${where}
         ORDER BY element ASC;
       `;
-      result = await sql.query(sqlQuery, values) as unknown as Array<{ element: string }> | { rows: Array<{ element: string }> };
+
+      rows = (await sql.query(queryText, values)) as ElementRow[];
     } else {
       whereClauses.push(`element ILIKE $${values.length + 1}`);
       values.push(likeQuery);
 
-      const genreExclusionList = [
-        "Music",
-        "Musica",
-        "Música",
-        "Musique",
-        "ミュージック",
-      ];
       if (category === "genre") {
-        const placeholder = genreExclusionList
+        const exclusionList = [
+          "Music",
+          "Musica",
+          "Música",
+          "Musique",
+          "ミュージック",
+        ];
+
+        const placeholders = exclusionList
           .map((_, i) => `$${values.length + i + 1}`)
           .join(", ");
-        whereClauses.push(`element NOT IN (${placeholder})`);
-        values.push(...genreExclusionList);
+
+        whereClauses.push(`element NOT IN (${placeholders})`);
+        values.push(...exclusionList);
       }
 
-      const finalWhereClause =
+      const where =
         whereClauses.length > 0 ? `WHERE ${whereClauses.join(" AND ")}` : "";
 
-      const sqlQuery = `
+      const queryText = `
         SELECT DISTINCT element
         FROM albums, unnest(albums.${columnName}) AS element
-        ${finalWhereClause}
+        ${where}
         ORDER BY element ASC;
       `;
-      result = await sql.query(sqlQuery, values) as unknown as Array<{ element: string }> | { rows: Array<{ element: string }> };
+
+      rows = (await sql.query(queryText, values)) as ElementRow[];
     }
 
-    // Handle both array and { rows: T[] } formats
-    const rows = Array.isArray(result) ? result : result.rows;
     const elements = rows.map((row) => row.element);
-
     return response.status(200).json({ elements });
   } catch (err) {
     console.error("Error fetching elements:", err);
     return response.status(500).json({
       message: "An error occurred while fetching elements.",
-      error: err instanceof Error ? err.message : String(err),
     });
   }
 }
