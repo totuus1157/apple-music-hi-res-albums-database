@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { neon } from "@neondatabase/serverless";
+import { getSql } from "@/lib/db";
 
-const sql = neon(process.env.DATABASE_URL!);
+type LikeCountRow = {
+  like_count: number;
+};
 
 /**
  * GET /api/likes?album_id=xxx
- *   → 指定アルバムの「いいね」数を返す
  */
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -19,12 +20,15 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const rows = await sql`
+    const sql = getSql();
+
+    const rows = (await sql`
       SELECT COUNT(*)::int AS like_count
       FROM likes
       WHERE album_id = ${albumId};
-    `;
-    return NextResponse.json({ like_count: rows[0].like_count });
+    `) as LikeCountRow[];
+
+    return NextResponse.json({ like_count: rows[0]?.like_count ?? 0 });
   } catch (err) {
     console.error(err);
     return NextResponse.json(
@@ -36,8 +40,6 @@ export async function GET(req: NextRequest) {
 
 /**
  * POST /api/likes
- * body: { album_id: string, user_id: string }
- *   → 新しい「いいね」を追加
  */
 export async function POST(req: NextRequest) {
   try {
@@ -50,6 +52,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const sql = getSql();
+
     await sql`
       INSERT INTO likes (album_id, user_id)
       VALUES (${album_id}, ${user_id})
@@ -59,14 +63,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: "Like added successfully" });
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: "Failed to add like" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to add like" },
+      { status: 500 },
+    );
   }
 }
 
 /**
  * DELETE /api/likes
- * body: { album_id: string, user_id: string }
- *   → 「いいね」を取り消し
  */
 export async function DELETE(req: NextRequest) {
   try {
@@ -79,9 +84,12 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
+    const sql = getSql();
+
     await sql`
       DELETE FROM likes
-      WHERE album_id = ${album_id} AND user_id = ${user_id};
+      WHERE album_id = ${album_id}
+        AND user_id = ${user_id};
     `;
 
     return NextResponse.json({ message: "Like removed successfully" });
