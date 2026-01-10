@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { neon } from "@neondatabase/serverless";
-
-const sql = neon(process.env.DATABASE_URL!);
+import { getSql } from "@/lib/db";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -16,12 +14,16 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const rows = await sql`
+    const sql = getSql();
+
+    const result = await sql`
       SELECT 1
       FROM likes
       WHERE album_id = ${albumId} AND user_id = ${userId}
       LIMIT 1;
     `;
+
+    const rows = Array.isArray(result) ? result : (result as { rows: unknown[] }).rows;
 
     return NextResponse.json({ liked: rows.length > 0 });
   } catch (err) {
