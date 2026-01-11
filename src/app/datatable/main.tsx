@@ -11,8 +11,8 @@ import Navbar from "app/datatable/navbar";
 import ActionPanel from "app/datatable/action-panel";
 import AlbumTable from "app/datatable/album-table";
 import Modal from "app/datatable/modal";
+import KofiWidget from "app/datatable/kofi-widget";
 import { useDisclosure } from "@heroui/react";
-import { KofiFloatingButtonReact } from "kofi-react-widget";
 import useSWR from "swr";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
@@ -112,12 +112,7 @@ export default function Main() {
           focusedAlbum={focusedAlbum}
         />
       </main>
-      <KofiFloatingButtonReact
-        username="anzumaru_software"
-        background="#fcbf47"
-        textColor="#323842"
-        text="Support Us"
-      />
+      <KofiWidget />
     </div>
   );
 }
