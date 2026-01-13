@@ -4,7 +4,7 @@ const PUBLISHER_ID = "1513283119557667";
 const NONCE_VALUE = "fh1sK8KcLkati2v7UkBnbA";
 
 export const GoogleAdScript = () => {
-  if (process.env.VERCEL_ENV === "production") {
+  if (process.env.NODE_ENV === "production") {
     return (
       <Script
         async
@@ -18,7 +18,7 @@ export const GoogleAdScript = () => {
 };
 
 export const AdBlockRecoveryScript = () => {
-  if (process.env.VERCEL_ENV === "production") {
+  if (process.env.NODE_ENV === "production") {
     return (
       <>
         {/* Google AdSense Funding Choices Script */}
@@ -57,7 +57,7 @@ export const AdBlockRecoveryScript = () => {
 };
 
 export const AdBlockWarning = () => {
-  if (process.env.VERCEL_ENV === "production") {
+  if (process.env.NODE_ENV === "production") {
     return (
       <Script
         id="full-adblock-script"
