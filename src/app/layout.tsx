@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/react";
 import {
   GoogleAdScript,
   AdBlockRecoveryScript,
@@ -50,7 +49,6 @@ export default function RootLayout({
       <html lang="en">
         <body>
           <Providers>{children}</Providers>
-          <Analytics />
           <GoogleAdScript />
         </body>
         <AdBlockRecoveryScript />
