@@ -5,6 +5,7 @@ import {
   AdBlockWarning,
 } from "app/googleads-script";
 import CookieConsentWidgetScript from "app/cookie-consent-widget-script";
+import CloudflareAnalytics from "app/cloudflare-analytics";
 import "app/globals.css";
 import { Providers } from "app/providers";
 
@@ -50,6 +51,7 @@ export default function RootLayout({
         <body>
           <Providers>{children}</Providers>
           <GoogleAdScript />
+          <CloudflareAnalytics />
         </body>
         <AdBlockRecoveryScript />
         <AdBlockWarning />
