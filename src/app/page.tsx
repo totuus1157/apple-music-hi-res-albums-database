@@ -67,61 +67,6 @@ const HomePage: NextPage = () => {
           <GoToDatabaseButton />
         </div>
 
-        <section className="my-8 max-w-3xl bg-red-100 border border-red-500 p-6 rounded-lg shadow-md">
-          <h2 className="text-2xl font-semibold mb-4 text-red-800">
-            Important Notice — Oct 15, 2025
-          </h2>
-
-          <p className="text-left text-red-700 leading-7 mb-4">
-            Thanks to the generous support from Ko-fi contributors, I’ve been
-            able to cover the renewal fee for the{" "}
-            <strong>Apple Developer Program</strong>. 🎉 This means the Apple
-            Music Hi-Res Albums Database can continue its operation for the
-            foreseeable future — something I truly couldn’t have achieved alone.
-          </p>
-
-          <p className="text-left text-red-700 leading-7 mb-4">
-            To everyone who stepped forward to help, whether by donating,
-            sharing the site, or simply visiting — <strong>thank you</strong>.
-            Your kindness and encouragement have kept this project alive. 🙏
-          </p>
-
-          <p className="text-left text-red-700 leading-7 mb-4">
-            That said, there are still ongoing expenses — particularly the{" "}
-            <strong>$20 monthly server cost</strong>. If you believe in what
-            this project stands for and would like to help sustain it, please
-            consider offering support through Ko-fi:
-            <a
-              href="https://ko-fi.com/anzumaru_software"
-              className="text-blue-700 underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              https://ko-fi.com/anzumaru_software
-            </a>
-          </p>
-
-          <p className="text-left text-red-700 leading-7 mb-4">
-            Every bit of help — big or small — makes a real difference in
-            keeping this independent service running. I remain committed to
-            improving and expanding it for all Apple Music Hi-Res listeners
-            worldwide. 🌍🎧
-          </p>
-
-          <p className="text-left text-red-700 leading-7 mb-4">
-            By the way, the new <strong>Ranking feature</strong> isn’t getting
-            much use yet — so please don’t hesitate to hit that 👍️ and “Like”
-            your favorite albums! The more you interact, the more meaningful and
-            fun the ranking data will become. 📈🎵
-          </p>
-
-          <p className="text-left text-red-700 leading-7 font-semibold">
-            Thank you again for standing with me and for helping this project
-            survive another year. ❤️ Let’s continue discovering amazing Hi-Res
-            albums together.
-          </p>
-        </section>
-
         <section className="my-8 max-w-3xl bg-green-100 border border-green-500 p-4 rounded-lg shadow-md">
           <h2 className="text-3xl font-semibold mb-6 text-green-800">
             Update Notice
