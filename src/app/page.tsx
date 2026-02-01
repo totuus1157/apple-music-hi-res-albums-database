@@ -72,6 +72,30 @@ const HomePage: NextPage = () => {
             Update Notice
           </h2>
           <h3 className="text-xl font-semibold mb-2 text-green-800">
+            Feb 1, 2026
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-4">
+            We’re currently developing a new project! Follow updates on{" "}
+            <Link
+              href="https://www.facebook.com/anzumaru.software"
+              size="lg"
+              underline="hover"
+              showAnchorIcon
+            >
+              Facebook
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="https://x.com/anzumaru_sw"
+              size="lg"
+              underline="hover"
+              showAnchorIcon
+            >
+              X
+            </Link>
+            .
+          </p>
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
             Oct 21, 2025
           </h3>
           <p className="text-left text-green-700 leading-7 mb-4">
@@ -109,31 +133,6 @@ const HomePage: NextPage = () => {
             albums ❤️, and those Likes directly contribute to the ranking. This
             makes the database not only a reference, but also a community-driven
             guide for discovering Hi-Res music ✨.
-          </p>
-          <h3 className="text-xl font-semibold mb-2 text-green-800">
-            Aug 24, 2025
-          </h3>
-          <p className="text-left text-green-700 leading-7 mb-4">
-            🎉🎉🎉 We have reached an incredible milestone:{" "}
-            <strong>30,000 registered albums</strong> in the database! 🚀 What
-            began as a small project has grown into a vast treasure trove of
-            Hi-Res music, thanks to the passion and contributions of users
-            worldwide. 🌍🎶✨
-          </p>
-          <p className="text-left text-green-700 leading-7 mb-6">
-            • 🗓️ Just over three years since launch, the database has tripled in
-            size from our first 10k celebration.
-            <br />
-            • 🏔️ We are no longer just climbing mountains—we are now exploring
-            entire ranges of musical discovery.
-            <br />
-            • 🌌 Each album is another star lighting up the galaxy of Hi-Res
-            Lossless music.
-            <br />
-            • 🎧 Hidden gems of the past and groundbreaking new releases
-            continue to join our collection every day.
-            <br />• 🚀 Let’s continue building this global archive
-            together—onward to <strong>40,000 albums</strong> and beyond!
           </p>
         </section>
 
