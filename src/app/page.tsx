@@ -63,7 +63,23 @@ const HomePage: NextPage = () => {
           />
         </div>
 
-        <div className="my-12">
+        <div className="mt-10 mb-3 text-center">
+          <p className="text-lg sm:text-xl font-bold text-red-600">
+            🚀 New iOS App Now in Beta — Experience Hi-Res Playback Like Never
+            Before!
+          </p>
+          <Link
+            isExternal
+            href="https://testflight.apple.com/join/TQqwQhxe"
+            size="lg"
+            underline="always"
+            className="text-lg font-semibold"
+          >
+            👉 Join the Hi-Res Albums Player TestFlight Beta
+          </Link>
+        </div>
+
+        <div className="mt-4 my-12">
           <GoToDatabaseButton />
         </div>
 
@@ -71,6 +87,36 @@ const HomePage: NextPage = () => {
           <h2 className="text-3xl font-semibold mb-6 text-green-800">
             Update Notice
           </h2>
+          <h3 className="text-xl font-semibold mb-2 text-green-800">
+            Feb 24, 2026
+          </h3>
+          <p className="text-left text-green-700 leading-7 mb-4">
+            We are now recruiting beta testers for our new iOS application,
+            <strong> “Hi-Res Albums Player”</strong>! 🎧✨
+          </p>
+          <p className="text-left text-green-700 leading-7 mb-4">
+            This new app is designed to seamlessly connect with the Apple Music
+            Hi-Res Albums Database and provide a more focused and immersive
+            playback experience for Hi-Res music lovers.
+          </p>
+          <p className="text-left text-green-700 leading-7 mb-6">
+            If you would like to participate in the TestFlight beta, please join
+            via the link below:
+            <br />
+            👉{" "}
+            <Link
+              isExternal
+              href="https://testflight.apple.com/join/TQqwQhxe"
+              size="lg"
+              underline="hover"
+              showAnchorIcon
+            >
+              Join TestFlight Beta
+            </Link>
+            <br />
+            Your feedback will help shape the future of the app. Thank you for
+            your support!
+          </p>
           <h3 className="text-xl font-semibold mb-2 text-green-800">
             Feb 1, 2026
           </h3>
@@ -117,22 +163,6 @@ const HomePage: NextPage = () => {
             for <strong>50,000 albums</strong> and beyond!
             <br />• 💫 The journey continues. Let’s keep discovering new
             soundscapes together!
-          </p>
-
-          <h3 className="text-lg font-semibold mb-2 text-green-800">
-            Oct 1, 2025
-          </h3>
-          <p className="text-left text-green-700 leading-7 mb-4">
-            We are excited to announce the launch of the new{" "}
-            <strong>Ranking Feature</strong>! 🏆 Albums can now be sorted by the
-            number of user “Likes” 👍, making it easier than ever to discover
-            the most popular Hi-Res albums in the community. 🎶
-          </p>
-          <p className="text-left text-green-700 leading-7 mb-4">
-            Logged-in users (via Apple ID 🔑) can now “Like” their favorite
-            albums ❤️, and those Likes directly contribute to the ranking. This
-            makes the database not only a reference, but also a community-driven
-            guide for discovering Hi-Res music ✨.
           </p>
         </section>
 
