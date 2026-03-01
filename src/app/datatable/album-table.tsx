@@ -97,6 +97,12 @@ export default function AlbumTable(props: Props) {
   const userID = user?.sub || process.env.NEXT_PUBLIC_AUTH0_DEVELOPER_USER_ID;
 
   const [rows, setRows] = useState<RowData[]>([]);
+  const [inputValues, setInputValues] = useState<Record<string, string>>({
+    artist: "",
+    genre: "",
+    composer: "",
+    sampleRate: "",
+  });
 
   const handleDelete = async (productId: string): Promise<void> => {
     if (!userID) {
@@ -244,10 +250,21 @@ export default function AlbumTable(props: Props) {
   );
 
   useEffect((): void => {
+    artistList.setFilterText("");
+    genreList.setFilterText("");
+    composerList.setFilterText("");
+    sampleRateList.setFilterText("");
     artistList.reload();
     genreList.reload();
     composerList.reload();
     sampleRateList.reload();
+    // Reset input values when selectedItem changes
+    setInputValues({
+      artist: "",
+      genre: "",
+      composer: "",
+      sampleRate: "",
+    });
   }, [selectedItem]);
 
   const topContent = (
@@ -259,6 +276,7 @@ export default function AlbumTable(props: Props) {
             label={label}
             placeholder={placeholder}
             selectedKey={selectedItem[key]}
+            inputValue={(selectedItem[key] || inputValues[key]) as string}
             size="lg"
             variant="faded"
             onSelectionChange={(keyValue): void => {
@@ -269,7 +287,13 @@ export default function AlbumTable(props: Props) {
             }}
             items={listMap[key].items}
             isLoading={listMap[key].isLoading}
-            onInputChange={listMap[key].setFilterText}
+            onInputChange={(value): void => {
+              setInputValues({
+                ...inputValues,
+                [key]: value,
+              });
+              listMap[key].setFilterText(value);
+            }}
           >
             {(item) => (
               <AutocompleteItem key={item.element}>
